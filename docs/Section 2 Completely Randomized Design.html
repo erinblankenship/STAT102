@@ -1,0 +1,2352 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; The Completely Randomized Design – Stat 102 Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Section 3 Factorial Treatment Design.html" rel="next">
+<link href="./Section 1 Introduction.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ffd282cb318059e0bcb130885a47f5dc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Section 2 Completely Randomized Design.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Completely Randomized Design</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Stat 102 Notes</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Stat-102-Notes.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Goals for STAT 102</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section 1 Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Design</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section 2 Completely Randomized Design.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Completely Randomized Design</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section 3 Factorial Treatment Design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Factorial Treatment Designs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section 4 Block Designs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Block Designs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section 5 Split Plot Designs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Split-Plot Designs</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#crd-model-and-basic-analysis" id="toc-crd-model-and-basic-analysis" class="nav-link active" data-scroll-target="#crd-model-and-basic-analysis"><span class="header-section-number">2.1</span> CRD Model and Basic Analysis</a></li>
+  <li><a href="#treatment-comparisons-and-contrasts" id="toc-treatment-comparisons-and-contrasts" class="nav-link" data-scroll-target="#treatment-comparisons-and-contrasts"><span class="header-section-number">2.2</span> Treatment Comparisons and Contrasts</a>
+  <ul class="collapse">
+  <li><a href="#unstructured-treatment-designs-and-all-pairwise-comparisons" id="toc-unstructured-treatment-designs-and-all-pairwise-comparisons" class="nav-link" data-scroll-target="#unstructured-treatment-designs-and-all-pairwise-comparisons"><span class="header-section-number">2.2.1</span> Unstructured Treatment Designs and All Pairwise Comparisons</a></li>
+  <li><a href="#control-versus-other-treatments" id="toc-control-versus-other-treatments" class="nav-link" data-scroll-target="#control-versus-other-treatments"><span class="header-section-number">2.2.2</span> Control versus other treatments</a></li>
+  <li><a href="#treatment-designs-with-other-structure" id="toc-treatment-designs-with-other-structure" class="nav-link" data-scroll-target="#treatment-designs-with-other-structure"><span class="header-section-number">2.2.3</span> Treatment Designs with (other) Structure</a></li>
+  </ul></li>
+  <li><a href="#model-adequacy" id="toc-model-adequacy" class="nav-link" data-scroll-target="#model-adequacy"><span class="header-section-number">2.3</span> Model Adequacy</a></li>
+  <li><a href="#power-for-the-completely-randomized-design" id="toc-power-for-the-completely-randomized-design" class="nav-link" data-scroll-target="#power-for-the-completely-randomized-design"><span class="header-section-number">2.4</span> Power for the Completely Randomized Design</a></li>
+  <li><a href="#quantitative-levels-of-a-factor" id="toc-quantitative-levels-of-a-factor" class="nav-link" data-scroll-target="#quantitative-levels-of-a-factor"><span class="header-section-number">2.5</span> Quantitative Levels of a Factor</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Completely Randomized Design</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The first <strong>experimental design</strong> we’ll consider is the <strong>completely randomized design</strong> or CRD. The CRD is an experimental design because</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>The CRD is characterized by</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>The CRD may be combined with several different <strong>treatment designs</strong>. To explore the CRD in more detail, we’ll start with the simplest treatment design, the <strong>one-way design</strong>. The one-way design is so named because</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Within one-way designs there are four basic treatment structures:</p>
+<ol type="1">
+<li><p>Unstructured<br>
+</p></li>
+<li><p>Control versus other treatments<br>
+</p></li>
+<li><p>Quantitative<br>
+</p></li>
+<li><p>Other structure<br>
+</p></li>
+</ol>
+<p><strong>Example:</strong> A donut manufacturer wants to see if the type of fat used to fry the donuts has any impact on the amount of fat absorbed by the donuts. The manufacturer has two types of animal fat and two types of vegetable fat that they would like to compare. They also have available 4 fryers, which can each fry 1 batch of 18 donuts at a time. They plan to measure the amount of fat absorbed in each batch.They have the resources to test 24 total batches of donuts.</p>
+<ul>
+<li><p><strong>Treatment Design:</strong></p>
+<ul>
+<li><p>Factor:</p></li>
+<li><p>Levels:</p></li>
+</ul></li>
+<li><p><strong>Experimental Design:</strong></p>
+<ul>
+<li>Run 6 batches of each fat in a Completely Randomized Design</li>
+</ul></li>
+</ul>
+<p><br>
+</p>
+<p>There are two possible scenarios for the CRD. Discuss the pros and cons of each, and decide which one you would use and why.</p>
+<ul>
+<li>Scenario 1: Randomly assign fat to a fryer and prepare 6 batches.</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>Scenario 2: Randomly select 6 of the 24 batches for each type of fat.</li>
+</ul>
+<p><br>
+<br>
+</p>
+<p>Here’s one possible experimental layout</p>
+<div class="center">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th></th>
+<th>Batch</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fryer</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>2</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>4</td>
+<td>1</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>4</td>
+<td>1</td>
+<td>3</td>
+<td>2</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>4</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="crd-model-and-basic-analysis" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="crd-model-and-basic-analysis"><span class="header-section-number">2.1</span> CRD Model and Basic Analysis</h2>
+<p>The <strong>CRD Model</strong> can be written in two different ways.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li><p><span class="math inline">\(y_{ij}\)</span> = amount of fat absorbed by the <span class="math inline">\(j^{th}\)</span> batch of donuts prepared using the <span class="math inline">\(i^{th}\)</span> fat</p></li>
+<li><p><span class="math inline">\(\mu\)</span> = overall mean fat absorbed by a batch of donuts</p></li>
+<li><p><span class="math inline">\(\tau_i\)</span> = treatment effect of fat <span class="math inline">\(i\)</span> = additional amount of fat absorbed on average by batches prepared using fat type <span class="math inline">\(i\)</span></p></li>
+<li><p><span class="math inline">\(\epsilon_{ij}\)</span> = random error = additional amount of fat absorbed by the <span class="math inline">\(j^{th}\)</span> batch of donuts prepared using fat <span class="math inline">\(i\)</span></p></li>
+</ul>
+<p>Some consequences of these assumptions:</p>
+<p><strong>Expected value:</strong></p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Dispersion:</strong></p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Distribution:</strong><br>
+<br>
+<br>
+<br>
+</p>
+<p>For this particular treatment design, there are several hypothesis tests that may be of interest. Write out in the symbols the null and alternative hypotheses for the following specified objectives. Reminder: Fats 1 and 2 are animal fats and Fats 3 and 4 are vegetable fats.</p>
+<ol type="1">
+<li>Are there differences among the four fats with respect to the amount of fat absorbed?</li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ol start="2" type="1">
+<li>Do the vegetable fats differ from the animal fats in the amount of fat absorbed?</li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ol start="3" type="1">
+<li>Are there differences between the two animal fats? Are there differences between the two vegetable fats?</li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s try out using SAS. We’ll start by reading in the data.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="donut.jpg" class="img-fluid figure-img" alt="A screenshot from SAS OnDemand showing the steps to reading the donut data set into SAS."></p>
+<figcaption>SAS code for reading in the donut data set</figcaption>
+</figure>
+</div>
+<p>Here are the results of <code>proc print</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="donut-data.jpg" class="img-fluid figure-img" alt="The result of the call to proc print, showing the data set read in using the code in the previous figure." width="90"></p>
+<figcaption>Donut data set</figcaption>
+</figure>
+</div>
+<p>We can read the data in other ways as well. We’ll see other data set options as we encounter different types of variables.</p>
+<p>Let’s start by plotting the data.</p>
+<pre><code>    proc plot data=donut1; *specifying the data set I want to plot;
+      plot absorb*type; *y-axis*x-axis;
+    run;</code></pre>
+<p>That’s not very pretty. Graphics are never going to be as pretty as they are in R, but we can do better.</p>
+<pre><code>    proc gplot data=donut1;
+      plot absorb*type='dot'; *'dot' is the symbol I want to use;
+    run;</code></pre>
+<p>Now let’s construct the ANOVA table:</p>
+<div class="center">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Source of Variation</th>
+<th style="text-align: left;">df</th>
+<th style="text-align: left;">SS</th>
+<th style="text-align: left;">MS</th>
+<th style="text-align: left;">Expected MS</th>
+<th style="text-align: left;">F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fat Type</td>
+<td style="text-align: left;"><span class="math inline">\(t-1=3\)</span></td>
+<td style="text-align: left;">SSTrt</td>
+<td style="text-align: left;">MST</td>
+<td style="text-align: left;"><span class="math inline">\(\sigma^2 + \frac{n}{t-1}\sum_{i=1}^4 \tau_i^2\)</span></td>
+<td style="text-align: left;">MST/MSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Error</td>
+<td style="text-align: left;"><span class="math inline">\(t(n-1) = 20\)</span></td>
+<td style="text-align: left;">SSError</td>
+<td style="text-align: left;">MSE</td>
+<td style="text-align: left;"><span class="math inline">\(\sigma^2\)</span></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: left;"><span class="math inline">\(nt-1=23\)</span></td>
+<td style="text-align: left;">SSTotal</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Under the null hypothesis, H<span class="math inline">\(_0: \mu_1 = \mu_2 = \mu_3 = \mu_4\)</span>, or equivalently H<span class="math inline">\(_0: \tau_i = 0\)</span> for all <span class="math inline">\(i\)</span>.</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>So, if the null hypothesis is true</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>and <span class="math inline">\(F\)</span> follows the <span class="math inline">\(F\)</span> distribution with num<span class="math inline">\(_{df} = t-1\)</span> and den<span class="math inline">\(_{df}=t(n-1)\)</span>.</p>
+<p>Let’s fit this model in SAS. There are a couple of different procedures (’<code>proc</code>’s) we can use to do so. We’ll start with <code>proc glimmix</code>. This gives a LOT of output.</p>
+<pre><code>    proc glimmix data=donut1;
+      class type; *telling SAS that fat type is the treatment factor;
+      model absorb=type; *model response = treatment factor;
+      lsmeans type/pdiff cl; *let's add some fanciness;
+    run;
+
+               The GLIMMIX Procedure
+                Model Information
+                
+    Data Set                     WORK.DONUT1
+    Response Variable            absorb
+    Response Distribution        Gaussian
+    Link Function                Identity
+    Variance Function            Default
+    Variance Matrix              Diagonal
+    Estimation Technique         Restricted Maximum Likelihood
+    Degrees of Freedom Method    Residual
+    
+    
+         Class Level Information
+         
+        Class    Levels    Values
+        type          4    1 2 3 4
+    
+    Number of Observations Read          24
+    Number of Observations Used          24
+    
+                Dimensions
+    
+    Covariance Parameters          1
+    Columns in X                   5
+    Columns in Z                   0
+    Subjects (Blocks in V)         1
+    Max Obs per Subject           24
+    
+    
+          Optimization Information
+    
+    Optimization Technique    None
+    Parameters                5
+    Lower Boundaries          1
+    Upper Boundaries          0
+    Fixed Effects             Not Profiled
+    
+    
+             Fit Statistics
+    
+    -2 Res Log Likelihood         156.21
+    AIC  (smaller is better)      166.21
+    AICC (smaller is better)      170.49
+    BIC  (smaller is better)      171.19
+    CAIC (smaller is better)      176.19
+    HQIC (smaller is better)      167.18
+    Pearson Chi-Square           2018.00
+    Pearson Chi-Square / DF       100.90
+    
+              Type III Tests of Fixed Effects
+    
+                    Num      Den
+     Effect         DF       DF    F Value    Pr &gt; F
+    
+      type            3       20       5.41    0.0069
+
+    
+               type Least Squares Means
+    
+                         Standard
+    type    Estimate       Error       DF    t Value    Pr &gt; |t|     Alpha       Lower       Upper
+    
+    1         172.00      4.1008       20      41.94      &lt;.0001      0.05      163.45      180.55
+    2         185.00      4.1008       20      45.11      &lt;.0001      0.05      176.45      193.55
+    3         176.00      4.1008       20      42.92      &lt;.0001      0.05      167.45      184.55
+    4         162.00      4.1008       20      39.50      &lt;.0001      0.05      153.45      170.55
+    
+    
+            Differences of type Least Squares Means
+    
+                               Standard
+    type   _type   Estimate      Error      DF   t Value   Pr &gt; |t|    Alpha      Lower      Upper
+    
+    1      2       -13.0000     5.7994      20     -2.24     0.0365     0.05   -25.0974    -0.9026
+    1      3        -4.0000     5.7994      20     -0.69     0.4983     0.05   -16.0974     8.0974
+    1      4        10.0000     5.7994      20      1.72     0.1001     0.05    -2.0974    22.0974
+    2      3         9.0000     5.7994      20      1.55     0.1364     0.05    -3.0974    21.0974
+    2      4        23.0000     5.7994      20      3.97     0.0008     0.05    10.9026    35.0974
+    3      4        14.0000     5.7994      20      2.41     0.0255     0.05     1.9026    26.0974</code></pre>
+<p>There’s a lot of stuff here, but what’s missing?</p>
+<p><br>
+</p>
+<p>Let’s try <code>proc mixed</code>.</p>
+<pre><code>    proc mixed data=donut1;
+      class type;
+      model absorb=type;
+    run;</code></pre>
+<p>One more try:</p>
+<pre><code>    proc mixed data=donut1 method=type3;
+      class type;
+      model absorb=type;
+    run;</code></pre>
+<p>Finally!</p>
+<pre><code>                            Type 3 Analysis of Variance
+                        Sum of                                                             Error
+Source        DF       Squares   Mean Square  Expected Mean Square       Error Term           DF
+type           3   1636.500000    545.500000  Var(Residual) + Q(type)    MS(Residual)         20
+Residual      20   2018.000000    100.900000  Var(Residual)              .                     .
+    
+    Type 3 Analysis of Variance
+    Source    F Value    Pr &gt; F
+    type         5.41    0.0069
+    Residual      .       .</code></pre>
+<p>Let’s go back to the <code>glimmix</code> output and look more carefully at some components. The output below comes from the <code>lsmeans type/cl;</code> statement.</p>
+<pre><code>                                        type Least Squares Means
+                        Standard
+    type    Estimate       Error       DF    t Value    Pr &gt; |t|     Alpha       Lower       Upper
+    1         172.00      4.1008       20      41.94      &lt;.0001      0.05      163.45      180.55
+    2         185.00      4.1008       20      45.11      &lt;.0001      0.05      176.45      193.55
+    3         176.00      4.1008       20      42.92      &lt;.0001      0.05      167.45      184.55
+    4         162.00      4.1008       20      39.50      &lt;.0001      0.05      153.45      170.55
+    </code></pre>
+<p>Now let’s look at what’s provided by the <code>lsmeans type/pdiff;</code> statement.</p>
+<pre><code>                                Differences of type Least Squares Means
+                                
+                              Standard
+    type   _type   Estimate      Error      DF   t Value   Pr &gt; |t|    Alpha      Lower      Upper
+    
+    1      2       -13.0000     5.7994      20     -2.24     0.0365     0.05   -25.0974    -0.9026
+    1      3        -4.0000     5.7994      20     -0.69     0.4983     0.05   -16.0974     8.0974
+    1      4        10.0000     5.7994      20      1.72     0.1001     0.05    -2.0974    22.0974
+    2      3         9.0000     5.7994      20      1.55     0.1364     0.05    -3.0974    21.0974
+    2      4        23.0000     5.7994      20      3.97     0.0008     0.05    10.9026    35.0974
+    3      4        14.0000     5.7994      20      2.41     0.0255     0.05     1.9026    26.0974</code></pre>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+</section>
+<section id="treatment-comparisons-and-contrasts" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="treatment-comparisons-and-contrasts"><span class="header-section-number">2.2</span> Treatment Comparisons and Contrasts</h2>
+<p>We can see in the results above that we may reject the overall hypothesis that the four treatments produce the same mean fat absorption (<span class="math inline">\(F=5.41\)</span>, p-value<span class="math inline">\(=0.0069\)</span>). But, this doesn’t address the hypotheses you constructed earlier. Remember, we also considered:</p>
+<ul>
+<li><p>Do the vegetable fats differ from the animal fats in the amount of fat absorbed?</p></li>
+<li><p>Are there differences between the two animal fats?</p></li>
+<li><p>Are there differences between the two vegetable fats?</p></li>
+</ul>
+<p>The output above allows us to address some of these questions, but not the one regarding vegetable fats versus animal fats. Let’s look at a more general way to construct treatment comparisons.</p>
+<p><strong>Contrasts</strong></p>
+<p>A well-thought-out treatment design’s objectives can usually be stated in terms of a set of <strong>contrasts</strong>. This is usually an important goal in planning the design, and contrasts are constructed before data are collected.</p>
+<p>A <strong>contrast</strong> is</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Estimates of the contrast are obtained by substituting in the sample means</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>We may also obtain standard errors of the contrast estimate</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>Standard errors may then be used to carry out tests and construct confidence intervals.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The contrasts of interest depend on the basic treatment design structure and the goals of the experiment. Remember, the four basic structures are</p>
+<ol type="1">
+<li><p>Unstructured</p></li>
+<li><p>Control versus other treatments</p></li>
+<li><p>Quantitative</p></li>
+<li><p>Other structure</p></li>
+</ol>
+<p>Let’s first consider Unstructured designs, because these are the simplest.</p>
+<section id="unstructured-treatment-designs-and-all-pairwise-comparisons" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="unstructured-treatment-designs-and-all-pairwise-comparisons"><span class="header-section-number">2.2.1</span> Unstructured Treatment Designs and All Pairwise Comparisons</h3>
+<p><strong>Example:</strong> The <em>New England Journal of Medicine</em> published a study investigating the effects of different exercise programs on postural stability in Parkinson’s patients. The three exercise programs compared were: tai chi, resistance training, and stretching. 65 patients with Parkinson’s were randomly assigned to each program, and change in functional reach was measured after 24 weeks.</p>
+<ul>
+<li><p><strong>Treatment Design:</strong></p>
+<ul>
+<li><p>Factor:</p></li>
+<li><p>Levels:</p></li>
+</ul></li>
+<li><p><strong>Experimental Design:</strong></p>
+<ul>
+<li></li>
+</ul></li>
+</ul>
+<p>In designs like this without structure, we are typically interested in <strong>all pairwise comparisons</strong>.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>There are multiple methods for making such comparisons. The simplest is the <strong>least significant difference</strong> (LSD), also called the unprotected LSD. It’s easy, but the Type I error rate can be badly inflated (we’ll talk more about this in a bit).</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>A (slightly) more conservative option is <strong>Fisher’s protected LSD</strong>.</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>We’ve already seen these, but let’s add some fanciness!</p>
+<pre><code>    proc glimmix data=reach;
+      class group;
+      model reach=group;
+      lsmeans group/pdiff cl lines plot=diffplot;
+    run;</code></pre>
+<p>This gives (in part) the output:</p>
+<pre><code>             Type III Tests of Fixed Effects
+    
+                  Num      Den
+    Effect         DF       DF    F Value    Pr &gt; F
+    
+    Group           2      192      11.10    &lt;.0001
+    
+    
+                      Group Least Squares Means
+    
+                          Standard
+    Group      Estimate      Error      DF   t Value   Pr &gt; |t|    Alpha      Lower      Upper
+    
+    Resistan     2.3400     0.6130     192      3.82     0.0002     0.05     1.1310     3.5490
+    Stretchi     0.8569     0.6130     192      1.40     0.1637     0.05    -0.3521     2.0660
+    Tai_Chi      4.8938     0.6130     192      7.98     &lt;.0001     0.05     3.6848     6.1029
+    
+    
+                        Differences of Group Least Squares Means
+    
+                                  Standard
+    Group     _Group    Estimate     Error     DF  t Value  Pr &gt; |t|   Alpha     Lower     Upper
+    
+    Resistan  Stretchi    1.4831    0.8669    192     1.71    0.0887    0.05   -0.2268    3.1929
+    Resistan  Tai_Chi    -2.5538    0.8669    192    -2.95    0.0036    0.05   -4.2637   -0.8440
+    Stretchi  Tai_Chi    -4.0369    0.8669    192    -4.66    &lt;.0001    0.05   -5.7468   -2.3271
+    
+    
+    T Grouping for Group Least Squares Means (Alpha=0.05)
+    
+    LS-means with the same letter are not significantly different.
+    
+    Group       Estimate
+    
+    Tai_Chi       4.8938    A
+    
+    Resistan      2.3400    B
+                            B
+    Stretchi      0.8569    B
+    </code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="reach-diff.jpg" class="img-fluid figure-img" style="width:60.0%" alt="The plot is a diffogram, a graphical depiction of all pairwise comparisons among the treatment groups. Red lines indicate a non-discernable difference and blue lines indicate a discernable difference."></p>
+<figcaption>Diffogram for the reach data</figcaption>
+</figure>
+</div>
+<p>This plot is called a <strong>diffogram</strong> and is a way to visualize differences among the treatments.</p>
+<p>So these plots are awesome, and the output is easy to interpret! Why do we care about anything other than the LSD? The big issue is Type I error rate, and it can be a concern for pairwise comparisons as well as more complicated contrasts.</p>
+<p><strong>Multiple Comparisons</strong></p>
+<p>If more than one comparison is made among the treatment means, then we have multiple comparisons which can lead to the problem of <strong>multiplicity</strong>.</p>
+<p><strong>Definition:</strong> <strong>Multiplicity</strong> is</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>For a single test, the significance level of a Type I error is called a <strong>comparison-wise</strong> error rate. This means</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>But, if we have multiple tests, the Type I errors for these tests accumulate. This accumulated rate is the called the <strong>experiment-wise</strong> error rate. This is</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>But, the errors don’t just add up. They accumulate in a power-type relationship. Consider a situation with a comparison-wise error rate of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(c\)</span> independent comparisons. Then, the experiment-wise error rate is</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>For example, consider a situation with <span class="math inline">\(\alpha=0.05\)</span> and 5 independent comparisons (there are as many independent comparisons as there are <span class="math inline">\(df\)</span> for treatment). In that case:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We can control the experiment-wise error rate by setting it to a pre-specified value <span class="math inline">\(\alpha\)</span> (maybe 0.05) and then solving for the comparison-wise error rate, assuming <span class="math inline">\(c\)</span> independent comparisons. So, for example, if <span class="math inline">\(\alpha=0.05\)</span> and <span class="math inline">\(c=5\)</span>,</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We’d then use this as the critical value (cut-off) value for our independent treatment comparisons.</p>
+<p>But here’s another issue. If the comparisons are not independent (which they aren’t in all pairwise-comparisons, and often aren’t in pre-planned contrasts of interest), then the experiment-wise error rate is actually even bigger than we see above. What can we do?</p>
+<p>There are a multitude of multiple comparison procedures which control the overall experiment-wise error rate, which have different pros and cons. We’re only going to the talk about a few.</p>
+<p><strong>Tukey’s HSD</strong>: Tukey’s Honestly Significant Difference (HSD) procedure is based on the studentized range statistic. To get this HSD from SAS:</p>
+<pre><code>    proc glimmix data=reach;
+      class group;
+      model reach=group;
+      lsmeans group/pdiff cl adjust=tukey plot=diffplot;
+    run;
+
+                            Differences of Group Least Squares Means
+                            Adjustment for Multiple Comparisons: Tukey
+    
+                                    Standard
+Group       _Group      Estimate       Error       DF    t Value    Pr &gt; |t|     Adj P     Alpha
+    
+Resistan    Stretchi      1.4831      0.8669      192       1.71      0.0887    0.2038      0.05
+Resistan    Tai_Chi      -2.5538      0.8669      192      -2.95      0.0036    0.0101      0.05
+Stretchi    Tai_Chi      -4.0369      0.8669      192      -4.66      &lt;.0001    &lt;.0001      0.05
+    
+                   Differences of Group Least Squares Means
+                  Adjustment for Multiple Comparisons: Tukey
+    
+                                                        Adj         Adj
+    Group       _Group         Lower       Upper       Lower       Upper
+    
+    Resistan    Stretchi     -0.2268      3.1929     -0.5645      3.5307
+    Resistan    Tai_Chi      -4.2637     -0.8440     -4.6015     -0.5062
+    Stretchi    Tai_Chi      -5.7468     -2.3271     -6.0845     -1.9893</code></pre>
+<p>The diffogram is also adjusted.</p>
+<p>Pros/Cons of the HSD:</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>The other multiple comparison procedures we’ll discuss are used with other treatment design structures. The three other one-way treatment design structures are:</p>
+<ol type="1">
+<li><p>Control versus other treatments</p></li>
+<li><p>Quantitative (we’ll put a pin in this one for now)</p></li>
+<li><p>Other structure</p></li>
+</ol>
+</section>
+<section id="control-versus-other-treatments" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="control-versus-other-treatments"><span class="header-section-number">2.2.2</span> Control versus other treatments</h3>
+<p>In some scenarios, one of the factor levels acts as a control treatment for some or all of the remaining levels. Often, we are interested in comparing all of the treatments against the control but not against each other. This means there are</p>
+<p><strong>Dunnett’s</strong> procedures is a modification to the two-sample <span class="math inline">\(t\)</span> test that is used when comparing all treatments against a control.</p>
+<p><strong>Example:</strong> Sections of tomato plant tissue were grown in culture with differing amounts and types of sugars with five replications of four treatments. The treatments were: control, 3% glucose, 3% fructose, and 3% sucrose.</p>
+<ul>
+<li><p><strong>Treatment Design:</strong></p>
+<ul>
+<li><p>Factor:</p></li>
+<li><p>Levels:</p></li>
+</ul></li>
+<li><p><strong>Experimental Design:</strong></p>
+<ul>
+<li></li>
+</ul></li>
+</ul>
+<p>In a situation like this, we may be interested in comparing each of the sugar treatments to the control.</p>
+<pre><code>    proc glimmix data=tomato;
+      class trt;
+      model growth=trt;
+      lsmeans trt/diff=control('control') cl adjust=dunnett plot=controlplot;
+    run;</code></pre>
+<p><br>
+</p>
+<p>Note that unless otherwise specified, SAS will assume the first treatment level (alphabetically or numerically) is the control.</p>
+<pre><code>                                    trt Least Squares Means
+                      Standard
+trt        Estimate      Error      DF   t Value   Pr &gt; |t|    Alpha      Lower      Upper
+control     42.2000     1.1726      16     35.99     &lt;.0001     0.05    39.7142    44.6858
+fructose    27.6000     1.1726      16     23.54     &lt;.0001     0.05    25.1142    30.0858
+glucose     29.0000     1.1726      16     24.73     &lt;.0001     0.05    26.5142    31.4858
+sucrose     34.0000     1.1726      16     29.00     &lt;.0001     0.05    31.5142    36.4858
+
+                            Differences of trt Least Squares Means
+                         Adjustment for Multiple Comparisons: Dunnett
+                                    Standard
+trt         _trt        Estimate       Error       DF    t Value    Pr &gt; |t|     Adj P     Alpha
+fructose    control     -14.6000      1.6583       16      -8.80      &lt;.0001    &lt;.0001      0.05
+glucose     control     -13.2000      1.6583       16      -7.96      &lt;.0001    &lt;.0001      0.05
+sucrose     control      -8.2000      1.6583       16      -4.94      0.0001    0.0004      0.05
+
+                         Differences of trt Least Squares Means
+                     Adjustment for Multiple Comparisons: Dunnett
+                                                     Adj         Adj
+trt         _trt           Lower       Upper       Lower       Upper
+fructose    control     -18.1155    -11.0845    -18.8990    -10.3010
+glucose     control     -16.7155     -9.6845    -17.4990     -8.9010
+sucrose     control     -11.7155     -4.6845    -12.4990     -3.9010</code></pre>
+<p>We get a new plot!</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="ControlPlot1.jpg" class="img-fluid figure-img" style="width:40.0%" alt="The graph shows a control plot, which compares each treatment to the control treatment. If the lines extend beyond the shaded area, there is a discernable difference between the treatment and the control."></p>
+<figcaption>Control plot for the tomato plant data</figcaption>
+</figure>
+</div>
+<p>Pros/Cons of Dunnett’s Test:</p>
+<p><br>
+<br>
+<br>
+</p>
+</section>
+<section id="treatment-designs-with-other-structure" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="treatment-designs-with-other-structure"><span class="header-section-number">2.2.3</span> Treatment Designs with (other) Structure</h3>
+<p>This is where the donut example fits in. There isn’t a true control, but we also may not care about all pairwise comparisons. Instead, we had some specific, pre-planned comparisons of interest:</p>
+<ul>
+<li><p>Do the vegetable fats differ from the animal fats in the amount of fat absorbed?</p></li>
+<li><p>Are there differences between the two animal fats?</p></li>
+<li><p>Are there differences between the two vegetable fats?</p></li>
+</ul>
+<p>Why pre-plan comparisons?</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>Earlier, we wrote out the hypotheses of interest corresponding to these comparisons:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>There are three options available in SAS to test these hypotheses and/or construct confidence intervals:</p>
+<ul>
+<li><p><code>contrast</code> statement</p></li>
+<li><p><code>estimate</code> statement</p></li>
+<li><p><code>lsmestimate</code> statement</p></li>
+</ul>
+<p>All three statements involve specifying the coefficients of the treatment effects/treatment means. Let’s look at the comparison of vegetable and animal fats.</p>
+<p><br>
+&nbsp;<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>and two different contrast statements we could write:</p>
+<pre><code>    proc glimmix data=donut1;
+      class type;
+      model absorb=type;
+      contrast "animal vs veg" type 1 1 -1 -1;
+      contrast "animal vs veg 2" type 0.5 0.5 -0.5 -0.5;
+    run;</code></pre>
+<p>Both give the same results!</p>
+<pre><code>                          Contrasts
+    
+    Num      Den
+    Label                DF       DF    F Value    Pr &gt; F
+    
+    animal vs veg         1       20       5.37    0.0313
+    animal vs veg 2       1       20       5.37    0.0313
+    </code></pre>
+<p>Let’s try them with <code>estimate</code> statements, and add a third option:</p>
+<pre><code>    estimate "animal vs veg" type 1 1 -1 -1;
+    estimate "animal vs veg 2" type 0.5 0.5 -0.5 -0.5;
+    estimate "animal vs veg 3" type 1 1 -1 -1/divisor=2;
+
+                                   Estimates
+    
+                                   Standard
+    Label              Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    animal vs veg       19.0000      8.2016       20       2.32      0.0313
+    animal vs veg 2      9.5000      4.1008       20       2.32      0.0313
+    animal vs veg 3      9.5000      4.1008       20       2.32      0.0313
+    
+                      type Least Squares Means
+    
+                        Standard
+    type    Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    1         172.00      4.1008       20      41.94      &lt;.0001
+    2         185.00      4.1008       20      45.11      &lt;.0001
+    3         176.00      4.1008       20      42.92      &lt;.0001
+    4         162.00      4.1008       20      39.50      &lt;.0001
+    
+    </code></pre>
+<p>What’s going on?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Suppose for some reason we wanted to test whether fats 1-3 (collectively) were different from fat 4.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The way we write the <code>estimate</code> statement really matters here:</p>
+<pre><code>    estimate "first 3 vs last" type 0.33 0.33 0.33 -1;
+    estimate "first 3 vs last" type 1 1 1 -3/divisor=3;
+
+                                   Estimates
+    
+                                   Standard
+    Label              Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    first 3 vs last     Non-est           .        .        .         .
+    first 3 vs last     15.6667      4.7352       20       3.31      0.0035</code></pre>
+<p>We do still have a multiplicity issue, because we are interested in three pre-planned contrasts. We can use the <strong>Sidak</strong> adjustment to control experiment-wise error rate:</p>
+<pre><code>    estimate "1 vs 2" type 1 -1 0 0,
+             "3 vs 4" type 0 0 1 -1,
+             "animal vs veg" type 0.5 0.5 -0.5 -0.5/adjust=sidak;</code></pre>
+<pre><code>                                  Estimates
+    
+                                   Standard
+    Label              Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    animal vs veg 2      9.5000      4.1008       20       2.32      0.0313
+    
+    
+
+                                  Estimates
+                        Adjustment for Multiplicity: Sidak
+    
+                                 Standard
+    Label            Estimate       Error       DF    t Value    Pr &gt; |t|     Adj P
+    
+    1 vs 2           -13.0000      5.7994       20      -2.24      0.0365    0.1055
+    3 vs 4            14.0000      5.7994       20       2.41      0.0255    0.0745
+    animal vs veg      9.5000      4.1008       20       2.32      0.0313    0.0909
+    </code></pre>
+<p>Finally, we can use the <code>lsmestimate</code> statement. <code>lsmestimate</code> basically does the same thing as <strong>estimate</strong> but it allows for more complicated models than we have yet encountered. For a CRD, the output of the two should be identical, though <code>lsmestimate</code> does have some additional options (and slightly different syntax).</p>
+<pre><code>    lsmestimate type "1 vs 2" 1 -1 0 0,
+                     "3 vs 4" 0 0 1 -1,
+                     "animal vs veg"  0.5 0.5 -0.5 -0.5/joint;</code></pre>
+<p>The <code>joint</code> option gives a joint test for whether the LSMeans are the same, which is the same as the overall test in the simple designs like the CRD. There are also multiple comparison adjustments available in <code>lsmestimate</code>.</p>
+<p><strong>What happens if you don’t pre-plan?</strong> Ideally, comparisons are set up ahead of time based on specific research questions. If comparisons are selected after examining the data, most researchers construct tests that correspond to large differences in the means. These differences could be due to a real treatment effect, or they could be due to random error. Picking the largest differences to compare will inflate Type I error. If you do want to look at comparisons suggested by the data (post hoc comparisons), then you should replace the <span class="math inline">\(t\)</span> test with a VERY conservative test called the <strong>Scheffé</strong> test. Scheffè works for pairwise comparisons or contrasts. We request it by adding the <code>adjust=scheffe</code> option.</p>
+<p>To see how conservative Scheffè is, let’s look at the comparison of Fats 1 vs 2 (and pretend that Fat 1 is a control, just for illustration.</p>
+<div class="center">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Adjustment Type</th>
+<th style="text-align: center;">p-value</th>
+<th style="text-align: center;">Lower CL</th>
+<th style="text-align: center;">Upper CL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Unadjusted</td>
+<td style="text-align: center;">0.0365</td>
+<td style="text-align: center;">-25.0974</td>
+<td style="text-align: center;">-0.9026</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Tukey</td>
+<td style="text-align: center;">0.1462</td>
+<td style="text-align: center;">-29.2320</td>
+<td style="text-align: center;">3.2320</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Dunnett</td>
+<td style="text-align: center;">0.0908</td>
+<td style="text-align: center;">-27.7326</td>
+<td style="text-align: center;">1.7326</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Scheffè</td>
+<td style="text-align: center;">0.2044</td>
+<td style="text-align: center;">-30.6813</td>
+<td style="text-align: center;">4.6813</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>What do you notice?</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>Which one to use? It depends. Is it more important to control the comparison-wise error rate or experiment-wise error rate? That will depend on the situation. Keep in mind that the more conservative the adjustment, the lower the power. That is, the more likely you are to make a Type II error.</p>
+<p><strong>A Note on Independent Comparisons:</strong> As mentioned above, there can be as many independent comparisons as there are <span class="math inline">\(df\)</span> for treatment. However, just because the number of planned comparisons equals the number of treatment <span class="math inline">\(df\)</span> does not mean they are independent.</p>
+<p>Independent contrasts are also called <strong>orthogonal contrasts</strong>. Orthogonality means that one contrast conveys no information about the other. We can check whether contrasts are orthogonal.</p>
+<p><strong>Definition:</strong> Two contrasts with coefficients <span class="math inline">\(c_i\)</span> and <span class="math inline">\(d_j\)</span> are orthogonal if</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s consider the three contrasts in the donut example.</p>
+<p><br>
+<br>
+<br>
+</p>
+<p><strong>Practice:</strong> Determine if the following set of contrasts for the donut example are orthogonal.</p>
+<ul>
+<li><p>H<span class="math inline">\(_0: \tau_1 - \tau_2 = 0\)</span></p></li>
+<li><p>H<span class="math inline">\(_0: \tau_1 - \tau_3 = 0\)</span></p></li>
+<li><p>H<span class="math inline">\(_0: \tau_1 - \tau_4 = 0\)</span></p></li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+</section>
+</section>
+<section id="model-adequacy" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="model-adequacy"><span class="header-section-number">2.3</span> Model Adequacy</h2>
+<p>Everything we’ve done so far is based on the assumptions that the observations are adequately described by the model</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>If these assumptions are not valid, then the estimates of the treatment means and tests of significance from the ANOVA will be affected. We typically use <strong>residuals</strong> as a basis of our diagnostic tools.</p>
+<p>The <strong>residual</strong> for observation <span class="math inline">\(j\)</span> in treatment <span class="math inline">\(i\)</span> is defined as:<br>
+<br>
+<br>
+</p>
+<p>Examining residuals should be an automatic part of the analysis of variance, and can be used to check the assumptions of common variance and normality of the error term. The assumptions can be checked using a visual inspection or formally through tests, and SAS makes it very easy to do so.</p>
+<p>There’s a lot of code here, but we’ll examine it piece-by-piece.</p>
+<pre><code>    proc glimmix data=donut1 plot=residualpanel;
+      class type;
+      model absorb=type; 
+      random _residual_/group=type;
+      covtest homogeneity;
+      output out=donutout pred=pred residual=resid;
+    run;</code></pre>
+<p>Here’s what the options are doing:</p>
+<ul>
+<li><p><code>plot=residualpanel</code> produces a set of residual plots</p></li>
+<li><p><code>random _residual_/group=type</code> tells SAS you want to estimate a residual variance for each treatment group (i.e., get separate estimates of <span class="math inline">\(\sigma^2\)</span> from each treatment group)</p></li>
+<li><p><code>covtest</code> produces a hypothesis test for comparing variances, and <code>homogeneity</code> says you want to test whether they are all equal</p></li>
+<li><p><code>output</code> produces a new data set (called <code>donutout</code>) which contains the observed residuals (<code>resid</code>) and predicted values (<code>pred</code>)</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Donut-residual-panel.jpg" class="img-fluid figure-img" style="width:70.0%" alt="The graphic contains four plots used to assess the fit of the ANOVA model: a scatterplot of the residuals versus the predictor, a histogram of the residuals with the normal distribution overlayed, a quantile-quantile plot of the residuals, and a box plot of the residuals."></p>
+<figcaption>Residual panel for the donut data</figcaption>
+</figure>
+</div>
+<p>The upper left hand plot shows</p>
+<p><br>
+</p>
+<p>The other three plots all deal with the normality assumption.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We can also use <code>proc univariate</code> to check normality, using the <code>donoutout</code> data set we created above.</p>
+<pre><code>    proc univariate data=donutout plot normal;
+      var resid;
+    run;</code></pre>
+<p>Here’s part of the output</p>
+<pre><code>                           Tests for Normality
+    
+    Test                  --Statistic---    -----p Value------
+    
+    Shapiro-Wilk          W     0.972165    Pr &lt; W      0.7205
+    </code></pre>
+<p>The Shapiro-Wilk test is the most commonly used test for normality. A highly significant p-value would indicate there may be a problem with non-normality.</p>
+<p>What happens if we do see a large departure from normality?</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>The other assumption we can check with residuals is the constant variance assumption, also called the assumption of homogeneous variances. From the SAS output</p>
+<pre><code>           Covariance Parameter Estimates
+                                           Standard
+    Cov Parm         Group     Estimate       Error
+    Residual (VC)    type 1      178.00      112.58
+    Residual (VC)    type 2     60.4000     38.2003
+    Residual (VC)    type 3     97.6000     61.7277
+    Residual (VC)    type 4     67.6000     42.7540
+    
+          Type III Tests of Fixed Effects
+                  Num      Den
+    Effect         DF       DF    F Value    Pr &gt; F
+    type            3       20       8.39    0.0008
+    
+               Tests of Covariance Parameters
+              Based on the Restricted Likelihood
+    Label            DF    -2 Res Log Like      ChiSq    Pr &gt; ChiSq    Note
+    Homogeneity       3             156.21       1.90        0.5942    DF
+    
+    DF: P-value based on a chi-square with DF degrees of freedom.</code></pre>
+<p>The covariance parameter estimates are the estimates of the variances for each of the four treatments, along with their standard errors. What do you notice?</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>The Tests of Covariance Parameters is testing the null hypothesis that the four variances are equal, versus the alternative that at least one is different.</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>In general, moderate departures from normality are of little concern, especially with the CRD. Nonconstant variance can be a bigger issue, but there are things we can do (like transformations) to stabilize the variance.</p>
+</section>
+<section id="power-for-the-completely-randomized-design" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="power-for-the-completely-randomized-design"><span class="header-section-number">2.4</span> Power for the Completely Randomized Design</h2>
+<p>With multiple comparisons, we talked about Type I error and its probability. We defined Type I error as rejecting the null hypothesis when it is, in fact, true. If P(Type I error) = <span class="math inline">\(\alpha\)</span>, then P(no Type I error) = <span class="math inline">\(1-\alpha\)</span>.</p>
+<p>There is another kind of error – Type II error. A Type II error occurs when H<span class="math inline">\(_0\)</span> is not rejected, but H<span class="math inline">\(_0\)</span> is actually false. In earlier courses, we summarized these two types of errors in a table:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Earlier in STAT 212, as well as other classes, we’ve said that we can “set” the probability of a Type I error. Anytime we say we’ll reject H<span class="math inline">\(_0\)</span> if the p-value <span class="math inline">\(&lt; \alpha\)</span>, we’re setting P(Type I error) = <span class="math inline">\(\alpha\)</span>. What about Type II error? We generally call the probability of a Type II error <span class="math inline">\(\beta\)</span>, P(Type II error) = <span class="math inline">\(\beta\)</span>. The problem is we can’t “set” both <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\alpha\)</span> without some other complications.</p>
+<p>We are typically interested in the <strong>power</strong> of a test:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s explore this via simulation. Consider a two-sample <span class="math inline">\(t\)</span>-test. In Canvas, there is an R file called <code>simulation example.R</code>.</p>
+<ul>
+<li><p>In the program, we’re generating <span class="math inline">\(n_1=20\)</span> normal random variables with <span class="math inline">\(\mu_1=10\)</span>, <span class="math inline">\(\sigma^2=25\)</span> and <span class="math inline">\(n_2=20\)</span> normal random variables with <span class="math inline">\(\mu_2=10\)</span>, <span class="math inline">\(\sigma^2=25\)</span>.</p></li>
+<li><p>Carry out the t-test (code already included) and observe the p-value. Using <span class="math inline">\(\alpha=0.10\)</span>, what is your decision?</p></li>
+<li><p>Run the program 9 more times, so you have a total of 10 p-values. How many times out of 10 did you reject H<span class="math inline">\(_0\)</span>?</p>
+<p>What does this estimate?</p></li>
+</ul>
+<ul>
+<li><p>Edit the program to generate data with <span class="math inline">\(\mu_1=10\)</span> and <span class="math inline">\(\mu_2=12\)</span> (still with <span class="math inline">\(n_1=n_2=20\)</span> and <span class="math inline">\(\sigma^2=25\)</span>). Run the program 10 times total. How many times did you reject H<span class="math inline">\(_0\)</span>, using <span class="math inline">\(\alpha=0.10\)</span>?</p></li>
+<li><p>Edit the program to generate data with <span class="math inline">\(\mu_1=10\)</span> and <span class="math inline">\(\mu_2=15\)</span> (still with <span class="math inline">\(n_1=n_2=20\)</span> and <span class="math inline">\(\sigma^2=25\)</span>). Run the program 10 times total. How many times did you reject H<span class="math inline">\(_0\)</span>, using <span class="math inline">\(\alpha=0.10\)</span>?</p></li>
+<li><p>Edit the program to generate data with <span class="math inline">\(\mu_1=10\)</span> and <span class="math inline">\(\mu_2=20\)</span> (still with <span class="math inline">\(n_1=n_2=20\)</span> and <span class="math inline">\(\sigma^2=25\)</span>). Run the program 10 times total. How many times did you reject H<span class="math inline">\(_0\)</span>, using <span class="math inline">\(\alpha=0.10\)</span>?</p></li>
+</ul>
+<p>What do you observe as <span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(\mu_2\)</span> get further apart?</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>Now let’s try the following:</p>
+<ul>
+<li><p>Edit the program to generate data with <span class="math inline">\(\mu_1=10\)</span> and <span class="math inline">\(\mu_2=12\)</span>, but with <span class="math inline">\(\sigma^2=1\)</span> (still with <span class="math inline">\(n_1=n_2=20\)</span>). Run the program 10 times total. How many times did you reject H<span class="math inline">\(_0\)</span>, using <span class="math inline">\(\alpha=0.10\)</span>?</p></li>
+<li><p>Edit the program to generate data with <span class="math inline">\(\mu_1=10\)</span> and <span class="math inline">\(\mu_2=20\)</span>, but with <span class="math inline">\(\sigma^2=625\)</span> (still with <span class="math inline">\(n_1=n_2=20\)</span>). Run the program 10 times total. How many times did you reject H<span class="math inline">\(_0\)</span>, using <span class="math inline">\(\alpha=0.10\)</span>?</p></li>
+</ul>
+<p>What do observe as <span class="math inline">\(\sigma^2\)</span> gets larger or smaller?</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Power</strong> is the probability of rejecting H<span class="math inline">\(_0\)</span> when it is really false. It is a function of several quantities:</p>
+<ul>
+<li><br>
+</li>
+<li><br>
+</li>
+<li><br>
+</li>
+<li><br>
+</li>
+</ul>
+<p>Power analyses usually focus on calculating the sample size required to achieve a particular power. What do you think would happen if instead of using <span class="math inline">\(n_1=n_2=20\)</span> we used <span class="math inline">\(n_1=n_2=10\)</span>?</p>
+<p><br>
+</p>
+<p>What do you think would happen if instead of using <span class="math inline">\(n_1=n_2=20\)</span> we used <span class="math inline">\(n_1=n_2=40\)</span>?</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>What do you think would happen if instead of using <span class="math inline">\(n_1=n_2=20\)</span> we used <span class="math inline">\(n_1=10\)</span> and <span class="math inline">\(n_2=30\)</span>?</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>In some simple situations, we can SAS procs to do power calculations. There are two: <code>PROC POWER</code> and <code>PROC GLMPOWER</code>. In some more complicated situations we’ll need to write our own code. We’ll start with <code>PROC POWER</code>. This proc will do power calculations for two sample <span class="math inline">\(t\)</span> tests and ANOVA.</p>
+<p>For a two-sample <span class="math inline">\(t\)</span> test, the basic code is:</p>
+<pre><code>        proc power;
+          twosamplemeans test=diff
+          alpha=
+          stddev=
+          meandiff=
+          npergroup=
+          power=               ;
+        run;</code></pre>
+<p>We’ll need to supply values for alpha, stddev, and meandiff. We can either supply a value for npergroup and use <code>power=.</code> or supply a value for power and use <code>npergroup=.</code></p>
+<p>We could also add the lines</p>
+<ul>
+<li><p><code>plot x=power min=0.5 max=0.95;</code> (for <code>ntotal=.</code>)</p></li>
+<li><p><code>x=n min= max= ;</code> (for <code>power=.</code>)</p></li>
+</ul>
+<p>Let’s try this, going back to our example with <span class="math inline">\(\mu_1=10\)</span>, <span class="math inline">\(\mu_2=12\)</span>, and <span class="math inline">\(\sigma^2=25\)</span>.</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>We can also use <code>PROC POWER</code> for ANOVA and contrasts. This time, the basic code is:</p>
+<pre><code>    proc power;
+      onewayanova
+      alpha=
+      stddev=
+      groupmeans=  |   |
+      ntotal=
+      power=
+      contrast= (     );
+    run;</code></pre>
+<p>Let’s go back to the donut data. In that example, the MSE was 100.90, so we’ll use <span class="math inline">\(\sigma=10\)</span> as a guess for future experiments. We observed sample means of <span class="math inline">\(\overline y_{1\cdot}=172\)</span>, <span class="math inline">\(\overline y_{2\cdot}=185\)</span>, <span class="math inline">\(\overline y_{3\cdot}=176\)</span>, and <span class="math inline">\(\overline y_{4\cdot}=162\)</span>. We can certainly use these as guesses for future experiments. We’ll consider the contrast testing animal fats versus vegetable fats. We could also look at the overall test.</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>We can also add plot statements here.</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>But, we don’t actually have to have guesses for the treatment means. We do have to have an idea of how large a difference we want to be able to detect. With our example data, we had a animal fat mean of 178.5 and a vegetable fat mean of 169. This is a difference of 9.5.</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>We could also the consider potential differences we might observe in pairwise differences.</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>There are situations, however, where <code>PROC POWER</code> doesn’t work. It can’t handle more than one factor, a treatment design we’ll see in a couple of weeks. And, it can’t handle any model with a random effect other than <span class="math inline">\(e_{ij}\)</span>, a consequence of experimental designs we’ll see shortly.</p>
+<p>Let’s go back to the donut scenario. In that case, the ANOVA table was</p>
+<div class="center">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Source of Variation</th>
+<th style="text-align: left;">df</th>
+<th style="text-align: left;">SS</th>
+<th style="text-align: left;">MS</th>
+<th style="text-align: left;">Expected MS</th>
+<th style="text-align: left;">F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fat Type</td>
+<td style="text-align: left;"><span class="math inline">\(t-1=4-1=3\)</span></td>
+<td style="text-align: left;">SSTrt</td>
+<td style="text-align: left;">MST</td>
+<td style="text-align: left;"><span class="math inline">\(\sigma^2 + \frac{n}{t-1}\sum_{i=1}^4 \tau_i^2\)</span></td>
+<td style="text-align: left;">MST/MSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Error</td>
+<td style="text-align: left;"><span class="math inline">\(t(n-1) = 4(6-1) = 20\)</span></td>
+<td style="text-align: left;">SSError</td>
+<td style="text-align: left;">MSE</td>
+<td style="text-align: left;"><span class="math inline">\(\sigma^2\)</span></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: left;"><span class="math inline">\(nt-1=(4)(6)-1=23\)</span></td>
+<td style="text-align: left;">SSTotal</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>When we considered this ANOVA table back in Chapter 3, we observed</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>But, power is about detecting when the null hypothesis is NOT true. It turns out that if H<span class="math inline">\(_0\)</span> is not true, the <span class="math inline">\(F\)</span> ratio follows a different distribution:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The term SSHyp means</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We can determine the power of an overall <span class="math inline">\(F\)</span> test or contrast under a specified alternative by tricking <code>PROC GLIMMIX</code> into computing <span class="math inline">\(\lambda\)</span> and then using it to compute power. There are three basic steps.</p>
+<ol type="1">
+<li><p>Generate data set where all <span class="math inline">\(y_{ij}\)</span> are set to the alternative value <span class="math inline">\(\mu_i\)</span> (the “true” <span class="math inline">\(\mu_i\)</span> MUST be specified by the researcher). A “true” value of <span class="math inline">\(\sigma^2\)</span> must also be specified.</p>
+<p><br>
+<br>
+</p></li>
+<li><p>Run <code>PROC GLIMMIX</code> on these data, but fix <span class="math inline">\(\sigma^2\)</span> at the value specified by the researcher (don’t let SAS estimate it). Use <code>GLIMMIX</code> to calculate the overall <span class="math inline">\(F\)</span> and <span class="math inline">\(F\)</span> values for any contrasts. This means the <code>contrast</code> statement must be used, not <code>estimate</code> or <code>lsmestimate</code>. The product of the numerator degrees of freedom and the resulting overall ANOVA and contrast <span class="math inline">\(F\)</span> values are the <span class="math inline">\(\lambda\)</span>s.</p></li>
+<li><p>Use the results from (2) in the SAS <span class="math inline">\(F\)</span> probability functions to compute power.</p></li>
+</ol>
+<p>Let’s go back to the donuts.</p>
+<ol type="1">
+<li>Step 1: Generate or simulate the data of “true” means.</li>
+</ol>
+<pre><code>        data donutpower;
+          input trt mu;
+          do eu=1 to 6; *6 batches per treatment;
+            output;
+          end;
+        datalines;
+        1 172
+        2 185
+        3 176
+        4 162
+        ;   </code></pre>
+<ol start="2" type="1">
+<li>Step 2: Run <code>GLIMMIX</code>, fixing the true value of <span class="math inline">\(\sigma^2\)</span> at 100.</li>
+</ol>
+<pre><code>            proc glimmix data=donutpower;
+              class trt;
+              model mu=trt;
+              parms (100)/hold=1;
+              contrast 'animal vs veg' trt 0.5 0.5 -0.5 -0.5;
+            ods output tests3=b;
+            ods output contrasts=c;
+            run;
+            
+            proc print data=b;
+            proc print data=c; run;</code></pre>
+<p>This produces the output</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="glimmix out.jpg" class="img-fluid figure-img" alt="A table of F values resulting from the running PROC GLIMMIX on the simulated data in the power calculation." width="400"></p>
+<figcaption>The results of Step 2 in the power calculation.</figcaption>
+</figure>
+</div>
+<ol start="3" type="1">
+<li>Step 3: Use the results from <code>GLIMMIX</code> to find the power.</li>
+</ol>
+<pre><code>         data powerval;
+          set b c;
+          do alpha=0.10, 0.05, 0.01;
+            lambda=numdf*fvalue;
+            fcrit=finv(1-alpha, numdf, dendf, 0);
+            power=1-probf(fcrit, numdf, dendf,lambda);
+            output;
+          end;
+        proc print; run;</code></pre>
+<p>Which gives</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="power out.jpg" class="img-fluid figure-img" alt="A table which shows the power calculated based on the simulated data." width="600"></p>
+<figcaption>The results of Step 3 in the power calculation.</figcaption>
+</figure>
+</div>
+</section>
+<section id="quantitative-levels-of-a-factor" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="quantitative-levels-of-a-factor"><span class="header-section-number">2.5</span> Quantitative Levels of a Factor</h2>
+<p>As a reminder, we’ve considered four basic treatment structures that may be used in a one-way treatment design:</p>
+<ol type="1">
+<li><p>Unstructured</p></li>
+<li><p>Control versus other treatments</p></li>
+<li><p>Quantitative</p></li>
+<li><p>Other structure</p></li>
+</ol>
+<p>The last of the four treatment structures we still need address is the quantitative factor. Up to now, we’ve only considered qualitative factors. A <strong>qualitative factor</strong> is</p>
+<p><br>
+<br>
+</p>
+<p>We’ve seen many of these examples:</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>On the other hand, a <strong>quantitative factor</strong> is</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>When we look at the initial experimental design (how the treatments are assigned to experimental units) and analysis of a study, it doesn’t really matter whether our factor is quantitative or qualitative. The researcher wants to know whether the response differs based on the treatment levels.</p>
+<p>However, many studies that have a quantitative factor are conducted because</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>The general approach to fitting these models is regression analysis. The functional relationship between the quantitative factor and the response may be linear or non-linear, and a polynomial model is often used to describe the functional relationship. It is the simplest of the linear functions.</p>
+<p>The general form of a <strong>polynomial model of</strong> <span class="math inline">\(p\)</span> degrees is</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The objective is to determine</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Example:</strong> A researcher is interested in studying the tensile strength of a new synthetic fiber to use in a cotton blend for shirts. The researcher knows the strength of material is affected by the percent (by weight) of cotton used in the blend and a range between 10 and 40% cotton is necessary to meet other characteristics criteria, like accepting a no-iron treatment. The researcher decides to test a range of percentages of cotton: 15, 20, 25, 30, and 35% and has the resources to test five samples at each level. The data are:</p>
+<div class="center">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th></th>
+<th style="text-align: left;">Obs</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cotton %</td>
+<td>1</td>
+<td>2</td>
+<td style="text-align: left;">3</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>7</td>
+<td>7</td>
+<td style="text-align: left;">15</td>
+<td>11</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td>20</td>
+<td>12</td>
+<td>17</td>
+<td style="text-align: left;">12</td>
+<td>18</td>
+<td>18</td>
+</tr>
+<tr class="even">
+<td>25</td>
+<td>15</td>
+<td>19</td>
+<td style="text-align: left;">19</td>
+<td>21</td>
+<td>19</td>
+</tr>
+<tr class="odd">
+<td>30</td>
+<td>19</td>
+<td>25</td>
+<td style="text-align: left;">22</td>
+<td>19</td>
+<td>23</td>
+</tr>
+<tr class="even">
+<td>35</td>
+<td>7</td>
+<td>10</td>
+<td style="text-align: left;">11</td>
+<td>15</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p><strong>Treatment Design:</strong></p>
+<ul>
+<li><p>Factor:</p></li>
+<li><p>Levels:</p></li>
+</ul></li>
+<li><p><strong>Experimental Design:</strong></p>
+<ul>
+<li></li>
+</ul></li>
+</ul>
+<p>Let’s first look at a plot of the treatment means by treatment level. We’ll use this code:</p>
+<pre><code>    proc glimmix data=cotton;
+      class percent; *treating percent as a qualitative var only to get the trt means;
+      model strength=percent;
+      lsmeans percent/plot=meanplot(join); *connect the dots;
+    run;</code></pre>
+<p>This produces the plot</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="cotton plot.jpeg" class="img-fluid figure-img" style="width:70.0%" alt="A plot of the lsmeans versus percent cotton. The shape of the plot generally indicates a quadratic relationship."></p>
+<figcaption>Plot of the lsmeans corresponding to the levels of percent cotton.</figcaption>
+</figure>
+</div>
+<p>Anytime we’re fitting a polynomial model, the number of degrees <span class="math inline">\(p\)</span> that can be fit is</p>
+<p><br>
+</p>
+<p>and each degree corresponds to 1 treatment degree of freedom. If we fit all terms, we get a complete partition of the treatment effect into its one degree of freedom components.</p>
+<p>In the case, the highest order model we can fit is</p>
+<p><br>
+</p>
+<p>From the plot, it appears</p>
+<p>The first model we’ll try fitting is a quartic model:</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>where</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>There are two models/methods for fitting the polynomial model:</p>
+<ul>
+<li><p>direct regression</p></li>
+<li><p>orthogonal polynomials</p></li>
+</ul>
+<p><strong>Direct regression</strong></p>
+<p>The <strong>direct regression</strong> approach considers the treatment/explanatory variable as a regression variable, not an ANOVA variable (though we know they’re really the same model at their core!). Because we are treating our explanatory varibale as a regression variable, it <u><em>must not</em></u> appear in the <code>class</code> statement. The following code fits a quartic model to the data:</p>
+<pre><code>proc glimmix data=cotton;
+  model strength=percent percent*percent percent*percent*percent 
+                 percent*percent*percent*percent/htype=1,3;
+/*alternate model statement */
+* model strength=percent|percent|percent|percent/htype=1,3;
+run;</code></pre>
+<p>A few notes:</p>
+<ul>
+<li>We’re asking for both Type I and Type III tests.</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>Note the alternate <code>model</code> statement.</li>
+</ul>
+<p><br>
+<br>
+</p>
+<p>Here’s part of the output</p>
+<pre><code>                    Type I Tests of Fixed Effects
+    
+                             Num      Den
+    Effect                    DF       DF    F Value    Pr &gt; F
+    
+    percent                    1       20       4.12    0.0559
+    percent*percent            1       20      47.66    &lt;.0001
+    percen*percen*percen       1       20       7.96    0.0105
+    perc*perc*perc*perce       1       20       2.19    0.1549
+    
+    
+                   Type III Tests of Fixed Effects
+    
+                             Num      Den
+    Effect                    DF       DF    F Value    Pr &gt; F
+    
+    percent                    1       20       1.57    0.2242
+    percent*percent            1       20       1.67    0.2115
+    percen*percen*percen       1       20       1.88    0.1857
+    perc*perc*perc*perce       1       20       2.19    0.1549
+    </code></pre>
+<p>The <strong>Type I Tests</strong></p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>So, it looks like</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>The <strong>Type III Tests</strong></p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>So now we can rerun the analyses, keeping the terms up to the highest order that has a significant contribution. In our example</p>
+<p><br>
+<br>
+</p>
+<p>We’ll use the code:</p>
+<pre><code>    proc glimmix data=cotton;
+      model strengt=percent|percent|percent/solution htype=1;
+    run;</code></pre>
+<p>Note we’ve added the <code>solution</code> option, which will provide the parameter estimates for the effects. Here’s the output:</p>
+<pre><code>                                 Parameter Estimates
+    
+                                        Standard
+    Effect                  Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    Intercept                59.5257     38.2927       21       1.55      0.1350
+    percent                  -8.7257      5.0052       21      -1.74      0.0959
+    percent*percent           0.4757      0.2081       21       2.29      0.0327
+    percen*percen*percen    -0.00760    0.002768       21      -2.75      0.0121
+    Scale                     8.6205      2.6604        .        .         .
+    
+    
+                                Type I Tests of Fixed Effects
+    
+                             Num      Den
+    Effect                    DF       DF    F Value    Pr &gt; F
+    
+    percent                    1       21       3.90    0.0616
+    percent*percent            1       21      45.12    &lt;.0001
+    percen*percen*percen       1       21       7.54    0.0121
+    </code></pre>
+<p>We can use these estimates to construct the fitted model:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We can also plot the predicted values from our equation</p>
+<pre><code>    proc glimmix data=cotton;
+      model strength=percent|percent|percent/solution htype=1;
+      output out=cottonout pred=predicted;
+    run;
+    
+    proc print data=cottonout; run;</code></pre>
+<p>Which gives us the output data set that I’ve called <code>cottonout</code>:</p>
+<pre><code>    Obs    percent    strength    predicted
+    
+     1       15          7        10.0257
+     2       15          7        10.0257
+     3       15         15        10.0257
+     4       15         11        10.0257
+     5       15          9        10.0257
+     6       20         12        14.4971
+     7       20         17        14.4971
+     8       20         12        14.4971
+     9       20         18        14.4971
+    10       20         18        14.4971
+    11       25         15        19.9543
+    12       25         19        19.9543
+    13       25         19        19.9543
+    14       25         21        19.9543
+    15       25         19        19.9543
+    16       30         19        20.6971
+    17       30         25        20.6971
+    18       30         22        20.6971
+    19       30         19        20.6971
+    20       30         23        20.6971
+    21       35          7        11.0257
+    22       35         10        11.0257
+    23       35         11        11.0257
+    24       35         15        11.0257
+    25       35         11        11.0257
+    </code></pre>
+<p>To plot the predicted values there are few options</p>
+<pre><code>    title "Regression model for cotton data";
+    symbol1 interpol=none value=dot color=black;
+    symbol2 interpol=join value=diamond color=red;
+    proc gplot data=cottonout;
+      plot strength*percent predicted*percent/overlay;
+    run;
+    
+    title "Regression model for cotton data";
+    symbol1 interpol=none value=dot color=black;
+    symbol2 interpol=RC value=diamond color=red; *can only go up to a cubic;
+    proc gplot data=cottonout;
+      plot strength*percent predicted*percent/overlay;
+    run;
+    
+    title "Regression model for cotton data";
+    symbol1 interpol=none value=dot color=black;
+    symbol2 interpol=spline value=diamond color=red; 
+    proc gplot data=cottonout;
+      plot strength*percent predicted*percent/overlay;
+    run;</code></pre>
+<p>Let’s go to SAS to see the differences among these three plots.</p>
+<p>Notice that at the percents outside the inference space we get nonsense strength values. Only values between 15 and 35 percent are within the inference space.</p>
+<p><strong>Orthogonal polynomials</strong></p>
+<p>Quantitative factors levels are one of the few cases where a full set of <strong>orthogonal contrasts</strong> can be useful. However, this approach does require</p>
+<p><br>
+<br>
+</p>
+<p>and involves testing orthogonal contrasts among the treatment factor levels. These contrasts allow us to evaluate the importance of each polynomial component with a specific contrast.</p>
+<p>Here are the steps:</p>
+<ul>
+<li><br>
+</li>
+<li><br>
+</li>
+<li><br>
+</li>
+<li><br>
+</li>
+<li><br>
+</li>
+</ul>
+<p>The coefficients for polynomial contrasts are not obvious. It’s easiest to look them up (google orthogonal polynomial coefficients table). For a design with 5 equally spaced levels:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ortho poly.jpg" class="img-fluid figure-img" style="width:70.0%" alt="The table provides the orthogonal polynomial coefficients for 5 equally spaced levels of a quantitative predictor variable."></p>
+<figcaption>Orthogonal polynomial coefficients for 5 equally spaced levels.</figcaption>
+</figure>
+</div>
+<p>So, our code would look like:</p>
+<pre><code>    proc glimmix data=cotton;
+      class percent;
+      model strength=percent;
+      contrast 'linear' percent -2 -1 0 1 2;
+      contrast 'quadratic' percent 2 -1 -2 -1 2;
+      contrast 'cubic' percent -1 2 0 -2 1;
+      contrast 'quartic' percent 1 -4 6 -4 1;
+    run;</code></pre>
+<p>Which gives the output:</p>
+<pre><code>       Type III Tests of Fixed Effects
+
+              Num      Den
+Effect         DF       DF    F Value    Pr &gt; F
+
+percent         4       20      15.48    &lt;.0001
+
+
+                  Contrasts
+
+               Num      Den
+Label          DF       DF    F Value    Pr &gt; F
+
+linear          1       20       4.12    0.0559
+quadratic       1       20      47.66    &lt;.0001
+cubic           1       20       7.96    0.0105
+quartic         1       20       2.19    0.1549</code></pre>
+<p>Note that these results are the same as we got with the direct regression method!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Section 1 Introduction.html" class="pagination-link" aria-label="Introduction to Design">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Design</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Section 3 Factorial Treatment Design.html" class="pagination-link" aria-label="Factorial Treatment Designs">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Factorial Treatment Designs</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

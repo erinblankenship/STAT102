@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Split-Plot Designs – Stat 102 Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Section 4 Block Designs.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ffd282cb318059e0bcb130885a47f5dc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Section 5 Split Plot Designs.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Split-Plot Designs</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Stat 102 Notes</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Stat-102-Notes.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Goals for STAT 102</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section 1 Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Design</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section 2 Completely Randomized Design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Completely Randomized Design</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section 3 Factorial Treatment Design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Factorial Treatment Designs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section 4 Block Designs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Block Designs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section 5 Split Plot Designs.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Split-Plot Designs</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#model-and-analysis-of-variance" id="toc-model-and-analysis-of-variance" class="nav-link active" data-scroll-target="#model-and-analysis-of-variance"><span class="header-section-number">5.1</span> Model and Analysis of Variance</a></li>
+  <li><a href="#analysis-in-sas" id="toc-analysis-in-sas" class="nav-link" data-scroll-target="#analysis-in-sas"><span class="header-section-number">5.2</span> Analysis in SAS</a></li>
+  <li><a href="#more-complicated-split-plot-designs" id="toc-more-complicated-split-plot-designs" class="nav-link" data-scroll-target="#more-complicated-split-plot-designs"><span class="header-section-number">5.3</span> More Complicated Split-Plot Designs</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Split-Plot Designs</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Suppose we are carrying out an experiment to explore the effect of cold storage conditions on food quality. There are two treatment factors: storage temperature (2, 4, 8 degrees C) and container type (sealed plastic, open plastic, glass, and aluminum foil). A food product will be placed in one of the containers and stored in a small temperature controlled freezer for fixed period of time. There are 12 small freezers available for the experiment. Each freezer can hold 4 containers.</p>
+<p>What kind of treatment design is this?<br>
+</p>
+<p>How many treatment combinations are there?<br>
+</p>
+<p>What is the experimental unit?<br>
+</p>
+<p>What’s the problem?</p>
+<p><br>
+</p>
+<p>One thing we can try is randomly assign storage temperatures to the freezers and randomly assign food products to storage containers within each freezer. The storage temperature is applied to all food samples in a freezer.</p>
+<p>Experimental unit for storage temperature:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The storage container is randomized separately, so the experimental unit for storage container:</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>So, we have two different sizes of experimental units for the two different factors in the experiment. Designs in which there are two sizes of experimental unit are called <strong>split-plot designs</strong>.</p>
+<p>Split-plot designs are frequently used for factorial experiments, and may use CRD, RCBD, row-column, or incomplete block designs. The underlying principle of split-plots is</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>This means each whole unit becomes a block for the subunit treatments.</p>
+<p>Consider the following design structure. We have Factor A (four levels) laid out in 3 randomized complete blocks.</p>
+<div id="tbl-panel" class="quarto-layout-panel anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-panel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.1: Factor A laid out in 3 randomized complete blocks
+</figcaption>
+<div aria-describedby="tbl-panel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-panel" style="flex-basis: 33.3%;justify-content: center;">
+<div id="tbl-first" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-first-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Block 1
+</figcaption>
+<div aria-describedby="tbl-first-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">A4</th>
+<th style="text-align: left;">A1</th>
+<th style="text-align: left;">A2</th>
+<th style="text-align: left;">A3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-panel" style="flex-basis: 33.3%;justify-content: center;">
+<div id="tbl-second" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-second-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Block 2
+</figcaption>
+<div aria-describedby="tbl-second-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">A2</th>
+<th style="text-align: left;">A1</th>
+<th style="text-align: left;">A4</th>
+<th style="text-align: left;">A3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-panel" style="flex-basis: 33.3%;justify-content: center;">
+<div id="tbl-third" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-third-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Block 3
+</figcaption>
+<div aria-describedby="tbl-third-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">A1</th>
+<th style="text-align: left;">A2</th>
+<th style="text-align: left;">A4</th>
+<th style="text-align: left;">A3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p>A second Factor B (2 levels), can be superimposed by dividing each A unit into two subunits and assigning the two B treatment levels to these subunits.</p>
+<div id="tbl-panel" class="quarto-layout-panel anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-panel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.2: Factor A laid out in 3 randomized complete blocks, with each A unit subdivided into two subunits.
+</figcaption>
+<div aria-describedby="tbl-panel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-panel" style="flex-basis: 33.3%;justify-content: center;">
+<div id="tbl-first" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-first-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Block 1
+</figcaption>
+<div aria-describedby="tbl-first-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">A4</th>
+<th style="text-align: left;">A1</th>
+<th style="text-align: left;">A2</th>
+<th style="text-align: left;">A3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">b2</td>
+<td style="text-align: left;">b2</td>
+<td style="text-align: left;">b1</td>
+<td style="text-align: left;">b2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">b1</td>
+<td style="text-align: left;">b1</td>
+<td style="text-align: left;">b2</td>
+<td style="text-align: left;">b1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-panel" style="flex-basis: 33.3%;justify-content: center;">
+<div id="tbl-second" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-second-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Block 2
+</figcaption>
+<div aria-describedby="tbl-second-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">A2</th>
+<th style="text-align: left;">A1</th>
+<th style="text-align: left;">A4</th>
+<th style="text-align: left;">A3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">b1</td>
+<td style="text-align: left;">b2</td>
+<td style="text-align: left;">b1</td>
+<td style="text-align: left;">b1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">b2</td>
+<td style="text-align: left;">b1</td>
+<td style="text-align: left;">b2</td>
+<td style="text-align: left;">b2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-panel" style="flex-basis: 33.3%;justify-content: center;">
+<div id="tbl-third" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-third-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Block 3
+</figcaption>
+<div aria-describedby="tbl-third-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">A1</th>
+<th style="text-align: left;">A2</th>
+<th style="text-align: left;">A4</th>
+<th style="text-align: left;">A3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">b1</td>
+<td style="text-align: left;">b2</td>
+<td style="text-align: left;">b2</td>
+<td style="text-align: left;">b1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">b2</td>
+<td style="text-align: left;">b1</td>
+<td style="text-align: left;">b1</td>
+<td style="text-align: left;">b2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p>Here the A units are the whole units and the B units are the subunits.</p>
+<p>Note the randomization happens in two stages.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Each whole plot may be considered as a block for Factor B, but it is not a complete block for the full set of treatments.</p>
+<p>Why might we use split-plot designs?</p>
+<ul>
+<li>Treatments associated with levels of one (or more) of the factors require larger amounts of experimental material than do treatments for other factors.</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>An additional factor could be added to the experiment to increase its scope.</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>From previous experiments or literature, we know that larger differences are expected among one factor than another.</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>We need greater precision for comparisons among some factors than we do for comparison among others.</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Big picture summary: variation among split-plot units is expected to be less than variation among whole plot units. This implies</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>As mentioned earlier, we can use split-plots in combination with any experimental design.</p>
+<ul>
+<li><p><strong>CRD:</strong></p>
+<div class="center">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">A1</th>
+<th style="text-align: center;">A2</th>
+<th style="text-align: center;">A1</th>
+<th style="text-align: center;">A1</th>
+<th style="text-align: center;">A2</th>
+<th style="text-align: center;">A2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">B2</td>
+<td style="text-align: center;">B1</td>
+<td style="text-align: center;">B1</td>
+<td style="text-align: center;">B1</td>
+<td style="text-align: center;">B2</td>
+<td style="text-align: center;">B2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B1</td>
+<td style="text-align: center;">B2</td>
+<td style="text-align: center;">B2</td>
+<td style="text-align: center;">B2</td>
+<td style="text-align: center;">B1</td>
+<td style="text-align: center;">B1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br>
+<br>
+</p></li>
+<li><p><strong>RCBD:</strong></p>
+<div class="center">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Block</th>
+<th>1</th>
+<th style="text-align: center;">Block</th>
+<th>2</th>
+<th style="text-align: center;">Block</th>
+<th>3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">A1</td>
+<td>A2</td>
+<td style="text-align: center;">A2</td>
+<td>A1</td>
+<td style="text-align: center;">A2</td>
+<td>A1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B2</td>
+<td>B1</td>
+<td style="text-align: center;">B1</td>
+<td>B1</td>
+<td style="text-align: center;">B2</td>
+<td>B2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">B1</td>
+<td>B2</td>
+<td style="text-align: center;">B2</td>
+<td>B2</td>
+<td style="text-align: center;">B1</td>
+<td>B1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br>
+<br>
+</p></li>
+<li><p><strong>Latin Square:</strong></p>
+<div class="center">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Row</th>
+<th style="text-align: center;"></th>
+<th></th>
+<th>Col</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td style="text-align: center;">1</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>3</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td style="text-align: center;">A1</td>
+<td></td>
+<td>A2</td>
+<td></td>
+<td>A3</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td style="text-align: center;">B1</td>
+<td>B2</td>
+<td>B2</td>
+<td>B1</td>
+<td>B2</td>
+<td>B1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td style="text-align: center;">A2</td>
+<td></td>
+<td>A3</td>
+<td></td>
+<td>Aa</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td style="text-align: center;">B1</td>
+<td>B2</td>
+<td>B1</td>
+<td>B2</td>
+<td>B1</td>
+<td>B2</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td style="text-align: center;">A3</td>
+<td></td>
+<td>A1</td>
+<td></td>
+<td>A2</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td style="text-align: center;">B2</td>
+<td>B1</td>
+<td>B2</td>
+<td>B1</td>
+<td>B1</td>
+<td>B2</td>
+</tr>
+</tbody>
+</table>
+</div></li>
+<li><p><strong>BIB:</strong></p>
+<div class="center">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Location</th>
+<th>1</th>
+<th style="text-align: center;">Location</th>
+<th>2</th>
+<th style="text-align: center;">Location</th>
+<th>3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">A1</td>
+<td>A2</td>
+<td style="text-align: center;">A1</td>
+<td>A3</td>
+<td style="text-align: center;">A2</td>
+<td>A3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B2</td>
+<td>B1</td>
+<td style="text-align: center;">B1</td>
+<td>B1</td>
+<td style="text-align: center;">B2</td>
+<td>B2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">B1</td>
+<td>B2</td>
+<td style="text-align: center;">B2</td>
+<td>B2</td>
+<td style="text-align: center;">B1</td>
+<td>B1</td>
+</tr>
+</tbody>
+</table>
+</div></li>
+</ul>
+<section id="model-and-analysis-of-variance" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="model-and-analysis-of-variance"><span class="header-section-number">5.1</span> Model and Analysis of Variance</h2>
+<p>To determine the appropriate model, we’ll start with the whole/main plot. Consider the following whole plot arrangement</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">A1</th>
+<th style="text-align: center;">A2</th>
+<th style="text-align: center;">A1</th>
+<th style="text-align: center;">A1</th>
+<th style="text-align: center;">A2</th>
+<th style="text-align: center;">A2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>Let’s sketch the ANOVA table for this arrangement</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Now let’s look only at the subplot arrangement:</p>
+<p><br>
+</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">B1</td>
+<td style="text-align: center;">B2</td>
+<td style="text-align: center;">B2</td>
+<td style="text-align: center;">B1</td>
+<td style="text-align: center;">B2</td>
+<td style="text-align: center;">B1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B2</td>
+<td style="text-align: center;">B1</td>
+<td style="text-align: center;">B1</td>
+<td style="text-align: center;">B2</td>
+<td style="text-align: center;">B1</td>
+<td style="text-align: center;">B2</td>
+</tr>
+</tbody>
+</table>
+<p>And sketch its ANOVA table</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>In order to get the main/whole unit analysis, the “block” is partitioned. The error from the subplot analysis can also be partitioned as each component times B, so we can examine the A <span class="math inline">\(\times\)</span> B interaction. If we put these two analyses together, we get (for the CRD):</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>If the main/whole plot is laid out in randomized complete blocks, the ANOVA table looks like this:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The model for the split-plot design incorporates both the whole plot and the sub plot. Without blocks, the model is</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Tests of hypothesis in the split-plot will be constructed differently than we’ve seen before. To see this, let’s review the ANOVA table (for the CRD) for a regular factorial:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Now let’s compare this with the ANOVA table for the split-plot (still CRD) with the expected mean squares:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>This leads to different <span class="math inline">\(F\)</span> statistics.</p>
+<p>For testing the null hypothesis H<span class="math inline">\(_0: \alpha_1 = \alpha_2 = \cdots = \alpha_a = 0\)</span></p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>For testing the null hypothesis H<span class="math inline">\(_0: \beta_1 = \beta_2 = \cdots = \beta_b = 0\)</span></p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>For testing the null hypothesis H<span class="math inline">\(_0: (\alpha\beta)_{11} = \cdots = (\alpha\beta)_{ab} = 0\)</span></p>
+<p><br>
+<br>
+</p>
+<p>Using these split units tends to mean</p>
+<ul>
+<li>Tests of main plot effects</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>Tests of sub plot effects</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+</section>
+<section id="analysis-in-sas" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="analysis-in-sas"><span class="header-section-number">5.2</span> Analysis in SAS</h2>
+<p>To correctly analyze the data in SAS (or any software), we have to identify the model terms correctly. Consider the following (very small) example:</p>
+<div class="center">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 15%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Replication</td>
+<td style="text-align: center;">(sub</td>
+<td style="text-align: center;">unit</td>
+<td style="text-align: center;">level)</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">A1 (R1, wp)</td>
+<td style="text-align: center;">A2 (R1, wp)</td>
+<td style="text-align: center;">A1 (R2, wp)</td>
+<td style="text-align: center;">A1 (R3, wp)</td>
+<td style="text-align: center;">A2 (R2,wp)</td>
+<td style="text-align: center;">A2 (R3, wp)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B2 (5.22)</td>
+<td style="text-align: center;">B1 (6.52)</td>
+<td style="text-align: center;">B1 (6.13)</td>
+<td style="text-align: center;">B1 (5.77)</td>
+<td style="text-align: center;">B2 (5.81)</td>
+<td style="text-align: center;">B2 (5.49)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">B1 (5.61)</td>
+<td style="text-align: center;">B2 (5.78)</td>
+<td style="text-align: center;">B2 (6.14)</td>
+<td style="text-align: center;">B2 (6.23)</td>
+<td style="text-align: center;">B1 (6.43)</td>
+<td style="text-align: center;">B1 (4.60)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>What can we tell about the experiment by looking at this layout?</p>
+<p><br>
+<br>
+</p>
+<p>We’ll need to identify the whole plot experimental unit for SAS. Let’s first use <code>proc mixed</code>, just so we can see the expected mean squares and make sure we’ve correctly identified the whole plot experimental unit.</p>
+<pre><code>    proc mixed method=type3;
+      class rep A B;
+      model y=A B A*B;
+      random rep(A);
+    run;</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="splitplotanova.jpg" class="img-fluid figure-img" style="width:80.0%" alt="The figure provided the output from SAS for the analysis of a split-plot carried out as a CRD. The Expected Mean Squares show the different error terms."></p>
+<figcaption>SAS output from PROC MIXED for the analysis of a split-plot</figcaption>
+</figure>
+</div>
+<p>So the <span class="math inline">\(F\)</span> value for Factor A is <span class="math inline">\(F=2.98\)</span>. This comes from</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>For the A <span class="math inline">\(\times\)</span> B interaction, the <span class="math inline">\(F\)</span> value is <span class="math inline">\(F=0.40\)</span>. This comes from</p>
+<p><br>
+</p>
+<p><strong>Example:</strong> A researcher is studying the absorption times of a particular type of antibiotic capsule. There are three dosage strengths and 4 capsule wall thicknesses, so 12 total treatment combinations. The researcher has decided on four replicates and it is necessary to run each replicate on a different day, so the researcher plans to block on day. On each day, each dosage strength is formulated. Once a particular dosage strength is formulated, all four wall thicknesses are tested at that strength. Then another dosage strength is selected, and all four wall thicknesses are tested. Finally, the third dosage strength and the four wall thicknesses are tested.</p>
+<p>The experimental layout looks like this (everything would be appropriately randomized):</p>
+<div class="center">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Day 1</th>
+<th></th>
+<th></th>
+<th style="text-align: center;">Day 2</th>
+<th></th>
+<th></th>
+<th style="text-align: center;">Day 3</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Dose1</td>
+<td style="text-align: center;">Dose2</td>
+<td>Dose3</td>
+<td>Dose1</td>
+<td style="text-align: center;">Dose2</td>
+<td>Dose3</td>
+<td>Dose1</td>
+<td style="text-align: center;">Dose2</td>
+<td>Dose3</td>
+</tr>
+<tr class="even">
+<td>Wall1</td>
+<td style="text-align: center;">Wall1</td>
+<td>Wall1</td>
+<td>Wall1</td>
+<td style="text-align: center;">Wall1</td>
+<td>Wall1</td>
+<td>Wall1</td>
+<td style="text-align: center;">Wall1</td>
+<td>Wall1</td>
+</tr>
+<tr class="odd">
+<td>Wall2</td>
+<td style="text-align: center;">Wall2</td>
+<td>Wall2</td>
+<td>Wall2</td>
+<td style="text-align: center;">Wall2</td>
+<td>Wall2</td>
+<td>Wall2</td>
+<td style="text-align: center;">Wall2</td>
+<td>Wall2</td>
+</tr>
+<tr class="even">
+<td>Wall3</td>
+<td style="text-align: center;">Wall3</td>
+<td>Wall3</td>
+<td>Wall3</td>
+<td style="text-align: center;">Wall3</td>
+<td>Wall3</td>
+<td>Wall3</td>
+<td style="text-align: center;">Wall3</td>
+<td>Wall3</td>
+</tr>
+<tr class="odd">
+<td>Wall4</td>
+<td style="text-align: center;">Wall4</td>
+<td>Wall4</td>
+<td>Wall4</td>
+<td style="text-align: center;">Wall4</td>
+<td>Wall4</td>
+<td>Wall4</td>
+<td style="text-align: center;">Wall4</td>
+<td>Wall4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Block:<br>
+</li>
+<li>Main plot treatment factor:<br>
+</li>
+<li>Main plot experimental unit:<br>
+</li>
+<li>Subplot treatment factor:<br>
+</li>
+<li>Subplot experimental unit:<br>
+</li>
+</ul>
+<p>So, we’ll put</p>
+<p><br>
+</p>
+<p>in the random statement to identify main plot error.</p>
+<p>Again, we’ll use <code>proc mixed</code>, just so we can see the expected mean squares and make sure we’ve correctly identified the whole plot experimental unit.</p>
+<pre><code>proc mixed data=antibiotic method=type3;
+  class day dosage wall;
+  model time=day dosage wall dosage*wall;
+  random day*dosage;
+run;</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="antibiotic mixed.jpg" class="img-fluid figure-img" style="width:90.0%" alt="The figure shows the output of the PROC MIXED analysis of the antibiotic capsule data."></p>
+<figcaption>PROC MIXED analysis of the antibiotic capsule data</figcaption>
+</figure>
+</div>
+<p>So the <span class="math inline">\(F\)</span> value for dosage strength is <span class="math inline">\(F=315.92\)</span>. This comes from</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>For the wall thickness effect, the <span class="math inline">\(F\)</span> value is <span class="math inline">\(F=48.94\)</span>. This comes from</p>
+<p><br>
+<br>
+</p>
+<p>We could also consider day as a random effect. We’ll go back to <code>proc glimmix</code>, since we no longer need the expected mean squares:</p>
+<pre><code>    proc glimmix data=antibiotic;
+      class day dosage wall;
+      model time=dosage wall dosage*wall;
+      random day day*dosage;
+    run;</code></pre>
+<p>Here’s part of the output</p>
+<pre><code>  Estimated G matrix is not positive definite.
+    
+      Covariance Parameter Estimates
+                              Standard
+    Cov Parm      Estimate       Error
+    
+    day                  0           .
+    day*dosage      0.2454      1.1182
+    Residual        7.4699      2.0330
+    
+           Type III Tests of Fixed Effects
+                    Num      Den
+    Effect           DF       DF    F Value    Pr &gt; F
+    
+    dosage            2        6     462.06    &lt;.0001
+    wall              3       27      48.94    &lt;.0001
+    dosage*wall       6       27       4.38    0.0033
+    </code></pre>
+<p>These don’t match what we had with fixed days, and weird things are happening! What do you notice?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s try something else</p>
+<pre><code>    proc glimmix data=antibiotic nobound;
+      class day dosage wall;
+      model time=dosage wall dosage*wall;
+      random day day*dosage;
+    run;</code></pre>
+<pre><code>
+   Estimated G matrix is not positive definite.
+    
+         Covariance Parameter Estimates
+                              Standard
+    Cov Parm      Estimate       Error
+    
+    day            -0.9774      0.5963
+    day*dosage      1.2228      1.8552
+    Residual        7.4699      2.0331
+    
+            Type III Tests of Fixed Effects
+                    Num      Den
+    Effect           DF       DF    F Value    Pr &gt; F
+    
+    dosage            2        6     315.92    &lt;.0001
+    wall              3       27      48.94    &lt;.0001
+    dosage*wall       6       27       4.38    0.0033</code></pre>
+<p>What do you notice now?</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s treat blocks as fixed, just for the sake of demonstrating how we should be estimating treatment means and differences in a split-plot experiment.</p>
+<p>The model with blocks:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The main plot treatment mean is <span class="math inline">\(\mu_{i\cdot}\)</span>, and the natural estimator is <span class="math inline">\(\overline y_{i\cdot \cdot} = \frac{1}{rb}\sum_{k=1}^b \sum_{j=1}^r y_{ijk}\)</span>. For the antibiotic data with dosage strength 1, we get</p>
+<p><span class="math display">\[\begin{eqnarray*}
+    \overline y_{i\cdot \cdot} &amp;=&amp; \frac{1}{(4)(4)} [ (95 + 104 + 101 + 108) + (95 + 106 + 103 + 109) \\
+    &amp; &amp; + (96 + 105 + 106 + 113) + (90 + 100 + 102 + 114) ] \\
+    &amp;=&amp; \frac{1}{16} (408 + 413 + 420 + 406) = 102.9375\\
+\end{eqnarray*}\]</span></p>
+<p>The hardest part is obtaining the estimate of the variance of the mean. First, keep in mind</p>
+<ul>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+</ul>
+<p>To figure out the variance of <span class="math inline">\(\overline y_{i\cdot \cdot}\)</span>, let’s think about what it’s actually estimating (assuming balanced data and fixed blocks):</p>
+<p><span class="math display">\[\overline y_{i\cdot \cdot} = \frac{1}{rb}\sum_{k=1}^b \sum_{j=1}^r y_{ijk} =  \frac{1}{rb}\sum_{k=1}^b \sum_{j=1}^r (\mu_{ij} + R_j + w_{ij} + e_{ijk})\]</span> So,</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s check this in SAS</p>
+<pre><code>                          Standard
+    dosage    Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    1           102.94      0.8790        6     117.11      &lt;.0001</code></pre>
+<p>What about differences between two whole plot treatment means? We estimate <span class="math inline">\(\mu_{i\cdot} - \mu_{i'\cdot}\)</span> with <span class="math inline">\(\overline y_{i\cdot \cdot} - \overline y_{i'\cdot \cdot}\)</span>, and estimate the variance of the difference with</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Checking in SAS:</p>
+<pre><code>                    Differences of dosage Least Squares Means
+                                     Standard
+    dosage    _dosage    Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    1         2           21.1250      1.2430        6      16.99      &lt;.0001
+    1         3           -9.3750      1.2430        6      -7.54      0.0003
+    2         3          -30.5000      1.2430        6     -24.54      &lt;.0001</code></pre>
+<p>Estimating the variance of the difference between simple effects gets even more complicated, so we’ll just let SAS do it. But, we do need to be aware that depending on the form of the standard error, the default degrees of freedom calculated by SAS may or may not be correct. Any time the standard error cannot be estimated by a single mean square (for many simple effects), the degrees of freedom must be estimated. We can do this by asking SAS to use the Kenward-Roger approximation to the degrees of freedom.</p>
+<pre><code>    proc glimmix data=antibiotic;
+      class day dosage wall;
+      model time=day dosage wall dosage*wall/ddfm=kr;
+      random day*dosage;
+      lsmeans dosage/pdiff;
+      lsmeans dosage*wall/pdiff;
+    run;</code></pre>
+<p>This gives (in part)</p>
+<pre><code>                     Differences of dosage Least Squares Means
+                                     Standard
+    dosage    _dosage    Estimate       Error       DF    t Value    Pr &gt; |t|
+    1         2           21.1250      1.2430        6      16.99      &lt;.0001
+    1         3           -9.3750      1.2430        6      -7.54      0.0003
+    2         3          -30.5000      1.2430        6     -24.54      &lt;.0001
+    
+                    dosage*wall Least Squares Means
+                              Standard
+dosage    wall    Estimate       Error       DF    t Value    Pr &gt; |t|
+1         1        94.0000      1.4742    27.44      63.76      &lt;.0001
+1         2         103.75      1.4742    27.44      70.38      &lt;.0001
+1         3         103.00      1.4742    27.44      69.87      &lt;.0001
+1         4         111.00      1.4742    27.44      75.30      &lt;.0001
+2         1        71.7500      1.4742    27.44      48.67      &lt;.0001
+2         2        82.7500      1.4742    27.44      56.13      &lt;.0001
+2         3        86.0000      1.4742    27.44      58.34      &lt;.0001
+2         4        86.7500      1.4742    27.44      58.85      &lt;.0001
+3         1         108.50      1.4742    27.44      73.60      &lt;.0001
+3         2         110.50      1.4742    27.44      74.96      &lt;.0001
+3         3         115.00      1.4742    27.44      78.01      &lt;.0001
+3         4         115.25      1.4742    27.44      78.18      &lt;.0001
+                      
+                        Differences of dosage*wall Least Squares Means
+                                                  Standard
+dosage    wall    _dosage    _wall    Estimate       Error       DF    t Value    Pr &gt; |t|
+1         1       1          2         -9.7500      1.9326       27      -5.05      &lt;.0001
+1         1       1          3         -9.0000      1.9326       27      -4.66      &lt;.0001
+1         1       1          4        -17.0000      1.9326       27      -8.80      &lt;.0001
+1         1       2          1         22.2500      2.0848    27.44      10.67      &lt;.0001
+1         1       2          2         11.2500      2.0848    27.44       5.40      &lt;.0001
+1         1       2          3          8.0000      2.0848    27.44       3.84      0.0007
+1         1       2          4          7.2500      2.0848    27.44       3.48      0.0017
+1         1       3          1        -14.5000      2.0848    27.44      -6.96      &lt;.0001
+1         1       3          2        -16.5000      2.0848    27.44      -7.91      &lt;.0001
+1         1       3          3        -21.0000      2.0848    27.44     -10.07      &lt;.0001
+1         1       3          4        -21.2500      2.0848    27.44     -10.19      &lt;.0001
+1         2       1          3          0.7500      1.9326       27       0.39      0.7010
+1         2       1          4         -7.2500      1.9326       27      -3.75      0.0009
+1         2       2          1         32.0000      2.0848    27.44      15.35      &lt;.0001
+1         2       2          2         21.0000      2.0848    27.44      10.07      &lt;.0001
+1         2       2          3         17.7500      2.0848    27.44       8.51      &lt;.0001
+1         2       2          4         17.0000      2.0848    27.44       8.15      &lt;.0001
+1         2       3          1         -4.7500      2.0848    27.44      -2.28      0.0307
+1         2       3          2         -6.7500      2.0848    27.44      -3.24      0.0031</code></pre>
+</section>
+<section id="more-complicated-split-plot-designs" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="more-complicated-split-plot-designs"><span class="header-section-number">5.3</span> More Complicated Split-Plot Designs</h2>
+<p>The concept of split-plot designs can be extended to</p>
+<ul>
+<li>Split-split-plot designs (or more splits). Sub-plot units are themselves further divided into sub-sub-plot units.</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>Split block/Strip-split plot designs. These lead to 3 different experimental units: for A, B, and A <span class="math inline">\(\times\)</span> B.</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>Repeated measures designs. One of the factors is time, and measurements are taken repeatedly on the same experimental unit.</li>
+</ul>
+<p>&nbsp;<br>
+</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Section 4 Block Designs.html" class="pagination-link" aria-label="Block Designs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Block Designs</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

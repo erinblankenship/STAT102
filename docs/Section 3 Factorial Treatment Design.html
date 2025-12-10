@@ -1,0 +1,2728 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Factorial Treatment Designs – Stat 102 Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Section 4 Block Designs.html" rel="next">
+<link href="./Section 2 Completely Randomized Design.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ffd282cb318059e0bcb130885a47f5dc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Section 3 Factorial Treatment Design.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Factorial Treatment Designs</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Stat 102 Notes</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Stat-102-Notes.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Goals for STAT 102</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section 1 Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Design</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section 2 Completely Randomized Design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Completely Randomized Design</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section 3 Factorial Treatment Design.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Factorial Treatment Designs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section 4 Block Designs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Block Designs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section 5 Split Plot Designs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Split-Plot Designs</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction-and-model" id="toc-introduction-and-model" class="nav-link active" data-scroll-target="#introduction-and-model"><span class="header-section-number">3.1</span> Introduction and Model</a></li>
+  <li><a href="#effects" id="toc-effects" class="nav-link" data-scroll-target="#effects"><span class="header-section-number">3.2</span> Effects</a>
+  <ul class="collapse">
+  <li><a href="#simple-effects" id="toc-simple-effects" class="nav-link" data-scroll-target="#simple-effects"><span class="header-section-number">3.2.1</span> Simple Effects</a></li>
+  <li><a href="#main-effects" id="toc-main-effects" class="nav-link" data-scroll-target="#main-effects"><span class="header-section-number">3.2.2</span> Main Effects</a></li>
+  <li><a href="#interaction-effects" id="toc-interaction-effects" class="nav-link" data-scroll-target="#interaction-effects"><span class="header-section-number">3.2.3</span> Interaction Effects</a></li>
+  </ul></li>
+  <li><a href="#model-and-analysis" id="toc-model-and-analysis" class="nav-link" data-scroll-target="#model-and-analysis"><span class="header-section-number">3.3</span> Model and Analysis</a></li>
+  <li><a href="#more-than-two-levels-per-treatment-factor" id="toc-more-than-two-levels-per-treatment-factor" class="nav-link" data-scroll-target="#more-than-two-levels-per-treatment-factor"><span class="header-section-number">3.4</span> More Than Two Levels per Treatment Factor</a></li>
+  <li><a href="#multifactor-experiments" id="toc-multifactor-experiments" class="nav-link" data-scroll-target="#multifactor-experiments"><span class="header-section-number">3.5</span> Multifactor Experiments</a>
+  <ul class="collapse">
+  <li><a href="#simple-effects-and-interaction-in-a-multifactor-experiment" id="toc-simple-effects-and-interaction-in-a-multifactor-experiment" class="nav-link" data-scroll-target="#simple-effects-and-interaction-in-a-multifactor-experiment"><span class="header-section-number">3.5.1</span> Simple Effects and Interaction in a Multifactor Experiment</a></li>
+  <li><a href="#analysis-for-multifactor-experiments" id="toc-analysis-for-multifactor-experiments" class="nav-link" data-scroll-target="#analysis-for-multifactor-experiments"><span class="header-section-number">3.5.2</span> Analysis for Multifactor Experiments</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Factorial Treatment Designs</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Often we are interested in more than one treatment factor. For example, we may want to look at</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>A <strong>factorial arrangement of treatments</strong> is a <strong>treatment design</strong> that is the most efficient approach for this type of experiment. For example, we’ve already seen</p>
+<p><br>
+<br>
+</p>
+<p>The goal is to describe <em>as simply as possible</em> how these factors affect our response variable.</p>
+<p><strong>Why use Factorials?</strong></p>
+<p>We could investigate a single factor as a time:</p>
+<ul>
+<li><br>
+</li>
+<li><br>
+</li>
+<li><br>
+</li>
+<li><br>
+<br>
+</li>
+<li><br>
+</li>
+</ul>
+<p>Alternatively, we could investigate every possible combination in a single experiment:</p>
+<ul>
+<li><br>
+</li>
+<li><br>
+<br>
+<br>
+<br>
+</li>
+<li><br>
+</li>
+</ul>
+<section id="introduction-and-model" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="introduction-and-model"><span class="header-section-number">3.1</span> Introduction and Model</h2>
+<p>We’ll start by looking at the general set-up for a 2-factor design. Designate one factor as Factor A. Factor A has <span class="math inline">\(a\)</span> levels. Designate the other factor as Factor B. Factor B has <span class="math inline">\(b\)</span> levels. This means there are a total of <span class="math inline">\(a \times b\)</span> treatment combinations. We will still be thinking about this factorial treatment design in the context of the CRD experimental design.</p>
+<p><strong>Example:</strong> In lab, you explored some data resulting from an experiment designed to study the effects of four treatments on the inches of fabric burned after a flame test. In the lab problem you were told</p>
+<ul>
+<li>Treatment A = Cotton fabric, fire-retardant additive X</li>
+<li>Treatment B = Polyester fabric, fire-retardant additive X</li>
+<li>Treatment C = Cotton fabric, fire-retardant additive Y</li>
+<li>Treatment D = Polyester fabric, fire-retardant additive Y</li>
+</ul>
+<p>So really, rather than 1 factor (Treatment) with 4 levels, we have</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s plot the data. Does it look like there is a difference among the treatments? Can we (easily) see if there are differences among different levels of the two factors?</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>Your group was asked to come up with two contrasts. What contrasts did you use?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>If we treat this experiment as the factorial treatment design that it is, we can look at the factors individually and in combination. We’ll need to start by adjusting the model and our notation.</p>
+<p>The treatment combinations and their means can be summarized in a table</p>
+<table class="caption-top table">
+<caption>Treatment Combinations and Means</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th style="text-align: center;"><strong>Fabric</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Additive</strong></td>
+<td></td>
+<td style="text-align: center;">Cotton</td>
+<td>Polyester</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>X</td>
+<td style="text-align: center;"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Y</td>
+<td style="text-align: center;"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>These are fixed, unknown values. The observed treatment means and marginal means are:</p>
+<table class="caption-top table">
+<caption>Observed Cell and Marginal Means</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th style="text-align: center;"><strong>Fabric</strong></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Additive</strong></td>
+<td></td>
+<td style="text-align: center;">Cotton</td>
+<td>Polyester</td>
+<td>Additive Means</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>X</td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Y</td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Fabric Means</td>
+<td></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>With a single factor, we could write the model in one of two ways:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>With two factors, we can still write the model in one of two ways:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Before we can see how this new model gets translated into an ANOVA table, we need to explore the <strong>effect</strong> of a factor.</p>
+</section>
+<section id="effects" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="effects"><span class="header-section-number">3.2</span> Effects</h2>
+<p><strong>Definition:</strong> The <strong>effect</strong> of a factor</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>There are three types of effects in a factorial experiment:</p>
+<ul>
+<li><br>
+</li>
+<li><br>
+</li>
+<li></li>
+</ul>
+<p>To demonstrate these effects, we’ll go back to the pajamas example.</p>
+<section id="simple-effects" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="simple-effects"><span class="header-section-number">3.2.1</span> Simple Effects</h3>
+<p><strong>Simple effects</strong> give the effect of one factor when the other(s) is held constant. So, a simple effect is the difference between two levels of a factor at a given level of the remaining factor(s).</p>
+<p>In our pajama example there are 4 simple effects:</p>
+<ul>
+<li><p>The simple effects comparing Cotton to Polyester:</p>
+<ul>
+<li><p>given Additive X</p></li>
+<li><p>given Additive Y</p></li>
+</ul></li>
+<li><p>The simple effects comparing Additive X to Additive Y:</p>
+<ul>
+<li><p>given Cotton fabric</p></li>
+<li><p>given Polyester fabric</p></li>
+</ul></li>
+</ul>
+<p>We can estimate the simple effects using our observed treatment means:</p>
+<ul>
+<li><p>The <strong>estimated</strong> simple effects comparing Cotton to Polyester:</p>
+<ul>
+<li><p>given Additive X</p></li>
+<li><p>given Additive Y</p></li>
+</ul></li>
+<li><p>The <strong>estimated</strong> simple effects comparing Additive X to Additive Y:</p>
+<ul>
+<li><p>given Cotton fabric</p></li>
+<li><p>given Polyester fabric</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="main-effects" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="main-effects"><span class="header-section-number">3.2.2</span> Main Effects</h3>
+<p><strong>Main effects</strong> are averages of simple effects. Main effects average over a variety of conditions.</p>
+<p>In our pajama example there are two main effects:</p>
+<ul>
+<li>Main effect for Fabric type:</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>Main effect for Additive:</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Main effects can also be thought of as differences between marginal means for a given factor. Let’s look more closely at Fabric type effect:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We could also re-write the main effect for Additive in a similar way.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+</section>
+<section id="interaction-effects" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="interaction-effects"><span class="header-section-number">3.2.3</span> Interaction Effects</h3>
+<p><strong>Interaction Effects</strong> are differences of simple effects, and interaction effects ask the question:</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>We do this by looking at the difference in the simple effects for one factor at two different levels of the second factor.</p>
+<p>For example,</p>
+<ul>
+<li>The simple effect of Fabric given Additive X</li>
+<li>The simple effect of Fabric given Additive Y</li>
+</ul>
+<p>Is the effect of Fabric the same for both Additives?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>What about the effect of Additive for both Fabrics?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Presence or absence of interaction effects can be illustrated graphically. We plot the response mean against one of the factors for both levels of the other factor. If the lines are approximately parallel, there is no interaction. If the lines are not parallel, there is interaction.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Important Note:</strong> The presence or absence of main effects tells us NOTHING about the presence or absence of interaction.The presence or absence of interaction tells us NOTHING about the presence or absence of main effects. The presence of interaction DOES tell us something about the homogeneity of simple effects. When factors interact, a single factor experiment will lead to disconnected and possibly misleading results.</p>
+<p><strong>Why do we care?</strong></p>
+<p>One thing we noted at the beginning of this section</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>The presence or absence of interaction helps inform how we can best report the findings of the experiment.</p>
+<ul>
+<li>Interaction is non-significant:</li>
+</ul>
+<p><br>
+<br>
+<br>
+</p>
+<ul>
+<li>Interaction is significant</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>It’s never <strong>wrong</strong> to report simple effects,</p>
+<p>&nbsp;<br>
+</p>
+<p>How do we determine significant? That brings us to . . .</p>
+</section>
+</section>
+<section id="model-and-analysis" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="model-and-analysis"><span class="header-section-number">3.3</span> Model and Analysis</h2>
+<p>We’ll start with the simplest type of factorial design with 2 factors. As we mentioned earlier, we’ll assume <span class="math inline">\(a\)</span> levels of Factor A and <span class="math inline">\(b\)</span> levels of Factor B arranged in a . That is, each replication of the experiment contains all <span class="math inline">\(a \times b\)</span> treatment combinations. In general, there are <span class="math inline">\(n\)</span> replicates. We call this a</p>
+<p><br>
+</p>
+<p>Recall that <span class="math inline">\(y_{ijk}\)</span> represents</p>
+<p><br>
+<br>
+</p>
+<p>In general (assuming equal sample sizes, which is not necessary), the data can be represented as</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We’ve been assuming that <span class="math inline">\(\mu_{ij}\)</span> represents the true mean for cell <span class="math inline">\((i,j)\)</span>. This implies the model</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>This is the <strong>cell means model</strong>. Like the the one-factor model, we can also write this using a <strong>treatment effects model</strong>:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Just as our model grows bigger, so does our ANOVA table:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We can formally test for interaction by testing the hypotheses</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>If there is no interaction, we look at main effects. For the main effects we can test hypotheses about the equality of Factor A treatment effects:</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>and the equality of Factor B effects:</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>and the main effects can be used to summarize the experiment.</p>
+<p>If interaction is present, we must summarize the experiment using simple effects. Main effects would not adequately represent the effect of the factors.</p>
+<p> Back to the pajamas data. We had two factors each with two levels, and 4 observations at each treatment combination. The linear model would be</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s sketch the ANOVA table:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>From the interaction plot we saw earlier, it was unclear whether interaction is present or not. We can fit the ANOVA model using the code:</p>
+<pre><code>  proc glimmix data=pajamas;
+     class fabric additive;
+       model burn=fabric additive fabric*additive;
+    run;</code></pre>
+<p>And here is the output:</p>
+<pre><code>                Fit Statistics
+    
+    -2 Res Log Likelihood          67.28
+    AIC  (smaller is better)       77.28
+    AICC (smaller is better)       87.28
+    BIC  (smaller is better)       79.71
+    CAIC (smaller is better)       84.71
+    HQIC (smaller is better)       76.38
+    Pearson Chi-Square            120.50
+    Pearson Chi-Square / DF        10.04
+    
+    
+               Type III Tests of Fixed Effects
+    
+                        Num      Den
+    Effect               DF       DF    F Value    Pr &gt; F
+    
+    fabric                1       12       4.88    0.0474
+    additive              1       12      75.31    &lt;.0001
+    fabric*additive       1       12       4.21    0.0627</code></pre>
+<p>What do you think?</p>
+<p>We can output the estimated effects and get a plot using</p>
+<pre><code>    lsmeans fabric*additive/diff plot=diffplot;</code></pre>
+<p>which gives</p>
+<pre><code>                           fabric*additive Least Squares Means
+    
+                                       Standard
+    fabric    additive    Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    C         X            40.5000      1.5844       12      25.56      &lt;.0001
+    C         Y            30.0000      1.5844       12      18.93      &lt;.0001
+    P         X            47.2500      1.5844       12      29.82      &lt;.0001
+    P         Y            30.2500      1.5844       12      19.09      &lt;.0001
+    
+    
+                    Differences of fabric*additive Least Squares Means
+    
+                                                         Standard
+    fabric   additive   _fabric   _additive   Estimate      Error      DF   t Value   Pr &gt; |t|
+    
+    C        X          C         Y            10.5000     2.2407      12      4.69     0.0005
+    C        X          P         X            -6.7500     2.2407      12     -3.01     0.0108
+    C        X          P         Y            10.2500     2.2407      12      4.57     0.0006
+    C        Y          P         X           -17.2500     2.2407      12     -7.70     &lt;.0001
+    C        Y          P         Y            -0.2500     2.2407      12     -0.11     0.9130
+    P        X          P         Y            17.0000     2.2407      12      7.59     &lt;.0001</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pajama diff.jpeg" class="img-fluid figure-img" alt="The plot shows comparisons of fabric type for each additive in the pajama data. There is a significant difference between cotton and polyester for Additive X but not for Additive Y." width="400"></p>
+<figcaption>Diffogram for pajama lsmeans</figcaption>
+</figure>
+</div>
+<p>What does this plot show us?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Although we generally worry about testing the interaction effect, there may be times where we want to estimate the interaction. That is, we may be interested in the magnitude of the difference between the simple effects. We can do this by adding an <code>estimate</code> statement to the <code>PROC GLIMMIX</code> program:</p>
+<pre><code>    estimate 'fabric x additive' fabric*additive 1 -1 -1 1/alpha=0.1;</code></pre>
+<p>This gives the output</p>
+<pre><code>                                          Estimates
+        
+                                 Standard
+Label              Estimate     Error     DF  t Value  Pr &gt; |t|   Alpha     Lower     Upper
+        
+fabric x additive   -6.5000    3.1689     12    -2.05    0.0627     0.1  -12.1478   -0.8522</code></pre>
+<p><br>
+<br>
+<br>
+</p>
+<p><code>PROC GLIMMIX</code> has both <code>slice</code> and <code>slicediff</code> options available that allow us to test one factor at each level of the other. The <code>slice</code> option is similar to a contrast statement, in that it only gives us the <span class="math inline">\(F\)</span> stats and p-values. The <code>slicediff</code> option allows us to construct confidence intervals. Let’s see what they provide:</p>
+<p><code>slice</code> option:</p>
+<pre><code>     lsmeans fabric*additive/slice=fabric slice=additive;</code></pre>
+<pre><code>     Tests of Effect Slices for fabric*additive
+                 Sliced By fabric
+    
+                Num      Den
+    fabric      DF       DF    F Value    Pr &gt; F
+    
+    C            1       12      21.96    0.0005
+    P            1       12      57.56    &lt;.0001
+    
+    
+    Tests of Effect Slices for fabric*additive
+                  Sliced By additive
+    
+                  Num      Den
+    additive      DF       DF    F Value    Pr &gt; F
+    
+    X              1       12       9.07    0.0108
+    Y              1       12       0.01    0.9130</code></pre>
+<p><code>slicediff</code> option:</p>
+<pre><code>     lsmeans fabric*additive/slicediff=fabric slicediff=additive cl;</code></pre>
+<pre><code>                                fabric*additive Least Squares Means
+                                Standard
+fabric  additive  Estimate     Error     DF  t Value  Pr &gt; |t|   Alpha     Lower     Upper
+C       X          40.5000    1.5844     12    25.56    &lt;.0001    0.05   37.0478   43.9522
+C       Y          30.0000    1.5844     12    18.93    &lt;.0001    0.05   26.5478   33.4522
+P       X          47.2500    1.5844     12    29.82    &lt;.0001    0.05   43.7978   50.7022
+P       Y          30.2500    1.5844     12    19.09    &lt;.0001    0.05   26.7978   33.7022
+        
+              Simple Effect Comparisons of fabric*additive Least Squares Means By fabric
+Simple
+Effect                                       Standard
+Level      additive   _additive   Estimate      Error      DF   t Value   Pr &gt; |t|    Alpha
+fabric C   X          Y            10.5000     2.2407      12      4.69     0.0005     0.05
+fabric P   X          Y            17.0000     2.2407      12      7.59     &lt;.0001     0.05
+        
+              Simple Effect Comparisons of fabric*additive Least Squares Means By fabric
+Simple
+Effect
+Level      additive   _additive      Lower       Upper
+fabric C   X          Y             5.6179     15.3821
+fabric P   X          Y            12.1179     21.8821
+        
+              Simple Effect Comparisons of fabric*additive Least Squares Means By additive
+Simple
+Effect                                         Standard
+Level         fabric    _fabric    Estimate       Error       DF    t Value    Pr &gt; |t|     Alpha
+additive X    C         P           -6.7500      2.2407       12      -3.01      0.0108      0.05
+additive Y    C         P           -0.2500      2.2407       12      -0.11      0.9130      0.05
+        
+              Simple Effect Comparisons of fabric*additive Least Squares Means By additive
+Simple
+Effect
+Level         fabric    _fabric       Lower       Upper
+additive X    C         P          -11.6321     -1.8679
+additive Y    C         P           -5.1321      4.6321</code></pre>
+<p>We may also construct confidence intervals for the marginal and cell means in a factorial experiment. To do this, we need the standard error of those means.</p>
+<ul>
+<li>Marginal mean of Factor A</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>Marginal mean of Factor B</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>Cell means</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>So, a confidence interval for</p>
+<ul>
+<li>Marginal mean</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>Cell mean</li>
+</ul>
+<p><br>
+<br>
+</p>
+<p>We could also get a confidence interval for an interaction effect. Recall that an interaction effect for a 2 <span class="math inline">\(\times\)</span> 2 factorial is a contrast with the coeefficients 1 -1 -1 1. The standard error for a contrast is</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>So for the pajamas example, the standard error would be</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>which would give a confidence interval</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>Using our pajamas example, we’ll use the following SAS program to see how to calculate estimates of the main effects, simple effects, and interaction effects to compare with what we did by hand.</p>
+<pre><code>proc glimmix data=pajamas;
+    class fabric additive;
+    model burn=fabric additive fabric*additive;
+    lsmeans fabric additive fabric*additive/diff cl;
+    estimate 'main effect cotton fabric' intercept 2 fabric 2 0 additive 1 1 
+                fabric*additive 1 1 0 0/divisor=2 cl;
+    estimate 'main effect polyester fabric' intercept 2 fabric 0 2 additive 1 1 
+                fabric*additive 0 0 1 1/divisor=2 cl;
+    estimate 'main effect additive X' intercept 2 additive 2 0 fabric 1 1 
+                fabric*additive 1 0 1 0/divisor=2 cl;
+    estimate 'main effect additive Y' intercept 2 additive 0 2 fabric 1 1 
+                fabric*additive 0 1 0 1/divisor=2 cl;
+    estimate 'effect of fabric with add X' fabric 1 -1 fabric*additive 1 0 -1 0/cl;
+    estimate 'effect of fabric with add Y' fabric 1 -1 fabric*additive 0 1 0 -1/cl;
+    estimate 'effect of additive in cotton' additive 1 -1 fabric*additive 1 -1 0 0/cl;
+    estimate 'effect of additive in polyester' additive 1 -1 fabric*additive 0 0 1 -1/cl;
+    estimate 'fabric x additive' fabric*additive 1 -1 -1 1/cl;
+    contrast 'fabric with add X' fabric 1 -1 fabric*additive 1 0 -1 0;
+    contrast 'fabric with add Y' fabric 1 -1 fabric*additive 0 1 0 -1;
+    contrast 'additive in cotton' additive 1 -1 fabric*additive 1 -1 0 0;
+    contrast 'additive in polyester' additive 1 -1 fabric*additive 0 0 1 -1;
+    contrast 'interaction' fabric*additive 1 -1 -1 1;
+run;</code></pre>
+<pre><code>                                            Estimates
+    
+                                                 Standard
+Label                              Estimate       Error       DF    t Value    Pr &gt; |t|     Alpha
+    
+main effect cotton fabric           35.2500      1.1204       12      31.46      &lt;.0001      0.05
+main effect polyester fabric        38.7500      1.1204       12      34.59      &lt;.0001      0.05
+main effect additive X              43.8750      1.1204       12      39.16      &lt;.0001      0.05
+main effect additive Y              30.1250      1.1204       12      26.89      &lt;.0001      0.05
+effect of fabric with add X         -6.7500      2.2407       12      -3.01      0.0108      0.05
+effect of fabric with add Y         -0.2500      2.2407       12      -0.11      0.9130      0.05
+effect of additive in cotton        10.5000      2.2407       12       4.69      0.0005      0.05
+effect of additive in polyester     17.0000      2.2407       12       7.59      &lt;.0001      0.05
+fabric x additive                   -6.5000      3.1689       12      -2.05      0.0627      0.05
+    
+                        Estimates
+    
+Label                                 Lower       Upper
+    
+main effect cotton fabric           32.8089     37.6911
+main effect polyester fabric        36.3089     41.1911
+main effect additive X              41.4339     46.3161
+main effect additive Y              27.6839     32.5661
+effect of fabric with add X        -11.6321     -1.8679
+effect of fabric with add Y         -5.1321      4.6321
+effect of additive in cotton         5.6179     15.3821
+effect of additive in polyester     12.1179     21.8821
+fabric x additive                  -13.4044      0.4044
+    
+                       Contrasts
+    
+                            Num      Den
+Label                      DF       DF    F Value    Pr &gt; F
+    
+fabric with add X           1       12       9.07    0.0108
+fabric with add Y           1       12       0.01    0.9130
+additive in cotton          1       12      21.96    0.0005
+additive in polyester       1       12      57.56    &lt;.0001
+interaction                 1       12       4.21    0.0627</code></pre>
+<pre><code>    
+                            fabric Least Squares Means
+
+                       Standard
+fabric    Estimate       Error       DF    t Value    Pr &gt; |t|     Alpha       Lower       Upper
+
+C          35.2500      1.1204       12      31.46      &lt;.0001      0.05     32.8089     37.6911
+P          38.7500      1.1204       12      34.59      &lt;.0001      0.05     36.3089     41.1911
+
+
+                     Differences of fabric Least Squares Means
+
+                            Standard
+fabric  _fabric  Estimate     Error     DF  t Value  Pr &gt; |t|   Alpha     Lower     Upper
+
+C       P         -3.5000    1.5844     12    -2.21    0.0474    0.05   -6.9522  -0.04782
+
+
+                           additive Least Squares Means
+
+                       Standard
+additive   Estimate      Error      DF   t Value   Pr &gt; |t|    Alpha      Lower      Upper
+
+X           43.8750     1.1204      12     39.16     &lt;.0001     0.05    41.4339    46.3161
+Y           30.1250     1.1204      12     26.89     &lt;.0001     0.05    27.6839    32.5661
+
+
+                    Differences of additive Least Squares Means
+
+                               Standard
+additive  _additive  Estimate     Error     DF  t Value  Pr &gt; |t|   Alpha     Lower     Upper
+
+X         Y           13.7500    1.5844     12     8.68    &lt;.0001    0.05   10.2978   17.2022
+    </code></pre>
+<pre><code>    
+                          fabric*additive Least Squares Means
+
+                            Standard
+fabric  additive  Estimate     Error     DF  t Value  Pr &gt; |t|   Alpha     Lower     Upper
+
+C       X          40.5000    1.5844     12    25.56    &lt;.0001    0.05   37.0478   43.9522
+C       Y          30.0000    1.5844     12    18.93    &lt;.0001    0.05   26.5478   33.4522
+P       X          47.2500    1.5844     12    29.82    &lt;.0001    0.05   43.7978   50.7022
+P       Y          30.2500    1.5844     12    19.09    &lt;.0001    0.05   26.7978   33.7022
+
+
+                      Differences of fabric*additive Least Squares Means
+
+                                                Standard
+fabric  additive  _fabric  _additive  Estimate     Error     DF  t Value  Pr &gt; |t|   Alpha
+
+C       X         C        Y           10.5000    2.2407     12     4.69    0.0005    0.05
+C       X         P        X           -6.7500    2.2407     12    -3.01    0.0108    0.05
+C       X         P        Y           10.2500    2.2407     12     4.57    0.0006    0.05
+C       Y         P        X          -17.2500    2.2407     12    -7.70    &lt;.0001    0.05
+C       Y         P        Y           -0.2500    2.2407     12    -0.11    0.9130    0.05
+P       X         P        Y           17.0000    2.2407     12     7.59    &lt;.0001    0.05
+
+                       Differences of fabric*additive Least Squares Means
+
+fabric  additive  _fabric  _additive     Lower       Upper
+
+C       X         C        Y            5.6179     15.3821
+C       X         P        X          -11.6321     -1.8679
+C       X         P        Y            5.3679     15.1321
+C       Y         P        X          -22.1321    -12.3679
+C       Y         P        Y           -5.1321      4.6321
+P       X         P        Y           12.1179     21.8821
+    </code></pre>
+<p>Let’s look more closely at the <code>SAS</code> code to see where those coefficients are coming from. Specifically, we’ll look at <code>estimate</code> statements 1 and 2 in detail.</p>
+<p>The value provided by the <code>estimate</code> statement is constructed based on the estimates of the effects in the model: the estimates of</p>
+<p><br>
+<br>
+</p>
+<p>We’ve used cell means (treatment combination means) to see where main, simple, and interaction effects come from, but they can also be expressed as a function of the model effects.</p>
+<p>For the pajama example, the <code>lsmeans</code> in <code>SAS</code> are</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>and the treatment effects model is</p>
+<p><br>
+<br>
+<br>
+</p>
+<ul>
+<li><code>estimate</code> statement #1: main effect for Cotton fabric</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li><code>estimate</code> statement #2: (simple) effect of fabric with Additive X</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Why does learning this matter, if we’re duplicating results from <code>lsmeans</code> statements?</p>
+<p><br>
+<br>
+<br>
+</p>
+<ul>
+<li>For practice, try <code>estimate</code> statement #3: main effect for Additive X</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>For practice, try <code>estimate</code> statement #4: (simple) effect of additive with Polyester fabric</li>
+</ul>
+<p><br>
+<br>
+</p>
+</section>
+<section id="more-than-two-levels-per-treatment-factor" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="more-than-two-levels-per-treatment-factor"><span class="header-section-number">3.4</span> More Than Two Levels per Treatment Factor</h2>
+<p>In the pajama example, we had two levels for each of our two factors. Fabric was either cotton or polyester, and Additive was either X or Y. Now we’ll consider a factorial with more than two levels for each factor.</p>
+<p><strong>Example:</strong> An experiment was conducted to aid in developing a product that can be used as a substrate for making ribbons. The experiment was designed to investigate the effects of base polymer and additive on the tensile strength of the resulting ribbon. There are two factors of interest: (1) base polymer: mylar, nylon, and polyethylene and (2) additive: c1, c2, c3, c4, and c5. There are 3 <span class="math inline">\(\times\)</span> 5 treatment combinations, and the researchers plan to test each treatment combination 6 times, for a total of 90 observations. The data are in the <code>ribbon.sas</code> file.</p>
+<p>The model is</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>and the ANOVA table is</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s look at an interaction plot to see what’s going on. We can also get an interaction plot using the <code>lsmeans</code> statement!</p>
+<pre><code>    proc glimmix data=ribbon;
+      class polymer add;
+      model strength=polymer add polymer*add;
+      lsmeans polymer*add/plots=meanplot(sliceby=polymer join);
+    run;</code></pre>
+<p>Which gives</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ribbon plot.jpeg" class="img-fluid figure-img" style="width:70.0%" alt="The graph displays an interaction plot between polymer and additive. The lines are not parallel, indicating an interaction between the two factors."></p>
+<figcaption>Interaction plot for the ribbon data</figcaption>
+</figure>
+</div>
+<p>So it looks like we have interaction!</p>
+<p>We’ll also formally test for interaction</p>
+<pre><code>           Type III Tests of Fixed Effects
+                Num      Den
+Effect           DF       DF    F Value    Pr &gt; F
+polymer           2       75      24.25    &lt;.0001
+add               4       75       0.14    0.9648
+polymer*add       8       75       2.38    0.0241</code></pre>
+<p>This verifies what we see in the plot.</p>
+<p>So, we must look at simple effects and not main effects. We’ll use the same <code>slice</code> and <code>slicediff</code> statements we used with the pajama example:</p>
+<pre><code>    proc glimmix data=ribbon;
+      class polymer add;
+      model strength=polymer add polymer*add;
+      lsmeans polymer*add/slice=polymer slice=add slicediff=(polymer add);
+    run;</code></pre>
+<p>This is going to produce a LOT of output. Let’s look at the output for <code>slice=add</code> and <code>slicediff=add</code>.</p>
+<pre><code>           Tests of Effect Slices for
+         polymer*add Sliced By add
+            Num      Den
+    add      DF       DF    F Value    Pr &gt; F
+    c1        2       75       3.41    0.0383
+    c2        2       75       3.53    0.0341
+    c3        2       75       4.90    0.0100
+    c4        2       75      14.31    &lt;.0001
+    c5        2       75       7.63    0.0010
+    
+                  Simple Effect Comparisons of polymer*add Least Squares Means By add
+    Simple
+    Effect                                       Standard
+    Level     polymer    _polymer    Estimate       Error       DF    t Value    Pr &gt; |t|
+    add c1    mylar      nylon         6.6833      2.5593       75       2.61      0.0109
+    add c1    mylar      poly          3.3500      2.5593       75       1.31      0.1945
+    add c1    nylon      poly         -3.3333      2.5593       75      -1.30      0.1968
+    add c2    mylar      nylon         6.6167      2.5593       75       2.59      0.0117
+    add c2    mylar      poly          1.9333      2.5593       75       0.76      0.4524
+    add c2    nylon      poly         -4.6833      2.5593       75      -1.83      0.0712
+    add c3    mylar      nylon         7.6833      2.5593       75       3.00      0.0036
+    add c3    mylar      poly          5.8167      2.5593       75       2.27      0.0259
+    add c3    nylon      poly         -1.8667      2.5593       75      -0.73      0.4681
+    add c4    mylar      nylon        12.4667      2.5593       75       4.87      &lt;.0001
+    add c4    mylar      poly         11.1333      2.5593       75       4.35      &lt;.0001
+    add c4    nylon      poly         -1.3333      2.5593       75      -0.52      0.6039
+    add c5    mylar      nylon         3.1167      2.5593       75       1.22      0.2271
+    add c5    mylar      poly          9.7833      2.5593       75       3.82      0.0003
+    add c5    nylon      poly          6.6667      2.5593       75       2.60      0.0111</code></pre>
+<p>The p-values given are for the LSD mean comparisons. We’re doing a lot of comparisons!</p>
+<p>We can try to adjust for multiplicity by using the Tukey adjustment:</p>
+<pre><code>lsmeans polymer*add/slicediff=(polymer add) cl adjust=tukey;
+
+              Simple Effect Comparisons of polymer*add Least Squares Means By add
+                          Adjustment for Multiple Comparisons: Tukey
+Simple
+Effect                                   Standard
+Level    polymer   _polymer   Estimate      Error      DF   t Value   Pr &gt; |t|    Adj P    Alpha
+add c1   mylar     nylon        6.6833     2.5593      75      2.61     0.0109   0.0290     0.05
+add c1   mylar     poly         3.3500     2.5593      75      1.31     0.1945   0.3947     0.05
+add c1   nylon     poly        -3.3333     2.5593      75     -1.30     0.1968   0.3983     0.05
+add c2   mylar     nylon        6.6167     2.5593      75      2.59     0.0117   0.0310     0.05
+add c2   mylar     poly         1.9333     2.5593      75      0.76     0.4524   0.7313     0.05
+add c2   nylon     poly        -4.6833     2.5593      75     -1.83     0.0712   0.1669     0.05
+add c3   mylar     nylon        7.6833     2.5593      75      3.00     0.0036   0.0101     0.05
+add c3   mylar     poly         5.8167     2.5593      75      2.27     0.0259   0.0659     0.05
+add c3   nylon     poly        -1.8667     2.5593      75     -0.73     0.4681   0.7469     0.05
+add c4   mylar     nylon       12.4667     2.5593      75      4.87     &lt;.0001   &lt;.0001     0.05
+add c4   mylar     poly        11.1333     2.5593      75      4.35     &lt;.0001   0.0001     0.05
+add c4   nylon     poly        -1.3333     2.5593      75     -0.52     0.6039   0.8614     0.05
+add c5   mylar     nylon        3.1167     2.5593      75      1.22     0.2271   0.4465     0.05
+add c5   mylar     poly         9.7833     2.5593      75      3.82     0.0003   0.0008     0.05
+add c5   nylon     poly         6.6667     2.5593      75      2.60     0.0111   0.0295     0.05
+
+ Simple Effect Comparisons of polymer*add Least Squares Means By add
+                 Adjustment for Multiple Comparisons: Tukey
+Simple
+Effect                                                     Adj         Adj
+Level    polymer   _polymer      Lower       Upper       Lower       Upper
+add c1   mylar     nylon        1.5849     11.7817      0.5637     12.8029
+add c1   mylar     poly        -1.7484      8.4484     -2.7696      9.4696
+add c1   nylon     poly        -8.4317      1.7651     -9.4529      2.7863
+add c2   mylar     nylon        1.5183     11.7151      0.4971     12.7363
+add c2   mylar     poly        -3.1651      7.0317     -4.1863      8.0529
+add c2   nylon     poly        -9.7817      0.4151    -10.8029      1.4363
+add c3   mylar     nylon        2.5849     12.7817      1.5637     13.8029
+add c3   mylar     poly         0.7183     10.9151     -0.3029     11.9363
+add c3   nylon     poly        -6.9651      3.2317     -7.9863      4.2529
+add c4   mylar     nylon        7.3683     17.5651      6.3471     18.5863
+add c4   mylar     poly         6.0349     16.2317      5.0137     17.2529
+add c4   nylon     poly        -6.4317      3.7651     -7.4529      4.7863
+add c5   mylar     nylon       -1.9817      8.2151     -3.0029      9.2363
+add c5   mylar     poly         4.6849     14.8817      3.6637     15.9029
+add c5   nylon     poly         1.5683     11.7651      0.5471     12.7863</code></pre>
+<p>Even with the Tukey adjustment, we need to remember the total number of comparisons we’re doing far exceeds the df for treatment. This means</p>
+<p><br>
+<br>
+</p>
+<p>A better way to try to keep the experiment-wise error rate reasonable is to look at only a small set of comparisons that are planned before carrying out the experiment. <code>contrast</code> and <code>estimate</code> statements (or <code>lsmestimate</code>) can be used to look at these pre-planned comparisons.</p>
+<p><strong>Planned Comparisons</strong></p>
+<p>In our example, we were not specific about the goals of the experiment, beyond considering these two factors. Typically, a researcher has more information about the specific questions of interest. Suppose nylon and polyethylene have been used by the company in the past, and they are interest in how mylar compares as a potentially new option. This leads to some specific hypotheses the company may want to test.</p>
+<p>So, in general, the company may be interested in</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>But there are several ways to look at this comparison</p>
+<ul>
+<li><br>
+<br>
+<br>
+</li>
+<li><br>
+<br>
+<br>
+<br>
+</li>
+<li><br>
+<br>
+<br>
+</li>
+</ul>
+<p>Not all of these will be appropriate comparisons! It depends on whether or not interaction is present. If there is interaction, we have to use simple effects or a compromise. If there is no interaction, then we can use the main effects.</p>
+<p>When we would use the compromise? When there are subsets of additives where the polymer does not interact with additive.</p>
+<p>We’ll now see how to we can use <code>estimate</code>, <code>contrast</code>, and <code>lsmestimate</code> statements to determine which of the comparisons above are important. The <code>estimate</code> statement is constructed based on the estimates of the effects in the model. The <code>lsmestimate</code> statement is constructed based on the treatment <code>lsmeans</code> (the cell means).</p>
+<p>Here’s a three step procedure to construct the <code>contrast</code> and <code>estimate</code> statements:</p>
+<ol type="1">
+<li><p>Write the linear combination you want to test or estimate in terms of the cell means, <span class="math inline">\(\mu_{ij}\)</span></p></li>
+<li><p>Convert means into model parameters</p></li>
+<li><p>Gather like terms</p></li>
+</ol>
+<p>This will give you the coefficients to use in the statements. We’re going to start with <code>lsmestimate</code>, because this is where it really gets to shine.</p>
+<p>Before determining the linear combinations, we need to know what order SAS has the <code>lsmeans</code>–this will tell us the order in which they go in the statements. The order is determined by the order the factors appear in the <code>class</code> statment (not the <code>model</code> statement) and then in alphanumeric order within each factor.</p>
+<p>For example:</p>
+<pre><code>        class polymer add;
+        model strength=polymer|add;
+        model strength=add|polymer;</code></pre>
+<p>will put the factors and levels in the same order.</p>
+<p>We have three polymers with 5 additives, so the order of the coefficients would be</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>However, if we use</p>
+<pre><code>        class add polymer;
+        model strength=polymer|add;
+        model strength=add|polymer;</code></pre>
+<p>we’d get a different order. Now, the order of the coefficients would be</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s stick with <code>class polymer add</code> order. We want to find the coefficients that we need to compare mylar vs the average of nylon and polyethylene in additive 1.</p>
+<p>We want to test</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>which maps to coefficients</p>
+<div class="center">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Mc1</td>
+<td style="text-align: center;">Mc2</td>
+<td style="text-align: center;">Mc3</td>
+<td style="text-align: center;">Mc4</td>
+<td style="text-align: center;">Mc5</td>
+<td style="text-align: center;">Nc1</td>
+<td style="text-align: center;">Nc2</td>
+<td style="text-align: center;">Nc3</td>
+<td style="text-align: center;">Nc4</td>
+<td style="text-align: center;">Nc5</td>
+<td style="text-align: center;">Pc1</td>
+<td style="text-align: center;">Pc2</td>
+<td style="text-align: center;">Pc3</td>
+<td style="text-align: center;">Pc4</td>
+<td style="text-align: center;">Pc5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br>
+</p>
+<p>We can now add the <code>lsmestimate</code> statement to our program</p>
+<pre><code>lsmestimate polymer*add 'Mylar vs Nylon,Poly in Add c1' 1 0 0 0 0 -0.5 0 0 0 0 -0.5 0 0 0 0;
+lsmestimate polymer*add 'Mylar vs Nylon,Poly in Add c1' 2 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0/divisor=2;</code></pre>
+<p>We could additional statements to look at this same comparison with the other additives. Note that I’m not looking at this comparison in Additive c5, because we already saw there is a difference between nylon and polyethylene in c5 so it doesn’t make sense to look at this.</p>
+<pre><code>        proc glimmix data=ribbon;
+          class polymer add;
+          model strength=polymer|add;
+          lsmestimate polymer*add 
+            'Mylar vs Nylon,Poly in Add c1' 2 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0,
+            'Mylar vs Nylon,Poly in Add c2' 0 2 0 0 0 0 -1 0 0 0 0 -1 0 0 0,
+            'Mylar vs Nylon,Poly in Add c3' 0 0 2 0 0 0 0 -1 0 0 0 0 -1 0 0,
+            'Mylar vs Nylon,Poly in Add c4' 0 0 0 2 0 0 0 0 -1 0 0 0 0 -1 0/divisor=2;
+        run;</code></pre>
+<pre><code>                                         Least Squares Means Estimates
+        
+                                                         Standard
+Effect        Label                           Estimate      Error      DF   t Value   Pr &gt; |t|
+        
+polymer*add   Mylar vs Nylon,Poly in Add c1     5.0167     2.2164      75      2.26     0.0265
+polymer*add   Mylar vs Nylon,Poly in Add c2     4.2750     2.2164      75      1.93     0.0575
+polymer*add   Mylar vs Nylon,Poly in Add c3     6.7500     2.2164      75      3.05     0.0032
+polymer*add   Mylar vs Nylon,Poly in Add c4    11.8000     2.2164      75      5.32     &lt;.0001</code></pre>
+<p>We see the estimates differ for the different additives, indicating a potential interaction between Mylar vs (Nylon &amp; Poly) and Additive. We can investigate this further by comparing the simple effects. But for this, we need to use <code>estimate</code>.</p>
+<p>Again the difference between <code>lsmestimate</code> and <code>estimate</code> is</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>Using <code>estimate</code>, we’ll need to go through the 3 step method outlined above.</p>
+<ol type="1">
+<li>State the comparison in terms of the cell means</li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<ol start="2" type="1">
+<li><p>Convert cell means into treatment effects<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p></li>
+<li><p>Gather like terms</p></li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>So, our estimate statement will only involve the polymer and polymer*additive estimates.</p>
+<pre><code>    proc glimmix data=ribbon;
+      class polymer add;
+      model strength=polymer|add;
+      estimate 'Mylar vs Nylon,Poly in Add c1' 
+        polymer 2 -1 -1 polymer*add 2 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0/divisor=2;
+    run;</code></pre>
+<p>which gives</p>
+<pre><code>                                           Estimates
+    
+                                                 Standard
+    Label                            Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+     Mylar vs Nylon,Poly in Add c1      5.0167      2.2164       75       2.26      0.0265
+    
+    </code></pre>
+<p>We could also look at all four comparisons at once like we did with <code>lsmestimate</code> and we could also add the <code>adjust=</code> option to control multiplicity.</p>
+<pre><code>    proc glimmix data=ribbon;
+      class polymer add;
+      model strength=polymer|add;
+      estimate 'Mylar vs Nylon,Poly in Add c1' 
+          polymer 2 -1 -1 polymer*add 2 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0,
+       'Mylar vs Nylon,Poly in Add c2' 
+          polymer 2 -1 -1 polymer*add 0 2 0 0 0 0 -1 0 0 0 0 -1 0 0 0,  
+       'Mylar vs Nylon,Poly in Add c3' 
+          polymer 2 -1 -1 polymer*add 0 0 2 0 0 0 0 -1 0 0 0 0 -1 0 0,
+       'Mylar vs Nylon,Poly in Add c4' 
+          polymer 2 -1 -1 polymer*add 0 0 0 2 0 0 0 0 -1 0 0 0 0 -1 0/divisor=2;
+    run;</code></pre>
+<p>These give us the same results we saw with <code>lsmestimate</code>! So why bother going through all of this mess if we could get them more easily with <code>lsmestimate</code>? So now that we know how to build the <code>estimate</code> statements we can do so to explore contrasts to see if there is significant interaction. We can see there is from the Type III tests, but interaction now has 8 df–there’s a lot more going on with interaction than there was in a 2 <span class="math inline">\(\times\)</span> 2 model, and we need to tease it apart. Right now, we’re specifically interested in whether there is interaction between the mylar vs nylon/poly comparison and additive.</p>
+<p>Let’s write out the null hypothesis for this interaction.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Rather than a single equation for interaction like we saw in the 2 <span class="math inline">\(\times\)</span> 2, we actually have a set of 4 equations. This is a</p>
+<p><br>
+<br>
+</p>
+<p>How can we come up with the 4 equations to see what goes in the contrast statement?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We’ll do the same thing we did in the three step process–write the means in terms of their treatment effects and gather like terms. Let’s look at c1 vs c5:</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>So the main effects cancel out and the only term we need in our contrast statement is polymer*add. That would give us coefficients:</p>
+<div class="center">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Mc1</td>
+<td style="text-align: center;">Mc2</td>
+<td style="text-align: center;">Mc3</td>
+<td style="text-align: center;">Mc4</td>
+<td style="text-align: center;">Mc5</td>
+<td style="text-align: center;">Nc1</td>
+<td style="text-align: center;">Nc2</td>
+<td style="text-align: center;">Nc3</td>
+<td style="text-align: center;">Nc4</td>
+<td style="text-align: center;">Nc5</td>
+<td style="text-align: center;">Pc1</td>
+<td style="text-align: center;">Pc2</td>
+<td style="text-align: center;">Pc3</td>
+<td style="text-align: center;">Pc4</td>
+<td style="text-align: center;">Pc5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br>
+</p>
+<p>and our contrast statement would look like this:</p>
+<pre><code>    proc glimmix data=ribbon;
+      class polymer add;
+      model strength=polymer|add;
+      contrast 'Mylar vs Nylon,Poly by Add interaction'
+        polymer*add 1 0 0 0 -1  -0.5 0 0 0 0.5  -0.5 0 0 0 0.5, 
+        polymer*add 0 1 0 0 -1  0 -0.5 0 0 0.5  0 -0.5 0 0 0.5,
+        polymer*add 0 0 1 0 -1  0 0 -0.5 0 0.5  0 0 -0.5 0 0.5,
+        polymer*add 0 0 0 1 -1  0 0 0 -0.5 0.5  0 0 0 -0.5 0.5;
+    run;</code></pre>
+<p>which gives</p>
+<pre><code>            Type III Tests of Fixed Effects
+    
+                    Num      Den
+    Effect           DF       DF    F Value    Pr &gt; F
+    
+    polymer           2       75      24.25    &lt;.0001
+    add               4       75       0.14    0.9648
+    polymer*add       8       75       2.38    0.0241
+    
+    
+                                Contrasts
+    
+                                               Num      Den
+    Label                                       DF       DF    F Value    Pr &gt; F
+    
+    Mylar vs Nylon,Poly by Add interaction       4       75       1.76    0.1450
+    </code></pre>
+<p>So it looks like there is potentially interaction between this comparison of polymers and additive. If we wanted to present results for this comparison, we should do it separately for the 5 additives. If the structure of the factors lends itself to specific comparisons, we could also tease apart that 4 df interaction test.</p>
+<p>Suppose we do have additional knowledge about the factor structures, and Additives c1 and c2 are similarly formulated as are Additives c3 and c4. We already know that polymers N and P are different in c5, so so we can’t report M versus (N/P) for c5. We can further tease apart c1, c2, c3, and c4 and potentially report some more general effects. We’ll consider (c1 and c2) and (c3 and c4), and break apart that 4 df interaction test into 4 separate 1 df tests.</p>
+<ol type="1">
+<li>H<span class="math inline">\(_0:\)</span> No interaction between M vs (N/P) and Additives (c1 and c2)</li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ol start="2" type="1">
+<li>H<span class="math inline">\(_0:\)</span> No interaction between M vs (N/P) and Additives (c3 and c4)</li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>At this point, if we were reporting our results, we’d stop. We can report M vs (N/P) averaged over (c1 and c2), but must report M vs (N/P) separately for the other 3 additives. Where do the other 2 df live?</p>
+<p>Let’s <strong>suppose</strong> (this is not true), that both contrast 1 and 2 had been non-significant. We could then move on to:</p>
+<ol start="3" type="1">
+<li>Could we combine (c1 and c2) and (c3 and c4)?</li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The remaining df is:</p>
+<ol start="4" type="1">
+<li>M vs (N/P) <span class="math inline">\(\times\)</span> [(c1/c2/c3/c4) vs c5]</li>
+</ol>
+</section>
+<section id="multifactor-experiments" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="multifactor-experiments"><span class="header-section-number">3.5</span> Multifactor Experiments</h2>
+<p>So far, we’ve discussed factorial experiments with two factors, A and B, both of which have 2 or more levels, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. We’ve referred to this as an <span class="math inline">\(a \times b\)</span> factorial treatment design. We’re still considering the completely randomized (CRD) experimental design. If we add a factor C (with <span class="math inline">\(c\)</span> levels) to our <span class="math inline">\(a \times b\)</span> design, we have an <span class="math inline">\(a \times b \times c\)</span> factorial design. If all three factors have <span class="math inline">\(a\)</span> levels, we can alternatively describe this as an <span class="math inline">\(a^3\)</span> factorial. The total number of treatments is <span class="math inline">\(a \times b \times c\)</span>.</p>
+<p><strong>Example:</strong> The following experiment was actually carried out in an experimental design class at Arizona State University, and considered some of the many different ways to bake brownies. The purpose of the experiment was to determine how the pan material, brand of brownie mix, and the stirring method affect the scrumptiousness of brownies. The factors and levels were:</p>
+<div class="center">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Factor</th>
+<th style="text-align: left;">Levels</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A= Pan Material</td>
+<td style="text-align: left;">Glass, Aluminum</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">B= Stirring Method</td>
+<td style="text-align: left;">Spoon, Mixer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">C= Brand of Mix</td>
+<td style="text-align: left;">Expensive, Cheap</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This is a <span class="math inline">\(2 \times 2 \times 2 = 2^3\)</span> experiment. There are 8 treatment combinations:</p>
+<div class="center">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: left;"></th>
+<th>Factors</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Treatment</td>
+<td style="text-align: left;">Pan</td>
+<td>Stirring</td>
+<td>Mix</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td style="text-align: left;">Glass</td>
+<td>Spoon</td>
+<td>Expensive</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td style="text-align: left;">Aluminum</td>
+<td>Spoon</td>
+<td>Expensive</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td style="text-align: left;">Glass</td>
+<td>Mixer</td>
+<td>Expensive</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td style="text-align: left;">Aluminum</td>
+<td>Mixer</td>
+<td>Expensive</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td style="text-align: left;">Glass</td>
+<td>Spoon</td>
+<td>Cheap</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td style="text-align: left;">Aluminum</td>
+<td>Spoon</td>
+<td>Cheap</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td style="text-align: left;">Glass</td>
+<td>Mixer</td>
+<td>Cheap</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td style="text-align: left;">Aluminum</td>
+<td>Mixer</td>
+<td>Cheap</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The response variable was scrumptiousness, a subjective measured derived from a questionnaire given to the subjects who sampled each batch of brownies. The questionnaire included questions related to taste, appearance, consistency, aroma, etc. Eight batches of each treatment combination were rated, for a total of <span class="math inline">\(8 \times 8 = 64\)</span> experimental units.</p>
+<p>Before we look at the data, let’s consider how we must adapt our notation, model, and ANOVA table for an additional factor.</p>
+<p>First, consider the cell mean <span class="math inline">\(\mu_{ijk}\)</span></p>
+<p><br>
+<br>
+</p>
+<p>Our response now have 4 subscripts: <span class="math inline">\(y_{ijkl}\)</span></p>
+<p><br>
+<br>
+<br>
+</p>
+<p>The treatment effects model is:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>And a sketch of the ANOVA table:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>It gets a little more complicated to make a table of cell means</p>
+<div class="center">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Stirring</th>
+<th>Method</th>
+<th>Stirring</th>
+<th>Method</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td style="text-align: center;">Spoon</td>
+<td>Spoon</td>
+<td>Mixer</td>
+<td>Mixer</td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: center;">Pan</td>
+<td>Material</td>
+<td>Pan</td>
+<td>Material</td>
+</tr>
+<tr class="odd">
+<td>Mix Brand</td>
+<td style="text-align: center;">Glass</td>
+<td>Aluminum</td>
+<td>Glass</td>
+<td>Aluminum</td>
+</tr>
+<tr class="even">
+<td>Expensive</td>
+<td style="text-align: center;"><span class="math inline">\(\mu_{111}\)</span></td>
+<td><span class="math inline">\(\mu_{211}\)</span></td>
+<td><span class="math inline">\(\mu_{121}\)</span></td>
+<td><span class="math inline">\(\mu_{221}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Cheap</td>
+<td style="text-align: center;"><span class="math inline">\(\mu_{112}\)</span></td>
+<td><span class="math inline">\(\mu_{212}\)</span></td>
+<td><span class="math inline">\(\mu_{122}\)</span></td>
+<td><span class="math inline">\(\mu_{222}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The data are in the file <code>brownie.sas.</code> Let’s put in the observed cell means</p>
+<div class="center">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Stirring</th>
+<th>Method</th>
+<th>Stirring</th>
+<th>Method</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td style="text-align: center;">Spoon</td>
+<td>Spoon</td>
+<td>Mixer</td>
+<td>Mixer</td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: center;">Pan</td>
+<td>Material</td>
+<td>Pan</td>
+<td>Material</td>
+</tr>
+<tr class="odd">
+<td>Mix Brand</td>
+<td style="text-align: center;">Glass</td>
+<td>Aluminum</td>
+<td>Glass</td>
+<td>Aluminum</td>
+</tr>
+<tr class="even">
+<td>Expensive</td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Cheap</td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We can also think about main effect marginal means</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>and treatment combination marginal means</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<section id="simple-effects-and-interaction-in-a-multifactor-experiment" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="simple-effects-and-interaction-in-a-multifactor-experiment"><span class="header-section-number">3.5.1</span> Simple Effects and Interaction in a Multifactor Experiment</h3>
+<p>We can again look at simple effects but this time, instead of looking at the effect of one factor with the other held constant, simple effects describe the effect of one factor with the other two (or more) held constant.</p>
+<p><strong>Example:</strong> We can consider the simple effect of pan material, given stirring with a spoon and expensive mix:</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>We can use simple effects to determine if there is <strong>conditional interaction</strong>. Conditional interaction means</p>
+<p><br>
+<br>
+</p>
+<p>This is denoted as <span class="math inline">\(A \times B | C_k\)</span> or <span class="math inline">\(A \times B | C\)</span>. Determining whether <span class="math inline">\(A \times B | C_k\)</span> is nonzero is the same as asking</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We can also construct interaction plots to explore this. For the brownie example, suppose we are interested in the interaction between pan material and stirring method, given the cheap brand.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We can also examine the conditional interaction between pan material and stirring method, given the expensive mix.</p>
+<p>These two plots together can be examined to see if there is a three-way interaction present. Three-way interaction occurs when</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>In this case, it does not appear there is significant three-way interaction. What would three-way interaction look like?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+</section>
+<section id="analysis-for-multifactor-experiments" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="analysis-for-multifactor-experiments"><span class="header-section-number">3.5.2</span> Analysis for Multifactor Experiments</h3>
+<p>We’ll now explore the analysis of a three-way factorial treatment design by looking first at the analysis of the brownie data, and then two additional example data sets with increasingly complex interactions among the three factors.</p>
+<p>The basic steps in analyzing data arising from a three-factor design are:</p>
+<ol type="1">
+<li><p>Include all main effects, two-way, and three-way interaction terms in the model and test the three-way interaction.</p></li>
+<li><p>If the three-way interaction term is not significant, test the two-way interactions. If the three-way interaction is significant, test the two-way interactions at each level of the third factor (conditional interactions).</p></li>
+<li><p>Depending on the results of (1) and (2),</p>
+<ul>
+<li><p>Test main effects (for those main effects free of any interaction)</p></li>
+<li><p>Test simple effects of one factor conditional on the second but free of the third (when there are two-way interactions, but no three-way)</p></li>
+<li><p>Test simple effects of one factor conditional on combinations of the other two (when there is three-way interaction)</p></li>
+</ul></li>
+</ol>
+<p>This can be conducted using a two-stage approach in <code>SAS</code>.</p>
+<p><strong>Stage 1:</strong> Run the basic analysis including all main effects, two-way interactions, and three-way interaction to see what is significant.</p>
+<pre><code>    proc glimmix;
+      class a b c;
+      model y=a|b|c; *or model y=a b c a*b a*c b*c a*b*c;
+    run;</code></pre>
+<p><strong>Stage 2:</strong> Add needed two-way interaction and/or main effect contrasts, <code>lsmeans</code>, <code>slice</code>, and <code>slicediff</code> statements to test various hypotheses and estimate various differences, depending on which thee-way or two-way interactions are significant (and therefore which hypotheses are legitimate to test).</p>
+<section id="brownie-example" class="level4" data-number="3.5.2.1">
+<h4 data-number="3.5.2.1" class="anchored" data-anchor-id="brownie-example"><span class="header-section-number">3.5.2.1</span> Brownie Example</h4>
+<p><strong>Stage 1:</strong> We’ll start using the basic program</p>
+<pre><code>    proc glimmix data=brownies;
+      class pan stir mix;
+      model y=pan|stir|mix;
+    run;</code></pre>
+<p>which gives</p>
+<pre><code>              Type III Tests of Fixed Effects
+    
+                     Num      Den
+    Effect            DF       DF    F Value    Pr &gt; F
+    
+    pan                1       56      11.95    0.0010
+    stir               1       56       2.99    0.0894
+    pan*stir           1       56       0.01    0.9194
+    mix                1       56       0.01    0.9194
+    pan*mix            1       56       0.26    0.6132
+    stir*mix           1       56       0.17    0.6858
+    pan*stir*mix       1       56       0.04    0.8396</code></pre>
+<p><br>
+<br>
+<br>
+</p>
+<p><strong>Stage 2:</strong> Based on the output above, we only need to further investigate the (main) effects of pan material and (potentially) stirring method. We can refit the model without the interactions and add an <code>lsmeans</code> statements</p>
+<pre><code>    proc glimmix data=brownies;
+      class pan stir mix;
+      model y=pan stir mix;
+      lsmeans pan stir/diff;
+    run;</code></pre>
+<p>which gives</p>
+<pre><code>         Type III Tests of Fixed Effects
+              Num      Den
+Effect         DF       DF    F Value    Pr &gt; F
+
+pan             1       60      12.70    0.0007
+stir            1       60       3.17    0.0798
+mix             1       60       0.01    0.9169
+
+
+                 pan Least Squares Means
+                        Standard
+pan         Estimate       Error       DF    t Value    Pr &gt; |t|
+aluminum     12.6250      0.4217       60      29.94      &lt;.0001
+glass        10.5000      0.4217       60      24.90      &lt;.0001
+
+                Differences of pan Least Squares Means
+                                    Standard
+pan         _pan        Estimate       Error       DF    t Value    Pr &gt; |t|
+aluminum    glass         2.1250      0.5963       60       3.56      0.0007
+
+                  stir Least Squares Means
+                     Standard
+stir     Estimate       Error       DF    t Value    Pr &gt; |t|
+mixer     12.0938      0.4217       60      28.68      &lt;.0001
+spoon     11.0313      0.4217       60      26.16      &lt;.0001
+
+             Differences of stir Least Squares Means
+                              Standard
+stir     _stir    Estimate       Error       DF    t Value    Pr &gt; |t|
+mixer    spoon      1.0625      0.5963       60       1.78      0.0798</code></pre>
+</section>
+<section id="data-set-2-example" class="level4" data-number="3.5.2.2">
+<h4 data-number="3.5.2.2" class="anchored" data-anchor-id="data-set-2-example"><span class="header-section-number">3.5.2.2</span> Data Set #2 Example</h4>
+<p>The data are in the file <code>multifactor examples.sas</code>.</p>
+<p>Let’s first explore the cell means and sketch the interaction plots.</p>
+<pre><code>                          a*b*c Least Squares Means
+    
+                               Standard
+    a    b    c    Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    1    1    1      221.83      4.8769       16      45.49      &lt;.0001
+    1    1    2      243.50      4.8769       16      49.93      &lt;.0001
+    1    2    1      239.77      4.8769       16      49.16      &lt;.0001
+    1    2    2      247.73      4.8769       16      50.80      &lt;.0001
+    2    1    1      254.87      4.8769       16      52.26      &lt;.0001
+    2    1    2      270.40      4.8769       16      55.44      &lt;.0001
+    2    2    1      232.07      4.8769       16      47.58      &lt;.0001
+    2    2    2      245.67      4.8769       16      50.37      &lt;.0001</code></pre>
+<p>Let’s plot B <span class="math inline">\(\times\)</span> C for each level of A.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Stage 1:</strong> We’ll start with the basic program</p>
+<pre><code>    proc glimmix data=example2;
+      class a b c;
+      model y=a|b|c;
+    run;
+
+               Fit Statistics
+    
+    Pearson Chi-Square / DF        71.35
+    
+    
+         Type III Tests of Fixed Effects
+                  Num      Den
+    Effect         DF       DF    F Value    Pr &gt; F
+    
+    a               1       16      13.23    0.0022
+    b               1       16       3.38    0.0846
+    a*b             1       16      25.53    0.0001
+    c               1       16      18.15    0.0006
+    a*c             1       16       0.00    0.9715
+    b*c             1       16       1.28    0.2738
+    a*b*c           1       16       0.73    0.4062</code></pre>
+<p>Based on this, we can look at the main effects of C and the simple effects of A given B (averaged over C) and B given A (averaged over C).</p>
+<p><strong>Stage 2:</strong></p>
+<pre><code>    proc glimmix data=example2;
+      class a b c;
+      model y=a b a*b c;
+      lsmeans c/diff;
+      lsmeans a*b/slicediff=a slicediff=b;
+    run;</code></pre>
+<pre><code>                 Fit Statistics
+    Pearson Chi-Square / DF        67.65
+    
+            Type III Tests of Fixed Effects
+                  Num      Den
+    Effect         DF       DF    F Value    Pr &gt; F
+    a               1       19      13.95    0.0014
+    b               1       19       3.57    0.0743
+    a*b             1       19      26.93    &lt;.0001
+    c               1       19      19.14    0.0003
+    
+                c Least Squares Means
+                     Standard
+    c    Estimate       Error       DF    t Value    Pr &gt; |t|
+    1      237.13      2.3743       19      99.87      &lt;.0001
+    2      251.83      2.3743       19     106.06      &lt;.0001
+    
+           Differences of c Least Squares Means
+                           Standard
+    c    _c    Estimate       Error       DF    t Value    Pr &gt; |t|
+    1    2     -14.6917      3.3578       19      -4.38      0.0003
+    
+                   a*b Least Squares Means
+                          Standard
+    a    b    Estimate       Error       DF    t Value    Pr &gt; |t|
+    1    1      232.67      3.3578       19      69.29      &lt;.0001
+    1    2      243.75      3.3578       19      72.59      &lt;.0001
+    2    1      262.63      3.3578       19      78.22      &lt;.0001
+    2    2      238.87      3.3578       19      71.14      &lt;.0001
+    
+          Simple Effect Comparisons of a*b Least Squares Means By a
+    Simple
+    Effect                           Standard
+    Level     b    _b    Estimate       Error       DF    t Value    Pr &gt; |t|
+    a 1       1    2     -11.0833      4.7486       19      -2.33      0.0307
+    a 2       1    2      23.7667      4.7486       19       5.00      &lt;.0001
+    
+           Simple Effect Comparisons of a*b Least Squares Means By b
+    Simple
+    Effect                           Standard
+    Level     a    _a    Estimate       Error       DF    t Value    Pr &gt; |t|
+    b 1       1    2     -29.9667      4.7486       19      -6.31      &lt;.0001
+    b 2       1    2       4.8833      4.7486       19       1.03      0.3167</code></pre>
+<p>We can also construct interaction plots to visualize the interaction between A and B:</p>
+<pre><code>    proc glimmix data=example2;
+      class a b c;
+      model y=a b a*b c;
+      lsmeans a*b/plots=meanplot(sliceby=b join);
+    run;</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Example2.jpeg" class="img-fluid figure-img" style="width:70.0%" alt="The graph shows an interaction plot for A x B, averaged over the levels of C. The lines are not parallel, indicating there is an A x B interaction."></p>
+<figcaption>Interaction plot for A x B, averaged over C</figcaption>
+</figure>
+</div>
+<p>Let’s verify that this really is averaging over C.</p>
+<p><br>
+<br>
+<br>
+</p>
+</section>
+<section id="data-set-3-example" class="level4" data-number="3.5.2.3">
+<h4 data-number="3.5.2.3" class="anchored" data-anchor-id="data-set-3-example"><span class="header-section-number">3.5.2.3</span> Data Set #3 Example</h4>
+<p>The data are in the file <code>multifactor examples.sas</code>.</p>
+<p>Let’s first explore the cell means and sketch the interaction plots.</p>
+<pre><code>                      a*b*c Least Squares Means
+                           Standard
+a    b    c    Estimate       Error       DF    t Value    Pr &gt; |t|
+
+1    1    1      223.13      6.2094       16      35.93      &lt;.0001
+1    1    2      234.53      6.2094       16      37.77      &lt;.0001
+1    2    1      247.77      6.2094       16      39.90      &lt;.0001
+1    2    2      259.57      6.2094       16      41.80      &lt;.0001
+2    1    1      245.67      6.2094       16      39.56      &lt;.0001
+2    1    2      275.30      6.2094       16      44.34      &lt;.0001
+2    2    1      265.33      6.2094       16      42.73      &lt;.0001
+2    2    2      249.90      6.2094       16      40.25      &lt;.0001</code></pre>
+<p>Let’s plot B <span class="math inline">\(\times\)</span> C for each level of A.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Stage 1:</strong> We’ll start with the basic program</p>
+<pre><code>    proc glimmix data=example2;
+    class a b c;
+    model y=a|b|c;
+    run;
+
+                  Fit Statistics
+        Pearson Chi-Square / DF       115.67
+    
+    
+         Type III Tests of Fixed Effects
+                  Num      Den
+    Effect         DF       DF    F Value    Pr &gt; F
+    
+    a               1       16      16.43    0.0009
+    b               1       16       6.26    0.0236
+    a*b             1       16       9.95    0.0061
+    c               1       16       4.53    0.0491
+    a*c             1       16       0.26    0.6153
+    b*c             1       16       6.47    0.0217
+    a*b*c           1       16       6.70    0.0198</code></pre>
+<p>So our suspicion of three-way interaction is verified. Let’s explore this a bit more using plots. We’ve seen the B <span class="math inline">\(\times\)</span> C for each level of A. To illustrate how to use <code>SAS</code> to construct the interaction plots, let’s consider A <span class="math inline">\(\times\)</span> B for each level of C.</p>
+<pre><code>    proc glimmix data=example3;
+      class a b c;
+      model y=a|b|c;
+      lsmeans a*b*c/plot=meanplot (sliceby=b plotby=c join);
+    run;</code></pre>
+<p><br>
+<br>
+</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Example 31.jpeg" class="img-fluid figure-img" alt="The graph shows an interaction plot between A and B at level C=1. The lines are roughly parallel, indicating that A and B do not interact at C=1" width="450"></p>
+<figcaption>Interaction plot for A x B at level C=1</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Example 32.jpeg" class="img-fluid figure-img" alt="The graph shows an interaction plot between A and B at level C=2. The lines are not parallel, indicating that A and B interact at C=2" width="450"></p>
+<figcaption>Interaction plot for A x B at level C=2.</figcaption>
+</figure>
+</div>
+<p>So it looks like there is no interaction between A and B at C=1.</p>
+<p><strong>Stage 2:</strong> We can formally test the interaction between A and B at C=1, and proceed based on the results. We’ll use the same approach we did in the last section:</p>
+<ol type="1">
+<li><p>Write the linear combination you want to test or estimate in terms of the cell means, <span class="math inline">\(\mu_{ij}\)</span></p></li>
+<li><p>Convert means into model parameters</p></li>
+<li><p>Gather like terms</p></li>
+</ol>
+<p>In this case, we’re interested in <span class="math inline">\(\mu_{111} - \mu_{121} - \mu_{211} + \mu_{221}\)</span>.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>This leads to the <code>contrast</code> statement</p>
+<pre><code>    contrast 'a*b at c=1' a*b 1 -1 -1 1 a*b*c 1 0 -1 0 -1 0 1 0;
+
+                       Contrasts
+                   Num      Den
+    Label           DF       DF    F Value    Pr &gt; F
+    
+    a*b at c=1       1       16       0.16    0.6945</code></pre>
+<p>As suspected, there is no A <span class="math inline">\(\times\)</span> B interaction at C=1. So, we can examine the ‘main’ effects of A and B at C=1.</p>
+<pre><code>    proc glimmix data=example3;
+      class a b c;
+      model y=a|b|c;
+      lsmeans a*c/slicediff=c;
+      lsmeans b*c/slicediff=c;
+    run;
+
+                        a*c Least Squares Means
+                          Standard
+    a    c    Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    1    1      235.45      4.3907       16      53.62      &lt;.0001
+    1    2      247.05      4.3907       16      56.27      &lt;.0001
+    2    1      255.50      4.3907       16      58.19      &lt;.0001
+    2    2      262.60      4.3907       16      59.81      &lt;.0001
+    
+            Simple Effect Comparisons of a*c Least Squares Means By c   
+    Simple
+    Effect                           Standard
+    Level     a    _a    Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    c 1       1    2     -20.0500      6.2094       16      -3.23      0.0052
+    c 2       1    2     -15.5500      6.2094       16      -2.50      0.0235</code></pre>
+<p><br>
+<br>
+</p>
+<pre><code>                       b*c Least Squares Means
+                          Standard
+    b    c    Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    1    1      234.40      4.3907       16      53.39      &lt;.0001
+    1    2      254.92      4.3907       16      58.06      &lt;.0001
+    2    1      256.55      4.3907       16      58.43      &lt;.0001
+    2    2      254.73      4.3907       16      58.02      &lt;.0001
+    
+             Simple Effect Comparisons of b*c Least Squares Means By c
+    Simple
+    Effect                           Standard
+    Level     b    _b    Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    c 1       1    2     -22.1500      6.2094       16      -3.57      0.0026
+    c 2       1    2       0.1833      6.2094       16       0.03      0.9768</code></pre>
+<p>However, it does look like there is an interaction between A and B if C=2. We’ll check this formally. This time, we’re interested in <span class="math inline">\(\mu_{112} - \mu_{122} - \mu_{212} + \mu_{222}\)</span>.</p>
+<p><strong>Practice:</strong> Find the coefficients necessary to test this contrast.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<pre><code>                       Contrasts
+                   Num      Den
+    Label           DF       DF    F Value    Pr &gt; F
+    
+    a*b at c=2       1       16      16.49    0.0009</code></pre>
+<p>So, the A <span class="math inline">\(\times\)</span> B interaction is significant. So, we must look at simple effects.</p>
+<pre><code>    lsmeans a*b*c/slicediff=b*c slicediff=a*c;
+
+                         a*b*c Least Squares Means  
+                               Standard
+    a    b    c    Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    1    1    1      223.13      6.2094       16      35.93      &lt;.0001
+    1    1    2      234.53      6.2094       16      37.77      &lt;.0001
+    1    2    1      247.77      6.2094       16      39.90      &lt;.0001
+    1    2    2      259.57      6.2094       16      41.80      &lt;.0001
+    2    1    1      245.67      6.2094       16      39.56      &lt;.0001
+    2    1    2      275.30      6.2094       16      44.34      &lt;.0001
+    2    2    1      265.33      6.2094       16      42.73      &lt;.0001
+    2    2    2      249.90      6.2094       16      40.25      &lt;.0001
+    
+    
+             Simple Effect Comparisons of a*b*c Least Squares Means By b*c
+    Simple
+    Effect                            Standard
+    Level      a    _a    Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    b*c 1 1    1    2     -22.5333      8.7815       16      -2.57      0.0207
+    b*c 1 2    1    2     -40.7667      8.7815       16      -4.64      0.0003
+    b*c 2 1    1    2     -17.5667      8.7815       16      -2.00      0.0627
+    b*c 2 2    1    2       9.6667      8.7815       16       1.10      0.2873
+
+             Simple Effect Comparisons of a*b*c Least Squares Means By a*c
+    
+    Simple
+    Effect                            Standard
+    Level      b    _b    Estimate       Error       DF    t Value    Pr &gt; |t|
+    
+    a*c 1 1    1    2     -24.6333      8.7815       16      -2.81      0.0127
+    a*c 1 2    1    2     -25.0333      8.7815       16      -2.85      0.0116
+    a*c 2 1    1    2     -19.6667      8.7815       16      -2.24      0.0397
+    a*c 2 2    1    2      25.4000      8.7815       16       2.89      0.0106</code></pre>
+<p>So, how would we write an overall summary of the results of Example 3? We explored:</p>
+<ul>
+<li><p>‘Main’ effects of A and B at C=1</p></li>
+<li><p>Simple effects of A and B at C=2</p></li>
+</ul>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Section 2 Completely Randomized Design.html" class="pagination-link" aria-label="The Completely Randomized Design">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Completely Randomized Design</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Section 4 Block Designs.html" class="pagination-link" aria-label="Block Designs">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Block Designs</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

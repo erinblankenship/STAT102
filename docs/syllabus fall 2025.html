@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>syllabus-fall-2025</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="syllabus fall 2025_files/libs/clipboard/clipboard.min.js"></script>
+<script src="syllabus fall 2025_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="syllabus fall 2025_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="syllabus fall 2025_files/libs/quarto-html/popper.min.js"></script>
+<script src="syllabus fall 2025_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="syllabus fall 2025_files/libs/quarto-html/anchor.min.js"></script>
+<link href="syllabus fall 2025_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="syllabus fall 2025_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="syllabus fall 2025_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="syllabus fall 2025_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="syllabus fall 2025_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="syllabus-fall-2025.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="stat-212-principles-of-study-design" class="level1">
+<h1><strong>STAT 212: Principles of Study Design</strong></h1>
+<p><strong>Instructor:</strong> Dr.&nbsp;Erin Blankenship (she/her)</p>
+<p><strong>email:</strong> <code>erin.blankenship@unl.edu</code></p>
+<p><strong>Lecture:</strong> 11:00-12:15 Tuesday/Thursday, Hardin Hall 49</p>
+<p><strong>Office Hours:</strong> 10:00-11:00 Monday/Wednesday or by appointment; 343B Hardin Hall, North Wing</p>
+<p><strong>Lab Instructor:</strong> Arian Alai (he/him)</p>
+<p><strong>email:</strong> <code>aalai4@huskers.unl.edu</code></p>
+<p><strong>Office Hours:</strong> 8:00-9:00 am Tuesday/12:30-1:30 pm Thursday; 349E Hardin Hall, North Wing</p>
+<p><strong>Required Materials:</strong> No book is required. We will be using statistical software (SAS OnDemand) that is cloud-based and free. Instructions on accessing SAS OnDemand are in Canvas, and we’ll go over them during Lab 1 on 27 August.</p>
+<p><strong>Prerequisites:</strong> STAT 102 or STAT 318</p>
+<p><strong>Course Description:</strong> Introduction to statistical aspects of study design. Both designed experiments and observational studies are covered. Sampling techniques, major experimental and treatment design structures, as well as power and sample size considerations.</p>
+<p><strong>Course Goals:</strong></p>
+<ul>
+<li><p>Understand the differences between designed experiments and observational studies. Including what conclusions can be made.</p></li>
+<li><p>Understand differences in sampling techniques and evaluating which should be considered for a study.</p></li>
+<li><p>Be familiar with major experimental and treatment design structures and what to consider when choosing an appropriate one for a study.</p></li>
+<li><p>Understand the impact of sample size, variation, and effect size on power.</p></li>
+<li><p>Know the strengths and weaknesses of different data collection and analysis methods.</p></li>
+<li><p>Be able to write down a linear additive model, correctly specify fixed effects, random effects, interactions and model assumptions for the error terms.</p></li>
+<li><p>Sketch a skeleton ANOVA table from a description of the study</p></li>
+<li><p>Understand data considerations such as patterns of missing data, evaluating systematic differences in sampling populations, choice of design points</p></li>
+</ul>
+<p><strong>Grading:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Assignment(s)</th>
+<th>Contribution to Final Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exam 1</td>
+<td>25%</td>
+</tr>
+<tr class="even">
+<td>Exam 2</td>
+<td>25%</td>
+</tr>
+<tr class="odd">
+<td>Lab</td>
+<td>25%</td>
+</tr>
+<tr class="even">
+<td>Project</td>
+<td>25%</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+</p>
+<p><strong>Grading Scale:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Grade</th>
+<th>Final Percentage Range</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>94.0-100</td>
+</tr>
+<tr class="even">
+<td>A-</td>
+<td>90.0-93.99</td>
+</tr>
+<tr class="odd">
+<td>B+</td>
+<td>88.0-89.99</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>84.0-87.99</td>
+</tr>
+<tr class="odd">
+<td>B-</td>
+<td>80.0-83.99</td>
+</tr>
+<tr class="even">
+<td>C+</td>
+<td>78.0-79.99</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>74.0-77.99</td>
+</tr>
+<tr class="even">
+<td>C-</td>
+<td>70.0-73.99</td>
+</tr>
+<tr class="odd">
+<td>D+</td>
+<td>68.0-69.99</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td>64.0-67.99</td>
+</tr>
+<tr class="odd">
+<td>D-</td>
+<td>60.0-63.99</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>&lt;60.0</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<strong>Course Expectations:</strong> In this course, you are expected to have professional behavior. You are expected to attend all class meetings, be curious, ask questions, seek opportunities to learn, and be open and responsive to constructive feedback. In addition:</p>
+<ul>
+<li><p>Be an active participant–statistics is not a spectator sport!</p></li>
+<li><p>Be committed, take your work seriously</p></li>
+<li><p>Engage with the in-class activities and labs</p></li>
+<li><p>Help others–if you understand the material being discussed, practice your mentoring skills. This does not means sharing answers, but instead helping others understand the concepts.</p></li>
+<li><p>Complete any assigned readings.</p></li>
+</ul>
+<p>You are also expected to exhibit a professional demeanor (language, attitude) toward others. Disagreement during discussions is welcome and often productive in developing a deeper understanding of the concepts being discussed. However, disagreement does not warrant yelling or disrespectful language or behavior. Unprofessional behavior will not be tolerated, and appropriate actions will be taken to prevent future occurrences.</p>
+<p><strong>Recording of class-related activity:</strong> I invite all of you to join me in actively creating and contributing to a positive, productive, and respectful classroom culture. Each student contributes to an environment that shapes the learning process. Any work and/or communication that you are privy to as a member of this course should be treated as the intellectual property of the speaker/creator, and is not to be shared outside the context of this course.</p>
+<p>Students may not make or distribute screen captures, audio/video recordings of, or livestream, any class-related activity, including lectures and presentations, without express prior written consent from me or an approved accommodation from Services for Students with Disabilities. If you have (or think you may have) a disability such that you need to record or tape class-related activities, you should contact Services for Students with Disabilities. If you have an accommodation to record class-related activities, those recordings may not be shared with any other student, whether in this course or not, or with any other person or on any other platform.</p>
+<p><strong>Labs:</strong> All students must be registered for lab (section 002). Weekly labs will give you the opportunity to practice applying statistical software to the design and analysis concepts covered in class. There will be about 10 weekly lab assignments leading up to Thanksgiving break. You will turn in the weekly lab assignment for grading and your lab grades, together with lab attendance, will be used in determining the final lab grade. All labs will be submitted in Canvas, and any submission instructions will be included in the assignment (e.g., the submission must be typed, must be submitted as a pdf, etc.). Late lab submissions should be avoided if at all possible. If this policy is abused, it will be changed to “No late labs are accepted.”</p>
+<p><strong>Lab attendance is required!</strong> The 25% of the overall grade corresponding to Lab is broken down as follows:</p>
+<ul>
+<li>30% Lab attendance</li>
+<li>70% Graded lab assignments</li>
+</ul>
+<p><strong>Exams:</strong> Two exams will be given during lab: October 8 and November 19. You will be allowed to use a calculator, but exams are closed notes. The exams will evaluate your understanding of the material, as well as your ability to synthesize and transfer that knowledge to other scenarios and situations; questions will assess conceptual understanding as opposed to mere memorization and mechanical calculation. You are expected to take exams at the scheduled times. If this is impossible due to extreme circumstances (illness, death in the family, previously scheduled activities vital to academic program), please notify me and provide appropriate documentation. No make-up exams will be given if I am not notified prior to the examination. You will be required to obtain a note from your physician or advisor explaining the nature of the conflict.</p>
+<p><strong>Project:</strong> A final group project will take the place of a final exam. The project will give you the opportunity to carry out the experimental design process from beginning to end, including formulating a question, designing an experiment to answer that question, collecting the data, analyzing the data, drawing conclusions about the research question, and presenting your findings in a coherent way. The project will include a presentation during the last week of class and a final written report.</p>
+<p><strong>Instructional Continuity:</strong> If in-person classes are canceled, you will be notified of the instructional continuity plan for this class through Canvas.</p>
+<p><strong>AI and Explainability Policy:</strong> (adapted from Dr.&nbsp;Vanderplas)</p>
+<ul>
+<li><p>Any use of generative AI must be disclosed in an appendix to your submission - this includes brainstorming, editing, using AI as spell-check/grammar-check, and so on. You must document the following:</p>
+<ul>
+<li><p>the version of the generative AI used</p></li>
+<li><p>the full sequence of prompts and responses</p></li>
+<li><p>any additional inputs you provided to the AI system</p></li>
+<li><p>a “diff” between the AI responses and your submission, showing exactly what was generated by the AI system and what you changed.</p></li>
+</ul></li>
+</ul>
+<p>It may be useful to leverage AI tools to ensure that your work conforms to grammar and style guidelines, but I very highly discourage the use of generative AI for content or code (I’ve seen it generate incorrect code too many times).</p>
+<ul>
+<li>You must be able to explain any work you turn in, including code. If you cannot explain the logic behind your approach as well as how it works in practice, then you will not receive credit for your submission.</li>
+</ul>
+<p><strong>Department Grade Appeal Policy:</strong> The Department of Statistics <a href="https://statistics.unl.edu/department-policies-grade-appeals-academic-integrity/">grade appeal policy</a></p>
+<p><strong>Academic Integrity:</strong> You are encouraged to work together on problems and exercises, but the work you turn in must be your own (unless the assignment specifically states otherwise). Work on exams must be your own. University policy will be followed in cases of academic dishonesty: In cases where an instructor finds that a student has committed any act of academic dishonesty, the instructor may in the exercise of his or her professional judgment impose an academic sanction as severe as giving the student a failing grade in the course. Before imposing an academic sanction the instructor shall first attempt to discuss the matter with the student. If deemed necessary by either the instructor or the student, the matter may be brought to the attention of the student’s major advisor, the instructor’s department chairperson or head, or the dean of the college in which the student is enrolled. For additional details see <a href="https://statistics.unl.edu/department-policies-grade-appeals-academic-integrity/">the department policy.</a></p>
+<p><strong>Services for Students with Disabilities:</strong> The University strives to make all learning experiences as accessible as possible. If you anticipate or experience barriers based on your disability (including mental health, chronic or temporary medical conditions), please let your instructor know immediately so that you can discuss options privately. To establish reasonable accommodations, your instructor may request that you register with Services for Students with Disabilities. If you are eligible for services and register with the office, make arrangements with your instructor as soon as possible to discuss your accommodations so they can be implemented in a timely manner. SSD is located in 117 Louise Pound Hall and can be reached at 402-472-3787.</p>
+<p><strong>University Policies:</strong> All <a href="https://executivevc.unl.edu/academic-excellence/teaching-resources/course-policies/">university-wide course policies.</a></p>
+<p><strong>Tentative Course Outline</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Week</th>
+<th>Dates</th>
+<th>Notes</th>
+<th>Topics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>26-28 August</td>
+<td></td>
+<td>Introduction to designed experiments; definitions</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2-4 September</td>
+<td>Lab 1 due</td>
+<td>Review of <span class="math inline">\(t\)</span> procedures and other 102/318 topics; One-way ANOVA; CRDs</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>9-11 September</td>
+<td>Lab 2 due</td>
+<td>One-way ANOVA; CRDs; pairwise comparisons</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>16-18 September</td>
+<td>Lab 3 due</td>
+<td>Model adequacy; power</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>23-25 September</td>
+<td>Lab 4 due</td>
+<td>Power; quantitative levels of a factor</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>30 Sept - 2 Oct</td>
+<td>Lab 5 due</td>
+<td>Factorials; main, simple, and interaction effects</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>7-9 October</td>
+<td>Exam 1 during lab</td>
+<td>Tests for effects</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>14-16 October</td>
+<td>Lab 6 due</td>
+<td>More than two levels of a factor</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>21-23 October</td>
+<td>No class on 21 Oct; Lab 7 due</td>
+<td>Multifactor experiments</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>28-30 October</td>
+<td>Lab 8 due</td>
+<td>Multifactor experiments</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>4-6 November</td>
+<td>Lab 9 due; Project checkpoint #1</td>
+<td>Blocking; RCBDs</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>11-13 November</td>
+<td>Lab 10 due</td>
+<td>RCBDs; row-column designs; incomplete block designs</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>18-20 November</td>
+<td>Exam 2 during lab; Project checkpoint #2</td>
+<td>Split-plot experiments</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>25-27 November</td>
+<td>No lab on 26 Nov, no class on 27 Nov</td>
+<td>Split-plot experiments</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>2-4 December</td>
+<td>Project checkpoint #3</td>
+<td>Split-plot experiments; catch up</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>9-11 December</td>
+<td></td>
+<td>Final project work time; final presentations</td>
+</tr>
+<tr class="odd">
+<td>Finals Week</td>
+<td></td>
+<td>No final exam</td>
+<td>Final reports due on Monday, 15 December at 9:00 am</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

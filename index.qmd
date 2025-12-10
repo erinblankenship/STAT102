@@ -1,0 +1,29 @@
+# Course Goals for STAT 102 {.unnumbered}
+
+STAT 212 is an introduction to the statistical aspects of study design. We'll consider all stages of the experimental process. By the end of the course, you will:
+
+-   understand the differences between designed experiments and observational studies, including the resulting conclusions that can be drawn.
+
+-   be familiar with major experimental and treatment design structures, and what to consider when choosing an appropriate design for a study.
+
+-   understand the impact of sample size, variation, and effect size on power.
+
+-   be able to write down a linear additive model, correctly specify fixed effects, random effects, interactions, and model assumptions for the error terms.
+
+-   sketch a skeleton ANOVA table from a description of a study.
+
+-   understand data collection considerations
+
+-   be able to analyze data resulting from major experimental and treatment design structures, including estimating main and simple effects, pairwise comparisons, contrasts, and model parameters.
+
+-   be able to clearly write up the results of an analysis so that a non-statistician could understand the major findings of the study.
+
+```{r}
+#| eval: true
+#| include: false
+
+quarto::quarto_render(input="syllabus fall 2025.qmd")
+file.copy("syllabus fall 2025.html","docs/")
+file.copy("syllabus-fall-2025.pdf","docs/")
+file.copy("syllabus fall 2025_files","docs/",recursive=TRUE)
+```
