@@ -145,7 +145,7 @@ It may be useful to leverage AI tools to ensure that your work conforms to gramm
 [***TENTATIVE***]{.underline} **Course Outline**
 
 | Week | Dates | Notes | Topics |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | 1 | 13-15 January |  | Introduction; Inference methods in broad strokes; Randomization tests |
 | 2 | 20-22 January | HW 1 due | Randomization tests; bootstrap confidence intervals |
 | 3 | 27-29 January | HW 2 due | Mathematical model methods |
