@@ -601,6 +601,8 @@ Here are the results of the randomized trial
 | No Clot | 2372 | 2356     | 4728  |
 | Total   | 2416 | 2416     | 4832  |
 
+
+
 \
 \
 \
@@ -619,5 +621,6 @@ For two-sided tests, the p-value is the probability that we observe a result as 
 
 So, how can we control Type I error?
 
--   Set up tests before seeing the data.
--   Collect enough data that the test has sufficient **power**. We'll talk more about power later (and LOTS more in an experimental design course), but power is the probability of correctly rejecting a false null hypothesis. It's a function of how big the true difference is (which we don't know and can't control) and the sample size (which we can control).
+- Set up tests before seeing the data.
+- Collect enough data that the test has sufficient **power**. We'll talk more about power later (and LOTS more in an experimental design course), but power is the probability of correctly rejecting a false null hypothesis. It's a function of how big the true difference is (which we don't know and can't control) and the sample size (which we can control).    
+

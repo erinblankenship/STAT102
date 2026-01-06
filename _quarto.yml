@@ -10,6 +10,7 @@ book:
   chapters:
     - index.qmd
     - Section 1 Philosophy.qmd
+    - Section 2 Proportions.qmd
   
 
   downloads: [pdf]    
