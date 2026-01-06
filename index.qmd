@@ -1,29 +1,33 @@
 # Course Goals for STAT 102 {.unnumbered}
 
-STAT 212 is an introduction to the statistical aspects of study design. We'll consider all stages of the experimental process. By the end of the course, you will:
+STAT 102 is an introduction to formal statistical inference. We will carry out inference using both simulation-based approaches and classical, theory-based methods. By the end of the course, you will:
 
--   understand the differences between designed experiments and observational studies, including the resulting conclusions that can be drawn.
+- Read an example where the research question is explicitly stated, and then translate what’s stated into a statistical statement involving parameters or other simple distributional characteristics. 
 
--   be familiar with major experimental and treatment design structures, and what to consider when choosing an appropriate design for a study.
+- Identify whether the ideal data collection strategy would involve random assignment, random sampling, or both and explain why. 
 
--   understand the impact of sample size, variation, and effect size on power.
+- Work with an example where the research question is explicitly stated, along with an existing data set, and propose and carry out an appropriate analysis to answer the research question. 
 
--   be able to write down a linear additive model, correctly specify fixed effects, random effects, interactions, and model assumptions for the error terms.
+- Explain the terms/components of a given statistical model, and connect those terms to the research question at hand. 
 
--   sketch a skeleton ANOVA table from a description of a study.
+- Check basic assumptions of various (simple) analysis methods and justify the use of the method. 
 
--   understand data collection considerations
+- Apply existing functions and point-and-click software for implementing basic data analyses. 
 
--   be able to analyze data resulting from major experimental and treatment design structures, including estimating main and simple effects, pairwise comparisons, contrasts, and model parameters.
+- Use tactile simulation to carry out a simple resampling procedure. 
 
--   be able to clearly write up the results of an analysis so that a non-statistician could understand the major findings of the study.
+- Identify the steps and perform the calculations required for routine statistical procedures to address a given problem. 
+
+- Calculate simple analyses (t-test, chi-squared test for proportions) by hand, to verify the validity of the computational algorithm. 
+
+- Recognize when computational results do not make sense in the context of the problem. 
 
 ```{r}
 #| eval: true
 #| include: false
 
-quarto::quarto_render(input="syllabus fall 2025.qmd")
-file.copy("syllabus fall 2025.html","docs/")
-file.copy("syllabus-fall-2025.pdf","docs/")
-file.copy("syllabus fall 2025_files","docs/",recursive=TRUE)
+quarto::quarto_render(input="syllabus spring 2026.qmd")
+file.copy("syllabus spring 2026.html","docs/")
+file.copy("syllabus-spring-2026.pdf","docs/")
+file.copy("syllabus spring 2026_files","docs/",recursive=TRUE)
 ```

@@ -9,11 +9,8 @@ book:
   
   chapters:
     - index.qmd
-    - Section 1 Introduction.qmd
-    - Section 2 Completely Randomized Design.qmd
-    - Section 3 Factorial Treatment Design.qmd
-    - Section 4 Block Designs.qmd
-    - Section 5 Split Plot Designs.qmd
+    - Section 1 Philosophy.qmd
+  
 
   downloads: [pdf]    
 
@@ -24,7 +21,7 @@ format:
         - \usepackage{float}
         - \floatplacement{table}{H}  
     output-file: pdf-book
-    fontsize: 11pt
+    fontsize: 12pt
     geometry: 
       - top=20mm
       - left=15mm
