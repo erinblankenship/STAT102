@@ -1,0 +1,165 @@
+---
+project:
+  output-dir: docs
+  
+format: 
+  html: default
+  pdf:   
+    header-includes:
+        - \usepackage{float}
+        - \floatplacement{table}{H}  
+    fontsize: 11pt
+    geometry: 
+      - top=20mm
+      - left=15mm
+      - right=10mm
+---
+
+# **STAT 102: Principles of Statistical Analysis**
+
+**Instructor:** Dr. Erin Blankenship (she/her)
+
+**email:** `erin.blankenship@unl.edu`
+
+**Lecture:** 12:30-1:45 Tuesday/Thursday, Keim 262
+
+**Office Hours:** 9:30-11:00 Tuesday/Thursday or by appointment; 343B Hardin Hall, North Wing
+
+**Required Materials:** *Introduction to Modern Statistics*, 2nd edition (Cetinkaya-Rundel and Hardin).
+
+Download for free at <https://leanpub.com/imstat>
+
+Chapters 1-10 cover content from STAT 101. We'll pick up with Chapter 11 (and backfill anywhere it's necessary).
+
+**Prerequisites:** STAT 101
+
+**Course Description:** Introduction to formal statistical inference and elementary probability for statistics majors. Explores the practical application of statistical techniques to meaningful scientific problems. Inference topics will be implemented using both simulation-based approaches and classical, theory-based methods.
+
+**Course Goals:**
+
+-   Read an example where the research question is explicitly stated, and then translate what’s stated into a statistical statement involving parameters or other simple distributional characteristics.
+
+-   Identify whether the ideal data collection strategy would involve random assignment, random sampling, or both and explain why.
+
+-   Work with an example where the research question is explicitly stated, along with an existing data set, and propose and carry out an appropriate analysis to answer the research question.
+
+-   Explain the terms/components of a given statistical model, and connect those terms to the research question at hand.
+
+-   Check basic assumptions of various (simple) analysis methods and justify the use of the method.
+
+-   Apply existing functions and point-and-click software for implementing basic data analyses.
+
+-   Use tactile simulation to carry out a simple resampling procedure.
+
+-   Identify the steps and perform the calculations required for routine statistical procedures to address a given problem.
+
+-   Calculate simple analyses (t-test, chi-squared test for proportions) by hand, to verify the validity of the computational algorithm.
+
+-   Recognize when computational results do not make sense in the context of the problem.
+
+\newpage
+
+**Grading:**
+
+| Assignment(s)       | Contribution to Final Grade |
+|---------------------|-----------------------------|
+| Mid-Term Project    | 25%                         |
+| Final Project       | 25%                         |
+| Homework            | 25%                         |
+| Final Demonstration | 25%                         |
+
+\
+
+**Grading Scale:**
+
+| Grade | Final Percentage Range |
+|-------|------------------------|
+| A     | 94.0-100               |
+| A-    | 90.0-93.99             |
+| B+    | 88.0-89.99             |
+| B     | 84.0-87.99             |
+| B-    | 80.0-83.99             |
+| C+    | 78.0-79.99             |
+| C     | 74.0-77.99             |
+| C-    | 70.0-73.99             |
+| D+    | 68.0-69.99             |
+| D     | 64.0-67.99             |
+| D-    | 60.0-63.99             |
+| F     | \<60.0                 |
+
+\
+**Course Expectations:** In this course, you are expected to have professional behavior. You are expected to attend all class meetings, be curious, ask questions, seek opportunities to learn, and be open and responsive to constructive feedback. In addition:
+
+-   Be an active participant--statistics is not a spectator sport!
+
+-   Be committed, take your work seriously
+
+-   Engage with the in-class activities and labs
+
+-   Help others--if you understand the material being discussed, practice your mentoring skills. This does not means sharing answers, but instead helping others understand the concepts.
+
+-   Complete any assigned readings.
+
+You are also expected to exhibit a professional demeanor (language, attitude) toward others. Disagreement during discussions is welcome and often productive in developing a deeper understanding of the concepts being discussed. However, disagreement does not warrant yelling or disrespectful language or behavior. Unprofessional behavior will not be tolerated, and appropriate actions will be taken to prevent future occurrences.
+
+**Recording of class-related activity:** I invite all of you to join me in actively creating and contributing to a positive, productive, and respectful classroom culture. Each student contributes to an environment that shapes the learning process. Any work and/or communication that you are privy to as a member of this course should be treated as the intellectual property of the speaker/creator, and is not to be shared outside the context of this course.
+
+Students may not make or distribute screen captures, audio/video recordings of, or livestream, any class-related activity, including lectures and presentations, without express prior written consent from me or an approved accommodation from Services for Students with Disabilities. If you have (or think you may have) a disability such that you need to record or tape class-related activities, you should contact Services for Students with Disabilities. If you have an accommodation to record class-related activities, those recordings may not be shared with any other student, whether in this course or not, or with any other person or on any other platform.
+
+**Projects:** Two projects will be given during the course of the semester, on **approximate** dates noted on the Tentative Course Outline on the last page. These projects will give you the opportunity to demonstrate your understanding of the material, as well as your ability to synthesize and transfer that knowledge to other scenarios and situations; questions will assess conceptual understanding as opposed to mere memorization. **You will not be allowed to collaborate with other students on the projects. If collaboration occurs, all involved students will receive a 0 on the project.**
+
+**Homework:** Approximately 8-10 homework assignments will be made over the course of the semester. The only way to learn statistics is to practice working problems, and homework is therefore an essential part of the course. Homework will be graded partially on completeness and partially on accuracy. Bear in mind that homework is for your benefit, not the instructor's.
+
+**Final Demonstration:** One of the goals of the course is to develop your skills in communicating with and about data. To this end, as well as to provide other students with valuable resources, you will demonstrate how to do something in R and/or with data. All materials and resources (e.g., R code, links to webpages, slides, instructions, etc.) will be provided the rest of the class, and other students should be able to use the tools you demonstrate on their own after the presentation. This assignment will be completed in pairs. More details will be provided later in the semester.
+
+**Instructional Continuity:** If in-person classes are canceled, you will be notified of the instructional continuity plan for this class through Canvas.
+
+\newpage
+
+**AI and Explainability Policy:** (adapted from Dr. Vanderplas)
+
+-   Any use of generative AI must be disclosed in an appendix to your submission - this includes brainstorming, editing, using AI as spell-check/grammar-check, and so on. You must document the following:
+
+    -   the version of the generative AI used
+
+    -   the full sequence of prompts and responses
+
+    -   any additional inputs you provided to the AI system
+
+    -   a “diff” between the AI responses and your submission, showing exactly what was generated by the AI system and what you changed.
+
+It may be useful to leverage AI tools to ensure that your work conforms to grammar and style guidelines, but I very highly discourage the use of generative AI for content or code (I've seen it generate incorrect code too many times).
+
+-   You must be able to explain any work you turn in, including code. If you cannot explain the logic behind your approach as well as how it works in practice, then you will not receive credit for your submission.
+
+**Department Grade Appeal Policy:** The Department of Statistics [grade appeal policy](https://statistics.unl.edu/department-policies-grade-appeals-academic-integrity/)
+
+**Academic Integrity:** You are encouraged to work together on problems and exercises, but the work you turn in must be your own (unless the assignment specifically states otherwise). Work on exams must be your own. University policy will be followed in cases of academic dishonesty: In cases where an instructor finds that a student has committed any act of academic dishonesty, the instructor may in the exercise of his or her professional judgment impose an academic sanction as severe as giving the student a failing grade in the course. Before imposing an academic sanction the instructor shall first attempt to discuss the matter with the student. If deemed necessary by either the instructor or the student, the matter may be brought to the attention of the student's major advisor, the instructor's department chairperson or head, or the dean of the college in which the student is enrolled. For additional details see [the department policy.](https://statistics.unl.edu/department-policies-grade-appeals-academic-integrity/)
+
+**Services for Students with Disabilities:** The University strives to make all learning experiences as accessible as possible. If you anticipate or experience barriers based on your disability (including mental health, chronic or temporary medical conditions), please let your instructor know immediately so that you can discuss options privately. To establish reasonable accommodations, your instructor may request that you register with Services for Students with Disabilities. If you are eligible for services and register with the office, make arrangements with your instructor as soon as possible to discuss your accommodations so they can be implemented in a timely manner. SSD is located in 117 Louise Pound Hall and can be reached at 402-472-3787.
+
+**University Policies:** All [university-wide course policies.](https://executivevc.unl.edu/academic-excellence/teaching-resources/course-policies/)
+
+\newpage
+
+[***TENTATIVE***]{.underline} **Course Outline**
+
+| Week | Dates | Notes | Topics |
+|------------------|------------------|------------------|------------------|
+| 1 | 13-15 January |  | Introduction; Inference methods in broad strokes; Randomization tests |
+| 2 | 20-22 January | HW 1 due | Randomization tests; bootstrap confidence intervals |
+| 3 | 27-29 January | HW 2 due | Mathematical model methods |
+| 4 | 3-5 February | HW 3 due | Decision errors; Inference for one proportion |
+| 5 | 10-12 February | HW 4 due | Inference for one proportion |
+| 6 | 17-19 February | HW 5 due | Inference for two proportions |
+| 7 | 24-26 February |  | Two-way tables; inference for more than 2 proportions |
+| 8 | 3-5 March | Mid-Term Project due | Inference for one mean |
+| 9 | 10-12 March |  | Inference for two means |
+| 10 | 17-19 March | No class! | Spring Break |
+| 11 | 24-26 March | HW 6 due | Inference for two means; inference for mean difference |
+| 12 | 31 March - 2 April | HW 7 due | Inference for more than 2 means: ANOVA |
+| 13 | 7-9 April | HW 8 due | ANOVA |
+| 14 | 14-16 April | HW 9 due | Regression |
+| 15 | 21-23 April |  | Regression |
+| 16 | 28-30 April | Final Project due | Final demonstration presentations |
+| Finals Week |  | No final exam |  |
