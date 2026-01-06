@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Stat 102 Notes</title>
+<title>2&nbsp; Inference for Proportions (Chapters 16-18) – Stat 102 Notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Section 1 Philosophy.html" rel="next">
+<link href="./Section 1 Philosophy.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course Goals for STAT 102</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Section 2 Proportions.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Inference for Proportions (Chapters 16-18)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -111,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Course Goals for STAT 102</span></a>
   </div>
 </li>
@@ -123,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Section 2 Proportions.html" class="sidebar-item-text sidebar-link">
+  <a href="./Section 2 Proportions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Inference for Proportions (Chapters 16-18)</span></span></a>
   </div>
 </li>
@@ -132,21 +132,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#course-goals-for-stat-102" id="toc-course-goals-for-stat-102" class="nav-link active" data-scroll-target="#course-goals-for-stat-102">Course Goals for STAT 102</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Stat 102 Notes</h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Inference for Proportions (Chapters 16-18)</span></h1>
 </div>
 
 
@@ -163,24 +157,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="course-goals-for-stat-102" class="level1 unnumbered">
-<h1 class="unnumbered">Course Goals for STAT 102</h1>
-<p>STAT 102 is an introduction to formal statistical inference. We will carry out inference using both simulation-based approaches and classical, theory-based methods. By the end of the course, you will:</p>
-<ul>
-<li><p>Read an example where the research question is explicitly stated, and then translate what’s stated into a statistical statement involving parameters or other simple distributional characteristics.</p></li>
-<li><p>Identify whether the ideal data collection strategy would involve random assignment, random sampling, or both and explain why.</p></li>
-<li><p>Work with an example where the research question is explicitly stated, along with an existing data set, and propose and carry out an appropriate analysis to answer the research question.</p></li>
-<li><p>Explain the terms/components of a given statistical model, and connect those terms to the research question at hand.</p></li>
-<li><p>Check basic assumptions of various (simple) analysis methods and justify the use of the method.</p></li>
-<li><p>Apply existing functions and point-and-click software for implementing basic data analyses.</p></li>
-<li><p>Use tactile simulation to carry out a simple resampling procedure.</p></li>
-<li><p>Identify the steps and perform the calculations required for routine statistical procedures to address a given problem.</p></li>
-<li><p>Calculate simple analyses (t-test, chi-squared test for proportions) by hand, to verify the validity of the computational algorithm.</p></li>
-<li><p>Recognize when computational results do not make sense in the context of the problem.</p></li>
-</ul>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -584,11 +562,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./Section 1 Philosophy.html" class="pagination-link" aria-label="Philosophy of Statistical Inference (Chapters 11-14)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Philosophy of Statistical Inference (Chapters 11-14)</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Section 1 Philosophy.html" class="pagination-link" aria-label="Philosophy of Statistical Inference (Chapters 11-14)">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Philosophy of Statistical Inference (Chapters 11-14)</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
