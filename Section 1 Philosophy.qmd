@@ -377,7 +377,7 @@ What are the requirements here?
     \
     \
 
-**Normal Distribution**: Nothing followings it exactly--it's a mathematical construct. But, a lot of things follow it approximately, either:
+**Normal Distribution**: Nothing follows it exactly--it's a mathematical construct. But, a lot of things follow it approximately, either:
 
 -   naturally:
 

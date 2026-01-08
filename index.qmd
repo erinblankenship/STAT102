@@ -2,25 +2,25 @@
 
 STAT 102 is an introduction to formal statistical inference. We will carry out inference using both simulation-based approaches and classical, theory-based methods. By the end of the course, you will:
 
-- Read an example where the research question is explicitly stated, and then translate what’s stated into a statistical statement involving parameters or other simple distributional characteristics. 
+-   Read an example where the research question is explicitly stated, and then translate what’s stated into a statistical statement involving parameters or other simple distributional characteristics.
 
-- Identify whether the ideal data collection strategy would involve random assignment, random sampling, or both and explain why. 
+-   Identify whether the ideal data collection strategy would involve random assignment, random sampling, or both and explain why.
 
-- Work with an example where the research question is explicitly stated, along with an existing data set, and propose and carry out an appropriate analysis to answer the research question. 
+-   Work with an example where the research question is explicitly stated, along with an existing data set, and propose and carry out an appropriate analysis to answer the research question.
 
-- Explain the terms/components of a given statistical model, and connect those terms to the research question at hand. 
+-   Explain the terms/components of a given statistical model, and connect those terms to the research question at hand.
 
-- Check basic assumptions of various (simple) analysis methods and justify the use of the method. 
+-   Check basic assumptions of various (simple) analysis methods and justify the use of the method.
 
-- Apply existing functions and point-and-click software for implementing basic data analyses. 
+-   Apply existing functions and point-and-click software for implementing basic data analyses.
 
-- Use tactile simulation to carry out a simple resampling procedure. 
+-   Use tactile simulation to carry out a simple resampling procedure.
 
-- Identify the steps and perform the calculations required for routine statistical procedures to address a given problem. 
+-   Identify the steps and perform the calculations required for routine statistical procedures to address a given problem.
 
-- Calculate simple analyses (t-test, chi-squared test for proportions) by hand, to verify the validity of the computational algorithm. 
+-   Calculate simple analyses (t-test, chi-squared test for proportions) by hand, to verify the validity of the computational algorithm.
 
-- Recognize when computational results do not make sense in the context of the problem. 
+-   Recognize when computational results do not make sense in the context of the problem.
 
 ```{r}
 #| eval: true
