@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -33,14 +68,15 @@ ul.task-list li input[type="checkbox"] {
 <link href="./Section 1 Philosophy.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ffd282cb318059e0bcb130885a47f5dc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d9ea66fcd6c317012447f26e9c021348.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -69,6 +105,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -94,7 +159,9 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Stat 102 Notes</a> 
         <div class="sidebar-tools-main">
@@ -132,8 +199,23 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#inference-for-a-single-proportion-chapter-16" id="toc-inference-for-a-single-proportion-chapter-16" class="nav-link active" data-scroll-target="#inference-for-a-single-proportion-chapter-16"><span class="header-section-number">2.1</span> Inference for a Single Proportion (Chapter 16)</a>
+  <ul class="collapse">
+  <li><a href="#bootstrap-tests-for-one-proportion" id="toc-bootstrap-tests-for-one-proportion" class="nav-link" data-scroll-target="#bootstrap-tests-for-one-proportion"><span class="header-section-number">2.1.1</span> Bootstrap Tests for One Proportion</a></li>
+  <li><a href="#bootstrap-confidence-intervals-for-one-proportion" id="toc-bootstrap-confidence-intervals-for-one-proportion" class="nav-link" data-scroll-target="#bootstrap-confidence-intervals-for-one-proportion"><span class="header-section-number">2.1.2</span> Bootstrap Confidence Intervals for One Proportion</a></li>
+  <li><a href="#mathematical-model-for-a-proportion" id="toc-mathematical-model-for-a-proportion" class="nav-link" data-scroll-target="#mathematical-model-for-a-proportion"><span class="header-section-number">2.1.3</span> Mathematical Model for a Proportion</a></li>
+  </ul></li>
+  <li><a href="#inference-for-a-comparing-two-proportions-chapter-17" id="toc-inference-for-a-comparing-two-proportions-chapter-17" class="nav-link" data-scroll-target="#inference-for-a-comparing-two-proportions-chapter-17"><span class="header-section-number">2.2</span> Inference for a Comparing Two Proportions (Chapter 17)</a>
+  <ul class="collapse">
+  <li><a href="#randomization-tests-for-the-difference-in-proportions" id="toc-randomization-tests-for-the-difference-in-proportions" class="nav-link" data-scroll-target="#randomization-tests-for-the-difference-in-proportions"><span class="header-section-number">2.2.1</span> Randomization tests for the difference in proportions</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -157,8 +239,527 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>So far, we’ve discussed randomization, bootstrap, and mathematical models as methods to approximate/describe a sampling distribution and quantify variability. Now, we turn to how these three methods can be used to answer research questions for different kinds of data. The appropriate method will depend on both the type of data and the research question of interest.</p>
+<p>During our class, we’ll discuss two types of data: <strong>categorical</strong> and <strong>quantitative</strong>. Categorical data arise when the responses are categories. If you think about what is being measured on each unit in the sample, and could imagine checking a box to record the response, the data are categorical. For example:</p>
+<p><br>
+<br>
+</p>
+<p>We also have to consider the research question. The research question of interest will drive answers to the following:</p>
+<ol type="1">
+<li>Is a single variable being measured on each unit in the sample, or are two (or more) variables being recorded?</li>
+</ol>
+<p><br>
+<br>
+<br>
+</p>
+<ol start="2" type="1">
+<li>If two or more variables are being recorded for each unit in the sample, can one be considered the <strong>response</strong> variable and the other(s) be considered <strong>explanatory</strong>?</li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ol start="3" type="1">
+<li>If a variable is categorical, does it have two possible outcomes (like yes/no) or more than two possible outcomes?</li>
+</ol>
+<div style="page-break-after: always;"></div>
+<ol start="4" type="1">
+<li>Is the research question focused around finding the answer to a yes/no question (like “Does a new teaching method improve student test scores?”) or around estimating a value (like “By how much do student test scores change if a new teaching method is introduced?”)?</li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<ol start="5" type="1">
+<li>Were the data collected obtained using random sampling, random assignment, both, or neither? (this is not typically driven by the research question, but can impact our analysis method and will <strong>definitely</strong> impact the conclusions we can draw.)</li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The answers to these questions will help us determine which method is most appropriate, as well as the specific analysis tool to implement that method. In this unit, we’re going to focus on categorical variables. We’re going to start with a single categorical variable measured on each unit in the sample, where that categorical variable has only two possible outcomes. From there we’ll move to two categorical variables measured on each unit (one explanatory, one response), again with only two possible outcomes for each. Finally, we’ll explore categorical variables with more than two possible outcomes.</p>
+<div style="page-break-after: always;"></div>
+<section id="inference-for-a-single-proportion-chapter-16" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="inference-for-a-single-proportion-chapter-16"><span class="header-section-number">2.1</span> Inference for a Single Proportion (Chapter 16)</h2>
+<p>Our first scenario involves a single categorical variable measured on each unit in the sample, with only two possible outcomes.</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<section id="bootstrap-tests-for-one-proportion" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="bootstrap-tests-for-one-proportion"><span class="header-section-number">2.1.1</span> Bootstrap Tests for One Proportion</h3>
+<p>When we discussed bootstrapping earlier, we were sampling (with replacement) from our sample data, because we wanted to understand the variability inherent to our statistic, <span class="math inline">\(\hat p\)</span>, assuming our sample is representative of all samples of the same size that could be drawn from the population. The goal of hypothesis testing is different: we want to understand the sampling distribution of <span class="math inline">\(\hat p\)</span> under the assumption</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>So, we need to repeatedly sample from a population with <span class="math inline">\(p=p_0\)</span>. We can do this by simulating data sets of the same size as original sample, assuming that <span class="math inline">\(p=p_0\)</span>. This is called a <strong>parametric bootstrap</strong>, because we are making an assumption about the value of the underlying parameter <span class="math inline">\(p\)</span> and we are assuming a particular distribution to generate our simulated data sets. From each simulated data set, we could calculate the resulting <span class="math inline">\(\hat p_{\hbox{\tiny{sim}}}\)</span>. Many simulated data sets will give us a good approximation for the distribution of <span class="math inline">\(\hat p\)</span> under our assumptions.</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: Back to the babies picking the good guy or bad guy. We want to know if babies are more likely to pick the good guy puppet.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Under H<span class="math inline">\(_0\)</span>, 50% of babies will pick the good guy. We’ll assume this is true for all babies that could be tested. We’ll simulate 16 babies undergoing this test to get a sample proportion from the null distribution.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s see how this works in R. We’ll start by setting up the original data, so we can calculate the test statistic.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_baby<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">14</span>),<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">2</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>obs_prop<span class="ot">&lt;-</span><span class="fu">mean</span>(data_baby)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>obs_prop</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.875</code></pre>
+</div>
+</div>
+<p>Next, we’ll set up the null model with 50% successes and 50% failures:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>para_boot<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">8</span>),<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">8</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>para_boot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0</code></pre>
+</div>
+</div>
+<p>Now, we’ll repeatedly sample from the null distribution, and collect the resulting <span class="math inline">\(\hat p_{pb}\)</span> from each sample.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>numsim<span class="ot">&lt;-</span><span class="dv">100</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>boot.sample<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">sim=</span><span class="dv">1</span><span class="sc">:</span>numsim,<span class="at">stat=</span><span class="cn">NA</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.sample)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sim stat
+1   1   NA
+2   2   NA
+3   3   NA
+4   4   NA
+5   5   NA
+6   6   NA</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numsim){</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  boot.sample<span class="sc">$</span>stat[i]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">sample</span>(para_boot,<span class="at">size=</span><span class="dv">16</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.sample)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sim   stat
+1   1 0.1875
+2   2 0.4375
+3   3 0.4375
+4   4 0.5625
+5   5 0.5625
+6   6 0.3750</code></pre>
+</div>
+</div>
+<p>We can plot these <span class="math inline">\(\hat p_{pb}\)</span>, and see how unusual our observed test statistic is.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.sample, <span class="fu">aes</span>(stat)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>boot.hist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-2-Proportions_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We’ve got a plot, but how do we know exactly how many/what proportion of <span class="math inline">\(\hat p_{pb}\)</span> were greater than our observed test statistic, <span class="math inline">\(\hat p = 0.875\)</span>?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>count<span class="ot">&lt;-</span>(boot.sample<span class="sc">$</span>stat <span class="sc">&gt;=</span> obs_prop)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(count)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(count)<span class="sc">/</span>numsim</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>So, we have an estimated p-value of</p>
+<p><br>
+</p>
+<p>What if we want to change the number of simulated data sets? Let’s try 1000. This gives an estimated p-value of</p>
+<p><br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Why is this an estimated p-value?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Why does this histogram not look bell-shaped?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Try Problem 5 in Chapter 16, and see if you can modify the Babies R code to re-create the histogram provided in the book. It might help to try the applet first and see what has to change there.</p>
+<p><br>
+<strong>Why Bootstrap?</strong></p>
+<ul>
+<li><p>Works for any sample size!</p></li>
+<li><p>Intuitive way to explain what the p-value is actually measuring.</p></li>
+</ul>
+</section>
+<section id="bootstrap-confidence-intervals-for-one-proportion" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="bootstrap-confidence-intervals-for-one-proportion"><span class="header-section-number">2.1.2</span> Bootstrap Confidence Intervals for One Proportion</h3>
+<p>We’ve already done these! Recall that with a confidence interval, we’re not assuming the null hypothesis is true. Rather, our goal with the bootstrap is to characterize the variability of our statistic <span class="math inline">\(\hat p\)</span>.</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="mathematical-model-for-a-proportion" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="mathematical-model-for-a-proportion"><span class="header-section-number">2.1.3</span> Mathematical Model for a Proportion</h3>
+<p>Sometimes, the sampling distribution of <span class="math inline">\(\hat p\)</span> can be well-approximated using a normal distribution. The conditions which must be met are:</p>
+<ul>
+<li><p><br>
+</p></li>
+<li></li>
+</ul>
+<p><br>
+<br>
+<br>
+</p>
+<p>If these conditions are met, then</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>[Note: This result is just another way of stating the Central Limit Theorem when dealing with proportions! The success/failure condition is playing the role of the “sample is large enough” requirement of the CLT.]</p>
+<p>Let’s think more about the standard error of <span class="math inline">\(\hat p\)</span>. Remember the <strong>standard error</strong> is</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>But this presents a problem. We don’t know <span class="math inline">\(p\)</span> (if we did, we wouldn’t be doing tests or confidence intervals)!</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>How is this going to play out in hypothesis tests?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>: Look at Problem 3 in Chapter 16. The journalist claims more than 1/5 adults living in Seattle support defunding the police. Is this true?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>To find the p-value, we can use R.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openintro)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'openintro' was built under R version 4.4.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: airports</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: cherryblossom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: usdata</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">normTail</span>(<span class="at">m=</span><span class="dv">0</span>,<span class="at">s=</span><span class="dv">1</span>,<span class="at">U=</span><span class="fl">2.79</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-2-Proportions_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pvalue<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="fl">2.79</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>pvalue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.002635402</code></pre>
+</div>
+</div>
+<p>Do you expect the p-value from the parametric bootstrap would be similar? Why or why not?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s see.</p>
+<div style="page-break-after: always;"></div>
+<p>How is this going to play out in confidence intervals?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>: Back to Chapter 16, problem 3. The journalist found that 159/650 Seattle residents support proposals to defund the police.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We can change the confidence level by changing <span class="math inline">\(z^*\)</span>, and using the <code>qnorm</code> function.</p>
+<ul>
+<li>90% confidence</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.05</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.644854</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<p><strong>Back to the bootstrap confidence interval…</strong></p>
+<p>So far, we’ve seen <strong>bootstrap percentile confidence intervals</strong>. We calculated these directly from the bootstrapped <span class="math inline">\(\hat p_{\hbox{\tiny{boot}}}\)</span>. If we want a 90% confidence interval, we can find the 5<span class="math inline">\(^{th}\)</span> and 95<span class="math inline">\(^{th}\)</span> percentile values of the <span class="math inline">\(\hat p_{\hbox{\tiny{boot}}}\)</span> values.</p>
+<p>We can also use the variability of the <span class="math inline">\(\hat p_{\hbox{\tiny{boot}}}\)</span> to calculate an estimate of the standard error of <span class="math inline">\(\hat p\)</span>, and then calculate the interval using the mathematical model approach. This is a <strong>bootstrap SE confidence interval</strong>.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>This is a rough approximation, using the 68-95-99.7 Rule which says that 95% of the observed differences should be no farther than 2 SE from the true parameter (<span class="math inline">\(p\)</span>). To do this, the bootstrap histogram must be roughly symmetric and bell-shaped. So, it works for Chapter 16, problem 3; it doesn’t work with the babies.</p>
+<p><br>
+</p>
+<p><strong>Why Z-Test/Z Confidence Intervals?</strong></p>
+<ul>
+<li>In many cases, works as well as simulation methods</li>
+<li>Easy to calculate without technology/can do “back of the envelope” analyses</li>
+<li>Z-scores and “estimate <span class="math inline">\(\pm\)</span> margin of error” are easily interpretable</li>
+<li>Classical methods, used by scientists across disciplines</li>
+</ul>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="inference-for-a-comparing-two-proportions-chapter-17" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="inference-for-a-comparing-two-proportions-chapter-17"><span class="header-section-number">2.2</span> Inference for a Comparing Two Proportions (Chapter 17)</h2>
+<p>We now move on to consider situations in which two categorical variables are measured on each unit in the sample, and each variable has two possible values. In cases like these, typically one variable is considered the response and one variable is considered explanatory. The explanatory variable may be randomly assigned (like whether or not a subject swam with dolphins) or it may be merely observed (like smoking status). The two possible values of the explanatory variable lead to two groups, and we’re interested in comparing the population proportions that arise from these two groups. We’ll focus on the function of parameters <span class="math inline">\(p_1 - p_2\)</span>. The natural estimate of this is <span class="math inline">\(\hat p_1 - \hat p_2\)</span>: the difference in the sample proportions. We’ll be constructing hypothesis tests to compare <span class="math inline">\(p_1\)</span> to <span class="math inline">\(p_2\)</span> and finding confidence intervals to estimate <span class="math inline">\(p_1 - p_2\)</span>.</p>
+<section id="randomization-tests-for-the-difference-in-proportions" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="randomization-tests-for-the-difference-in-proportions"><span class="header-section-number">2.2.1</span> Randomization tests for the difference in proportions</h3>
+<p><strong>Example</strong>: Researchers are interested whether electrical brain stimulation will help with problem solving tasks. 40 volunteers were all trained to solve problems in a particular way. Half of the volunteers were randomly assigned to receive electrical stimulation and the other half received a sham stimulation (placebo). All volunteers were then presented with an unfamiliar problem and asked to solve it. The researchers are interested in testing whether the proportion able to solve the problem following electrical stimulation is greater than the proportion able to solve the problem without electrical stimulation.</p>
+<p>There are a couple of different ways we could state the hypotheses of interest:</p>
+<ul>
+<li>H<span class="math inline">\(_0:\)</span></li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li>H<span class="math inline">\(_a:\)</span></li>
+</ul>
+<p><br>
+</p>
+<p>Recall that hypothesis tests work by assessing how unusual our observed data are, if the null hypothesis is really true. A very unusual result implies that observed data are not likely to have occurred under the null hypothesis. Randomization tests allow us to assess that unusualness by estimating the null distribution–a simulated distribution of what we could expect the distribution of <span class="math inline">\(\hat p_1 - \hat p_2\)</span> to look like if H<span class="math inline">\(_0\)</span> is true. We assume H<span class="math inline">\(_0\)</span> is true by recreating the randomization that occurred in the experiment.</p>
+<p>Here are the data:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Solved</th>
+<th>Not Solved</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sham</td>
+<td></td>
+<td></td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td>Electrical</td>
+<td></td>
+<td></td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td></td>
+<td></td>
+<td>40</td>
+</tr>
+</tbody>
+</table>
+<p>To demonstrate what the randomization test is doing, we need 40 cards. Why 40?</p>
+<p>Of these cards, are red and are black. What do these represent?</p>
+<p>We’ll shuffle, and deal into two stacks.</p>
+<p>A randomization test is going through this shuffling/dealing over and over again, find the difference in proportions for each simulation.</p>
+<p>Let’s look at this in the .</p>
+<p>What do you notice about the null distribution? How unusual is the observed <span class="math inline">\(\hat p_1 - \hat p_2\)</span>?</p>
+<p> Try 17.2. Set up the hypotheses and describe how a randomization test would work.</p>
+<p>Let’s do this in R!</p>
+<div style="page-break-after: always;"></div>
+<p></p>
+<p>As we saw with a single proportion, bootstrapping will allow us to estimate the variability of <span class="math inline">\(\hat p_1 - \hat p_2\)</span> without assuming the null hypothesis is true. With a single proportion, we drew repeated samples (with replacement) from our sample data, and from each bootstrap sample calculated <span class="math inline">\(\hat p_{\hbox{\tiny{boot}}}\)</span>. The distribution of the <span class="math inline">\(\hat p_{\hbox{\tiny{boot}}}\)</span> provided an estimation of the sampling distribution of <span class="math inline">\(\hat p\)</span>.</p>
+<p>Now, with two samples, our observed statistic of interest is</p>
+<p>Let’s go to R, and see how this works with the electrical stimulation example.</p>
+<p>Now, by re-using this example, we are ignoring (maybe) the research question. But, we’re doing both a randomization test and confidence interval so that we can compare the resulting sampling distributions of <span class="math inline">\(\hat p_1 - \hat p_2\)</span>. What is different? What’s the same?</p>
+<p>Bootstrap percentile confidence interval:</p>
+<p>Bootstrap SE confidence interval:</p>
+<div style="page-break-after: always;"></div>
+<p></p>
+<p>For a single proportion, we needed two conditions to be met to ensure the sampling distribution of <span class="math inline">\(\hat p\)</span> is approximately normal:</p>
+<p>If these conditions are met, then</p>
+<p>We must meet similar conditions to ensure the sampling distribution of <span class="math inline">\(\hat p_1 - \hat p_2\)</span> is approximately normal:</p>
+<p>If these conditions are met, then</p>
+<p>Like before we don’t know <span class="math inline">\(p_1\)</span> and <span class="math inline">\(p_2\)</span>, so we’ll use our best guess. And, like before, our best guess will change depending on whether we’re constructing a confidence interval or carrying out a hypothesis test.</p>
+<div style="page-break-after: always;"></div>
+<p>How is this going to play out in a hypothesis test?</p>
+<p> (Aside: why can’t we do the electrical stimuation example again?). A 2021 Gallup poll surveyed 3941 students pursuing a bachelor’s degree and 2064 students pursuing an associate’s degree. The survey found that 51% of the bachelor’s students (2010) and 44% of the associate’s students (908) said that COVID-19 will negatively impact their ability to complete the degree. We want to decide whether the proportion of bachelor’s students who believe the pandemic will negatively impact degree completion is different from the proportion of associate’s students who believe they will be negatively affected. Let <span class="math inline">\(p_B\)</span> be the proportion of bachelor’s students who believe they’ll be negatively affected and let <span class="math inline">\(p_A\)</span> be the proportion of associate’s students who believe they’ll be negatively affected.</p>
+<p>To visualize the p-value: </p>
+<p>To get the p-value: </p>
+<div style="page-break-after: always;"></div>
+<p>How is this going to play out in a confidence interval?</p>
+<p> A Kaiser Family Foundation poll for US adults in 2019 found that 79% of Democrats, 55% of Independents, and 24% of Republicans supported a generic ``National Health Plan.’’ There were 347 Democrats, 298 Republicans, and 617 Independents surveyed (Foundation, 2019). We want to estimate the difference between the proportion of Democrats and Independents who support a National Health Plan.</p>
+<div style="page-break-after: always;"></div>
+<p></p>
+<p>There are three main things that impact the width of a confidence interval:</p>
+<p>No matter what method we use to calculate the confidence interval, the is a statement about the long run percentage of confidence intervals that would succeed in capturing the true value of the parameter. What does this mean? </p>
+<p></p>
+<p>While we should be matching analysis method to the research question, there is a nice relationship between hypothesis tests and confidence intervals. Recall that confidence intervals give a set of plausible values for the unknown parameter.</p>
+<div style="page-break-after: always;"></div>
+<p></p>
+<p>So far, we’ve considered categorical variables with only two possible outcomes: success and failure. Many categorical variables have more than two possible outcomes, so we can’t easily define the proportion of ``successes.’’ Instead, we’ll summarize categorical data with more than two levels using two-way tables. In this class, we’re still going to restrict ourselves to only two variables (often explanatory and response, but not necessarily), both with two or more levels. However, there are certainly statistical methods for more complicated situations.</p>
+<p>Typically, research questions focus on how the proportions of the possible outcomes in the response variable change (or don’t) across the levels of the explanatory variable. However, we can also consider questions about a single variable with more than two outcomes (are the possible outcomes all equally likely? do the possible outcomes follow a particular pattern?) or just whether the two categorical variables are independent or dependent without assigning an explanatory/response relationship. Due to the structure of the variable(s), there really isn’t a population parameter of interest. We can’t (usually) make a function of proportion of successes that makes sense to estimate, like we can with <span class="math inline">\(p_1 - p_2\)</span>. That means we’ll be considering only tests, not confidence intervals. We’ll focus on the randomization test and the mathematical model approach. Both methods start with the same set-up.</p>
+<p> When surveys are administered, we hope that the respondents give accurate answers. Does the mode of survey delivery affect this? Schober et al (2015) investigated this question. They had 147 people who agreed to be interviewed on an iPhone, and they were randomly assigned to one of three interview modes: human voice, automated voice, text. One question asked was whether they exercise less than once per week during a typical week (a yes is mostly likely considered socially undesirable). The explanatory variable here is survey mode and the response is whether or not the respondent said yes. Here are the data:</p>
+<p>Based on these data, it looks like the answer to the question does change depending on survey mode, with respondents more likely to say yes via text. However, we don’t know if this result could have happened by chance.</p>
+<div style="page-break-after: always;"></div>
+<p></p>
+<p>We don’t expect the proportion of `yes’ to be exactly the same across all survey modes, but we want to know if these vary enough to convince us that survey mode and answer are not independent. To do this, we need to find for each cell in the table.</p>
+<div style="page-break-after: always;"></div>
+<p>So now the key question…are the observed and expected cell counts different enough?</p>
+<p>New test statistic!</p>
+<p>In our example:</p>
+<p>To see if this is `big’ we need the sampling distribution of our new test statistic. We can estimate that sampling distribution using either a randomization test or the mathematical model approach.</p>
+<div style="page-break-after: always;"></div>
+<p></p>
+<p>The randomization test for a two-way table works just like it does with two samples. We’ll randomize by shuffling and dealing/assigning the 75 yes answers and 402 no answers to the three survey modes at random.</p>
+<p></p>
+<p>Conclusion:</p>
+<div style="page-break-after: always;"></div>
+<p></p>
+<p>Based on what we just observed in the applet, the normal distribution is not going to be a good approximation to sampling distribution. It turns out this test statistic follows a different mathematical distribution, the (proof: see STAT 262). The normal distribution has two parameters that determine its shape: the mean (<span class="math inline">\(\mu\)</span>) and standard deviation (<span class="math inline">\(\sigma\)</span>). The shape of the chi-square distribution is determined by a parameter called the . Figure 18.2 on page 339 shows how the shape of the distribution changes depending on the df.</p>
+<p>So how can we use this?</p>
+<p>Again, we have conditions that need to be met for the mathematical model to be a good approximation:</p>
+<p> Let’s go back and do the survey mode example using the mathematical model approach. First, we’ll need to check the conditions are met:</p>
+<p>To find the p-value, we can use the R function . Like it gives area to the left. So,</p>
+<p>We can also do this directly in R.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -212,13 +813,14 @@ ul.task-list li input[type="checkbox"] {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
