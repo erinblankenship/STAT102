@@ -287,8 +287,11 @@ How is this going to play out in hypothesis tests?
 To find the p-value, we can use R.
 
 ```{r}
+#| include: false
 library(openintro)
+```
 
+```{r}
 normTail(m=0,s=1,U=2.79)
 
 pvalue<-1-pnorm(2.79,mean=0,sd=1)
@@ -419,285 +422,589 @@ Here are the data:
 
 To demonstrate what the randomization test is doing, we need 40 cards. Why 40?
 
-\vspace{20mm}
+\
 
-Of these cards, \underline{\hspace{20mm}} are red and \underline{\hspace{20mm}} are black. What do these represent?
+Of these cards, how many should be red and how many should be black? What do these represent?
 
-\vspace{30mm}
+\
+\
 
 We'll shuffle, and deal into two stacks.
 
-\vspace{30mm}
+\
+\
+\
 
 A randomization test is going through this shuffling/dealing over and over again, find the difference in proportions for each simulation.
 
-Let's look at this in the \underline{\href{https://www.isi-stats.com/isi2nd/ISIapplets2021.html}{applet}}.
+Let's look at this in the [applets](https://www.isi-stats.com/isi2nd/ISIapplets2021.html).
 
 What do you notice about the null distribution? How unusual is the observed $\hat p_1 - \hat p_2$?
 
-\vspace{40mm}
+\
+\
+\
+\
+\
+\
+\
 
-\textbf{Example:} Try 17.2. Set up the hypotheses and describe how a randomization test would work.
+**Example**: Try Problem 2 in Chapter 17. Set up the hypotheses and describe how a randomization test would work.
 
-\begin{itemize}
-    \item How many cards are needed?
-    \item How many red? How many black?
-    \item How many should be dealt into each stack?
-    \item What would you calculate from each shuffle/deal?
-\end{itemize}
+-   How many cards are needed?
+-   How many red? How many black?
+-   How many should be dealt into each stack?
+-   What would you calculate from each shuffle/deal?
 
 Let's do this in R!
 
 \newpage
 
-\textbf{Bootstrap confidence interval for the difference in proportions}
+First, we'll need to set up the data. This is honestly the hardest part.
+
+```{r}
+VM<-data.frame(Treatment="Vaccine",Response="Malaria",obs=1:89)
+head(VM)
+VN<-data.frame(Treatment="Vaccine",Response="NoMal",obs=1:203)
+CM<-data.frame(Treatment="Control",Response="Malaria",obs=1:106)
+CN<-data.frame(Treatment="Control",Response="NoMal",obs=1:41)
+malariadf<-rbind(VM,VN,CM,CN)
+head(malariadf)
+```
+
+Next, we'll calculate the observed difference in the proportion of children who contracted malaria between those who received the vaccine and those who received the control. To use the `diffmean` function, we need to load the `mosaic` package.
+
+```{r}
+#| include: false
+library(mosaic)
+```
+
+```{r}
+observed<-diffmean(Response == "Malaria" ~ Treatment, data=malariadf)
+observed
+```
+
+Now, we need to shuffle the vaccine/control treatment labels many times and calculate the difference in proportions of malaria for each shuffle. To do this, we'll need the `mosaic` library but it's already been loaded.
+
+```{r}
+malaria.null<-do(1000)*diffmean(Response == "Malaria" ~ shuffle(Treatment),data=malariadf)
+head(malaria.null)
+```
+
+We'll plot the null distribution, and to do this we'll need the `ggplot2` library.
+
+```{r}
+library(ggplot2)
+
+ggplot(data=malaria.null) + geom_histogram(mapping=aes(x=diffmean)) + 
+  xlab("Difference in proportions") +
+  geom_vline(xintercept = observed, linetype=2, color="blue")
+```
+
+Finally, we can calculate the p-value by observing how unusual the observed difference in the proportions of malaria is under the null hypothesis.
+
+```{r}
+prop(~diffmean <= observed, data=malaria.null)
+```
+
+Why are we considering less than or equal to be more extreme in this example?
+
+\
+\
+\
+
+### Bootstrap confidence interval for the difference in proportions
 
 As we saw with a single proportion, bootstrapping will allow us to estimate the variability of $\hat p_1 - \hat p_2$ without assuming the null hypothesis is true. With a single proportion, we drew repeated samples (with replacement) from our sample data, and from each bootstrap sample calculated $\hat p_{\hbox{\tiny{boot}}}$. The distribution of the $\hat p_{\hbox{\tiny{boot}}}$ provided an estimation of the sampling distribution of $\hat p$.
 
 Now, with two samples, our observed statistic of interest is
 
-\vspace{60mm}
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
 
-Let's go to R, and see how this works with the electrical stimulation example.
+Let's go to R, and see how this works with the electrical stimulation example. We'll start by setting up the data and calculating the observed difference in proportion of solved problems between electrical stimulation and control.
 
-\vspace{30mm}
+```{r}
+#original Sample 1 data (Electrical), creating a data set with 10 S (1) and 10 F (0)#
+electrical<-c(rep(1,10),rep(0,10))
 
-Now, by re-using this example, we are ignoring (maybe) the research question. But, we're doing both a randomization test and confidence interval so that we can compare the resulting sampling distributions of $\hat p_1 - \hat p_2$. What is different? What's the same?
+#original Sample 2 data (Control), creating a data set with 6 S (1) and 14 F (0)#
+control<-c(rep(1,6),rep(0,14))
 
-\vspace{30mm}
+#Calculate and print the observed statistic, p-hat_E - p-hat_C#
+obs_stat<-mean(electrical)-mean(control)
+obs_stat
+```
 
-Bootstrap percentile confidence interval:
+Now, we'll repeatedly sample with replacement separately from each group. First we need to set up a place to store our summaries from each resample.
 
-\vspace{20mm}
+```{r}
+#Set up an empty data set with 4 columns: sim number, p_hat_boot_E, p_hat_boot_C, diff#
 
-Bootstrap SE confidence interval:
+boot.samples<-data.frame(sim=1:1000,stat_E=NA,stat_C=NA, diff=NA)
+
+head(boot.samples)
+
+#For each row in the data set, draw a bootstrap sample from Sample 1 and Sample 2 and find#
+# p_hat_boot_E and p_hat_boot_C #
+
+for(i in 1:1000){
+  boot.samples$stat_E[i]<-mean(sample(electrical,size=20,replace=TRUE))
+  boot.samples$stat_C[i]<-mean(sample(control,size=20,replace=TRUE))
+}
+
+head(boot.samples)
+
+#Now find the differences#
+
+boot.samples$diff<-boot.samples$stat_E - boot.samples$stat_C
+
+head(boot.samples)
+```
+
+Now let's plot the bootstrap distribution.
+
+```{r}
+boot.hist<-ggplot(boot.samples, aes(diff)) + geom_histogram(binwidth=0.05)
+
+boot.hist
+```
+
+Notice where this distribution is centered!
+
+\
 
 \newpage
 
-\textbf{Mathematical model for the difference in proportions}
+We are re-using this example, since we've already carried out the randomization test in the applet. By doing so we are ignoring (maybe) the research question. But, we're doing both a randomization test and confidence interval so that we can compare the resulting sampling distributions of $\hat p_1 - \hat p_2$. What is different? What's the same?
+
+\
+\
+\
+\
+\
+
+Now that we have the bootstrap distribution, we can find the bootstrap percentile confidence interval. Let's do a 90% interval.
+
+```{r}
+#start by ranking the bootstrap differences from smallest to largest #
+rankdiff<-sort(boot.samples$diff)
+
+#Print out just the first few#
+head(rankdiff)
+
+#Lower endpoint is the 5th percentile (90% confidence)#
+lower<-rankdiff[50]
+lower
+
+#Upper endpoint is the 950th percentile (90% confidence)#
+upper<-rankdiff[950]
+upper
+```
+
+\
+\
+\
+
+\newpage
+
+Because our bootstrap distribution is relatively bell-shaped, we could also a calculate a rough 95% boostrap SE confidence interval.
+
+```{r}
+SE<-sd(rankdiff)
+SE
+```
+
+\
+\
+\
+\
+\
+
+### Mathematical model for the difference in proportions
 
 For a single proportion, we needed two conditions to be met to ensure the sampling distribution of $\hat p$ is approximately normal:
 
-\begin{itemize}
-    \item 
-    
-    
-    \item 
-    
-    
-\end{itemize}
+-   \
 
-\vspace{15mm}
+-   \
+    \
 
 If these conditions are met, then
 
-\vspace{35mm}
+\
+\
+\
 
 We must meet similar conditions to ensure the sampling distribution of $\hat p_1 - \hat p_2$ is approximately normal:
 
-\begin{itemize}
-    \item 
-    
-    
-    \item 
-    
-    
-\end{itemize}
+-   \
 
-\vspace{15mm}
+-   \
+    \
 
 If these conditions are met, then
 
-\vspace{35mm}
+\
+\
+\
+\
+\
+\
+\
+\
+\
 
 Like before we don't know $p_1$ and $p_2$, so we'll use our best guess. And, like before, our best guess will change depending on whether we're constructing a confidence interval or carrying out a hypothesis test.
 
-\newpage
-
 How is this going to play out in a hypothesis test?
 
-\vspace{60mm}
-
-\textbf{Example (17.5):} (Aside: why can't we do the electrical stimuation example again?). A 2021 Gallup poll surveyed 3941 students pursuing a bachelor's degree and 2064 students pursuing an associate's degree. The survey found that 51% of the bachelor's students (2010) and 44% of the associate's students (908) said that COVID-19 will negatively impact their ability to complete the degree. We want to decide whether the proportion of bachelor's students who believe the pandemic will negatively impact degree completion is different from the proportion of associate's students who believe they will be negatively affected. Let $p_B$ be the proportion of bachelor's students who believe they'll be negatively affected and let $p_A$ be the proportion of associate's students who believe they'll be negatively affected.
-
-\vfill
-
-To visualize the p-value: \texttt{normTail(m=0,s=1,L=-5.15, U=5.15)}
-
-To get the p-value: \texttt{pnorm(-5.15,mean=0,sd=1)+(1-pnorm(5.15,mean=0,sd=1))}
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
 
 \newpage
+
+**Example (17.5)**: (Aside: why can't we do the electrical stimuation example again?). A 2021 Gallup poll surveyed 3941 students pursuing a bachelor's degree and 2064 students pursuing an associate's degree. The survey found that 51% of the bachelor's students (2010) and 44% of the associate's students (908) said that COVID-19 will negatively impact their ability to complete the degree. We want to decide whether the proportion of bachelor's students who believe the pandemic will negatively impact degree completion is different from the proportion of associate's students who believe they will be negatively affected. Let $p_B$ be the proportion of bachelor's students who believe they'll be negatively affected and let $p_A$ be the proportion of associate's students who believe they'll be negatively affected.
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+To visualize the p-value:
+
+```{r}
+#| include: false
+library(openintro)
+```
+
+```{r}
+normTail(m=0,s=1,L=-5.15, U=5.15)
+```
+
+And to get the p-value:
+
+```{r}
+pnorm(-5.15,mean=0,sd=1)+(1-pnorm(5.15,mean=0,sd=1))
+```
+
+\
+\
+\
+\
+\
+\
 
 How is this going to play out in a confidence interval?
 
-\vspace{60mm}
-
-\textbf{Example(17.9):} A Kaiser Family Foundation poll for US adults in 2019 found that 79% of Democrats, 55% of Independents, and 24% of Republicans supported a generic \`\`National Health Plan.'' There were 347 Democrats, 298 Republicans, and 617 Independents surveyed (Foundation, 2019). We want to estimate the difference between the proportion of Democrats and Independents who support a National Health Plan.
+\
+\
+\
+\
+\
+\
 
 \newpage
 
-\textbf{What impacts the width of a confidence interval?}
+**Example(17.9)**: A Kaiser Family Foundation poll for US adults in 2019 found that 79% of Democrats, 55% of Independents, and 24% of Republicans supported a generic "National Health Plan." There were 347 Democrats, 298 Republicans, and 617 Independents surveyed (Foundation, 2019). We want to estimate the difference between the proportion of Democrats and Independents who support a National Health Plan.
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+**What impacts the width of a confidence interval?**
 
 There are three main things that impact the width of a confidence interval:
 
-\begin{itemize}
-    \item Confidence level
-    
-    \vspace{20mm}
-    
-    \item Sample size
-    
-    \vspace{20mm}
-    
-    \item Standard Error
-    
-    \vspace{20mm}
-    
-\end{itemize}
+-   Confidence level
 
-No matter what method we use to calculate the confidence interval, the \textbf{confidence level} is a statement about the long run percentage of confidence intervals that would succeed in capturing the true value of the parameter. What does this mean? \underline{\href{https://www.isi-stats.com/isi2nd/ISIapplets2021.html}{Applet}}
+\
 
-\vspace{20mm}
+-   Sample size
 
-\textbf{Hypothesis tests vs. Confidence Intervals}
+\
+
+-   Standard Error
+
+\
+
+No matter what method we use to calculate the confidence interval, the **confidence level** is a statement about the long run percentage of confidence intervals that would succeed in capturing the true value of the parameter. What does this mean? [Applet](https://www.isi-stats.com/isi2nd/ISIapplets2021.html)
+
+\
+
+**Hypothesis tests vs. Confidence Intervals**
 
 While we should be matching analysis method to the research question, there is a nice relationship between hypothesis tests and confidence intervals. Recall that confidence intervals give a set of plausible values for the unknown parameter.
 
-\newpage
+\
+\
+\
+\
+\
+\
+\
+\
+\
 
-\textbf{Inference for Two-Way Tables (Chapter 18)}
+## Inference for Two-Way Tables (Chapter 18)
 
-So far, we've considered categorical variables with only two possible outcomes: success and failure. Many categorical variables have more than two possible outcomes, so we can't easily define the proportion of \`\`successes.'' Instead, we'll summarize categorical data with more than two levels using two-way tables. In this class, we're still going to restrict ourselves to only two variables (often explanatory and response, but not necessarily), both with two or more levels. However, there are certainly statistical methods for more complicated situations.
+So far, we've considered categorical variables with only two possible outcomes: success and failure. Many categorical variables have more than two possible outcomes, so we can't easily define the proportion of "successes." Instead, we'll summarize categorical data with more than two levels using two-way tables. In this class, we're still going to restrict ourselves to only two variables (often explanatory and response, but not necessarily), both with two or more levels. However, there are certainly statistical methods for more complicated situations.
 
 Typically, research questions focus on how the proportions of the possible outcomes in the response variable change (or don't) across the levels of the explanatory variable. However, we can also consider questions about a single variable with more than two outcomes (are the possible outcomes all equally likely? do the possible outcomes follow a particular pattern?) or just whether the two categorical variables are independent or dependent without assigning an explanatory/response relationship. Due to the structure of the variable(s), there really isn't a population parameter of interest. We can't (usually) make a function of proportion of successes that makes sense to estimate, like we can with $p_1 - p_2$. That means we'll be considering only tests, not confidence intervals. We'll focus on the randomization test and the mathematical model approach. Both methods start with the same set-up.
 
-\textbf{Example:} When surveys are administered, we hope that the respondents give accurate answers. Does the mode of survey delivery affect this? Schober et al (2015) investigated this question. They had 147 people who agreed to be interviewed on an iPhone, and they were randomly assigned to one of three interview modes: human voice, automated voice, text. One question asked was whether they exercise less than once per week during a typical week (a yes is mostly likely considered socially undesirable). The explanatory variable here is survey mode and the response is whether or not the respondent said yes. Here are the data:
+\newpage
 
-\begin{center}
-    \begin{tabular}{c|c||ccc|c}
-        \multicolumn{2}{c}{} &  Text & Human voice & Automated voice & Total \\ \hline
-        & Yes & 34 & 21 & 20 & 75 \\
-        Exercise &   &   &  &   &   \\ 
-        & No & 124 & 139 & 139 & 402 \\ \hline
-        \multicolumn{2}{c}{Total} & 158 & 160 & 159 & 477   
-    \end{tabular}
-\end{center}
+**Example**: When surveys are administered, we hope that the respondents give accurate answers. Does the mode of survey delivery affect this? Schober et al (2015) investigated this question. They had 147 people who agreed to be interviewed on an iPhone, and they were randomly assigned to one of three interview modes: human voice, automated voice, text. One question asked was whether they exercise less than once per week during a typical week (a yes is mostly likely considered socially undesirable). The explanatory variable here is survey mode and the response is whether or not the respondent said yes. Here are the data:
+
+|              | Text | Human Voice | Automated Voice | Total |
+|--------------|------|-------------|-----------------|-------|
+| Exercise Yes | 34   | 21          | 30              | 75    |
+| Exercise No  | 124  | 139         | 139             | 402   |
+| Total        | 158  | 160         | 159             | 477   |
 
 Based on these data, it looks like the answer to the question does change depending on survey mode, with respondents more likely to say yes via text. However, we don't know if this result could have happened by chance.
 
-\newpage
+\
+\
+\
+\
+\
+\
+\
+\
 
-\textbf{Expected Counts}
+### Expected Counts
 
 We don't expect the proportion of \`yes' to be exactly the same across all survey modes, but we want to know if these vary enough to convince us that survey mode and answer are not independent. To do this, we need to find \textbf{expected counts} for each cell in the table.
 
-\vfill
+\newpage
 
-\begin{center}
-    \begin{tabular}{c|c||ccc|c}
-        \multicolumn{2}{c}{} &  Text & Human voice & Automated voice & Total \\ \hline
-        & Yes & 34 (\hspace{15mm})  & 21 (\hspace{15mm}) & 20(\hspace{15mm})  & 75 \\
-        Exercise &   &   &  &   &   \\ 
-        & No & 124 (\hspace{15mm}) & 139 (\hspace{15mm}) & 139 (\hspace{15mm}) & 402 \\ \hline
-        \multicolumn{2}{c}{Total} & 158 & 160 & 159 & 477   
-    \end{tabular}
-\end{center}
+Again, here are the observed data
+
+|              | Text | Human Voice | Automated Voice | Total |
+|--------------|:----:|:-----------:|:---------------:|:-----:|
+| Exercise Yes |  34  |     21      |       30        |  75   |
+| Exercise No  | 124  |     139     |       139       |  402  |
+| Total        | 158  |     160     |       159       |  477  |
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+|              | Text            | Human Voice     | Auto Voice      | Total |
+|--------------|-----------------|-----------------|-----------------|-------|
+| Exercise Yes | 34 (\_\_\_\_\_) | 21 (\_\_\_\_\_) | 30 (\_\_\_\_\_) | 75    |
+| Exercise No  | 124 (\_\_\_\_\_)             | 139 (\_\_\_\_\_)             | 139 (\_\_\_\_\_)             | 402   |
+| Total        | 158             | 160             | 159             | 477   |
+
+
 
 \newpage
 
 So now the key question...are the observed and expected cell counts different enough?
 
-\vspace{15mm}
+- Cell(1,1) obs - exp = 34 - 
+- Cell(1,2) obs - exp = 21 - 
+- Cell(1,3) obs - exp = 20 - 
+- Cell(2,1) obs - exp = 124 - 
+- Cell(2,2) obs - exp = 139 - 
+- Cell(2,3) obs - exp = 139 - 
 
-\begin{itemize}
-    \item Cell(1,1) obs - exp = 34 - 
-    \item Cell(1,2) obs - exp = 21 - 
-    \item Cell(1,3) obs - exp = 20 - 
-    \item Cell(2,1) obs - exp = 124 - 
-    \item Cell(2,2) obs - exp = 139 - 
-    \item Cell(2,3) obs - exp = 139 - 
-\end{itemize}
-
-\vspace{20mm}
+\
+\
+\
+\
 
 New test statistic!
 
-\vspace{20mm}
+\
+\
+\
+\
+\
 
 In our example:
 
-\begin{itemize}
-    \item Cell(1,1) (obs - exp)$^2$/exp = $(34 - 24.84)^2/(24.84) = 9.16^2/24.84 = 3.3778$
-    \item Cell(1,2) (obs - exp)$^2$/exp = $(21 - 25.16)^2/(25.16) = (-4.16)^2/25.16 = 0.6878$
-    \item Cell(1,3) (obs - exp)$^2$/exp = $(20 - 25)^2/(25) = (-5)^2/25 = 1$
-    \item Cell(2,1) (obs - exp)$^2$/exp = $(124 - 133.16)^2/(133.16) = (-9.16)^2/133.16 = 0.6301$
-    \item Cell(2,2) (obs - exp)$^2$/exp = $(139 - 134.84)^2/(134.84) = 4.16^2/134.84 = 0.1283$
-    \item Cell(2,3) (obs - exp)$^2$/exp = $(139 - 134)^2/(134) = 5^2/134 =0.3731 $
-\end{itemize}
+- Cell(1,1) (obs - exp)$^2$/exp = $(34 - 24.84)^2/(24.84) = 9.16^2/24.84 = 3.3778$
+- Cell(1,2) (obs - exp)$^2$/exp = $(21 - 25.16)^2/(25.16) = (-4.16)^2/25.16 = 0.6878$
+- Cell(1,3) (obs - exp)$^2$/exp = $(20 - 25)^2/(25) = (-5)^2/25 = 1$
+- Cell(2,1) (obs - exp)$^2$/exp = $(124 - 133.16)^2/(133.16) = (-9.16)^2/133.16 = 0.6301$
+- Cell(2,2) (obs - exp)$^2$/exp = $(139 - 134.84)^2/(134.84) = 4.16^2/134.84 = 0.1283$
+- Cell(2,3) (obs - exp)$^2$/exp = $(139 - 134)^2/(134) = 5^2/134 =0.3731$ 
 
-\vfill
+\
+\
 
-To see if this is \`big' we need the sampling distribution of our new test statistic. We can estimate that sampling distribution using either a randomization test or the mathematical model approach.
+To see if this is 'big' we need the sampling distribution of our new test statistic. We can estimate that sampling distribution using either a randomization test or the mathematical model approach.
 
 \newpage
 
-\textbf{Randomization Test}
+### Randomization Test
 
 The randomization test for a two-way table works just like it does with two samples. We'll randomize by shuffling and dealing/assigning the 75 yes answers and 402 no answers to the three survey modes at random.
 
-\begin{itemize}
-    \item How many colors of cards?
+- How many colors of cards?
     
-    \vspace{15mm}
+\
+\
     
-    \item How many stacks to deal them into? How many in each stack?
+- How many stacks to deal them into? How many in each stack?
     
-    \vspace{15mm}
+\
+\
     
-    \item What do we find for each deal/shuffle?
+- What do we find for each deal/shuffle?
     
-    \vspace{15mm}
+\
+\
     
-\end{itemize}
+[Applet](https://www.isi-stats.com/isi2nd/ISIapplets2021.html)
 
-\underline{\href{https://www.isi-stats.com/isi2nd/ISIapplets2021.html}{Applet}}
-
-\vspace{30mm}
+\
+\
+\
+\
+\
+\
 
 Conclusion:
 
 \newpage
 
-\textbf{Mathematical Model}
+### Mathematical Model
 
-Based on what we just observed in the applet, the normal distribution is not going to be a good approximation to sampling distribution. It turns out this test statistic follows a different mathematical distribution, the \textbf{chi-squared distribution} (proof: see STAT 262). The normal distribution has two parameters that determine its shape: the mean ($\mu$) and standard deviation ($\sigma$). The shape of the chi-square distribution is determined by a parameter called the \textbf{degrees of freedom (df)}. Figure 18.2 on page 339 shows how the shape of the distribution changes depending on the df.
+Based on what we just observed in the applet, the normal distribution is not going to be a good approximation to sampling distribution. It turns out this test statistic follows a different mathematical distribution, the **chi-squared distribution** (proof: see STAT 462). The normal distribution has two parameters that determine its shape: the mean ($\mu$) and standard deviation ($\sigma$). The shape of the chi-square distribution is determined by a parameter called the \textbf{degrees of freedom (df)}. Figure 18.2 on page 307 shows how the shape of the distribution changes depending on the df.
 
 So how can we use this?
 
-\vspace{50mm}
+\
+\
+\
+\
+\
+\
+\
+\
 
 Again, we have conditions that need to be met for the mathematical model to be a good approximation:
 
-\begin{itemize}
-    \item 
-    \item
-\end{itemize}
+-
+\
 
-\textbf{Example:} Let's go back and do the survey mode example using the mathematical model approach. First, we'll need to check the conditions are met:
+-
+\
 
-\begin{itemize}
-    \item 
-    \item
-\end{itemize}
+**Example**: Let's go back and do the survey mode example using the mathematical model approach. First, we'll need to check the conditions are met:
 
-\vspace{15mm}
+-
+\
 
-To find the p-value, we can use the R function \texttt{pchisq()}. Like \texttt{pnorm} it gives area to the left. So,
+-
+\
 
-\begin{center}
-    p-value = \texttt{1-pchisq(6.1971,df=2) = \hspace{20mm}}
-\end{center}
+\
 
-\vfill
+To find the p-value, we can use the R function `pchisq()`. Like `pnorm` it gives area to the left. So,
+
+```{r}
+pchisq(6.1971,df=2,lower.tail=FALSE)
+```
+
+\newpage
 
 We can also do this directly in R.
+
+```{r}
+surveymode<-read.csv("surveymode.csv",header=TRUE)
+
+#make a table#
+mode<-table(surveymode$Response,surveymode$Mode)
+
+#see the table, note alphabetical order#
+mode
+
+#Chi-square mathematical model test#
+chisq.test(mode)
+
+#Chi-square randomization test#
+chisq.test(mode,simulate.p.value=TRUE, B=1000)
+```

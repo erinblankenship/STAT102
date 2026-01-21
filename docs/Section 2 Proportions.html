@@ -213,6 +213,14 @@ window.Quarto = {
   <li><a href="#inference-for-a-comparing-two-proportions-chapter-17" id="toc-inference-for-a-comparing-two-proportions-chapter-17" class="nav-link" data-scroll-target="#inference-for-a-comparing-two-proportions-chapter-17"><span class="header-section-number">2.2</span> Inference for a Comparing Two Proportions (Chapter 17)</a>
   <ul class="collapse">
   <li><a href="#randomization-tests-for-the-difference-in-proportions" id="toc-randomization-tests-for-the-difference-in-proportions" class="nav-link" data-scroll-target="#randomization-tests-for-the-difference-in-proportions"><span class="header-section-number">2.2.1</span> Randomization tests for the difference in proportions</a></li>
+  <li><a href="#bootstrap-confidence-interval-for-the-difference-in-proportions" id="toc-bootstrap-confidence-interval-for-the-difference-in-proportions" class="nav-link" data-scroll-target="#bootstrap-confidence-interval-for-the-difference-in-proportions"><span class="header-section-number">2.2.2</span> Bootstrap confidence interval for the difference in proportions</a></li>
+  <li><a href="#mathematical-model-for-the-difference-in-proportions" id="toc-mathematical-model-for-the-difference-in-proportions" class="nav-link" data-scroll-target="#mathematical-model-for-the-difference-in-proportions"><span class="header-section-number">2.2.3</span> Mathematical model for the difference in proportions</a></li>
+  </ul></li>
+  <li><a href="#inference-for-two-way-tables-chapter-18" id="toc-inference-for-two-way-tables-chapter-18" class="nav-link" data-scroll-target="#inference-for-two-way-tables-chapter-18"><span class="header-section-number">2.3</span> Inference for Two-Way Tables (Chapter 18)</a>
+  <ul class="collapse">
+  <li><a href="#expected-counts" id="toc-expected-counts" class="nav-link" data-scroll-target="#expected-counts"><span class="header-section-number">2.3.1</span> Expected Counts</a></li>
+  <li><a href="#randomization-test" id="toc-randomization-test" class="nav-link" data-scroll-target="#randomization-test"><span class="header-section-number">2.3.2</span> Randomization Test</a></li>
+  <li><a href="#mathematical-model" id="toc-mathematical-model" class="nav-link" data-scroll-target="#mathematical-model"><span class="header-section-number">2.3.3</span> Mathematical Model</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -386,12 +394,12 @@ window.Quarto = {
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.sample)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sim   stat
-1   1 0.1875
-2   2 0.4375
-3   3 0.4375
-4   4 0.5625
-5   5 0.5625
-6   6 0.3750</code></pre>
+1   1 0.4375
+2   2 0.5625
+3   3 0.3750
+4   4 0.6875
+5   5 0.2500
+6   6 0.5000</code></pre>
 </div>
 </div>
 <p>We can plot these <span class="math inline">\(\hat p_{pb}\)</span>, and see how unusual our observed test statistic is.</p>
@@ -529,29 +537,16 @@ window.Quarto = {
 </p>
 <p>To find the p-value, we can use R.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openintro)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'openintro' was built under R version 4.4.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: airports</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: cherryblossom</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: usdata</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">normTail</span>(<span class="at">m=</span><span class="dv">0</span>,<span class="at">s=</span><span class="dv">1</span>,<span class="at">U=</span><span class="fl">2.79</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">normTail</span>(<span class="at">m=</span><span class="dv">0</span>,<span class="at">s=</span><span class="dv">1</span>,<span class="at">U=</span><span class="fl">2.79</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Section-2-Proportions_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Section-2-Proportions_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pvalue<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="fl">2.79</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>pvalue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pvalue<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="fl">2.79</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>pvalue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.002635402</code></pre>
 </div>
@@ -605,7 +600,7 @@ window.Quarto = {
 <li>90% confidence</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.05</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.05</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1.644854</code></pre>
 </div>
@@ -693,69 +688,731 @@ window.Quarto = {
 </tbody>
 </table>
 <p>To demonstrate what the randomization test is doing, we need 40 cards. Why 40?</p>
-<p>Of these cards, are red and are black. What do these represent?</p>
+<p><br>
+</p>
+<p>Of these cards, how many should be red and how many should be black? What do these represent?</p>
+<p><br>
+<br>
+</p>
 <p>We’ll shuffle, and deal into two stacks.</p>
+<p><br>
+<br>
+<br>
+</p>
 <p>A randomization test is going through this shuffling/dealing over and over again, find the difference in proportions for each simulation.</p>
-<p>Let’s look at this in the .</p>
+<p>Let’s look at this in the <a href="https://www.isi-stats.com/isi2nd/ISIapplets2021.html">applets</a>.</p>
 <p>What do you notice about the null distribution? How unusual is the observed <span class="math inline">\(\hat p_1 - \hat p_2\)</span>?</p>
-<p> Try 17.2. Set up the hypotheses and describe how a randomization test would work.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>: Try Problem 2 in Chapter 17. Set up the hypotheses and describe how a randomization test would work.</p>
+<ul>
+<li>How many cards are needed?</li>
+<li>How many red? How many black?</li>
+<li>How many should be dealt into each stack?</li>
+<li>What would you calculate from each shuffle/deal?</li>
+</ul>
 <p>Let’s do this in R!</p>
 <div style="page-break-after: always;"></div>
-<p></p>
+<p>First, we’ll need to set up the data. This is honestly the hardest part.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>VM<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Treatment=</span><span class="st">"Vaccine"</span>,<span class="at">Response=</span><span class="st">"Malaria"</span>,<span class="at">obs=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">89</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(VM)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Treatment Response obs
+1   Vaccine  Malaria   1
+2   Vaccine  Malaria   2
+3   Vaccine  Malaria   3
+4   Vaccine  Malaria   4
+5   Vaccine  Malaria   5
+6   Vaccine  Malaria   6</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>VN<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Treatment=</span><span class="st">"Vaccine"</span>,<span class="at">Response=</span><span class="st">"NoMal"</span>,<span class="at">obs=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">203</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>CM<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Treatment=</span><span class="st">"Control"</span>,<span class="at">Response=</span><span class="st">"Malaria"</span>,<span class="at">obs=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">106</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>CN<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Treatment=</span><span class="st">"Control"</span>,<span class="at">Response=</span><span class="st">"NoMal"</span>,<span class="at">obs=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">41</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>malariadf<span class="ot">&lt;-</span><span class="fu">rbind</span>(VM,VN,CM,CN)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(malariadf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Treatment Response obs
+1   Vaccine  Malaria   1
+2   Vaccine  Malaria   2
+3   Vaccine  Malaria   3
+4   Vaccine  Malaria   4
+5   Vaccine  Malaria   5
+6   Vaccine  Malaria   6</code></pre>
+</div>
+</div>
+<p>Next, we’ll calculate the observed difference in the proportion of children who contracted malaria between those who received the vaccine and those who received the control. To use the <code>diffmean</code> function, we need to load the <code>mosaic</code> package.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>observed<span class="ot">&lt;-</span><span class="fu">diffmean</span>(Response <span class="sc">==</span> <span class="st">"Malaria"</span> <span class="sc">~</span> Treatment, <span class="at">data=</span>malariadf)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>observed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  diffmean 
+-0.4162939 </code></pre>
+</div>
+</div>
+<p>Now, we need to shuffle the vaccine/control treatment labels many times and calculate the difference in proportions of malaria for each shuffle. To do this, we’ll need the <code>mosaic</code> library but it’s already been loaded.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>malaria.null<span class="ot">&lt;-</span><span class="fu">do</span>(<span class="dv">1000</span>)<span class="sc">*</span><span class="fu">diffmean</span>(Response <span class="sc">==</span> <span class="st">"Malaria"</span> <span class="sc">~</span> <span class="fu">shuffle</span>(Treatment),<span class="at">data=</span>malariadf)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(malaria.null)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     diffmean
+1 -0.12992731
+2  0.03371074
+3  0.01325599
+4  0.12575715
+5 -0.04810828
+6 -0.04810828</code></pre>
+</div>
+</div>
+<p>We’ll plot the null distribution, and to do this we’ll need the <code>ggplot2</code> library.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>malaria.null) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>diffmean)) <span class="sc">+</span> </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Difference in proportions"</span>) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> observed, <span class="at">linetype=</span><span class="dv">2</span>, <span class="at">color=</span><span class="st">"blue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-2-Proportions_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Finally, we can calculate the p-value by observing how unusual the observed difference in the proportions of malaria is under the null hypothesis.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop</span>(<span class="sc">~</span>diffmean <span class="sc">&lt;=</span> observed, <span class="at">data=</span>malaria.null)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>prop_TRUE 
+        0 </code></pre>
+</div>
+</div>
+<p>Why are we considering less than or equal to be more extreme in this example?</p>
+<p><br>
+<br>
+<br>
+</p>
+</section>
+<section id="bootstrap-confidence-interval-for-the-difference-in-proportions" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="bootstrap-confidence-interval-for-the-difference-in-proportions"><span class="header-section-number">2.2.2</span> Bootstrap confidence interval for the difference in proportions</h3>
 <p>As we saw with a single proportion, bootstrapping will allow us to estimate the variability of <span class="math inline">\(\hat p_1 - \hat p_2\)</span> without assuming the null hypothesis is true. With a single proportion, we drew repeated samples (with replacement) from our sample data, and from each bootstrap sample calculated <span class="math inline">\(\hat p_{\hbox{\tiny{boot}}}\)</span>. The distribution of the <span class="math inline">\(\hat p_{\hbox{\tiny{boot}}}\)</span> provided an estimation of the sampling distribution of <span class="math inline">\(\hat p\)</span>.</p>
 <p>Now, with two samples, our observed statistic of interest is</p>
-<p>Let’s go to R, and see how this works with the electrical stimulation example.</p>
-<p>Now, by re-using this example, we are ignoring (maybe) the research question. But, we’re doing both a randomization test and confidence interval so that we can compare the resulting sampling distributions of <span class="math inline">\(\hat p_1 - \hat p_2\)</span>. What is different? What’s the same?</p>
-<p>Bootstrap percentile confidence interval:</p>
-<p>Bootstrap SE confidence interval:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s go to R, and see how this works with the electrical stimulation example. We’ll start by setting up the data and calculating the observed difference in proportion of solved problems between electrical stimulation and control.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#original Sample 1 data (Electrical), creating a data set with 10 S (1) and 10 F (0)#</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>electrical<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">10</span>),<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#original Sample 2 data (Control), creating a data set with 6 S (1) and 14 F (0)#</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>control<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">6</span>),<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">14</span>))</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate and print the observed statistic, p-hat_E - p-hat_C#</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>obs_stat<span class="ot">&lt;-</span><span class="fu">mean</span>(electrical)<span class="sc">-</span><span class="fu">mean</span>(control)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>obs_stat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2</code></pre>
+</div>
+</div>
+<p>Now, we’ll repeatedly sample with replacement separately from each group. First we need to set up a place to store our summaries from each resample.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Set up an empty data set with 4 columns: sim number, p_hat_boot_E, p_hat_boot_C, diff#</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>boot.samples<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">sim=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,<span class="at">stat_E=</span><span class="cn">NA</span>,<span class="at">stat_C=</span><span class="cn">NA</span>, <span class="at">diff=</span><span class="cn">NA</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sim stat_E stat_C diff
+1   1     NA     NA   NA
+2   2     NA     NA   NA
+3   3     NA     NA   NA
+4   4     NA     NA   NA
+5   5     NA     NA   NA
+6   6     NA     NA   NA</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For each row in the data set, draw a bootstrap sample from Sample 1 and Sample 2 and find#</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># p_hat_boot_E and p_hat_boot_C #</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>stat_E[i]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">sample</span>(electrical,<span class="at">size=</span><span class="dv">20</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>stat_C[i]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">sample</span>(control,<span class="at">size=</span><span class="dv">20</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sim stat_E stat_C diff
+1   1   0.45   0.35   NA
+2   2   0.35   0.15   NA
+3   3   0.65   0.30   NA
+4   4   0.45   0.30   NA
+5   5   0.50   0.40   NA
+6   6   0.50   0.30   NA</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Now find the differences#</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>boot.samples<span class="sc">$</span>diff<span class="ot">&lt;-</span>boot.samples<span class="sc">$</span>stat_E <span class="sc">-</span> boot.samples<span class="sc">$</span>stat_C</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sim stat_E stat_C diff
+1   1   0.45   0.35 0.10
+2   2   0.35   0.15 0.20
+3   3   0.65   0.30 0.35
+4   4   0.45   0.30 0.15
+5   5   0.50   0.40 0.10
+6   6   0.50   0.30 0.20</code></pre>
+</div>
+</div>
+<p>Now let’s plot the bootstrap distribution.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.samples, <span class="fu">aes</span>(diff)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.05</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>boot.hist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-2-Proportions_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice where this distribution is centered!</p>
+<p><br>
+</p>
 <div style="page-break-after: always;"></div>
-<p></p>
+<p>We are re-using this example, since we’ve already carried out the randomization test in the applet. By doing so we are ignoring (maybe) the research question. But, we’re doing both a randomization test and confidence interval so that we can compare the resulting sampling distributions of <span class="math inline">\(\hat p_1 - \hat p_2\)</span>. What is different? What’s the same?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Now that we have the bootstrap distribution, we can find the bootstrap percentile confidence interval. Let’s do a 90% interval.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#start by ranking the bootstrap differences from smallest to largest #</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>rankdiff<span class="ot">&lt;-</span><span class="fu">sort</span>(boot.samples<span class="sc">$</span>diff)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Print out just the first few#</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rankdiff)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.40 -0.25 -0.25 -0.25 -0.20 -0.20</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Lower endpoint is the 5th percentile (90% confidence)#</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankdiff[<span class="dv">50</span>]</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.05</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpoint is the 950th percentile (90% confidence)#</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankdiff[<span class="dv">950</span>]</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.45</code></pre>
+</div>
+</div>
+<p><br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Because our bootstrap distribution is relatively bell-shaped, we could also a calculate a rough 95% boostrap SE confidence interval.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>SE<span class="ot">&lt;-</span><span class="fu">sd</span>(rankdiff)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>SE</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.146625</code></pre>
+</div>
+</div>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+</section>
+<section id="mathematical-model-for-the-difference-in-proportions" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="mathematical-model-for-the-difference-in-proportions"><span class="header-section-number">2.2.3</span> Mathematical model for the difference in proportions</h3>
 <p>For a single proportion, we needed two conditions to be met to ensure the sampling distribution of <span class="math inline">\(\hat p\)</span> is approximately normal:</p>
+<ul>
+<li><p><br>
+</p></li>
+<li><p><br>
+<br>
+</p></li>
+</ul>
 <p>If these conditions are met, then</p>
+<p><br>
+<br>
+<br>
+</p>
 <p>We must meet similar conditions to ensure the sampling distribution of <span class="math inline">\(\hat p_1 - \hat p_2\)</span> is approximately normal:</p>
+<ul>
+<li><p><br>
+</p></li>
+<li><p><br>
+<br>
+</p></li>
+</ul>
 <p>If these conditions are met, then</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
 <p>Like before we don’t know <span class="math inline">\(p_1\)</span> and <span class="math inline">\(p_2\)</span>, so we’ll use our best guess. And, like before, our best guess will change depending on whether we’re constructing a confidence interval or carrying out a hypothesis test.</p>
-<div style="page-break-after: always;"></div>
 <p>How is this going to play out in a hypothesis test?</p>
-<p> (Aside: why can’t we do the electrical stimuation example again?). A 2021 Gallup poll surveyed 3941 students pursuing a bachelor’s degree and 2064 students pursuing an associate’s degree. The survey found that 51% of the bachelor’s students (2010) and 44% of the associate’s students (908) said that COVID-19 will negatively impact their ability to complete the degree. We want to decide whether the proportion of bachelor’s students who believe the pandemic will negatively impact degree completion is different from the proportion of associate’s students who believe they will be negatively affected. Let <span class="math inline">\(p_B\)</span> be the proportion of bachelor’s students who believe they’ll be negatively affected and let <span class="math inline">\(p_A\)</span> be the proportion of associate’s students who believe they’ll be negatively affected.</p>
-<p>To visualize the p-value: </p>
-<p>To get the p-value: </p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
 <div style="page-break-after: always;"></div>
+<p><strong>Example (17.5)</strong>: (Aside: why can’t we do the electrical stimuation example again?). A 2021 Gallup poll surveyed 3941 students pursuing a bachelor’s degree and 2064 students pursuing an associate’s degree. The survey found that 51% of the bachelor’s students (2010) and 44% of the associate’s students (908) said that COVID-19 will negatively impact their ability to complete the degree. We want to decide whether the proportion of bachelor’s students who believe the pandemic will negatively impact degree completion is different from the proportion of associate’s students who believe they will be negatively affected. Let <span class="math inline">\(p_B\)</span> be the proportion of bachelor’s students who believe they’ll be negatively affected and let <span class="math inline">\(p_A\)</span> be the proportion of associate’s students who believe they’ll be negatively affected.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>To visualize the p-value:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">normTail</span>(<span class="at">m=</span><span class="dv">0</span>,<span class="at">s=</span><span class="dv">1</span>,<span class="at">L=</span><span class="sc">-</span><span class="fl">5.15</span>, <span class="at">U=</span><span class="fl">5.15</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-2-Proportions_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And to get the p-value:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">5.15</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)<span class="sc">+</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="fl">5.15</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.604865e-07</code></pre>
+</div>
+</div>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
 <p>How is this going to play out in a confidence interval?</p>
-<p> A Kaiser Family Foundation poll for US adults in 2019 found that 79% of Democrats, 55% of Independents, and 24% of Republicans supported a generic ``National Health Plan.’’ There were 347 Democrats, 298 Republicans, and 617 Independents surveyed (Foundation, 2019). We want to estimate the difference between the proportion of Democrats and Independents who support a National Health Plan.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
 <div style="page-break-after: always;"></div>
-<p></p>
+<p><strong>Example(17.9)</strong>: A Kaiser Family Foundation poll for US adults in 2019 found that 79% of Democrats, 55% of Independents, and 24% of Republicans supported a generic “National Health Plan.” There were 347 Democrats, 298 Republicans, and 617 Independents surveyed (Foundation, 2019). We want to estimate the difference between the proportion of Democrats and Independents who support a National Health Plan.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>What impacts the width of a confidence interval?</strong></p>
 <p>There are three main things that impact the width of a confidence interval:</p>
-<p>No matter what method we use to calculate the confidence interval, the is a statement about the long run percentage of confidence intervals that would succeed in capturing the true value of the parameter. What does this mean? </p>
-<p></p>
+<ul>
+<li>Confidence level</li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li>Sample size</li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li>Standard Error</li>
+</ul>
+<p><br>
+</p>
+<p>No matter what method we use to calculate the confidence interval, the <strong>confidence level</strong> is a statement about the long run percentage of confidence intervals that would succeed in capturing the true value of the parameter. What does this mean? <a href="https://www.isi-stats.com/isi2nd/ISIapplets2021.html">Applet</a></p>
+<p><br>
+</p>
+<p><strong>Hypothesis tests vs.&nbsp;Confidence Intervals</strong></p>
 <p>While we should be matching analysis method to the research question, there is a nice relationship between hypothesis tests and confidence intervals. Recall that confidence intervals give a set of plausible values for the unknown parameter.</p>
-<div style="page-break-after: always;"></div>
-<p></p>
-<p>So far, we’ve considered categorical variables with only two possible outcomes: success and failure. Many categorical variables have more than two possible outcomes, so we can’t easily define the proportion of ``successes.’’ Instead, we’ll summarize categorical data with more than two levels using two-way tables. In this class, we’re still going to restrict ourselves to only two variables (often explanatory and response, but not necessarily), both with two or more levels. However, there are certainly statistical methods for more complicated situations.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+</section>
+</section>
+<section id="inference-for-two-way-tables-chapter-18" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="inference-for-two-way-tables-chapter-18"><span class="header-section-number">2.3</span> Inference for Two-Way Tables (Chapter 18)</h2>
+<p>So far, we’ve considered categorical variables with only two possible outcomes: success and failure. Many categorical variables have more than two possible outcomes, so we can’t easily define the proportion of “successes.” Instead, we’ll summarize categorical data with more than two levels using two-way tables. In this class, we’re still going to restrict ourselves to only two variables (often explanatory and response, but not necessarily), both with two or more levels. However, there are certainly statistical methods for more complicated situations.</p>
 <p>Typically, research questions focus on how the proportions of the possible outcomes in the response variable change (or don’t) across the levels of the explanatory variable. However, we can also consider questions about a single variable with more than two outcomes (are the possible outcomes all equally likely? do the possible outcomes follow a particular pattern?) or just whether the two categorical variables are independent or dependent without assigning an explanatory/response relationship. Due to the structure of the variable(s), there really isn’t a population parameter of interest. We can’t (usually) make a function of proportion of successes that makes sense to estimate, like we can with <span class="math inline">\(p_1 - p_2\)</span>. That means we’ll be considering only tests, not confidence intervals. We’ll focus on the randomization test and the mathematical model approach. Both methods start with the same set-up.</p>
-<p> When surveys are administered, we hope that the respondents give accurate answers. Does the mode of survey delivery affect this? Schober et al (2015) investigated this question. They had 147 people who agreed to be interviewed on an iPhone, and they were randomly assigned to one of three interview modes: human voice, automated voice, text. One question asked was whether they exercise less than once per week during a typical week (a yes is mostly likely considered socially undesirable). The explanatory variable here is survey mode and the response is whether or not the respondent said yes. Here are the data:</p>
-<p>Based on these data, it looks like the answer to the question does change depending on survey mode, with respondents more likely to say yes via text. However, we don’t know if this result could have happened by chance.</p>
 <div style="page-break-after: always;"></div>
-<p></p>
+<p><strong>Example</strong>: When surveys are administered, we hope that the respondents give accurate answers. Does the mode of survey delivery affect this? Schober et al (2015) investigated this question. They had 147 people who agreed to be interviewed on an iPhone, and they were randomly assigned to one of three interview modes: human voice, automated voice, text. One question asked was whether they exercise less than once per week during a typical week (a yes is mostly likely considered socially undesirable). The explanatory variable here is survey mode and the response is whether or not the respondent said yes. Here are the data:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Text</th>
+<th>Human Voice</th>
+<th>Automated Voice</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exercise Yes</td>
+<td>34</td>
+<td>21</td>
+<td>30</td>
+<td>75</td>
+</tr>
+<tr class="even">
+<td>Exercise No</td>
+<td>124</td>
+<td>139</td>
+<td>139</td>
+<td>402</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>158</td>
+<td>160</td>
+<td>159</td>
+<td>477</td>
+</tr>
+</tbody>
+</table>
+<p>Based on these data, it looks like the answer to the question does change depending on survey mode, with respondents more likely to say yes via text. However, we don’t know if this result could have happened by chance.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<section id="expected-counts" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="expected-counts"><span class="header-section-number">2.3.1</span> Expected Counts</h3>
 <p>We don’t expect the proportion of `yes’ to be exactly the same across all survey modes, but we want to know if these vary enough to convince us that survey mode and answer are not independent. To do this, we need to find for each cell in the table.</p>
 <div style="page-break-after: always;"></div>
-<p>So now the key question…are the observed and expected cell counts different enough?</p>
-<p>New test statistic!</p>
-<p>In our example:</p>
-<p>To see if this is `big’ we need the sampling distribution of our new test statistic. We can estimate that sampling distribution using either a randomization test or the mathematical model approach.</p>
+<p>Again, here are the observed data</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Text</th>
+<th style="text-align: center;">Human Voice</th>
+<th style="text-align: center;">Automated Voice</th>
+<th style="text-align: center;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exercise Yes</td>
+<td style="text-align: center;">34</td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">75</td>
+</tr>
+<tr class="even">
+<td>Exercise No</td>
+<td style="text-align: center;">124</td>
+<td style="text-align: center;">139</td>
+<td style="text-align: center;">139</td>
+<td style="text-align: center;">402</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: center;">158</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">159</td>
+<td style="text-align: center;">477</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Text</th>
+<th>Human Voice</th>
+<th>Auto Voice</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exercise Yes</td>
+<td>34 (_____)</td>
+<td>21 (_____)</td>
+<td>30 (_____)</td>
+<td>75</td>
+</tr>
+<tr class="even">
+<td>Exercise No</td>
+<td>124 (_____)</td>
+<td>139 (_____)</td>
+<td>139 (_____)</td>
+<td>402</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>158</td>
+<td>160</td>
+<td>159</td>
+<td>477</td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
-<p></p>
+<p>So now the key question…are the observed and expected cell counts different enough?</p>
+<ul>
+<li>Cell(1,1) obs - exp = 34 -</li>
+<li>Cell(1,2) obs - exp = 21 -</li>
+<li>Cell(1,3) obs - exp = 20 -</li>
+<li>Cell(2,1) obs - exp = 124 -</li>
+<li>Cell(2,2) obs - exp = 139 -</li>
+<li>Cell(2,3) obs - exp = 139 -</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>New test statistic!</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>In our example:</p>
+<ul>
+<li>Cell(1,1) (obs - exp)<span class="math inline">\(^2\)</span>/exp = <span class="math inline">\((34 - 24.84)^2/(24.84) = 9.16^2/24.84 = 3.3778\)</span></li>
+<li>Cell(1,2) (obs - exp)<span class="math inline">\(^2\)</span>/exp = <span class="math inline">\((21 - 25.16)^2/(25.16) = (-4.16)^2/25.16 = 0.6878\)</span></li>
+<li>Cell(1,3) (obs - exp)<span class="math inline">\(^2\)</span>/exp = <span class="math inline">\((20 - 25)^2/(25) = (-5)^2/25 = 1\)</span></li>
+<li>Cell(2,1) (obs - exp)<span class="math inline">\(^2\)</span>/exp = <span class="math inline">\((124 - 133.16)^2/(133.16) = (-9.16)^2/133.16 = 0.6301\)</span></li>
+<li>Cell(2,2) (obs - exp)<span class="math inline">\(^2\)</span>/exp = <span class="math inline">\((139 - 134.84)^2/(134.84) = 4.16^2/134.84 = 0.1283\)</span></li>
+<li>Cell(2,3) (obs - exp)<span class="math inline">\(^2\)</span>/exp = <span class="math inline">\((139 - 134)^2/(134) = 5^2/134 =0.3731\)</span></li>
+</ul>
+<p><br>
+<br>
+</p>
+<p>To see if this is ‘big’ we need the sampling distribution of our new test statistic. We can estimate that sampling distribution using either a randomization test or the mathematical model approach.</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="randomization-test" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="randomization-test"><span class="header-section-number">2.3.2</span> Randomization Test</h3>
 <p>The randomization test for a two-way table works just like it does with two samples. We’ll randomize by shuffling and dealing/assigning the 75 yes answers and 402 no answers to the three survey modes at random.</p>
-<p></p>
+<ul>
+<li>How many colors of cards?</li>
+</ul>
+<p><br>
+<br>
+</p>
+<ul>
+<li>How many stacks to deal them into? How many in each stack?</li>
+</ul>
+<p><br>
+<br>
+</p>
+<ul>
+<li>What do we find for each deal/shuffle?</li>
+</ul>
+<p><br>
+<br>
+</p>
+<p><a href="https://www.isi-stats.com/isi2nd/ISIapplets2021.html">Applet</a></p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
 <p>Conclusion:</p>
 <div style="page-break-after: always;"></div>
-<p></p>
-<p>Based on what we just observed in the applet, the normal distribution is not going to be a good approximation to sampling distribution. It turns out this test statistic follows a different mathematical distribution, the (proof: see STAT 262). The normal distribution has two parameters that determine its shape: the mean (<span class="math inline">\(\mu\)</span>) and standard deviation (<span class="math inline">\(\sigma\)</span>). The shape of the chi-square distribution is determined by a parameter called the . Figure 18.2 on page 339 shows how the shape of the distribution changes depending on the df.</p>
+</section>
+<section id="mathematical-model" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="mathematical-model"><span class="header-section-number">2.3.3</span> Mathematical Model</h3>
+<p>Based on what we just observed in the applet, the normal distribution is not going to be a good approximation to sampling distribution. It turns out this test statistic follows a different mathematical distribution, the <strong>chi-squared distribution</strong> (proof: see STAT 462). The normal distribution has two parameters that determine its shape: the mean (<span class="math inline">\(\mu\)</span>) and standard deviation (<span class="math inline">\(\sigma\)</span>). The shape of the chi-square distribution is determined by a parameter called the . Figure 18.2 on page 307 shows how the shape of the distribution changes depending on the df.</p>
 <p>So how can we use this?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
 <p>Again, we have conditions that need to be met for the mathematical model to be a good approximation:</p>
-<p> Let’s go back and do the survey mode example using the mathematical model approach. First, we’ll need to check the conditions are met:</p>
-<p>To find the p-value, we can use the R function . Like it gives area to the left. So,</p>
+<ul>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+</ul>
+<p><strong>Example</strong>: Let’s go back and do the survey mode example using the mathematical model approach. First, we’ll need to check the conditions are met:</p>
+<ul>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+</ul>
+<p><br>
+</p>
+<p>To find the p-value, we can use the R function <code>pchisq()</code>. Like <code>pnorm</code> it gives area to the left. So,</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="fl">6.1971</span>,<span class="at">df=</span><span class="dv">2</span>,<span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04511457</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
 <p>We can also do this directly in R.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>surveymode<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"surveymode.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co">#make a table#</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>mode<span class="ot">&lt;-</span><span class="fu">table</span>(surveymode<span class="sc">$</span>Response,surveymode<span class="sc">$</span>Mode)</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="co">#see the table, note alphabetical order#</span></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>mode</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     
+      Avoice Hvoice Text
+  No     139    139  124
+  Yes     20     21   34</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Chi-square mathematical model test#</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(mode)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  mode
+X-squared = 6.0069, df = 2, p-value = 0.04962</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Chi-square randomization test#</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(mode,<span class="at">simulate.p.value=</span><span class="cn">TRUE</span>, <span class="at">B=</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with simulated p-value (based on 1000
+    replicates)
+
+data:  mode
+X-squared = 6.0069, df = NA, p-value = 0.05395</code></pre>
+</div>
+</div>
 
 
 </section>
