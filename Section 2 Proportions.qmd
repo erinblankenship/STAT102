@@ -707,6 +707,12 @@ How is this going to play out in a hypothesis test?
 \
 \
 \
+\
+\
+\
+\
+\
+\
 
 To visualize the p-value:
 

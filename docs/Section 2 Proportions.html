@@ -394,11 +394,11 @@ window.Quarto = {
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.sample)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sim   stat
-1   1 0.5625
-2   2 0.5625
-3   3 0.2500
-4   4 0.6875
-5   5 0.3750
+1   1 0.7500
+2   2 0.6250
+3   3 0.5625
+4   4 0.5000
+5   5 0.5625
 6   6 0.3750</code></pre>
 </div>
 </div>
@@ -761,13 +761,13 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>malaria.null<span class="ot">&lt;-</span><span class="fu">do</span>(<span class="dv">1000</span>)<span class="sc">*</span><span class="fu">diffmean</span>(Response <span class="sc">==</span> <span class="st">"Malaria"</span> <span class="sc">~</span> <span class="fu">shuffle</span>(Treatment),<span class="at">data=</span>malariadf)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(malaria.null)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      diffmean
-1 -0.058335663
-2 -0.017426149
-3 -0.048108284
-4  0.003028609
-5 -0.017426149
-6  0.003028609</code></pre>
+<pre><code>     diffmean
+1 -0.02765353
+2  0.09507502
+3  0.01325599
+4 -0.02765353
+5 -0.04810828
+6 -0.00719877</code></pre>
 </div>
 </div>
 <p>We’ll plot the null distribution, and to do this we’ll need the <code>ggplot2</code> library.</p>
@@ -861,12 +861,12 @@ window.Quarto = {
 <span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sim stat_E stat_C diff
-1   1   0.60   0.20   NA
-2   2   0.35   0.25   NA
-3   3   0.65   0.20   NA
-4   4   0.60   0.40   NA
-5   5   0.50   0.25   NA
-6   6   0.60   0.35   NA</code></pre>
+1   1   0.60   0.45   NA
+2   2   0.45   0.35   NA
+3   3   0.35   0.25   NA
+4   4   0.45   0.45   NA
+5   5   0.30   0.40   NA
+6   6   0.65   0.35   NA</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Now find the differences#</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -874,13 +874,13 @@ window.Quarto = {
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  sim stat_E stat_C diff
-1   1   0.60   0.20 0.40
-2   2   0.35   0.25 0.10
-3   3   0.65   0.20 0.45
-4   4   0.60   0.40 0.20
-5   5   0.50   0.25 0.25
-6   6   0.60   0.35 0.25</code></pre>
+<pre><code>  sim stat_E stat_C  diff
+1   1   0.60   0.45  0.15
+2   2   0.45   0.35  0.10
+3   3   0.35   0.25  0.10
+4   4   0.45   0.45  0.00
+5   5   0.30   0.40 -0.10
+6   6   0.65   0.35  0.30</code></pre>
 </div>
 </div>
 <p>Now let’s plot the bootstrap distribution.</p>
@@ -940,7 +940,7 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>SE<span class="ot">&lt;-</span><span class="fu">sd</span>(rankdiff)</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>SE</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1562026</code></pre>
+<pre><code>[1] 0.1520223</code></pre>
 </div>
 </div>
 <p><br>
@@ -1007,6 +1007,12 @@ window.Quarto = {
 <div style="page-break-after: always;"></div>
 <p><strong>Example (17.5)</strong>: (Aside: why can’t we do the electrical stimuation example again?). A 2021 Gallup poll surveyed 3941 students pursuing a bachelor’s degree and 2064 students pursuing an associate’s degree. The survey found that 51% of the bachelor’s students (2010) and 44% of the associate’s students (908) said that COVID-19 will negatively impact their ability to complete the degree. We want to decide whether the proportion of bachelor’s students who believe the pandemic will negatively impact degree completion is different from the proportion of associate’s students who believe they will be negatively affected. Let <span class="math inline">\(p_B\)</span> be the proportion of bachelor’s students who believe they’ll be negatively affected and let <span class="math inline">\(p_A\)</span> be the proportion of associate’s students who believe they’ll be negatively affected.</p>
 <p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1411,7 +1417,7 @@ X-squared = 6.0069, df = 2, p-value = 0.04962</code></pre>
     replicates)
 
 data:  mode
-X-squared = 6.0069, df = NA, p-value = 0.04296</code></pre>
+X-squared = 6.0069, df = NA, p-value = 0.04595</code></pre>
 </div>
 </div>
 
