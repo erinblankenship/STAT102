@@ -649,6 +649,7 @@ If these conditions are met, then
 We must meet similar conditions to ensure the sampling distribution of $\hat p_1 - \hat p_2$ is approximately normal:
 
 -   \
+\
 
 -   \
     \
