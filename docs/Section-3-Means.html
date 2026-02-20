@@ -333,13 +333,13 @@ window.Quarto = {
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankmean[<span class="dv">25</span>]</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 73.16667</code></pre>
+<pre><code>[1] 72.83333</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpoint is the 97.5th percentile (95% confidence)#</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankmean[<span class="dv">975</span>]</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 110.3333</code></pre>
+<pre><code>[1] 109.8333</code></pre>
 </div>
 </div>
 <p>This will give us a <strong>bootstrap percentile confidence interval</strong>.</p>
@@ -352,7 +352,7 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bootstrap standard error of the mean#</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(rankmean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.381784</code></pre>
+<pre><code>[1] 9.486019</code></pre>
 </div>
 </div>
 <p><br>
@@ -394,13 +394,13 @@ window.Quarto = {
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>ranksd[<span class="dv">50</span>]</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 11.36075</code></pre>
+<pre><code>[1] 10.91329</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpont is the 95th percentile (90% confidence)#</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>ranksd[<span class="dv">950</span>]</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 30.49208</code></pre>
+<pre><code>[1] 30.91763</code></pre>
 </div>
 </div>
 <p><br>
@@ -772,11 +772,11 @@ mean of x
 <div class="cell-output cell-output-stdout">
 <pre><code>     violent
 1 -1.2197802
-2  0.4054160
-3 -3.7566719
-4 -0.3873626
-5  0.4846939
-6  3.0414050</code></pre>
+2  1.3567504
+3 -1.5567111
+4  4.9837127
+5  0.6432496
+6 -1.9729199</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram of the null distribution#</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>null_dist) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>violent))<span class="sc">+</span> </span>
@@ -797,7 +797,7 @@ mean of x
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prop</span>(<span class="sc">~</span>violent <span class="sc">&gt;=</span> obs_diff, <span class="at">data=</span>null_dist)<span class="sc">+</span><span class="fu">prop</span>(<span class="sc">~</span>violent <span class="sc">&lt;=</span> <span class="sc">-</span>obs_diff, <span class="at">data=</span>null_dist)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>prop_TRUE 
-    0.005 </code></pre>
+    0.003 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Another way to visualize!#</span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_histogram</span>(<span class="sc">~</span>violent, <span class="at">fill =</span> <span class="sc">~</span>(<span class="fu">abs</span>(violent) <span class="sc">&gt;=</span> obs_diff), <span class="at">data=</span>null_dist,</span>
@@ -930,12 +930,12 @@ mean of x
 <span id="cb64-15"><a href="#cb64-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sim mean_base mean_soccer    diff
-1   1  191.8750    175.0000 16.8750
-2   2  192.6875    177.5000 15.1875
-3   3  191.2500    167.1250 24.1250
-4   4  188.5625    178.5625 10.0000
-5   5  190.5625    174.5000 16.0625
-6   6  190.1250    177.3750 12.7500</code></pre>
+1   1  190.8125    177.8125 13.0000
+2   2  187.1250    173.1250 14.0000
+3   3  189.4375    174.6250 14.8125
+4   4  185.2500    172.4375 12.8125
+5   5  190.8750    175.2500 15.6250
+6   6  190.3750    178.5000 11.8750</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram#</span></span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.samples, <span class="fu">aes</span>(diff)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">2</span>)</span>
@@ -957,18 +957,18 @@ mean of x
 <span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankmean[<span class="dv">25</span>]</span>
 <span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.5</code></pre>
+<pre><code>[1] 9.875</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpont is the 97.5th percentile (95% confidence)#</span></span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankmean[<span class="dv">975</span>]</span>
 <span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 24.3125</code></pre>
+<pre><code>[1] 24.5</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bootstrap standard error of the mean#</span></span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(rankmean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.733697</code></pre>
+<pre><code>[1] 3.876474</code></pre>
 </div>
 </div>
 <p>So we can get a bootstrap percentile interval or a bootstrap SE interval.</p>
@@ -1511,12 +1511,12 @@ mean in group Baseball   mean in group Soccer
 <span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankmean[<span class="dv">975</span>]</span>
 <span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1090909</code></pre>
+<pre><code>[1] 0.1113636</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bootstrap standard error of the mean#</span></span>
 <span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(rankmean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.01860648</code></pre>
+<pre><code>[1] 0.01818902</code></pre>
 </div>
 </div>
 <ul>
@@ -1565,13 +1565,13 @@ mean in group Baseball   mean in group Soccer
 <span id="cb118-6"><a href="#cb118-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankmean[<span class="dv">25</span>]</span>
 <span id="cb118-7"><a href="#cb118-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.09090909</code></pre>
+<pre><code>[1] -0.08863636</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpoint is the 97.5th percentile (95% confidence)#</span></span>
 <span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankmean[<span class="dv">975</span>]</span>
 <span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2386364</code></pre>
+<pre><code>[1] 0.2181818</code></pre>
 </div>
 </div>
 <p><br>
