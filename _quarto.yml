@@ -1,6 +1,9 @@
 project:
   type: book
   output-dir: docs
+  
+execute: 
+  freeze: auto
 
 
 editor: visual
@@ -9,8 +12,10 @@ book:
   
   chapters:
     - index.qmd
-    - Section 1 Philosophy.qmd
-    - Section 2 Proportions.qmd
+    - Section-1-Philosophy.qmd
+    - Section-2-Proportions.qmd
+    - Section-3-Means.qmd
+
   
 
   downloads: [pdf]    
