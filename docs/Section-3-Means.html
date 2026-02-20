@@ -1,0 +1,2577 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Section 3: Inference for Means – Stat 102 Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Section-2-Proportions.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d9ea66fcd6c317012447f26e9c021348.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Section-3-Means.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Inference for Means (Chapters 19-22)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Stat 102 Notes</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Stat-102-Notes.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Goals for STAT 102</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-1-Philosophy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Philosophy of Statistical Inference (Chapters 11-14)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-2-Proportions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Inference for Proportions (Chapters 16-18)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-3-Means.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Inference for Means (Chapters 19-22)</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#inference-for-a-single-mean-chapter-19" id="toc-inference-for-a-single-mean-chapter-19" class="nav-link active" data-scroll-target="#inference-for-a-single-mean-chapter-19"><span class="header-section-number">3.1</span> Inference for a Single Mean (Chapter 19)</a>
+  <ul class="collapse">
+  <li><a href="#bootstrap-confidence-intervals-for-a-mean" id="toc-bootstrap-confidence-intervals-for-a-mean" class="nav-link" data-scroll-target="#bootstrap-confidence-intervals-for-a-mean"><span class="header-section-number">3.1.1</span> Bootstrap Confidence Intervals for a Mean</a></li>
+  <li><a href="#mathematical-model-approach-for-a-mean" id="toc-mathematical-model-approach-for-a-mean" class="nav-link" data-scroll-target="#mathematical-model-approach-for-a-mean"><span class="header-section-number">3.1.2</span> Mathematical Model Approach for a Mean</a></li>
+  </ul></li>
+  <li><a href="#inference-for-a-two-independent-means-chapter-20" id="toc-inference-for-a-two-independent-means-chapter-20" class="nav-link" data-scroll-target="#inference-for-a-two-independent-means-chapter-20"><span class="header-section-number">3.2</span> Inference for a Two Independent Means (Chapter 20)</a>
+  <ul class="collapse">
+  <li><a href="#randomization-test-for-the-difference-in-means" id="toc-randomization-test-for-the-difference-in-means" class="nav-link" data-scroll-target="#randomization-test-for-the-difference-in-means"><span class="header-section-number">3.2.1</span> Randomization test for the difference in means</a></li>
+  <li><a href="#bootstrap-confidence-interval-for-the-difference-in-means" id="toc-bootstrap-confidence-interval-for-the-difference-in-means" class="nav-link" data-scroll-target="#bootstrap-confidence-interval-for-the-difference-in-means"><span class="header-section-number">3.2.2</span> Bootstrap confidence interval for the difference in means}</a></li>
+  <li><a href="#mathematical-model-for-the-difference-in-means" id="toc-mathematical-model-for-the-difference-in-means" class="nav-link" data-scroll-target="#mathematical-model-for-the-difference-in-means"><span class="header-section-number">3.2.3</span> Mathematical model for the difference in means</a></li>
+  </ul></li>
+  <li><a href="#inference-for-comparing-paired-means-chapter-21" id="toc-inference-for-comparing-paired-means-chapter-21" class="nav-link" data-scroll-target="#inference-for-comparing-paired-means-chapter-21"><span class="header-section-number">3.3</span> Inference for Comparing Paired Means (Chapter 21)</a>
+  <ul class="collapse">
+  <li><a href="#randomization-test-for-mean-difference-matched-pairs" id="toc-randomization-test-for-mean-difference-matched-pairs" class="nav-link" data-scroll-target="#randomization-test-for-mean-difference-matched-pairs"><span class="header-section-number">3.3.1</span> Randomization test for mean difference (matched pairs)</a></li>
+  <li><a href="#bootstrap-confidence-intervals-for-mean-difference-matched-pairs" id="toc-bootstrap-confidence-intervals-for-mean-difference-matched-pairs" class="nav-link" data-scroll-target="#bootstrap-confidence-intervals-for-mean-difference-matched-pairs"><span class="header-section-number">3.3.2</span> Bootstrap confidence intervals for mean difference (matched pairs)</a></li>
+  <li><a href="#mathematical-model-approach-for-mean-difference-matched-pairs" id="toc-mathematical-model-approach-for-mean-difference-matched-pairs" class="nav-link" data-scroll-target="#mathematical-model-approach-for-mean-difference-matched-pairs"><span class="header-section-number">3.3.3</span> Mathematical model approach for mean difference (matched pairs)</a></li>
+  </ul></li>
+  <li><a href="#inference-for-comparing-many-means-chapter-22" id="toc-inference-for-comparing-many-means-chapter-22" class="nav-link" data-scroll-target="#inference-for-comparing-many-means-chapter-22"><span class="header-section-number">3.4</span> Inference for Comparing Many Means (Chapter 22)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Inference for Means (Chapters 19-22)</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>So far, we’ve discussed randomization, bootstrap, and mathematical models as methods to approximate/describe a sampling distribution and quantify variability, as well as how these methods can be used to answer research questions about categorical data. Now, we turn to how these three methods can be used to answer research questions for quantitative data, specifically a quantitative response. We’ll consider scenarios where there is a single numerical variable measured (one mean, Chapter 19), scenarios where a categorical explanatory variable with two possible values is recorded/assigned and a numerical response variable is observed (two independent means, Chapter 20), and scenarios in which a categorical explanatory variable with more than two possible values is recorded/assigned and a numerical response variable is observed (many means, Chapter 22). We’ll also encounter a new scenario: the difference between paired observations (Chapter 21). We’ll also meet two new distributions!</p>
+<p>In all of these scenarios the parameter(s) of interest is the mean (<span class="math inline">\(\mu\)</span>) of the population(s) under consideration. The natural estimator of the population mean is the sample mean, <span class="math inline">\(\bar X\)</span>. In Chapter 19 (and, spoiler alert, Chapter 21) we’ll have a single <span class="math inline">\(\mu\)</span>. In Chapter 20 we’ll have two <span class="math inline">\(\mu_i\)</span>s, and in Chapter 22 we’ll have several <span class="math inline">\(\mu_i\)</span>s.</p>
+<p>Like we did with proportions, we’ll rely on the Central Limit Theorem to model <span class="math inline">\(\bar X\)</span> using the normal distribution when we consider the mathematical model approaches. Also as with proportions, certain conditions must be met for this approach to be valid. We’ll discuss those conditions in each of the data scenarios. We’ll start with a single variable measured on each sample unit, where the observation results in a number.</p>
+<section id="inference-for-a-single-mean-chapter-19" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="inference-for-a-single-mean-chapter-19"><span class="header-section-number">3.1</span> Inference for a Single Mean (Chapter 19)</h2>
+<section id="bootstrap-confidence-intervals-for-a-mean" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="bootstrap-confidence-intervals-for-a-mean"><span class="header-section-number">3.1.1</span> Bootstrap Confidence Intervals for a Mean</h3>
+<p>Consider the following scenario. We’d like to learn about the true average wait time at Starbucks for a particular drink. To learn about this, we go to 6 randomly selected Starbucks locations in the same city, all at 10:00 am on Monday. At each location we order the same drink and observe the waiting time in seconds until it is prepared. The parameter of interest is</p>
+<p><span class="math inline">\(\mu =\)</span></p>
+<p>The sample statistic is</p>
+<p><span class="math inline">\(\bar X =\)</span></p>
+<p>Suppose we observed wait times of: 110, 54, 76, 123, 91, and 101. Based on our sample of six locations, the sample average wait time is <span class="math inline">\(\bar x = 92.5\)</span> seconds with sample standard deviation <span class="math inline">\(s=24.76\)</span> seconds.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Like we did with proportions, we can use the bootstrap method to approximate the variability we expect to see in sample means (calculated from 6 observations) from sample to sample:</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s go to R! We’ll start by setting up the data</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>waittime<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">110</span>, <span class="dv">54</span>, <span class="dv">76</span>, <span class="dv">123</span>, <span class="dv">91</span>, <span class="dv">101</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>waittime</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 110  54  76 123  91 101</code></pre>
+</div>
+</div>
+<p>Now, we’ll find the observed sample mean and standard deviation from our 6 observations:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(waittime) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 92.5</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(waittime)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24.76086</code></pre>
+</div>
+</div>
+<p>We’ll draw bootstrap samples just like we did with proportions, draw repeated samples of size 6 from our data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Set up an empty data set with 2 columns: simulation number, bootstrap mean#</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>boot.samples<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">sim=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,<span class="at">mean_WT=</span><span class="cn">NA</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#For each row in the data set, draw a bootstrap sample from the original data and find#</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># mean_WT#</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>mean_WT[i]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">sample</span>(waittime,<span class="at">size=</span><span class="dv">6</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram#</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.samples, <span class="fu">aes</span>(mean_WT)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">5</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#See the plot#</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>boot.hist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#To get the bootstrap percentile confidence interval, #</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#start by ranking the bootstrap means from smallest to largest #</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>rankmean<span class="ot">&lt;-</span><span class="fu">sort</span>(boot.samples<span class="sc">$</span>mean_WT)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Lower endpoint is the 2.5th percentile (95% confidence)#</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankmean[<span class="dv">25</span>]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 72.83333</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpoint is the 97.5th percentile (95% confidence)#</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankmean[<span class="dv">975</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 110.6667</code></pre>
+</div>
+</div>
+<p>This will give us a <strong>bootstrap percentile confidence interval</strong>.</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>The histogram of the bootstrapped sample means is relatively bell-shape, so we could also find a <strong>bootstrap SE confidence interval</strong>. For that, we’ll need the bootstrap SE (the standard deviation of the bootstrapped sample means).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bootstrap standard error of the mean#</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(rankmean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9.751536</code></pre>
+</div>
+</div>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The bootstrap method works for other statistics as well (even when the mathematical model does not)–like standard deviation, median, range, etc. With other stats we won’t necessarily end up a bell-shaped distribution. That’s okay–we can use the percentile method.</p>
+<p>For example, we could use the bootstrap approach to get a confidence interval for <span class="math inline">\(\sigma\)</span>, the true standard deviation of wait time.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Set up an empty data set with 2 columns: simulation number, bootstrap SD#</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>boot.samples<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">sim=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="at">sd_WT=</span><span class="cn">NA</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#For each row in the data set, draw a bootstrap sample from the original data and find#</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># sd_WT#</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>sd_WT[i]<span class="ot">&lt;-</span><span class="fu">sd</span>(<span class="fu">sample</span>(waittime,<span class="at">size=</span><span class="dv">6</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram#</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.samples, <span class="fu">aes</span>(sd_WT)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">2</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#See the plot#</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>boot.hist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#To get the bootstrap percentile confidence interval, #</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#start by ranking the bootstrap sds from smallest to largest #</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ranksd<span class="ot">&lt;-</span><span class="fu">sort</span>(boot.samples<span class="sc">$</span>sd_WT)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Lower endpoint is the 5th percentile (90% confidence)#</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>ranksd[<span class="dv">50</span>]</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.70981</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpont is the 95th percentile (90% confidence)#</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>ranksd[<span class="dv">950</span>]</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 31.2602</code></pre>
+</div>
+</div>
+<p><br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>: Wildlife researchers trapped and measured six adult male collared lemmings. The data (in mm) are: 104, 99, 112, 115, 96, 109. Use bootstrap methods to find a 95% confidence interval for the true mean size of adult male collared lemmings. Use both the percentile approach and the bootstrap SE approach.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+</section>
+<section id="mathematical-model-approach-for-a-mean" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="mathematical-model-approach-for-a-mean"><span class="header-section-number">3.1.2</span> Mathematical Model Approach for a Mean</h3>
+<p>Like with proportions, we’ll use the Central Limit Theorem here.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>This presents a few complications:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>The natural fix is to use <span class="math inline">\(s\)</span> (the sample standard deviation) in place of <span class="math inline">\(\sigma\)</span>, so <span class="math inline">\(SE=\)</span></p>
+<p>But this leads to yet another complication: the normal distribution isn’t quite right. We end up with a distribution that has heavier tails than the normal.</p>
+<p>Instead, we use the <span class="math inline">\(t\)</span>-distribution which, like the chi-squared, has the degrees of freedom parameter:</p>
+<ul>
+<li><p>degrees of freedom determines the shape of the <span class="math inline">\(t\)</span>, with the distribution getting closer and closer to the normal as the <span class="math inline">\(df\)</span> increase</p>
+<p>Demo: <a href="https://www.geogebra.org/m/xp7A3A53">Compare t and Z</a></p>
+<p>As <span class="math inline">\(df \rightarrow \infty\)</span>, the <span class="math inline">\(t\)</span> goes to the standard normal.</p></li>
+<li><p>In this scenario of a single mean, <span class="math inline">\(df=\)</span></p></li>
+<li><p>R function: <code>pt(q,df)</code></p></li>
+</ul>
+<section id="mathematical-model-confidence-intervals-for-a-single-mean" class="level4" data-number="3.1.2.1">
+<h4 data-number="3.1.2.1" class="anchored" data-anchor-id="mathematical-model-confidence-intervals-for-a-single-mean"><span class="header-section-number">3.1.2.1</span> Mathematical model confidence intervals for a single mean</h4>
+<p>Let’s work through confidence intervals for a single mean by way of example. Suppose we want to get a sense of the average number of goals scored per game in the NHL, and the average margin of victory. We record data on all 44 NHL games played over a Thursday-Monday in December. Let’s first look at the number of goals. The data are in Canvas.</p>
+<p>We’ll start with visualizing the data in R</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Read in the NHL data#</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>hockey<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"NHLGames.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(hockey)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Goals MarginVictory
+1     6             2
+2     3             1
+3     9             1
+4     7             3
+5     6             2
+6     5             1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Summarize Number of Goals#</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(hockey<span class="sc">$</span>Goals)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  3.000   5.000   6.000   6.114   7.000   9.000 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sGoals<span class="ot">&lt;-</span><span class="fu">sd</span>(hockey<span class="sc">$</span>Goals)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sGoals</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.728232</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>Goals.dot<span class="ot">&lt;-</span><span class="fu">ggplot</span>(hockey, <span class="fu">aes</span>(hockey<span class="sc">$</span>Goals)) <span class="sc">+</span> <span class="fu">geom_dotplot</span>()</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>Goals.dot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Use of `hockey$Goals` is discouraged.
+ℹ Use `Goals` instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Bin width defaults to 1/30 of the range of the data. Pick better value with
+`binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Are the conditions for the mathematical model met?</p>
+<ul>
+<li>Sample size</li>
+<li>Independence</li>
+</ul>
+<p><br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>The general form of the confidence interval hasn’t changed:</p>
+<p><span class="math display">\[
+\hbox{point estimate} \pm \hbox{multiplier} \times SE
+\]</span><br>
+<br>
+</p>
+<p>In our data set set, there are <span class="math inline">\(n=44\)</span> games.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For a confidence interval, need the multiplier for a 95% confidence interval, puts 0.025 in left tail#</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.05</span>, <span class="at">df=</span><span class="dv">43</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.681071</code></pre>
+</div>
+</div>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>What about a 90% confidence interval? What would change?</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>What about a 95% confidence interval for margin of victory?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Summarize Margin of Victory#</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(hockey<span class="sc">$</span>MarginVictory)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  1.000   1.000   2.000   2.159   3.000   6.000 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>Margin.dot<span class="ot">&lt;-</span><span class="fu">ggplot</span>(hockey, <span class="fu">aes</span>(hockey<span class="sc">$</span>MarginVictory)) <span class="sc">+</span> <span class="fu">geom_dotplot</span>()</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>Margin.dot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Use of `hockey$MarginVictory` is discouraged.
+ℹ Use `MarginVictory` instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Bin width defaults to 1/30 of the range of the data. Pick better value with
+`binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>sMV<span class="ot">&lt;-</span><span class="fu">sd</span>(hockey<span class="sc">$</span>MarginVictory)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>sMV</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.328457</code></pre>
+</div>
+</div>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="mathematical-model-hypothesis-tests-for-a-single-mean" class="level4" data-number="3.1.2.2">
+<h4 data-number="3.1.2.2" class="anchored" data-anchor-id="mathematical-model-hypothesis-tests-for-a-single-mean"><span class="header-section-number">3.1.2.2</span> Mathematical model hypothesis tests for a single mean</h4>
+<p>Just as with confidence intervals, the form of the test statistic doesn’t (typically) change as we move from data type to data type:</p>
+<p><span class="math display">\[
+\hbox{test statistic} = \frac{\hbox{observed value - null value}}{SE}
+\]</span> So now,</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>If the null hypothesis is true and the conditions are met, then our test statistic follows a <span class="math inline">\(t-\)</span>distribution with <span class="math inline">\(df = n-1\)</span>. The conditions are the same: independent observations and a large enough sample size with no extreme outliers. We can use the R function <code>pt(T,df=)</code> to get p-values.</p>
+<p><strong>Example</strong>: The Lincoln Marathon is the 51st largest marathon in the US, and is a qualifier for the Boston Marathon. From 2003 to 2019, the average finish time was 253.25 minutes (4 hours and 13 minutes, 15 seconds). The race was not run in 2020. We want to see if the break changed the average finish time. We took a random sample of 50 finishers from the 2021 race. For this random sample of 50, <span class="math inline">\(\bar x = 261.38\)</span> minutes and <span class="math inline">\(s=51.87\)</span> minutes.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: Consider a manufacturing process for hypodermic needles used for blood donation. The needles need to have a diameter of 1.65 mm. If the needles are too big, they hurt the donor. Too small, and they’ll rupture the red blood cells, making the donated blood useless. During every shift, quality control staff take a random sample of several needles and measure their diameter. If there’s a problem, they shut down the manufacturing process to correct it. Suppose the most recent sample of 35 needles had an average diameter of 1.64 mm and a standard deviation of 0.07 mm. Suppose the diameters of needles have a bell-shaped distribution. Based on these data, should the process be shut down?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>: The General Social Survey (GSS) is a survey of a representative sample of U.S. adults who are not institutionalized. A 2018 General Social Survey asked a random sample of 1,118 adults how often they contacted their closest friend by either phone, internet, other communication device, or face-to-face. Of the 1,118 responses, the average number of times per week the respondents contacted their closest friend was 2.87, with a standard deviation of 2.46. The sample data are not strongly skewed. We want to estimate the mean number of closest friend contacts per week.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Aside: How do we know from the sample mean and standard deviation that the distribution of contact times cannot be bell-shaped? Why is it still okay to use the mathematical model?</p>
+<div style="page-break-after: always;"></div>
+<p>We can also do these in R using <code>t.test</code>, but we’ll need the full data set, not just the summary statistics.</p>
+<p>For the NHL data,</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(hockey<span class="sc">$</span>Goals, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">alternative=</span><span class="st">"greater"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  hockey$Goals
+t = 4.2743, df = 43, p-value = 5.221e-05
+alternative hypothesis: true mean is greater than 5
+95 percent confidence interval:
+ 5.675649      Inf
+sample estimates:
+mean of x 
+ 6.113636 </code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="inference-for-a-two-independent-means-chapter-20" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="inference-for-a-two-independent-means-chapter-20"><span class="header-section-number">3.2</span> Inference for a Two Independent Means (Chapter 20)</h2>
+<p>Now, we’ll extend the methods for a single mean to differences in population means that come from two groups. So, we’ll now focus on constructing hypothesis tests about and estimating the function of parameters <span class="math inline">\(\mu_1 - \mu_2\)</span>, where <span class="math inline">\(\mu_1\)</span> is the mean of Group 1 an <span class="math inline">\(\mu_2\)</span> is the mean of Group 2. A reasonable point estimate is <span class="math inline">\(\bar x_1 - \bar x_2\)</span>, the difference in sample means.</p>
+<p>As we did with two proportions, we’ll look at analysis three different ways: randomization test; bootstrap to find an interval estimate; mathematical framework for tests and confidence intervals (assuming the conditions are met to use a normal approximation. One note: one of the conditions for these techniques (no matter which) is the groups are independent. What happens in Group 1 has no bearing on Group 2. If there is any dependence among the groups (twin studies, before-and-after studies, for example) these are not appropriate. This was not really a concern with proportions, but can occur quite naturally with means. We’ll consider dependence between the groups in a future section.</p>
+<section id="randomization-test-for-the-difference-in-means" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="randomization-test-for-the-difference-in-means"><span class="header-section-number">3.2.1</span> Randomization test for the difference in means</h3>
+<p>When we were working with proportions, we carried out a randomization test using two colors of cards. One color represented success, and the other color represented failure. We shuffled the cards, and dealt them into two stacks, representing our two groups. We then found the proportion of successes in each stack, and took the difference in proportions. We then did this shuffling/dealing many times. We’ll see through an example how our process changes when dealing with quantitative data.</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: The research question we are interested in investigating is whether playing violent video games lead people to more or less aggressive behavior. Hollingdale and Greitemeyer (2014) approached the question in this way. They randomly assigned 49 students from a UK university to play Call of Duty: Modern Warfare (violent) and 52 students to play LittleBigPlanet (not violent). After 30 minutes playing the video games, the subjects were asked to complete a marketing survey investigating a new hot chili sauce recipe. They were told to prepare some chili sauce for a taste tester and that the taste tester “couldn’t stand hot chili sauce but were taking part due to good payment.” They were then presented with that appeared to be a very hot chili sauce and asked to spoon what they thought would be an appropriate amount into a bowl for a new recipe. The amount of chili sauce was weighed in grams after the participant left the experiment. The amount of sauce was used as a measure of aggression: the more chili sauce, the greater the subject’s aggression.</p>
+<ul>
+<li>Is this an experiment or an observational study? How do you know?</li>
+</ul>
+<p><br>
+<br>
+</p>
+<ul>
+<li>How do we know this is involves quantitative data?</li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li>Parameters:</li>
+</ul>
+<p><br>
+<br>
+<br>
+</p>
+<ul>
+<li>Hypotheses:</li>
+</ul>
+<p><br>
+<br>
+<br>
+</p>
+<p>The resulting data are:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Group</th>
+<th><span class="math inline">\(n\)</span></th>
+<th>Mean</th>
+<th>SD</th>
+<th>Min</th>
+<th>Max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Violent</td>
+<td>49</td>
+<td>16.12</td>
+<td>15.30</td>
+<td>1</td>
+<td>63</td>
+</tr>
+<tr class="even">
+<td>Nonviolent</td>
+<td>52</td>
+<td>9.06</td>
+<td>7.65</td>
+<td>0</td>
+<td>38</td>
+</tr>
+</tbody>
+</table>
+<p>So our observed statistic is:</p>
+<div style="page-break-after: always;"></div>
+<p>Our goal is the same as it was with proportions: to determine whether the observed difference in sample means is likely to have occurred by chance if the null hypothesis is really true.</p>
+<p>Just like we shuffled cards in the two-proportions case, we’re going to have cards again. Like before, the shuffling implements the null hypothesis model–there is no effect of the violent video game. The amount of chili sauce selected doesn’t depend on whether or not the participant just played a violent game. We’d sometimes expect participants to use slightly more chili sauce if they’d just played a violent game (<span class="math inline">\(\bar x_{\tiny{\hbox{violent}}} &gt; \bar x_{\tiny{\hbox{nonviolent}}}\)</span> and sometimes expect participants to use slightly less chili sauce if they’d just played a violent video game (<span class="math inline">\(\bar x_{\tiny{\hbox{violent}}} &lt; \bar x_{\tiny{\hbox{nonviolent}}}\)</span> just due to natural variability.</p>
+<p>Before, we looked at red and black cards, shuffled, and dealt into two stacks representing our two groups. Now, color isn’t enough. Instead, we’ll still have <span class="math inline">\(n_{total} = 49 + 52\)</span> total cards, but we’ll write on the cards the observed amount of chili sauce. Then shuffle, and deal into stacks. One stack will get 49 cards (representing the 49 violent players) and the other will get 52 cards (representing the 52 nonviolent players). We’ll find the difference in sample means after the shuffling/dealing. We’ll repeat this process many times, and look to see how unusual our observed <span class="math inline">\(\bar x_{\hbox{\tiny{violent}}} - \bar x_{\hbox{\tiny{nonviolent}}} = 7.065\)</span> is.</p>
+<ul>
+<li>In the applet</li>
+</ul>
+<p><br>
+<br>
+</p>
+<ul>
+<li>In R</li>
+</ul>
+<p>We’ll start by loading the necessary packages and reading in the data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mosaic)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>chili<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"chili.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(chili)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  VideoGame ChiliSauce
+1   violent         42
+2   violent          4
+3   violent         27
+4   violent          2
+5   violent         10
+6   violent          5</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Get the sample mean for each group#</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ChiliSauce<span class="sc">~</span>VideoGame, <span class="at">data=</span>chili)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>nonviolent    violent 
+  9.057692  16.122449 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Find the difference in sample means#</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>obs_diff <span class="ot">&lt;-</span> <span class="fu">diff</span>(<span class="fu">mean</span>(ChiliSauce<span class="sc">~</span>VideoGame, <span class="at">data=</span>chili))</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>obs_diff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> violent 
+7.064757 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Construct box plots for each group#</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_boxplot</span>(ChiliSauce<span class="sc">~</span>VideoGame,<span class="at">data=</span>chili)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Scramble the treatment groups with respect to outcome many times to get the null distribution#</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>null_dist <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">1000</span>)<span class="sc">*</span><span class="fu">diff</span>(<span class="fu">mean</span>(ChiliSauce<span class="sc">~</span><span class="fu">shuffle</span>(VideoGame), <span class="at">data=</span>chili))</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(null_dist)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    violent
+1 -2.290031
+2  1.535126
+3  1.931515
+4  1.911695
+5 -1.100863
+6  3.318878</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram of the null distribution#</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>null_dist) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>violent))<span class="sc">+</span> </span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Difference in means"</span>) <span class="sc">+</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> obs_diff, <span class="at">linetype=</span><span class="dv">2</span>, <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="sc">-</span>obs_diff, <span class="at">linetype=</span><span class="dv">2</span>, <span class="at">color=</span><span class="st">"blue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate the proportion of simulated differences in mean as or more extreme than obs#</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prop</span>(<span class="sc">~</span>violent <span class="sc">&gt;=</span> obs_diff, <span class="at">data=</span>null_dist)<span class="sc">+</span><span class="fu">prop</span>(<span class="sc">~</span>violent <span class="sc">&lt;=</span> <span class="sc">-</span>obs_diff, <span class="at">data=</span>null_dist)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>prop_TRUE 
+    0.003 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Another way to visualize!#</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_histogram</span>(<span class="sc">~</span>violent, <span class="at">fill =</span> <span class="sc">~</span>(<span class="fu">abs</span>(violent) <span class="sc">&gt;=</span> obs_diff), <span class="at">data=</span>null_dist,</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">binwidth=</span><span class="fl">0.5</span>,<span class="at">xlab=</span><span class="st">"Distribution of difference in means under the null hypothesis"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bootstrap-confidence-interval-for-the-difference-in-means" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="bootstrap-confidence-interval-for-the-difference-in-means"><span class="header-section-number">3.2.2</span> Bootstrap confidence interval for the difference in means}</h3>
+<p>When we used bootstrapping to find confidence intervals for the difference in two proportions, we took a bootstrap sample separately from each group and calculated the difference in the resulting proportions. We’re going to do the same thing here–take a bootstrap sample from each group, find the two sample bootstrap means, and then find the difference in the bootstrap means. Doing this over and over again will allow us to explore the variability/sampling distribution of the difference in sample means.</p>
+<p><strong>Example</strong>: A random sample of college baseball players and a random sample of (male) college soccer players were obtained independently and weighed. The table below shows the weights (in pounds) (also a .csv file in Canvas).</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Baseball</th>
+<th>Soccer</th>
+<th>Baseball</th>
+<th>Soccer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>190</td>
+<td>165</td>
+<td>186</td>
+<td>156</td>
+</tr>
+<tr class="even">
+<td>200</td>
+<td>190</td>
+<td>210</td>
+<td>168</td>
+</tr>
+<tr class="odd">
+<td>187</td>
+<td>185</td>
+<td>198</td>
+<td>173</td>
+</tr>
+<tr class="even">
+<td>182</td>
+<td>187</td>
+<td>180</td>
+<td>158</td>
+</tr>
+<tr class="odd">
+<td>192</td>
+<td>183</td>
+<td>182</td>
+<td>150</td>
+</tr>
+<tr class="even">
+<td>205</td>
+<td>189</td>
+<td>193</td>
+<td>172</td>
+</tr>
+<tr class="odd">
+<td>185</td>
+<td>170</td>
+<td>200</td>
+<td>180</td>
+</tr>
+<tr class="even">
+<td>177</td>
+<td>182</td>
+<td>195</td>
+<td>184</td>
+</tr>
+</tbody>
+</table>
+<p>We are interested in estimating the differences in mean weight between baseball players and soccer players.</p>
+<p>Let’s look at R, and read in the data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>athletes<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"Athletes.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(athletes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Baseball Soccer
+1      190    165
+2      200    190
+3      187    185
+4      182    187
+5      192    183
+6      205    189</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co">#observed mean and sd#</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>basemean<span class="ot">&lt;-</span><span class="fu">mean</span>(athletes<span class="sc">$</span>Baseball) </span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>basemean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 191.375</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>basesd<span class="ot">&lt;-</span><span class="fu">sd</span>(athletes<span class="sc">$</span>Baseball) </span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>basesd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9.464847</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>soccermean<span class="ot">&lt;-</span><span class="fu">mean</span>(athletes<span class="sc">$</span>Soccer) </span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>soccermean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 174.5</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>soccersd<span class="ot">&lt;-</span><span class="fu">sd</span>(athletes<span class="sc">$</span>Soccer) </span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>soccersd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.49533</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Set up an empty data set with 4 columns: simulation number, </span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="co"># bootstrap mean for baseball, bootstrap mean for soccer, difference#</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>boot.samples<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">sim=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,<span class="at">mean_base=</span><span class="cn">NA</span>,<span class="at">mean_soccer=</span><span class="cn">NA</span>,<span class="at">diff=</span><span class="cn">NA</span>)</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="co">#For each row in the data set, draw a bootstrap sample from the original data and find#</span></span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a><span class="co"># mean_base and mean_soccer#</span></span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){</span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>mean_base[i]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">sample</span>(athletes<span class="sc">$</span>Baseball,<span class="at">size=</span><span class="dv">16</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>mean_soccer[i]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">sample</span>(athletes<span class="sc">$</span>Soccer,<span class="at">size=</span><span class="dv">16</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
+<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>diff[i]<span class="ot">&lt;-</span>boot.samples<span class="sc">$</span>mean_base[i]<span class="sc">-</span>boot.samples<span class="sc">$</span>mean_soccer[i]</span>
+<span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb64-14"><a href="#cb64-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-15"><a href="#cb64-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sim mean_base mean_soccer    diff
+1   1  191.1250    176.2500 14.8750
+2   2  192.8125    173.8125 19.0000
+3   3  190.1875    170.0625 20.1250
+4   4  189.0625    176.8125 12.2500
+5   5  189.6250    175.3125 14.3125
+6   6  192.4375    179.7500 12.6875</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram#</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.samples, <span class="fu">aes</span>(diff)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">2</span>)</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co">#See the plot#</span></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>boot.hist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co">#To get the bootstrap percentile confidence interval, #</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="co">#start by ranking the bootstrap means from smallest to largest #</span></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>rankmean<span class="ot">&lt;-</span><span class="fu">sort</span>(boot.samples<span class="sc">$</span>diff)</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Lower endpoint is the 2.5th percentile (95% confidence)#</span></span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankmean[<span class="dv">25</span>]</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.1875</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpont is the 97.5th percentile (95% confidence)#</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankmean[<span class="dv">975</span>]</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24.4375</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bootstrap standard error of the mean#</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(rankmean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.805684</code></pre>
+</div>
+</div>
+<p>So we can get a bootstrap percentile interval or a bootstrap SE interval.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Practice</strong>: (from book, page 346-348) Does treatment using embryonic stem cells (ESCs) help improve heart function following a heart attack? The data are in the library . Try to find a 95% confidence interval for <span class="math inline">\(\mu_{ESC} - \mu_{Control}\)</span> using the bootstrap percentile confidence interval and the bootstrap SE confidence interval.</p>
+<p><br>
+</p>
+<p><strong>More Practice</strong>: The Canvas file ‘shoes.csv’ contains data on many styles of athletic shoes. Find a confidence interval for the difference in mean price for road versus trail shoes.</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="mathematical-model-for-the-difference-in-means" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="mathematical-model-for-the-difference-in-means"><span class="header-section-number">3.2.3</span> Mathematical model for the difference in means</h3>
+<p>Just like with mathematical model methods for single means, we need to check conditions to determine whether we can the <span class="math inline">\(t\)</span>-distribution to construct tests and form confidence intervals for the difference in means.</p>
+<ul>
+<li>Independence–both between and within groups</li>
+<li>Check normality of each group separately (basically checking for extreme outliers)</li>
+<li>If these are both met, then the standard error of <span class="math inline">\(\bar x_1 - \bar x_2\)</span> is <span class="math inline">\(SE = \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma^2_2}{n_2}}\)</span> with <span class="math inline">\(df =\)</span> really complicated (you’ll see we get non-integers in R–it’s doing the complicated calculation). We’ll use <span class="math inline">\(\min(n_1-1, n_2-1)\)</span> if we’re not using R. We won’t know <span class="math inline">\(\sigma^2_1\)</span> and <span class="math inline">\(\sigma_2^2\)</span>, so we’ll approximate the standard error using <span class="math inline">\(SE \approx \sqrt{\frac{s_1^2}{n_1} + \frac{s^2_2}{n_2}}\)</span></li>
+</ul>
+<p>As with tests for a single mean (and one proportion, and two proportions), our test statistic will have the usual form: <span class="math display">\[
+\hbox{test statistic} = \frac{\hbox{observed value - hypothesized value}}{SE}
+\]</span> In the case of two means, this is <span class="math display">\[
+T = \frac{(\bar x_1 - \bar x_2) - 0}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
+\]</span> When the null hypothesis is true and the conditions are met, <span class="math inline">\(T\)</span> has a <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(df=\min(n_1-1,n_2-1)\)</span>.</p>
+<p>Confidence intervals will also have the same form: <span class="math display">\[
+\hbox{observed statistic} \pm \hbox{multiplier} \times SE
+\]</span> For this specific situation of comparing two independent means, this is <span class="math display">\[
+(\bar x_1 - \bar x_2) \pm t^*_{df} \times \sqrt{\frac{s_1^2}{n_1} + \frac{s^2_2}{n_2}}
+\]</span> and we’ll again use <span class="math inline">\(df=\min(n_1-1,n_2-1)\)</span> (or let R calculate it for us).</p>
+<p>With two proportions, our SE depending on whether we were doing a hypothesis test or calculating a confidence interval. Here, it doesn’t. Any guesses why?</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: The data set SleepStudy contains data on 253 students who did skills tests to measure cognitive function, completed a survey about attitude and habits, and kept a sleep diary. The data were reported in Onyper, et al.&nbsp;(2012). There are lots of different potential variables to consider. The data set includes:</p>
+<ul>
+<li>Gender: 1=male, 0=female</li>
+<li>ClassYear: Year in school, 1=first year, <span class="math inline">\(\dots\)</span>, 4=senior</li>
+<li>LarkOwl: Early riser or night owl? Lark, Neither, or Owl</li>
+<li>NumEarlyClass: Number of classes per week before 9 am</li>
+<li>EarlyClass: Indicator for any early classes</li>
+<li>GPA: Grade point average (0-4 scale)</li>
+<li>ClassesMissed: Number of classes missed in a semester</li>
+<li>CognitionZScore: Z-score on a test of cognitive skills</li>
+<li>PoorSleepQuality: Measure of sleep quality (higher values are poorer sleep)</li>
+<li>DepressionScore: Measure of degree of depression</li>
+<li>AnxietyScore: Measure of amount of anxiety</li>
+<li>StressScore: Measure of amount of stress</li>
+<li>DepressionStatus: Coded depression score: normal, moderate, or severe</li>
+<li>AnxietyStatus: Coded anxiety score: normal, moderate, or severe</li>
+<li>Stress: Coded stress score: normal or high</li>
+<li>DASScore: Combined score for depression, anxiety, and stress</li>
+<li>Happiness: Measure of degree of happiness</li>
+<li>AlcoholUse: Self-reported: Abstain, light, moderate, or heavy</li>
+<li>Drinks: Number of alcoholic drinks per week</li>
+<li>WeekdayBed: Average weekday bedtime (24.0 = midnight)</li>
+<li>WeekdayRise: Average weekday rise time (8.0 = 8 am)</li>
+<li>WeekdaySleep: Average hours of sleep on weekdays</li>
+<li>WeekendBed: Average weekend bedtime (24.0 = midnight)</li>
+<li>WeekendRise: Average weekend rise time (8.0 = 8 am)</li>
+<li>WeekendSleep: Average hours of sleep on weekends</li>
+<li>AverageSleep: Average hours of sleep for all days</li>
+<li>AllNighter: Had an all-nighter this semester? 1=yes, 0=no</li>
+</ul>
+<p>Let’s consider the variables GPA and stress (coded normal or high). We’d like to know if there is convincing evidence that those with high stress levels have a different mean GPA than those with normal stress levels.</p>
+<ul>
+<li>Hypotheses:</li>
+</ul>
+<div style="page-break-after: always;"></div>
+<ul>
+<li>Check conditions:
+<ul>
+<li>Independent observations?</li>
+<li>Large enough sample sizes?</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+T = \frac{(\bar x_1 - \bar x_2) - 0}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}} = \hspace{90mm}
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>sleep<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"SleepStudy.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Those with normal stress#</span></span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sleep<span class="sc">$</span>GPA[sleep<span class="sc">$</span>Stress<span class="sc">==</span><span class="st">"normal"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  2.000   3.000   3.250   3.209   3.500   4.000 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">with</span>(sleep,Stress<span class="sc">==</span><span class="st">"normal"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 197</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(sleep<span class="sc">$</span>GPA[sleep<span class="sc">$</span>Stress<span class="sc">==</span><span class="st">"normal"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.412318</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Those with high stress#</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sleep<span class="sc">$</span>GPA[sleep<span class="sc">$</span>Stress<span class="sc">==</span><span class="st">"high"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  2.500   3.065   3.350   3.366   3.603   4.000 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">with</span>(sleep,Stress<span class="sc">==</span><span class="st">"high"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 56</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(sleep<span class="sc">$</span>GPA[sleep<span class="sc">$</span>Stress<span class="sc">==</span><span class="st">"high"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3513277</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>dotplot<span class="ot">&lt;-</span><span class="fu">ggplot</span>(sleep, <span class="fu">aes</span>(GPA)) <span class="sc">+</span> <span class="fu">geom_dotplot</span>(<span class="fu">aes</span>(<span class="at">color=</span>Stress)) <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>Stress)</span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>dotplot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Bin width defaults to 1/30 of the range of the data. Pick better value with
+`binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>And we can get the p-value:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="sc">-</span><span class="fl">2.835</span>,<span class="at">df=</span><span class="dv">55</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.00639864</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<p>In R, we can carry out this test very easily:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(GPA<span class="sc">~</span>Stress,<span class="at">data=</span>sleep)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  GPA by Stress
+t = 2.8397, df = 102.11, p-value = 0.005451
+alternative hypothesis: true difference in means between group high and group normal is not equal to 0
+95 percent confidence interval:
+ 0.04741781 0.26711265
+sample estimates:
+  mean in group high mean in group normal 
+            3.366250             3.208985 </code></pre>
+</div>
+</div>
+<p><br>
+<br>
+</p>
+<p>We can also use the <code>subset</code> function to restrict our attention to a specific value of another variable. For example, suppose we want to determine whether average hours of weekday sleep (WeekdaySleep) differs between those who have at least one early class and those who do not (EarlyClass; 0=no; 1=yes). However, we want to restrict our attention only to those who consider themselves Night Owls (LarkOwl=Owl). We could do this with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>sleep2<span class="ot">&lt;-</span><span class="fu">subset</span>(sleep,LarkOwl<span class="sc">==</span><span class="st">'Owl'</span>)</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sleep2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Gender ClassYear LarkOwl NumEarlyClass EarlyClass  GPA ClassesMissed
+3       0         4     Owl             0          0 2.97            12
+5       0         4     Owl             0          0 3.20             4
+20      1         3     Owl             3          1 2.80            20
+26      1         2     Owl             0          0 3.07            20
+27      1         2     Owl             4          1 3.00            10
+46      1         3     Owl             0          0 3.50             2
+   CognitionZscore PoorSleepQuality DepressionScore AnxietyScore StressScore
+3             0.38               18              18           18           9
+5             1.22                9               7           25          14
+20           -0.57               15               6            5          10
+26           -0.62                9              23            5          16
+27            0.16                5              14           13          14
+46            0.47                6               9            5          19
+   DepressionStatus AnxietyStatus Stress DASScore Happiness AlcoholUse Drinks
+3          moderate        severe normal       45        17      Light      3
+5            normal        severe normal       46        15   Moderate      4
+20           normal        normal normal       21        19   Moderate      7
+26           severe        normal   high       44        24    Abstain      0
+27         moderate      moderate normal       41        28   Moderate      8
+46           normal        normal   high       33        24   Moderate      9
+   WeekdayBed WeekdayRise WeekdaySleep WeekendBed WeekendRise WeekendSleep
+3       27.44        6.55         3.00      28.00       12.59        10.09
+5       25.90        8.67         6.09      23.75        9.50         7.00
+20      25.25        8.12         7.20      25.67       10.50         8.00
+26      24.70       11.02        10.32      27.50       12.25         8.75
+27      24.40        7.95         8.45      24.00       11.75         9.50
+46      24.95        8.86         7.97      27.00       11.63         9.13
+   AverageSleep AllNighter
+3          5.02          0
+5          6.35          0
+20         7.43          0
+26         9.87          0
+27         8.75          0
+46         8.30          0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(WeekdaySleep<span class="sc">~</span>EarlyClass, <span class="at">data=</span>sleep2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  WeekdaySleep by EarlyClass
+t = 0.79051, df = 30.009, p-value = 0.4354
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ -0.5768755  1.3055071
+sample estimates:
+mean in group 0 mean in group 1 
+       7.986316        7.622000 </code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<p>For confidence intervals, let’s go back to the baseball and soccer players. The summary statistics are:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Group</th>
+<th><span class="math inline">\(n\)</span></th>
+<th>Mean</th>
+<th>SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Baseball</td>
+<td>16</td>
+<td>191.375</td>
+<td>9.465</td>
+</tr>
+<tr class="even">
+<td>Soccer</td>
+<td>16</td>
+<td>174.5</td>
+<td>12.495</td>
+</tr>
+</tbody>
+</table>
+<p>We do need to check the conditions to see if we can use the mathematical model. We can use dotplot to check for extreme outliers. However, this data set is structured differently than we have seen before, and we’ll need to restructure. There are two ways to do this, but one will require a couple of new packages: <code>tidyr</code> and <code>tidyverse</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>One way to restructure:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>athletes2 <span class="ot">&lt;-</span> athletes <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="fu">c</span>(<span class="st">'Baseball'</span>,<span class="st">'Soccer'</span>), <span class="at">names_to=</span><span class="st">'Sport'</span>,<span class="at">values_to=</span><span class="st">'Weight'</span>)</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>athletes2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 32 × 2
+   Sport    Weight
+   &lt;chr&gt;     &lt;int&gt;
+ 1 Baseball    190
+ 2 Soccer      165
+ 3 Baseball    200
+ 4 Soccer      190
+ 5 Baseball    187
+ 6 Soccer      185
+ 7 Baseball    182
+ 8 Soccer      187
+ 9 Baseball    192
+10 Soccer      183
+# ℹ 22 more rows</code></pre>
+</div>
+</div>
+<p>Another way:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>athletes3<span class="ot">&lt;-</span><span class="fu">cbind</span>(<span class="fu">stack</span>(athletes[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]))</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>athletes3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   values      ind
+1     190 Baseball
+2     200 Baseball
+3     187 Baseball
+4     182 Baseball
+5     192 Baseball
+6     205 Baseball
+7     185 Baseball
+8     177 Baseball
+9     186 Baseball
+10    210 Baseball
+11    198 Baseball
+12    180 Baseball
+13    182 Baseball
+14    193 Baseball
+15    200 Baseball
+16    195 Baseball
+17    165   Soccer
+18    190   Soccer
+19    185   Soccer
+20    187   Soccer
+21    183   Soccer
+22    189   Soccer
+23    170   Soccer
+24    182   Soccer
+25    156   Soccer
+26    168   Soccer
+27    173   Soccer
+28    158   Soccer
+29    150   Soccer
+30    172   Soccer
+31    180   Soccer
+32    184   Soccer</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co">#rename columns#</span></span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Do I need to do this? No. Does it help me keep track of which variable is which? Yes#</span></span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(athletes3)[<span class="dv">1</span>]<span class="ot">=</span><span class="st">"weight"</span></span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(athletes3)[<span class="dv">2</span>]<span class="ot">=</span><span class="st">"sport"</span></span>
+<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a>athletes3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   weight    sport
+1     190 Baseball
+2     200 Baseball
+3     187 Baseball
+4     182 Baseball
+5     192 Baseball
+6     205 Baseball
+7     185 Baseball
+8     177 Baseball
+9     186 Baseball
+10    210 Baseball
+11    198 Baseball
+12    180 Baseball
+13    182 Baseball
+14    193 Baseball
+15    200 Baseball
+16    195 Baseball
+17    165   Soccer
+18    190   Soccer
+19    185   Soccer
+20    187   Soccer
+21    183   Soccer
+22    189   Soccer
+23    170   Soccer
+24    182   Soccer
+25    156   Soccer
+26    168   Soccer
+27    173   Soccer
+28    158   Soccer
+29    150   Soccer
+30    172   Soccer
+31    180   Soccer
+32    184   Soccer</code></pre>
+</div>
+</div>
+<p>Now we can get the dotplots.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>dotplot<span class="ot">&lt;-</span><span class="fu">ggplot</span>(athletes2, <span class="fu">aes</span>(Weight)) <span class="sc">+</span> <span class="fu">geom_dotplot</span>(<span class="fu">aes</span>(<span class="at">color=</span>Sport)) <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>Sport)</span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>dotplot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Bin width defaults to 1/30 of the range of the data. Pick better value with
+`binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We can also get the confidence interval in R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Weight<span class="sc">~</span>Sport,<span class="at">data=</span>athletes2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  Weight by Sport
+t = 4.3061, df = 27.95, p-value = 0.0001846
+alternative hypothesis: true difference in means between group Baseball and group Soccer is not equal to 0
+95 percent confidence interval:
+  8.846974 24.903026
+sample estimates:
+mean in group Baseball   mean in group Soccer 
+               191.375                174.500 </code></pre>
+</div>
+</div>
+<p>By default, R calculates 95% confidence intervals. We can change this with the <code>conf.level=</code> statement:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Weight<span class="sc">~</span>Sport,<span class="at">data=</span>athletes2,<span class="at">conf.level=</span><span class="fl">0.90</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  Weight by Sport
+t = 4.3061, df = 27.95, p-value = 0.0001846
+alternative hypothesis: true difference in means between group Baseball and group Soccer is not equal to 0
+90 percent confidence interval:
+ 10.20813 23.54187
+sample estimates:
+mean in group Baseball   mean in group Soccer 
+               191.375                174.500 </code></pre>
+</div>
+</div>
+<p>For practice, find a research question you can answer using variables in the sleep study data.</p>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="inference-for-comparing-paired-means-chapter-21" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="inference-for-comparing-paired-means-chapter-21"><span class="header-section-number">3.3</span> Inference for Comparing Paired Means (Chapter 21)</h2>
+<p>Everything we’ve done so far has assumed independence among observations. If we only had one group, it was just independence among observations. If we had two or more groups, it was independence between and within groups. Now, we’ll turn our attention to a common situation: dependence between groups. Specifically, a particular dependency–pairing. This occurs in before/after studies, other studies in which subjects are matched. For example, considering the price of a item purchased from two different retailers.</p>
+<p>In these situations, we generally take the difference between the two values, and consider the difference as our observation. So, for example, if we want to compare cost of textbooks between the campus bookstore and Amazon, we’d randomly select a set of book titles, and find their price at both the bookstore and Amazon. We’d find the difference in price, and use those differences as our observations.</p>
+<p>Note that we’re distinguishing between <strong>difference in means</strong> (Chapter 20) and <strong>mean difference</strong> (Chapter 21).</p>
+<ul>
+<li>Parameters:</li>
+</ul>
+<p><br>
+- Observed Statistics:</p>
+<p><br>
+</p>
+<p>Good news: we’ve already seen how to construct mathematical model tests and confidence intervals here! We just use the same techniques we used for a single mean (Chapter 19), but on the differences.</p>
+<p>However, randomization tests didn’t really work with one mean in Chapter 19 because there was nothing to randomize. They will work here!</p>
+<section id="randomization-test-for-mean-difference-matched-pairs" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="randomization-test-for-mean-difference-matched-pairs"><span class="header-section-number">3.3.1</span> Randomization test for mean difference (matched pairs)</h3>
+<p><strong>Example</strong>: Suppose you are playing baseball and hit a hard line drive. You want to turn a single into a double. Does the path you take to round first base make a difference? A masters thesis way back in 1970 considered the difference between a <code>narrow angle'' and a</code>wide angle’’ around first base. Suppose we have 22 baseball players who have volunteered to participate. There are a couple ways we could design an experiment to see if there is a difference.</p>
+<ul>
+<li>Randomly assign 11 players to run a wide angle and 11 players to run a narrow angle. Problems: some players may be faster than others. Ideally, randomization will equally distribute the speedy runners between the two groups, but there is no guarantee. Speed could be a confounding variable.</li>
+<li>Have each of the 22 runners run both angles, with the angle run first randomized using a coin. This allows each player to serve as their own control.</li>
+</ul>
+<p>The second option is what the thesis writer did–he randomly determined the angle the player would take first. He then used a stopwatch the time the run from going from a spot 35 feet past home to a spot 15 feet before 2nd base. After a rest period, the runner then ran the second angle. This controls for runner-to-runner variability. It’s important to randomize the order of the treatments, where possible! (This isn’t possible in before-and-after type studies.)</p>
+<p>Let’s look at the data:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bases.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><br>
+<br>
+</p>
+<p>Parameter of interest:</p>
+<p><br>
+</p>
+<p>Hypotheses of interest:</p>
+<p><br>
+</p>
+<p>Observed statistic:</p>
+<p><br>
+</p>
+<p>Like before, we’re trying to determine if it’s surprising to see such a large difference as <span class="math inline">\(\bar x_d = 0.075\)</span> just by chance, if running strategy has no effect on running time.</p>
+<p>Here’s how the randomization test works: if running strategy really doesn’t make a difference, then the two times for each runner were going to be the same two times regardless of which strategy was used. Any difference was just by chance, perhaps which one they ran first. That is, it really doesn’t matter which value we call wide angle time and which value we call narrow angle time–the two times are completely interchangeable or swappable. This idea of swapping is how we’ll do the randomization.</p>
+<p>In the two sample randomization test, the explanatory variable was randomly assigned to the response. We shuffled all the cards, and randomly dealt them into the two stacks. Here, randomization occurs within an observational unit (in our example, a baseball player). So, the two times will stay assigned to the same player, but we’ll randomly decide which time is narrow and which is wide using a coin flip. If the coin comes up, we swap the times. If the coin comes up tails, we don’t swap.</p>
+<p>We’re going to do these in the applet, because I think it’s easiest to see the swapping. Let’s try it:</p>
+<ul>
+<li>Go to applet, do one randomization. In our randomization, how many players had their times swapped? The mean difference from this first randomization is shown in the applet. Like other randomization tests, we’ll need to do this over and over. We’ve built up an estimate of the sampling distribution for the mean difference.</li>
+<li>Now, just like before, we’ll see how unusual our observed <span class="math inline">\(\bar x_d = 0.075\)</span> is. Remember this is a two-sided test. None of our randomizations resulted in a mean difference more extreme than <span class="math inline">\(\bar x_d =0.075\)</span>. So, our p-value is approximately 0, and it looks like we do have evidence that base-running strategy has an impact on running time. We can reject the null hypothesis, and conclude that there is a difference in the strategies. \end{itemize}</li>
+</ul>
+</section>
+<section id="bootstrap-confidence-intervals-for-mean-difference-matched-pairs" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="bootstrap-confidence-intervals-for-mean-difference-matched-pairs"><span class="header-section-number">3.3.2</span> Bootstrap confidence intervals for mean difference (matched pairs)</h3>
+<p>The bootstrap approach to finding a confidence interval for <span class="math inline">\(\mu_d\)</span> is almost identical to the method for finding a bootstrap confidence interval for a single mean. The difference is in the interpretation.</p>
+<ul>
+<li>Take bootstrap samples from the observed <strong>differences</strong></li>
+<li>Let’s look at the R code</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>bases<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"bases.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>bases</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id narrow wide
+1   1   5.50 5.55
+2   2   5.70 5.75
+3   3   5.60 5.50
+4   4   5.50 5.40
+5   5   5.85 5.70
+6   6   5.55 5.60
+7   7   5.40 5.35
+8   8   5.50 5.35
+9   9   5.15 5.00
+10 10   5.80 5.70
+11 11   5.20 5.10
+12 12   5.55 5.45
+13 13   5.35 5.45
+14 14   5.00 4.95
+15 15   5.50 5.40
+16 16   5.55 5.50
+17 17   5.55 5.35
+18 18   5.50 5.55
+19 19   5.45 5.25
+20 20   5.60 5.40
+21 21   5.65 5.55
+22 22   6.30 6.25</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>bases<span class="sc">$</span>diff<span class="ot">&lt;-</span>bases<span class="sc">$</span>narrow<span class="sc">-</span>bases<span class="sc">$</span>wide</span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="do">##Bootstrap confidence intervals##</span></span>
+<span id="cb110-4"><a href="#cb110-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Set up an empty data set with 2 columns: simulation number, bootstrap mean#</span></span>
+<span id="cb110-5"><a href="#cb110-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-6"><a href="#cb110-6" aria-hidden="true" tabindex="-1"></a>boot.samples<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">sim=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,<span class="at">mean_diff=</span><span class="cn">NA</span>)</span>
+<span id="cb110-7"><a href="#cb110-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-8"><a href="#cb110-8" aria-hidden="true" tabindex="-1"></a><span class="co">#For each row in the data set, draw a bootstrap sample from the original data and find#</span></span>
+<span id="cb110-9"><a href="#cb110-9" aria-hidden="true" tabindex="-1"></a><span class="co"># mean_diff#</span></span>
+<span id="cb110-10"><a href="#cb110-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-11"><a href="#cb110-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){</span>
+<span id="cb110-12"><a href="#cb110-12" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>mean_diff[i]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">sample</span>(bases<span class="sc">$</span>diff,<span class="at">size=</span><span class="dv">22</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
+<span id="cb110-13"><a href="#cb110-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb110-14"><a href="#cb110-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-15"><a href="#cb110-15" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram#</span></span>
+<span id="cb110-16"><a href="#cb110-16" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.samples, <span class="fu">aes</span>(mean_diff)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.005</span>)</span>
+<span id="cb110-17"><a href="#cb110-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-18"><a href="#cb110-18" aria-hidden="true" tabindex="-1"></a><span class="co">#See the plot#</span></span>
+<span id="cb110-19"><a href="#cb110-19" aria-hidden="true" tabindex="-1"></a>boot.hist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co">#To get the bootstrap percentile confidence interval, #</span></span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="co">#start by ranking the bootstrap means from smallest to largest #</span></span>
+<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a>rankmean<span class="ot">&lt;-</span><span class="fu">sort</span>(boot.samples<span class="sc">$</span>mean_diff)</span>
+<span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-5"><a href="#cb111-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Lower endpoint is the 2.5th percentile (95% confidence)#</span></span>
+<span id="cb111-6"><a href="#cb111-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankmean[<span class="dv">25</span>]</span>
+<span id="cb111-7"><a href="#cb111-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03863636</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpoint is the 97.5th percentile (95% confidence)#</span></span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankmean[<span class="dv">975</span>]</span>
+<span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1090909</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bootstrap standard error of the mean#</span></span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(rankmean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01840164</code></pre>
+</div>
+</div>
+<ul>
+<li>Bootstrap percentile confidence interval:</li>
+</ul>
+<div style="page-break-after: always;"></div>
+<ul>
+<li>Bootstrap SE confidence interval:</li>
+</ul>
+<p><br>
+<br>
+</p>
+<p>What would happen if we (incorrectly) ignored the pairing? Let’s find a 95% confidence interval, assuming the two samples are independent.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="do">##INCORRECT ANALYSIS##</span></span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Set up an empty data set with 4 columns: simulation number, bootstrap mean for narrow, bootstrap mean for wide, difference#</span></span>
+<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-4"><a href="#cb117-4" aria-hidden="true" tabindex="-1"></a>boot.samples<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">sim=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,<span class="at">mean_narrow=</span><span class="cn">NA</span>,<span class="at">mean_wide=</span><span class="cn">NA</span>,<span class="at">diff=</span><span class="cn">NA</span>)</span>
+<span id="cb117-5"><a href="#cb117-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-6"><a href="#cb117-6" aria-hidden="true" tabindex="-1"></a><span class="co">#For each row in the data set, draw a bootstrap sample from the original data and find#</span></span>
+<span id="cb117-7"><a href="#cb117-7" aria-hidden="true" tabindex="-1"></a><span class="co"># mean_narrow and mean_wide#</span></span>
+<span id="cb117-8"><a href="#cb117-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-9"><a href="#cb117-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){</span>
+<span id="cb117-10"><a href="#cb117-10" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>mean_narrow[i]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">sample</span>(bases<span class="sc">$</span>narrow,<span class="at">size=</span><span class="dv">22</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
+<span id="cb117-11"><a href="#cb117-11" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>mean_wide[i]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">sample</span>(bases<span class="sc">$</span>wide,<span class="at">size=</span><span class="dv">22</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
+<span id="cb117-12"><a href="#cb117-12" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>diff[i]<span class="ot">&lt;-</span>boot.samples<span class="sc">$</span>mean_narrow[i]<span class="sc">-</span>boot.samples<span class="sc">$</span>mean_wide[i]</span>
+<span id="cb117-13"><a href="#cb117-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb117-14"><a href="#cb117-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-15"><a href="#cb117-15" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram#</span></span>
+<span id="cb117-16"><a href="#cb117-16" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.samples, <span class="fu">aes</span>(diff)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.05</span>)</span>
+<span id="cb117-17"><a href="#cb117-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-18"><a href="#cb117-18" aria-hidden="true" tabindex="-1"></a><span class="co">#See the plot#</span></span>
+<span id="cb117-19"><a href="#cb117-19" aria-hidden="true" tabindex="-1"></a>boot.hist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co">#To get the bootstrap percentile confidence interval, #</span></span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="co">#start by ranking the bootstrap means from smallest to largest #</span></span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>rankmean<span class="ot">&lt;-</span><span class="fu">sort</span>(boot.samples<span class="sc">$</span>diff)</span>
+<span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Lower endpoint is the 2.5th percentile (95% confidence)#</span></span>
+<span id="cb118-6"><a href="#cb118-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankmean[<span class="dv">25</span>]</span>
+<span id="cb118-7"><a href="#cb118-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.08181818</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpoint is the 97.5th percentile (95% confidence)#</span></span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankmean[<span class="dv">975</span>]</span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2272727</code></pre>
+</div>
+</div>
+<p><br>
+<br>
+</p>
+<p>The hardest part is determining whether we are dealing with independent samples or matched pairs. Let’s talk through 21.2, 21.3, 21.4, and 21.5</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="mathematical-model-approach-for-mean-difference-matched-pairs" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="mathematical-model-approach-for-mean-difference-matched-pairs"><span class="header-section-number">3.3.3</span> Mathematical model approach for mean difference (matched pairs)</h3>
+<p>The mathematical model approach to matched pairs is the same as the one sample analysis, but carried out on differences. The changes come in the form of the hypotheses and interpretation of the confidence interval.</p>
+<p>We still need to check conditions!</p>
+<ul>
+<li>Independence: among observations (we know the observations within an observation are not independent)</li>
+<li>Large enough sample size: no extreme outliers or strong skew</li>
+</ul>
+<p><strong>Example:</strong> A study carried out by Cai et al.&nbsp;(2019) aimed to determine whether laugh tracks make dad jokes seem funnier. The researchers had a professional comedian record 40 dad jokes. They had people listen to the jokes and rate how funny they were on a 7 point scale, with 1 being not funny at all and 7 being extremely funny. Other people listened to the same 40 jokes, but this time the researchers added a laugh track to the recording. The volunteers were randomized to either no laugh track or laugh track.</p>
+<ul>
+<li>Why is this a paired scenario?</li>
+</ul>
+<p><br>
+<br>
+</p>
+<ul>
+<li>What is the parameter?</li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li>What are the hypotheses?</li>
+</ul>
+<p><br>
+</p>
+<p>Here are the observed statistics:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Laugh Track?</th>
+<th><span class="math inline">\(n\)</span></th>
+<th>Sample mean</th>
+<th>Sample SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>With</td>
+<td>40</td>
+<td>3.010</td>
+<td>0.490</td>
+</tr>
+<tr class="even">
+<td>Without</td>
+<td>40</td>
+<td>2.715</td>
+<td>0.507</td>
+</tr>
+<tr class="odd">
+<td>Diff=with-without</td>
+<td>40</td>
+<td><span class="math inline">\(\bar x_d=0.295\)</span></td>
+<td><span class="math inline">\(s_d = 0.427\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Hypothesis test:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>90% confidence interval:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We can also do this in R, adding <code>paired=TRUE</code> to the <code>t.test</code> code. Let’s try it with the base running data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(bases<span class="sc">$</span>narrow,bases<span class="sc">$</span>wide,<span class="at">paired=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Paired t-test
+
+data:  bases$narrow and bases$wide
+t = 3.9837, df = 21, p-value = 0.0006754
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.03584814 0.11415186
+sample estimates:
+mean difference 
+          0.075 </code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="inference-for-comparing-many-means-chapter-22" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="inference-for-comparing-many-means-chapter-22"><span class="header-section-number">3.4</span> Inference for Comparing Many Means (Chapter 22)</h2>
+<p>We’re going to start this section by considering an example. The data are in the file ‘mice.csv.’</p>
+<p><strong>Example:</strong> These data come from an experiment to determine if exercise confers some resilience to stress. Mice were randomly assigned to either an enriched environment (exercise wheel) or standard environment, and spent three weeks there. After that time, they were exposed for five minutes per day for two weeks to a “mouse bully”–a mouse very strong, aggressive, and territorial. After those two weeks, anxiety in the mice was measured, as amount of time hiding in a dark compartment. Mice that are more anxious spend more time in darkness. We want to determine if there is a difference in time spent in darkness for the two groups of mice.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>mice<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"mice.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mice)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Envr Time
+1 Enrich  259
+2 Enrich  280
+3 Enrich  138
+4 Enrich  227
+5 Enrich  203
+6 Enrich  184</code></pre>
+</div>
+</div>
+<p>We already know how to answer this research question!</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s first plot the data</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/mice-data-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It definitely looks like there’s a difference between the groups! We can find the group means and standard deviations. We’ll also add the sample means to the plot.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(mice<span class="sc">$</span>Time, <span class="at">by=</span><span class="fu">list</span>(mice<span class="sc">$</span>Envr), <span class="at">FUN=</span>mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Group.1        x
+1  Enrich 217.4286
+2     Std 438.7143</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(mice<span class="sc">$</span>Time, <span class="at">by=</span><span class="fu">list</span>(mice<span class="sc">$</span>Envr), <span class="at">FUN=</span>sd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Group.1        x
+1  Enrich 47.52844
+2     Std 37.68162</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/mice-data-means-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We’re testing H<span class="math inline">\(_0: \mu_1 = \mu_2\)</span>, and assume this is true to construct the test. The overall common sample mean is <span class="math inline">\(\bar x = 328.07\)</span>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Time<span class="sc">~</span>Envr,<span class="at">data=</span>mice)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  Time by Envr
+t = -9.6526, df = 11.407, p-value = 7.885e-07
+alternative hypothesis: true difference in means between group Enrich and group Std is not equal to 0
+95 percent confidence interval:
+ -271.5245 -171.0470
+sample estimates:
+mean in group Enrich    mean in group Std 
+            217.4286             438.7143 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/mice-data-overall-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It turns out the difference between the two groups will also manifest itself in the variances. There will be variation between the group means and the overall mean, as well as variation between the data points and their group means.</p>
+<p>Remember how sample variance is calculated:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We’re exploring how far, on average, observations are from the mean (squared). So, variance has to be positive. If there is a difference between the group means, the first kind of variation (between the group means and the overall mean) will be much greater than the second kind of variance (between the data points and their group mean). We can test whether the first variance is bigger than the second using an <span class="math inline">\(F\)</span> statistic, just like we did in the last section when we were comparing two variances:</p>
+<p><span class="math display">\[
+F = \frac{\hbox{variance between group means and overall mean}}{\hbox{variance between the data points and their group mean}}
+\]</span></p>
+<p>If the variances are about equal, there’s no evidence of a difference between the group means–they vary as much from the overall mean as data points vary from their group mean. This will result in an <span class="math inline">\(F\)</span> statistic of about 1. If there is a difference between the group means, the first kind of variation (between the group means and the overall mean) will be much greater than the second kind of variance (between the data points and their group mean). This will result in an <span class="math inline">\(F\)</span> statistic greater than 1.</p>
+<div style="page-break-after: always;"></div>
+<p>For the mice data:</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Notice!</strong></p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>We made some assumptions to carry out the <span class="math inline">\(t\)</span>-test:</p>
+<ul>
+<li>approximate normality (no extreme outliers, no strong skew)</li>
+<li>independence between groups and between observations</li>
+<li>constant variance (we didn’t make a big deal of this one, but mentioned it)</li>
+</ul>
+<p>We can summarize these assumptions very succinctly, and to do so we’re going to introduce some new notation.</p>
+<p>Consider a random sample of observations from a normal distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. If we let <span class="math inline">\(Y_1, Y_2,\dots, Y_n\)</span> represent our data points we can summarize this as:</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>Or another way:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>This is a <strong>statistical model</strong> with 2 parameters: <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>.</p>
+<p><br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>If we have two samples:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>If we have more than two samples:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Let’s start with some summary statistics <span class="math display">\[\begin{eqnarray*}
+    Y_{i\cdot} &amp;=&amp; \sum_{j=1}^{n_i} Y_{ij} = i^{th} \hbox{ sample total} \\
+    \bar Y_{i\cdot} &amp;=&amp; \frac{1}{n_i} \sum_{j=1}^{n_i} Y_{ij} = i^{th} \hbox{ sample mean} \\
+    Y_{\cdot \cdot} &amp;=&amp; \sum_{i=1}^{t} \sum_{j=1}^{n_i} Y_{ij} = \hbox{ grand total} \\
+    \bar Y_{\cdot \cdot} &amp;=&amp; \frac{1}{N} \sum_{i=1}^{t} \sum_{j=1}^{n_i} Y_{ij} = \hbox{ grand mean  } (N=\sum_{i=1}^{n_i} n_i)
+\end{eqnarray*}\]</span></p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example:</strong> A student carried out an experiment to investigate handwashing methods: water only, regular soap, antibacterial soap, and alcohol spray. Each treatment was replicated 8 times, and bacteria count was observed. The data are in ‘handwash.csv’.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/wash-data-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Group.1     x
+1  ABSoap  92.5
+2 Alcohol  37.5
+3    Soap 106.0
+4   Water 117.0</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Group.1        x
+1  ABSoap 41.96257
+2 Alcohol 26.55991
+3    Soap 46.95895
+4   Water 31.13106</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/wash-data-means-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-Means_files/figure-html/wash-data-overall-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<p>Remember how to calculate the sample variance, <span class="math inline">\(S^2 = \frac{\sum_{i=1}^n (y_i - \bar y)^2}{n-1}\)</span>. We’re going to look at three difference variances. Let’s assume for simplicity that <span class="math inline">\(n_i = n\)</span> (all groups have equal sample size, this is not really necessary, it’s just to make it easier to look at notation):</p>
+<ol type="1">
+<li>Total Variance. Another name for the numerator is total sum of squares.</li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ol start="2" type="1">
+<li>Error (Within-Group) Variance. Another name for the numerator is the error sum of squares.</li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ol start="3" type="1">
+<li>Model (Between-Group) Variance. Another name for the numerator is the treatment (model) sum of squares.</li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>To see what this is measuring, first consider the ‘inside’ sum:</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>This is still an estimate of variance, but it’s an estimate of <span class="math inline">\(\sigma^2/n\)</span>, because these are means. In order to be able to compare fairly to the error variance we must multiply by <span class="math inline">\(n\)</span> (only works with equal sample sizes) or, equivalently, take the sum from <span class="math inline">\(j=1\)</span> to <span class="math inline">\(n\)</span>:</p>
+<div style="page-break-after: always;"></div>
+<p>We can’t lose sight of what we’re interested in here: testing H<span class="math inline">\(_0: \mu_1 = \mu_2\)</span>. If H<span class="math inline">\(_0\)</span> is true, <span class="math inline">\(\bar y_1\)</span> and <span class="math inline">\(\bar y_2\)</span> should not be different from <span class="math inline">\(\bar y_{\cdot \cdot}\)</span>. This means that error variance should be about equal to model variance (both would estimate <span class="math inline">\(\sigma^2\)</span>). If H<span class="math inline">\(_0\)</span> is not true, model variance will be larger because of the deviations of the group averages from the grand average. If it’s much larger, this gives us evidence against H<span class="math inline">\(_0\)</span>.</p>
+<p>Why do we worry about three variances when we only use two (error and model) to get the <span class="math inline">\(F\)</span> stat? It turn out that: <span class="math display">\[
+\hbox{Total SS } = \hbox{Model SS } + \hbox{ Error SS}
+\]</span> For the mice data:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+        \hbox{Total SS } &amp;=&amp; (259-328.07)^2 + \cdots + (231-328.07)^2 + (394-328.07)^2 + \cdots + (454-328.07)^2 = 193459 \\
+        \hbox{Error SS } &amp;=&amp; (259-217.43)^2 + \cdots + (231-217.43)^2 + (394-438.71)^2 + \cdots + (454-438.71)^2 = 22073 \\
+        \hbox{Model SS } &amp;=&amp; 6(217.43-328.07)^2 + 6(438.71-328.07)^2 =  171386 \\
+\end{eqnarray*}\]</span></p>
+<p>To convert these sums of squares into variances (which we call mean squares), they must be divided by denominators noted above. These are degrees of freedom, and have the same relationship as the sums of squares do: <span class="math display">\[
+\hbox{Total } df = \hbox{ Model } df + \hbox{ Error } df
+\]</span></p>
+<p>In our mice example, we have</p>
+<p><span class="math display">\[
+\hbox{Total } df = \hbox{ Model } df + \hbox{ Error } df
+\]</span><br>
+<br>
+<br>
+<br>
+</p>
+<p>We often summarize our calculations in a table (<span class="math inline">\(df\)</span> assuming equal sample sizes):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th><span class="math inline">\(df\)</span></th>
+<th>SS</th>
+<th>MS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model</td>
+<td><span class="math inline">\(t-1\)</span></td>
+<td>SSModel</td>
+<td>MSModel</td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td><span class="math inline">\(t(n-1)\)</span></td>
+<td>SSError</td>
+<td>MSError</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><span class="math inline">\(nt-1\)</span></td>
+<td>SSTotal</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<p>The MSError (usually called MSE) is our estimate of <span class="math inline">\(\sigma^2\)</span>. In our mice example, we get the table:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th><span class="math inline">\(df\)</span></th>
+<th>SS</th>
+<th>MS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model</td>
+<td>1</td>
+<td>171386</td>
+<td>171386</td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td>12</td>
+<td>22073</td>
+<td>1839</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>13</td>
+<td>193459</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>To test H<span class="math inline">\(_0: \mu_1 = \mu_2\)</span> we use the F stat: <span class="math display">\[
+F = \frac{\hbox{MSModel}}{\hbox{MSError}} = \frac{171386}{1839} = 93.2
+\]</span> and we can add this to the table:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th><span class="math inline">\(df\)</span></th>
+<th>SS</th>
+<th>MS</th>
+<th>F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model</td>
+<td>1</td>
+<td>171386</td>
+<td>171386</td>
+<td>93.2</td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td>12</td>
+<td>22073</td>
+<td>1839</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>13</td>
+<td>193459</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>What we’ve just done is called an <strong>Analysis of Variance (ANOVA)</strong>, and the resulting table is called an ANOVA table. It’s a single hypothesis test to check whether the means across many groups are equal. Specifically, it’s testing:</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>We still have assumptions: - Independence between and among groups - Responses/errors are approximately normal - Variability across groups is about equal</p>
+<p>We still don’t know if 93.2 is enough greater than 1 to determine there’s a difference! We have two options:</p>
+<ul>
+<li><p>Randomization test: Like for two means, write all responses on cards. Shuffle, and deal into as many stacks as there are groups with stack size corresponding to group size. Find <span class="math inline">\(F\)</span> for the shuffle. Repeat many times, and see how unusual our observed <span class="math inline">\(F\)</span> statistic is. We can do this in the applet or in R.</p></li>
+<li><p>Mathematical model: <span class="math inline">\(F\)</span> Test</p>
+<p>Assuming H<span class="math inline">\(_0\)</span> is true and the assumptions are met, <span class="math inline">\(F\)</span> follows and <span class="math inline">\(F\)</span>-distribution with <span class="math inline">\(df_1 = t-1\)</span> and <span class="math inline">\(df_2 = N-t\)</span> (<span class="math inline">\(N\)</span> is the total number of observations). We can use <code>pf()</code> in R to find p-values</p></li>
+</ul>
+<div style="page-break-after: always;"></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pf</span>(<span class="fl">93.2</span>,<span class="at">df1=</span><span class="dv">1</span>,<span class="at">df2=</span><span class="dv">12</span>,<span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.232224e-07</code></pre>
+</div>
+</div>
+<p>The p-value typically gets added to the table as well:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th><span class="math inline">\(df\)</span></th>
+<th>SS</th>
+<th>MS</th>
+<th>F</th>
+<th>p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model</td>
+<td>1</td>
+<td>171386</td>
+<td>171386</td>
+<td>93.2</td>
+<td>0.0000005</td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td>12</td>
+<td>22073</td>
+<td>1839</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>13</td>
+<td>193459</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>This is the only time we’ll do an ANOVA by hand! Let’s do the same in R.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(<span class="fu">lm</span>(Time<span class="sc">~</span>Envr, <span class="at">data=</span>mice))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: Time
+          Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+Envr       1 171386  171386  93.173 5.24e-07 ***
+Residuals 12  22073    1839                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p><strong>Example:</strong> Let’s now carry out the ANOVA on the handwashing data. We’ll start by writing the model and sketching the ANOVA table.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(<span class="fu">lm</span>(Bacteria<span class="sc">~</span>Method,<span class="at">data=</span>handwash))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: Bacteria
+          Df Sum Sq Mean Sq F value   Pr(&gt;F)   
+Method     3  29882  9960.7  7.0636 0.001111 **
+Residuals 28  39484  1410.1                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>We’ll do some more examples, focusing on sketching the ANOVA table.</p>
+<p><strong>Example</strong>: A teacher takes a random sample of 30 student GPAs, along with where they chose to sit in a classroom (front, middle, back). We want to see if mean GPA differs based on where a student sits.</p>
+<p><strong>Example</strong>: Baseball run time. The data gives run time in seconds for 50 yards for 29 players at three different positions (OF, IF, C).</p>
+<p> A group of college students wanted to see whether there was an association between students’ major and the time (in seconds) to complete a small paper-and-pencil puzzle. They took a random sample of 40 students, and they grouped majors into four categories: applied science (as), natural science (ns), social science (ss), and arts/humanities (ah).</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Section-2-Proportions.html" class="pagination-link" aria-label="Inference for Proportions (Chapters 16-18)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Inference for Proportions (Chapters 16-18)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
