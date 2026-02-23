@@ -401,12 +401,12 @@ window.Quarto = {
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.sample)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sim   stat
-1   1 0.5000
-2   2 0.4375
-3   3 0.4375
-4   4 0.5625
-5   5 0.5000
-6   6 0.2500</code></pre>
+1   1 0.3750
+2   2 0.7500
+3   3 0.6250
+4   4 0.5000
+5   5 0.7500
+6   6 0.5625</code></pre>
 </div>
 </div>
 <p>We can plot these <span class="math inline">\(\hat p_{pb}\)</span>, and see how unusual our observed test statistic is.</p>
@@ -768,13 +768,13 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>malaria.null<span class="ot">&lt;-</span><span class="fu">do</span>(<span class="dv">1000</span>)<span class="sc">*</span><span class="fu">diffmean</span>(Response <span class="sc">==</span> <span class="st">"Malaria"</span> <span class="sc">~</span> <span class="fu">shuffle</span>(Treatment),<span class="at">data=</span>malariadf)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(malaria.null)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     diffmean
-1  0.02348337
-2  0.01325599
-3 -0.03788091
-4 -0.03788091
-5  0.02348337
-6  0.07462026</code></pre>
+<pre><code>      diffmean
+1  0.013255987
+2  0.033710745
+3  0.003028609
+4 -0.068563042
+5 -0.048108284
+6 -0.007198770</code></pre>
 </div>
 </div>
 <p>We’ll plot the null distribution, and to do this we’ll need the <code>ggplot2</code> library.</p>
@@ -868,12 +868,12 @@ window.Quarto = {
 <span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sim stat_E stat_C diff
-1   1   0.60   0.25   NA
-2   2   0.60   0.15   NA
-3   3   0.40   0.25   NA
-4   4   0.55   0.15   NA
-5   5   0.75   0.30   NA
-6   6   0.70   0.30   NA</code></pre>
+1   1   0.40   0.25   NA
+2   2   0.45   0.20   NA
+3   3   0.60   0.40   NA
+4   4   0.35   0.35   NA
+5   5   0.35   0.15   NA
+6   6   0.50   0.30   NA</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Now find the differences#</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -882,12 +882,12 @@ window.Quarto = {
 <span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sim stat_E stat_C diff
-1   1   0.60   0.25 0.35
-2   2   0.60   0.15 0.45
-3   3   0.40   0.25 0.15
-4   4   0.55   0.15 0.40
-5   5   0.75   0.30 0.45
-6   6   0.70   0.30 0.40</code></pre>
+1   1   0.40   0.25 0.15
+2   2   0.45   0.20 0.25
+3   3   0.60   0.40 0.20
+4   4   0.35   0.35 0.00
+5   5   0.35   0.15 0.20
+6   6   0.50   0.30 0.20</code></pre>
 </div>
 </div>
 <p>Now let’s plot the bootstrap distribution.</p>
@@ -922,7 +922,7 @@ window.Quarto = {
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Print out just the first few#</span></span>
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rankdiff)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.25 -0.25 -0.20 -0.20 -0.20 -0.20</code></pre>
+<pre><code>[1] -0.35 -0.20 -0.20 -0.20 -0.20 -0.20</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Lower endpoint is the 5th percentile (90% confidence)#</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankdiff[<span class="dv">50</span>]</span>
@@ -947,7 +947,7 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>SE<span class="ot">&lt;-</span><span class="fu">sd</span>(rankdiff)</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>SE</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1538363</code></pre>
+<pre><code>[1] 0.1542495</code></pre>
 </div>
 </div>
 <p><br>
@@ -1424,7 +1424,7 @@ X-squared = 6.0069, df = 2, p-value = 0.04962</code></pre>
     replicates)
 
 data:  mode
-X-squared = 6.0069, df = NA, p-value = 0.05794</code></pre>
+X-squared = 6.0069, df = NA, p-value = 0.05095</code></pre>
 </div>
 </div>
 

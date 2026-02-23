@@ -218,7 +218,7 @@ window.Quarto = {
   <li><a href="#inference-for-a-two-independent-means-chapter-20" id="toc-inference-for-a-two-independent-means-chapter-20" class="nav-link" data-scroll-target="#inference-for-a-two-independent-means-chapter-20"><span class="header-section-number">3.2</span> Inference for a Two Independent Means (Chapter 20)</a>
   <ul class="collapse">
   <li><a href="#randomization-test-for-the-difference-in-means" id="toc-randomization-test-for-the-difference-in-means" class="nav-link" data-scroll-target="#randomization-test-for-the-difference-in-means"><span class="header-section-number">3.2.1</span> Randomization test for the difference in means</a></li>
-  <li><a href="#bootstrap-confidence-interval-for-the-difference-in-means" id="toc-bootstrap-confidence-interval-for-the-difference-in-means" class="nav-link" data-scroll-target="#bootstrap-confidence-interval-for-the-difference-in-means"><span class="header-section-number">3.2.2</span> Bootstrap confidence interval for the difference in means}</a></li>
+  <li><a href="#bootstrap-confidence-interval-for-the-difference-in-means" id="toc-bootstrap-confidence-interval-for-the-difference-in-means" class="nav-link" data-scroll-target="#bootstrap-confidence-interval-for-the-difference-in-means"><span class="header-section-number">3.2.2</span> Bootstrap confidence interval for the difference in means</a></li>
   <li><a href="#mathematical-model-for-the-difference-in-means" id="toc-mathematical-model-for-the-difference-in-means" class="nav-link" data-scroll-target="#mathematical-model-for-the-difference-in-means"><span class="header-section-number">3.2.3</span> Mathematical model for the difference in means</a></li>
   </ul></li>
   <li><a href="#inference-for-comparing-paired-means-chapter-21" id="toc-inference-for-comparing-paired-means-chapter-21" class="nav-link" data-scroll-target="#inference-for-comparing-paired-means-chapter-21"><span class="header-section-number">3.3</span> Inference for Comparing Paired Means (Chapter 21)</a>
@@ -333,13 +333,13 @@ window.Quarto = {
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankmean[<span class="dv">25</span>]</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 74.83333</code></pre>
+<pre><code>[1] 73.16667</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpoint is the 97.5th percentile (95% confidence)#</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankmean[<span class="dv">975</span>]</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 109.6667</code></pre>
+<pre><code>[1] 109.1667</code></pre>
 </div>
 </div>
 <p>This will give us a <strong>bootstrap percentile confidence interval</strong>.</p>
@@ -352,7 +352,7 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bootstrap standard error of the mean#</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(rankmean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.112462</code></pre>
+<pre><code>[1] 9.321514</code></pre>
 </div>
 </div>
 <p><br>
@@ -394,13 +394,13 @@ window.Quarto = {
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>ranksd[<span class="dv">50</span>]</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 11.75443</code></pre>
+<pre><code>[1] 10.77806</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpont is the 95th percentile (90% confidence)#</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>ranksd[<span class="dv">950</span>]</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 30.25888</code></pre>
+<pre><code>[1] 31.32677</code></pre>
 </div>
 </div>
 <p><br>
@@ -508,7 +508,7 @@ window.Quarto = {
 </p>
 <p>In our data set set, there are <span class="math inline">\(n=44\)</span> games.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For a confidence interval, need the multiplier for a 95% confidence interval, puts 0.025 in left tail#</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For a confidence interval, need the multiplier for a 90% confidence interval, puts 0.05 in left tail#</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.05</span>, <span class="at">df=</span><span class="dv">43</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.681071</code></pre>
@@ -523,7 +523,7 @@ window.Quarto = {
 <br>
 <br>
 </p>
-<p>What about a 90% confidence interval? What would change?</p>
+<p>What about a 99% confidence interval? What would change?</p>
 <p><br>
 <br>
 <br>
@@ -770,13 +770,13 @@ mean of x
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(null_dist)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     violent
-1 -1.5765306
-2  5.0828100
-3  0.9603611
-4 -1.4576138
-5  1.2378336
-6  4.6666013</code></pre>
+<pre><code>    violent
+1 -2.012559
+2 -1.913462
+3 -3.915228
+4 -4.291797
+5 -3.281005
+6  0.405416</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram of the null distribution#</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>null_dist) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>violent))<span class="sc">+</span> </span>
@@ -812,7 +812,7 @@ mean of x
 </div>
 </section>
 <section id="bootstrap-confidence-interval-for-the-difference-in-means" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="bootstrap-confidence-interval-for-the-difference-in-means"><span class="header-section-number">3.2.2</span> Bootstrap confidence interval for the difference in means}</h3>
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="bootstrap-confidence-interval-for-the-difference-in-means"><span class="header-section-number">3.2.2</span> Bootstrap confidence interval for the difference in means</h3>
 <p>When we used bootstrapping to find confidence intervals for the difference in two proportions, we took a bootstrap sample separately from each group and calculated the difference in the resulting proportions. We’re going to do the same thing here–take a bootstrap sample from each group, find the two sample bootstrap means, and then find the difference in the bootstrap means. Doing this over and over again will allow us to explore the variability/sampling distribution of the difference in sample means.</p>
 <p><strong>Example</strong>: A random sample of college baseball players and a random sample of (male) college soccer players were obtained independently and weighed. The table below shows the weights (in pounds) (also a .csv file in Canvas).</p>
 <table class="caption-top table">
@@ -930,12 +930,12 @@ mean of x
 <span id="cb64-15"><a href="#cb64-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sim mean_base mean_soccer    diff
-1   1  190.5000    180.0625 10.4375
-2   2  190.5625    169.9375 20.6250
-3   3  191.6250    172.2500 19.3750
-4   4  191.1875    173.9375 17.2500
-5   5  189.3750    177.0625 12.3125
-6   6  192.3125    177.3750 14.9375</code></pre>
+1   1  192.1250    174.2500 17.8750
+2   2  190.5000    172.2500 18.2500
+3   3  187.0625    174.0000 13.0625
+4   4  194.6250    170.8750 23.7500
+5   5  191.8750    180.1875 11.6875
+6   6  193.6875    175.1875 18.5000</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram#</span></span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.samples, <span class="fu">aes</span>(diff)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">2</span>)</span>
@@ -957,18 +957,18 @@ mean of x
 <span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankmean[<span class="dv">25</span>]</span>
 <span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.5</code></pre>
+<pre><code>[1] 9.6875</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpont is the 97.5th percentile (95% confidence)#</span></span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankmean[<span class="dv">975</span>]</span>
 <span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 24.875</code></pre>
+<pre><code>[1] 23.875</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bootstrap standard error of the mean#</span></span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(rankmean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.912724</code></pre>
+<pre><code>[1] 3.745269</code></pre>
 </div>
 </div>
 <p>So we can get a bootstrap percentile interval or a bootstrap SE interval.</p>
@@ -1396,14 +1396,17 @@ mean in group Baseball   mean in group Soccer
 <li>Parameters:</li>
 </ul>
 <p><br>
-- Observed Statistics:</p>
+</p>
+<ul>
+<li>Observed Statistics:</li>
+</ul>
 <p><br>
 </p>
 <p>Good news: we’ve already seen how to construct mathematical model tests and confidence intervals here! We just use the same techniques we used for a single mean (Chapter 19), but on the differences.</p>
 <p>However, randomization tests didn’t really work with one mean in Chapter 19 because there was nothing to randomize. They will work here!</p>
 <section id="randomization-test-for-mean-difference-matched-pairs" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="randomization-test-for-mean-difference-matched-pairs"><span class="header-section-number">3.3.1</span> Randomization test for mean difference (matched pairs)</h3>
-<p><strong>Example</strong>: Suppose you are playing baseball and hit a hard line drive. You want to turn a single into a double. Does the path you take to round first base make a difference? A masters thesis way back in 1970 considered the difference between a <code>narrow angle'' and a</code>wide angle’’ around first base. Suppose we have 22 baseball players who have volunteered to participate. There are a couple ways we could design an experiment to see if there is a difference.</p>
+<p><strong>Example</strong>: Suppose you are playing baseball and hit a hard line drive. You want to turn a single into a double. Does the path you take to round first base make a difference? A masters thesis way back in 1970 considered the difference between a “narrow angle” and a “wide angle” around first base. Suppose we have 22 baseball players who have volunteered to participate. There are a couple ways we could design an experiment to see if there is a difference.</p>
 <ul>
 <li>Randomly assign 11 players to run a wide angle and 11 players to run a narrow angle. Problems: some players may be faster than others. Ideally, randomization will equally distribute the speedy runners between the two groups, but there is no guarantee. Speed could be a confounding variable.</li>
 <li>Have each of the 22 runners run both angles, with the angle run first randomized using a coin. This allows each player to serve as their own control.</li>
@@ -1433,7 +1436,7 @@ mean in group Baseball   mean in group Soccer
 <p>We’re going to do these in the applet, because I think it’s easiest to see the swapping. Let’s try it:</p>
 <ul>
 <li>Go to applet, do one randomization. In our randomization, how many players had their times swapped? The mean difference from this first randomization is shown in the applet. Like other randomization tests, we’ll need to do this over and over. We’ve built up an estimate of the sampling distribution for the mean difference.</li>
-<li>Now, just like before, we’ll see how unusual our observed <span class="math inline">\(\bar x_d = 0.075\)</span> is. Remember this is a two-sided test. None of our randomizations resulted in a mean difference more extreme than <span class="math inline">\(\bar x_d =0.075\)</span>. So, our p-value is approximately 0, and it looks like we do have evidence that base-running strategy has an impact on running time. We can reject the null hypothesis, and conclude that there is a difference in the strategies. \end{itemize}</li>
+<li>Now, just like before, we’ll see how unusual our observed <span class="math inline">\(\bar x_d = 0.075\)</span> is. Remember this is a two-sided test. None of our randomizations resulted in a mean difference more extreme than <span class="math inline">\(\bar x_d =0.075\)</span>. So, our p-value is approximately 0, and it looks like we do have evidence that base-running strategy has an impact on running time. We can reject the null hypothesis, and conclude that there is a difference in the strategies.</li>
 </ul>
 </section>
 <section id="bootstrap-confidence-intervals-for-mean-difference-matched-pairs" class="level3" data-number="3.3.2">
@@ -1505,18 +1508,18 @@ mean in group Baseball   mean in group Soccer
 <span id="cb111-6"><a href="#cb111-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankmean[<span class="dv">25</span>]</span>
 <span id="cb111-7"><a href="#cb111-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.03636364</code></pre>
+<pre><code>[1] 0.03863636</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpoint is the 97.5th percentile (95% confidence)#</span></span>
 <span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankmean[<span class="dv">975</span>]</span>
 <span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1136364</code></pre>
+<pre><code>[1] 0.1090909</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bootstrap standard error of the mean#</span></span>
 <span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(rankmean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.01895054</code></pre>
+<pre><code>[1] 0.01844355</code></pre>
 </div>
 </div>
 <ul>
@@ -1565,13 +1568,13 @@ mean in group Baseball   mean in group Soccer
 <span id="cb118-6"><a href="#cb118-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankmean[<span class="dv">25</span>]</span>
 <span id="cb118-7"><a href="#cb118-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.07727273</code></pre>
+<pre><code>[1] -0.075</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpoint is the 97.5th percentile (95% confidence)#</span></span>
 <span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankmean[<span class="dv">975</span>]</span>
 <span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2340909</code></pre>
+<pre><code>[1] 0.2272727</code></pre>
 </div>
 </div>
 <p><br>

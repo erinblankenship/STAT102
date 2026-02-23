@@ -237,7 +237,7 @@ $$\
 In our data set set, there are $n=44$ games.
 
 ```{r}
-#For a confidence interval, need the multiplier for a 95% confidence interval, puts 0.025 in left tail#
+#For a confidence interval, need the multiplier for a 90% confidence interval, puts 0.05 in left tail#
 qt(0.05, df=43, lower.tail=FALSE)
 ```
 
@@ -250,7 +250,7 @@ qt(0.05, df=43, lower.tail=FALSE)
 \
 \
 
-What about a 90% confidence interval? What would change?
+What about a 99% confidence interval? What would change?
 
 \
 \
@@ -453,7 +453,7 @@ gf_histogram(~violent, fill = ~(abs(violent) >= obs_diff), data=null_dist,
              binwidth=0.5,xlab="Distribution of difference in means under the null hypothesis")
 ```
 
-### Bootstrap confidence interval for the difference in means}
+### Bootstrap confidence interval for the difference in means
 
 When we used bootstrapping to find confidence intervals for the difference in two proportions, we took a bootstrap sample separately from each group and calculated the difference in the resulting proportions. We're going to do the same thing here--take a bootstrap sample from each group, find the two sample bootstrap means, and then find the difference in the bootstrap means. Doing this over and over again will allow us to explore the variability/sampling distribution of the difference in sample means.
 
@@ -754,6 +754,7 @@ Note that we're distinguishing between **difference in means** (Chapter 20) and 
 -   Parameters:
 
 \
+
 - Observed Statistics:
 
 \
@@ -764,7 +765,7 @@ However, randomization tests didn't really work with one mean in Chapter 19 beca
 
 ### Randomization test for mean difference (matched pairs)
 
-**Example**: Suppose you are playing baseball and hit a hard line drive. You want to turn a single into a double. Does the path you take to round first base make a difference? A masters thesis way back in 1970 considered the difference between a `narrow angle'' and a`wide angle'' around first base. Suppose we have 22 baseball players who have volunteered to participate. There are a couple ways we could design an experiment to see if there is a difference.
+**Example**: Suppose you are playing baseball and hit a hard line drive. You want to turn a single into a double. Does the path you take to round first base make a difference? A masters thesis way back in 1970 considered the difference between a "narrow angle" and a "wide angle" around first base. Suppose we have 22 baseball players who have volunteered to participate. There are a couple ways we could design an experiment to see if there is a difference.
 
 -   Randomly assign 11 players to run a wide angle and 11 players to run a narrow angle. Problems: some players may be faster than others. Ideally, randomization will equally distribute the speedy runners between the two groups, but there is no guarantee. Speed could be a confounding variable.
 -   Have each of the 22 runners run both angles, with the angle run first randomized using a coin. This allows each player to serve as their own control.
@@ -799,7 +800,7 @@ In the two sample randomization test, the explanatory variable was randomly assi
 We're going to do these in the applet, because I think it's easiest to see the swapping. Let's try it:
 
 -   Go to applet, do one randomization. In our randomization, how many players had their times swapped? The mean difference from this first randomization is shown in the applet. Like other randomization tests, we'll need to do this over and over. We've built up an estimate of the sampling distribution for the mean difference.
--   Now, just like before, we'll see how unusual our observed $\bar x_d = 0.075$ is. Remember this is a two-sided test. None of our randomizations resulted in a mean difference more extreme than $\bar x_d =0.075$. So, our p-value is approximately 0, and it looks like we do have evidence that base-running strategy has an impact on running time. We can reject the null hypothesis, and conclude that there is a difference in the strategies. \\end{itemize}
+-   Now, just like before, we'll see how unusual our observed $\bar x_d = 0.075$ is. Remember this is a two-sided test. None of our randomizations resulted in a mean difference more extreme than $\bar x_d =0.075$. So, our p-value is approximately 0, and it looks like we do have evidence that base-running strategy has an impact on running time. We can reject the null hypothesis, and conclude that there is a difference in the strategies. 
 
 ### Bootstrap confidence intervals for mean difference (matched pairs)
 
@@ -939,7 +940,6 @@ Hypothesis test:
 \
 \
 \
-
 
 90% confidence interval:
 
@@ -1255,19 +1255,16 @@ What we've just done is called an **Analysis of Variance (ANOVA)**, and the resu
 \
 \
 
-We still have assumptions: 
-- Independence between and among groups 
-- Responses/errors are approximately normal 
-- Variability across groups is about equal
+We still have assumptions: - Independence between and among groups - Responses/errors are approximately normal - Variability across groups is about equal
 
 We still don't know if 93.2 is enough greater than 1 to determine there's a difference! We have two options:
 
-- Randomization test: Like for two means, write all responses on cards. Shuffle, and deal into as many stacks as there are groups with stack size corresponding to group size. Find $F$ for the shuffle. Repeat many times, and see how unusual our observed $F$ statistic is. We can do this in the applet or in R.
+-   Randomization test: Like for two means, write all responses on cards. Shuffle, and deal into as many stacks as there are groups with stack size corresponding to group size. Find $F$ for the shuffle. Repeat many times, and see how unusual our observed $F$ statistic is. We can do this in the applet or in R.
 
-- Mathematical model: $F$ Test
-    
-  Assuming H$_0$ is true and the assumptions are met, $F$ follows and $F$-distribution with $df_1 = t-1$ and $df_2 = N-t$ ($N$ is the total number of observations). We can use `pf()` in R to find p-values
-    
+-   Mathematical model: $F$ Test
+
+    Assuming H$_0$ is true and the assumptions are met, $F$ follows and $F$-distribution with $df_1 = t-1$ and $df_2 = N-t$ ($N$ is the total number of observations). We can use `pf()` in R to find p-values
+
 \newpage
 
 ```{r}
@@ -1311,12 +1308,12 @@ anova(lm(Bacteria~Method,data=handwash))
 
 We'll do some more examples, focusing on sketching the ANOVA table.
 
-**Example**: A teacher takes a random sample of 30 student GPAs, along with where they chose to sit in a classroom (front, middle, back). We want to see if mean GPA differs based on where a student sits. 
+**Example**: A teacher takes a random sample of 30 student GPAs, along with where they chose to sit in a classroom (front, middle, back). We want to see if mean GPA differs based on where a student sits.
 
 \vspace{35mm}
 
-**Example**: Baseball run time. The data gives run time in seconds for 50 yards for 29 players at three different positions (OF, IF, C). 
+**Example**: Baseball run time. The data gives run time in seconds for 50 yards for 29 players at three different positions (OF, IF, C).
 
 \vspace{35mm}
 
-\textbf{Example:} A group of college students wanted to see whether there was an association between students' major and the time (in seconds) to complete a small paper-and-pencil puzzle. They took a random sample of 40 students, and they grouped majors into four categories: applied science (as), natural science (ns), social science (ss), and arts/humanities (ah). 
+\textbf{Example:} A group of college students wanted to see whether there was an association between students' major and the time (in seconds) to complete a small paper-and-pencil puzzle. They took a random sample of 40 students, and they grouped majors into four categories: applied science (as), natural science (ns), social science (ss), and arts/humanities (ah).
