@@ -201,6 +201,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Inference for Means (Chapters 19-22)</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-4-Regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Linear Regression (Chapters 7 and 24)</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -401,20 +407,23 @@ window.Quarto = {
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.sample)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sim   stat
-1   1 0.3750
-2   2 0.7500
-3   3 0.6250
-4   4 0.5000
-5   5 0.7500
+1   1 0.5625
+2   2 0.5625
+3   3 0.4375
+4   4 0.6250
+5   5 0.6875
 6   6 0.5625</code></pre>
 </div>
 </div>
 <p>We can plot these <span class="math inline">\(\hat p_{pb}\)</span>, and see how unusual our observed test statistic is.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.sample, <span class="fu">aes</span>(stat)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>boot.hist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.4.3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.sample, <span class="fu">aes</span>(stat)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>boot.hist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -425,13 +434,13 @@ window.Quarto = {
 </div>
 <p>We’ve got a plot, but how do we know exactly how many/what proportion of <span class="math inline">\(\hat p_{pb}\)</span> were greater than our observed test statistic, <span class="math inline">\(\hat p = 0.875\)</span>?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>count<span class="ot">&lt;-</span>(boot.sample<span class="sc">$</span>stat <span class="sc">&gt;=</span> obs_prop)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(count)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>count<span class="ot">&lt;-</span>(boot.sample<span class="sc">$</span>stat <span class="sc">&gt;=</span> obs_prop)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(count)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(count)<span class="sc">/</span>numsim</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(count)<span class="sc">/</span>numsim</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
@@ -544,7 +553,7 @@ window.Quarto = {
 </p>
 <p>To find the p-value, we can use R.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">normTail</span>(<span class="at">m=</span><span class="dv">0</span>,<span class="at">s=</span><span class="dv">1</span>,<span class="at">U=</span><span class="fl">2.79</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">normTail</span>(<span class="at">m=</span><span class="dv">0</span>,<span class="at">s=</span><span class="dv">1</span>,<span class="at">U=</span><span class="fl">2.79</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -552,8 +561,8 @@ window.Quarto = {
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pvalue<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="fl">2.79</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>pvalue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pvalue<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="fl">2.79</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>pvalue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.002635402</code></pre>
 </div>
@@ -607,7 +616,7 @@ window.Quarto = {
 <li>90% confidence</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.05</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.05</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1.644854</code></pre>
 </div>
@@ -728,8 +737,8 @@ window.Quarto = {
 <div style="page-break-after: always;"></div>
 <p>First, we’ll need to set up the data. This is honestly the hardest part.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>VM<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Treatment=</span><span class="st">"Vaccine"</span>,<span class="at">Response=</span><span class="st">"Malaria"</span>,<span class="at">obs=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">89</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(VM)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>VM<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Treatment=</span><span class="st">"Vaccine"</span>,<span class="at">Response=</span><span class="st">"Malaria"</span>,<span class="at">obs=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">89</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(VM)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Treatment Response obs
 1   Vaccine  Malaria   1
@@ -739,11 +748,11 @@ window.Quarto = {
 5   Vaccine  Malaria   5
 6   Vaccine  Malaria   6</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>VN<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Treatment=</span><span class="st">"Vaccine"</span>,<span class="at">Response=</span><span class="st">"NoMal"</span>,<span class="at">obs=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">203</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>CM<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Treatment=</span><span class="st">"Control"</span>,<span class="at">Response=</span><span class="st">"Malaria"</span>,<span class="at">obs=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">106</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>CN<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Treatment=</span><span class="st">"Control"</span>,<span class="at">Response=</span><span class="st">"NoMal"</span>,<span class="at">obs=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">41</span>)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>malariadf<span class="ot">&lt;-</span><span class="fu">rbind</span>(VM,VN,CM,CN)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(malariadf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>VN<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Treatment=</span><span class="st">"Vaccine"</span>,<span class="at">Response=</span><span class="st">"NoMal"</span>,<span class="at">obs=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">203</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>CM<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Treatment=</span><span class="st">"Control"</span>,<span class="at">Response=</span><span class="st">"Malaria"</span>,<span class="at">obs=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">106</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>CN<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Treatment=</span><span class="st">"Control"</span>,<span class="at">Response=</span><span class="st">"NoMal"</span>,<span class="at">obs=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">41</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>malariadf<span class="ot">&lt;-</span><span class="fu">rbind</span>(VM,VN,CM,CN)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(malariadf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Treatment Response obs
 1   Vaccine  Malaria   1
@@ -756,8 +765,8 @@ window.Quarto = {
 </div>
 <p>Next, we’ll calculate the observed difference in the proportion of children who contracted malaria between those who received the vaccine and those who received the control. To use the <code>diffmean</code> function, we need to load the <code>mosaic</code> package.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>observed<span class="ot">&lt;-</span><span class="fu">diffmean</span>(Response <span class="sc">==</span> <span class="st">"Malaria"</span> <span class="sc">~</span> Treatment, <span class="at">data=</span>malariadf)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>observed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>observed<span class="ot">&lt;-</span><span class="fu">diffmean</span>(Response <span class="sc">==</span> <span class="st">"Malaria"</span> <span class="sc">~</span> Treatment, <span class="at">data=</span>malariadf)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>observed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  diffmean 
 -0.4162939 </code></pre>
@@ -765,27 +774,27 @@ window.Quarto = {
 </div>
 <p>Now, we need to shuffle the vaccine/control treatment labels many times and calculate the difference in proportions of malaria for each shuffle. To do this, we’ll need the <code>mosaic</code> library but it’s already been loaded.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>malaria.null<span class="ot">&lt;-</span><span class="fu">do</span>(<span class="dv">1000</span>)<span class="sc">*</span><span class="fu">diffmean</span>(Response <span class="sc">==</span> <span class="st">"Malaria"</span> <span class="sc">~</span> <span class="fu">shuffle</span>(Treatment),<span class="at">data=</span>malariadf)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(malaria.null)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>malaria.null<span class="ot">&lt;-</span><span class="fu">do</span>(<span class="dv">1000</span>)<span class="sc">*</span><span class="fu">diffmean</span>(Response <span class="sc">==</span> <span class="st">"Malaria"</span> <span class="sc">~</span> <span class="fu">shuffle</span>(Treatment),<span class="at">data=</span>malariadf)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(malaria.null)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      diffmean
-1  0.013255987
-2  0.033710745
-3  0.003028609
-4 -0.068563042
-5 -0.048108284
-6 -0.007198770</code></pre>
+<pre><code>     diffmean
+1  0.01325599
+2  0.05416550
+3  0.02348337
+4 -0.08901780
+5 -0.11969993
+6  0.01325599</code></pre>
 </div>
 </div>
 <p>We’ll plot the null distribution, and to do this we’ll need the <code>ggplot2</code> library.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>malaria.null) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>diffmean)) <span class="sc">+</span> </span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Difference in proportions"</span>) <span class="sc">+</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> observed, <span class="at">linetype=</span><span class="dv">2</span>, <span class="at">color=</span><span class="st">"blue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>malaria.null) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>diffmean)) <span class="sc">+</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Difference in proportions"</span>) <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> observed, <span class="at">linetype=</span><span class="dv">2</span>, <span class="at">color=</span><span class="st">"blue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
@@ -797,7 +806,7 @@ window.Quarto = {
 </div>
 <p>Finally, we can calculate the p-value by observing how unusual the observed difference in the proportions of malaria is under the null hypothesis.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop</span>(<span class="sc">~</span>diffmean <span class="sc">&lt;=</span> observed, <span class="at">data=</span>malaria.null)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop</span>(<span class="sc">~</span>diffmean <span class="sc">&lt;=</span> observed, <span class="at">data=</span>malaria.null)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>prop_TRUE 
         0 </code></pre>
@@ -828,26 +837,26 @@ window.Quarto = {
 </p>
 <p>Let’s go to R, and see how this works with the electrical stimulation example. We’ll start by setting up the data and calculating the observed difference in proportion of solved problems between electrical stimulation and control.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#original Sample 1 data (Electrical), creating a data set with 10 S (1) and 10 F (0)#</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>electrical<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">10</span>),<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#original Sample 2 data (Control), creating a data set with 6 S (1) and 14 F (0)#</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>control<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">6</span>),<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">14</span>))</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate and print the observed statistic, p-hat_E - p-hat_C#</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>obs_stat<span class="ot">&lt;-</span><span class="fu">mean</span>(electrical)<span class="sc">-</span><span class="fu">mean</span>(control)</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>obs_stat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#original Sample 1 data (Electrical), creating a data set with 10 S (1) and 10 F (0)#</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>electrical<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">10</span>),<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co">#original Sample 2 data (Control), creating a data set with 6 S (1) and 14 F (0)#</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>control<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">6</span>),<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">14</span>))</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate and print the observed statistic, p-hat_E - p-hat_C#</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>obs_stat<span class="ot">&lt;-</span><span class="fu">mean</span>(electrical)<span class="sc">-</span><span class="fu">mean</span>(control)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>obs_stat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2</code></pre>
 </div>
 </div>
 <p>Now, we’ll repeatedly sample with replacement separately from each group. First we need to set up a place to store our summaries from each resample.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Set up an empty data set with 4 columns: sim number, p_hat_boot_E, p_hat_boot_C, diff#</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>boot.samples<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">sim=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,<span class="at">stat_E=</span><span class="cn">NA</span>,<span class="at">stat_C=</span><span class="cn">NA</span>, <span class="at">diff=</span><span class="cn">NA</span>)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Set up an empty data set with 4 columns: sim number, p_hat_boot_E, p_hat_boot_C, diff#</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>boot.samples<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">sim=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,<span class="at">stat_E=</span><span class="cn">NA</span>,<span class="at">stat_C=</span><span class="cn">NA</span>, <span class="at">diff=</span><span class="cn">NA</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sim stat_E stat_C diff
 1   1     NA     NA   NA
@@ -857,44 +866,44 @@ window.Quarto = {
 5   5     NA     NA   NA
 6   6     NA     NA   NA</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For each row in the data set, draw a bootstrap sample from Sample 1 and Sample 2 and find#</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># p_hat_boot_E and p_hat_boot_C #</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>stat_E[i]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">sample</span>(electrical,<span class="at">size=</span><span class="dv">20</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>stat_C[i]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">sample</span>(control,<span class="at">size=</span><span class="dv">20</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#For each row in the data set, draw a bootstrap sample from Sample 1 and Sample 2 and find#</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># p_hat_boot_E and p_hat_boot_C #</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>stat_E[i]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">sample</span>(electrical,<span class="at">size=</span><span class="dv">20</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>stat_C[i]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">sample</span>(control,<span class="at">size=</span><span class="dv">20</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sim stat_E stat_C diff
-1   1   0.40   0.25   NA
-2   2   0.45   0.20   NA
-3   3   0.60   0.40   NA
-4   4   0.35   0.35   NA
-5   5   0.35   0.15   NA
-6   6   0.50   0.30   NA</code></pre>
+1   1   0.65   0.25   NA
+2   2   0.45   0.60   NA
+3   3   0.60   0.45   NA
+4   4   0.55   0.30   NA
+5   5   0.50   0.20   NA
+6   6   0.35   0.20   NA</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Now find the differences#</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>boot.samples<span class="sc">$</span>diff<span class="ot">&lt;-</span>boot.samples<span class="sc">$</span>stat_E <span class="sc">-</span> boot.samples<span class="sc">$</span>stat_C</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Now find the differences#</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>boot.samples<span class="sc">$</span>diff<span class="ot">&lt;-</span>boot.samples<span class="sc">$</span>stat_E <span class="sc">-</span> boot.samples<span class="sc">$</span>stat_C</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  sim stat_E stat_C diff
-1   1   0.40   0.25 0.15
-2   2   0.45   0.20 0.25
-3   3   0.60   0.40 0.20
-4   4   0.35   0.35 0.00
-5   5   0.35   0.15 0.20
-6   6   0.50   0.30 0.20</code></pre>
+<pre><code>  sim stat_E stat_C  diff
+1   1   0.65   0.25  0.40
+2   2   0.45   0.60 -0.15
+3   3   0.60   0.45  0.15
+4   4   0.55   0.30  0.25
+5   5   0.50   0.20  0.30
+6   6   0.35   0.20  0.15</code></pre>
 </div>
 </div>
 <p>Now let’s plot the bootstrap distribution.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.samples, <span class="fu">aes</span>(diff)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.05</span>)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>boot.hist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.samples, <span class="fu">aes</span>(diff)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.05</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>boot.hist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -916,23 +925,23 @@ window.Quarto = {
 </p>
 <p>Now that we have the bootstrap distribution, we can find the bootstrap percentile confidence interval. Let’s do a 90% interval.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#start by ranking the bootstrap differences from smallest to largest #</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>rankdiff<span class="ot">&lt;-</span><span class="fu">sort</span>(boot.samples<span class="sc">$</span>diff)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Print out just the first few#</span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rankdiff)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#start by ranking the bootstrap differences from smallest to largest #</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>rankdiff<span class="ot">&lt;-</span><span class="fu">sort</span>(boot.samples<span class="sc">$</span>diff)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Print out just the first few#</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rankdiff)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.35 -0.20 -0.20 -0.20 -0.20 -0.20</code></pre>
+<pre><code>[1] -0.30 -0.25 -0.20 -0.20 -0.20 -0.15</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Lower endpoint is the 5th percentile (90% confidence)#</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankdiff[<span class="dv">50</span>]</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Lower endpoint is the 5th percentile (90% confidence)#</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankdiff[<span class="dv">50</span>]</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -0.05</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpoint is the 950th percentile (90% confidence)#</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankdiff[<span class="dv">950</span>]</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpoint is the 950th percentile (90% confidence)#</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankdiff[<span class="dv">950</span>]</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.45</code></pre>
 </div>
@@ -944,10 +953,10 @@ window.Quarto = {
 <div style="page-break-after: always;"></div>
 <p>Because our bootstrap distribution is relatively bell-shaped, we could also a calculate a rough 95% boostrap SE confidence interval.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>SE<span class="ot">&lt;-</span><span class="fu">sd</span>(rankdiff)</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>SE</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>SE<span class="ot">&lt;-</span><span class="fu">sd</span>(rankdiff)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>SE</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1542495</code></pre>
+<pre><code>[1] 0.1490991</code></pre>
 </div>
 </div>
 <p><br>
@@ -1038,7 +1047,7 @@ window.Quarto = {
 </p>
 <p>To visualize the p-value:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">normTail</span>(<span class="at">m=</span><span class="dv">0</span>,<span class="at">s=</span><span class="dv">1</span>,<span class="at">L=</span><span class="sc">-</span><span class="fl">5.15</span>, <span class="at">U=</span><span class="fl">5.15</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">normTail</span>(<span class="at">m=</span><span class="dv">0</span>,<span class="at">s=</span><span class="dv">1</span>,<span class="at">L=</span><span class="sc">-</span><span class="fl">5.15</span>, <span class="at">U=</span><span class="fl">5.15</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1049,7 +1058,7 @@ window.Quarto = {
 </div>
 <p>And to get the p-value:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">5.15</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)<span class="sc">+</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="fl">5.15</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">5.15</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)<span class="sc">+</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="fl">5.15</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.604865e-07</code></pre>
 </div>
@@ -1386,7 +1395,7 @@ window.Quarto = {
 </p>
 <p>To find the p-value, we can use the R function <code>pchisq()</code>. Like <code>pnorm</code> it gives area to the left. So,</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="fl">6.1971</span>,<span class="at">df=</span><span class="dv">2</span>,<span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="fl">6.1971</span>,<span class="at">df=</span><span class="dv">2</span>,<span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.04511457</code></pre>
 </div>
@@ -1394,21 +1403,21 @@ window.Quarto = {
 <div style="page-break-after: always;"></div>
 <p>We can also do this directly in R.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>surveymode<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"surveymode.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co">#make a table#</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>mode<span class="ot">&lt;-</span><span class="fu">table</span>(surveymode<span class="sc">$</span>Response,surveymode<span class="sc">$</span>Mode)</span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="co">#see the table, note alphabetical order#</span></span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>mode</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>surveymode<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"surveymode.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="co">#make a table#</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>mode<span class="ot">&lt;-</span><span class="fu">table</span>(surveymode<span class="sc">$</span>Response,surveymode<span class="sc">$</span>Mode)</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="co">#see the table, note alphabetical order#</span></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>mode</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     
       Avoice Hvoice Text
   No     139    139  124
   Yes     20     21   34</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Chi-square mathematical model test#</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(mode)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Chi-square mathematical model test#</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(mode)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -1416,15 +1425,15 @@ window.Quarto = {
 data:  mode
 X-squared = 6.0069, df = 2, p-value = 0.04962</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Chi-square randomization test#</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(mode,<span class="at">simulate.p.value=</span><span class="cn">TRUE</span>, <span class="at">B=</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Chi-square randomization test#</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(mode,<span class="at">simulate.p.value=</span><span class="cn">TRUE</span>, <span class="at">B=</span><span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test with simulated p-value (based on 1000
     replicates)
 
 data:  mode
-X-squared = 6.0069, df = NA, p-value = 0.05095</code></pre>
+X-squared = 6.0069, df = NA, p-value = 0.04496</code></pre>
 </div>
 </div>
 

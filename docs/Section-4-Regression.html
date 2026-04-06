@@ -1,0 +1,2205 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Section 4: Linear Regression – Stat 102 Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Section-3-Means.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d9ea66fcd6c317012447f26e9c021348.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Section-4-Regression.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Linear Regression (Chapters 7 and 24)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Stat 102 Notes</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Stat-102-Notes.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Goals for STAT 102</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-1-Philosophy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Philosophy of Statistical Inference (Chapters 11-14)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-2-Proportions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Inference for Proportions (Chapters 16-18)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-3-Means.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Inference for Means (Chapters 19-22)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-4-Regression.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Linear Regression (Chapters 7 and 24)</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#linear-regression-basics" id="toc-linear-regression-basics" class="nav-link active" data-scroll-target="#linear-regression-basics"><span class="header-section-number">4.1</span> Linear Regression Basics</a></li>
+  <li><a href="#model-diagnostics-and-model-fit" id="toc-model-diagnostics-and-model-fit" class="nav-link" data-scroll-target="#model-diagnostics-and-model-fit"><span class="header-section-number">4.2</span> Model Diagnostics and Model Fit</a></li>
+  <li><a href="#inference-for-regression-chapter-24" id="toc-inference-for-regression-chapter-24" class="nav-link" data-scroll-target="#inference-for-regression-chapter-24"><span class="header-section-number">4.3</span> Inference for Regression (Chapter 24)</a>
+  <ul class="collapse">
+  <li><a href="#randomization-test-for-the-slope" id="toc-randomization-test-for-the-slope" class="nav-link" data-scroll-target="#randomization-test-for-the-slope"><span class="header-section-number">4.3.1</span> Randomization test for the slope</a></li>
+  <li><a href="#bootstrap-confidence-interval-for-the-slope" id="toc-bootstrap-confidence-interval-for-the-slope" class="nav-link" data-scroll-target="#bootstrap-confidence-interval-for-the-slope"><span class="header-section-number">4.3.2</span> Bootstrap confidence interval for the slope</a></li>
+  <li><a href="#mathematical-model-for-inference-about-the-slope" id="toc-mathematical-model-for-inference-about-the-slope" class="nav-link" data-scroll-target="#mathematical-model-for-inference-about-the-slope"><span class="header-section-number">4.3.3</span> Mathematical model for inference about the slope</a></li>
+  </ul></li>
+  <li><a href="#anova-and-regression" id="toc-anova-and-regression" class="nav-link" data-scroll-target="#anova-and-regression"><span class="header-section-number">4.4</span> ANOVA and Regression</a></li>
+  <li><a href="#inference-for-prediction" id="toc-inference-for-prediction" class="nav-link" data-scroll-target="#inference-for-prediction"><span class="header-section-number">4.5</span> Inference for Prediction</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Linear Regression (Chapters 7 and 24)</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>You’ve likely seen linear regression in earlier course (perhaps even in middle school?) but before we jump into inference (tests and confidence intervals) for regression, let’s review the basic concepts of linear regression.</p>
+<section id="linear-regression-basics" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="linear-regression-basics"><span class="header-section-number">4.1</span> Linear Regression Basics</h2>
+<p>So far, we’ve been summarizing the relationship between two categorical variables (comparing two proportions or chi-squared tests) or one categorical variable (predictor) and one quantitative variable (response) (comparing two means or ANOVA). With linear regression, we are interesting in summarizing the relationship between a quantitative response and a quantitative predictor. Typically, we hope to show that variation in the response can be explained by variation in the predictor.</p>
+<ul>
+<li>Response:</li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li>Explanatory/Predictor:</li>
+</ul>
+<p><br>
+</p>
+<p>In previous recent examples, we saw:</p>
+<ul>
+<li><p>Attempting to see a relationship between environment (predictor) and hours spent in darkness (response) in mice.</p></li>
+<li><p>Attempting to see a relationship between running strategy (predictor) and time to second base (response).</p></li>
+<li><p>Attempting to see a relationship between field position (predictor) and running speed (response).</p></li>
+<li><p>Attempting to see a relationship between student major (predictor) and time to complete a puzzle (response).</p></li>
+</ul>
+<p>In all cases, the predictor was categorical, and the response was quantitative.</p>
+<div style="page-break-after: always;"></div>
+<p>For other recent examples:</p>
+<ul>
+<li><p>Attempting to see a relationship between education level (predictor) and caring about whether data is singular or plural (response).</p></li>
+<li><p>Attempting to see a relationship between survey mode (predictor) and whether or not the respondent indicated they did not exercise.</p></li>
+</ul>
+<p>In these cases, the predictor was categorical as was the response.</p>
+<p>Now, we turn to quantitative predictor(s) and quantitative response. We’ll focus on a single predictor, though it is possible to multiple predictors. Linear regression is the statistical method for fitting a line to data where the relationship between two quantitative variables (<span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> can be modeled by a straight line with some error.</p>
+<p>We typically start with a <strong>scatterplot</strong>, and we explore the plot looking for 4 things:</p>
+<ul>
+<li><p>Direction:<br>
+</p></li>
+<li><p>Form:<br>
+</p></li>
+<li><p>Strength:<br>
+</p></li>
+<li><p>Unusual observations:<br>
+</p></li>
+</ul>
+<p><strong>Example</strong>: The data in the file <code>lego.csv</code> give (from the Lego website) the number of pieces and price for 157 Lego products.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>lego<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"lego.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(lego)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  pieces  price
+1    102  11.99
+2    139  17.99
+3    269  34.99
+4    305  39.99
+5    748  99.99
+6    933 119.99</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lego.plot<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>lego, <span class="fu">aes</span>(<span class="at">x=</span>pieces, <span class="at">y=</span>price))<span class="sc">+</span><span class="fu">geom_point</span>() </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>lego.plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Direction:<br>
+</p></li>
+<li><p>Form:<br>
+</p></li>
+<li><p>Strength:<br>
+</p></li>
+<li><p>Unusual observations:<br>
+</p></li>
+</ul>
+<p>We can summarize the strength and direction of the (linear) relationship) using the <strong>correlation coefficient</strong>:</p>
+<ul>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+<li></li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li><br>
+</li>
+</ul>
+<p>We can use R to calculate the correlation</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(lego<span class="sc">$</span>pieces,lego<span class="sc">$</span>price)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9739097</code></pre>
+</div>
+</div>
+<p>We do need to pay special attention to <strong>influential observations</strong>.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lego2<span class="ot">&lt;-</span><span class="fu">subset</span>(lego,pieces<span class="sc">&lt;</span><span class="dv">3000</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(lego2<span class="sc">$</span>price,lego2<span class="sc">$</span>pieces)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9600515</code></pre>
+</div>
+</div>
+<p>If we can imagine fitting a straight line to the data, we are implicitly assuming a predictor/response relationship. For the Lego data, what is the predictor and what is the response?</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>To fit a straight line, we assume the statistical model</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>For the Lego data:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lego.lm<span class="ot">&lt;-</span><span class="fu">lm</span>(price<span class="sc">~</span>pieces,<span class="at">data=</span>lego)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lego.lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = price ~ pieces, data = lego)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-67.588  -4.587  -1.700   3.402  69.306 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 4.861992   1.359954   3.575 0.000467 ***
+pieces      0.105045   0.001966  53.430  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 13.31 on 155 degrees of freedom
+Multiple R-squared:  0.9485,    Adjusted R-squared:  0.9482 
+F-statistic:  2855 on 1 and 155 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>So how do we use this line?</p>
+<div style="page-break-after: always;"></div>
+<p>The estimated slope tell us</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>The estimated intercept tells us</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>We can also plot the fitted line</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>lego.plotline<span class="ot">&lt;-</span>lego.plot <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">color=</span><span class="st">"red"</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>lego.plotline</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="model-diagnostics-and-model-fit" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="model-diagnostics-and-model-fit"><span class="header-section-number">4.2</span> Model Diagnostics and Model Fit</h2>
+<p>We can check how well the model fits using model diagnostics. <strong>Residuals</strong> are the leftover variation in the data after accounting for the fitted model:</p>
+<p>Data = Fit + Residual.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>resid<span class="ot">&lt;-</span><span class="fu">resid</span>(lego.lm)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(resid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        1         2         3         4         5         6 
+-3.586582 -1.473247  1.870903  3.089283 16.554349 17.121024 </code></pre>
+</div>
+</div>
+<p>Residuals help us determine how well a model fits, and we often plot them, with the residuals on the <span class="math inline">\(y-\)</span>axis amd the predicted values on the <span class="math inline">\(x-\)</span>axis.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>resid<span class="ot">&lt;-</span><span class="fu">resid</span>(lego.lm)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>pred<span class="ot">&lt;-</span><span class="fu">predict</span>(lego.lm)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pred,resid,<span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What are we looking for in such a plot?</p>
+<ul>
+<li>Obvious patterns</li>
+<li>Relative size of the residuals</li>
+</ul>
+<p>What if we eliminate the potentially influential observations?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>lego2<span class="ot">&lt;-</span><span class="fu">subset</span>(lego,pieces<span class="sc">&lt;</span><span class="dv">3000</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>lego2.plot<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>lego2, <span class="fu">aes</span>(<span class="at">x=</span>pieces, <span class="at">y=</span>price))<span class="sc">+</span><span class="fu">geom_point</span>() </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>lego2.lm<span class="ot">&lt;-</span><span class="fu">lm</span>(price<span class="sc">~</span>pieces,<span class="at">data=</span>lego2)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lego2.lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = price ~ pieces, data = lego2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-57.354  -5.495  -2.273   4.653  72.251 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 6.846760   1.334641    5.13 8.66e-07 ***
+pieces      0.099011   0.002333   42.44  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 12.08 on 153 degrees of freedom
+Multiple R-squared:  0.9217,    Adjusted R-squared:  0.9212 
+F-statistic:  1801 on 1 and 153 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>lego2.plotline<span class="ot">&lt;-</span>lego2.plot <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">color=</span><span class="st">"red"</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>lego2.plotline</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>resid2<span class="ot">&lt;-</span><span class="fu">resid</span>(lego2.lm)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>pred2<span class="ot">&lt;-</span><span class="fu">predict</span>(lego2.lm)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pred2,resid2,<span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The fitted line itself comes from</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Caution!</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>The strength of the model fit can be assessed using <span class="math inline">\(R^2\)</span>, the <strong>coefficient of determination</strong>. <span class="math inline">\(R^2\)</span> describes the amount of variation in the <span class="math inline">\(y\)</span> that is explained by the least squares line.</p>
+<p><br>
+<br>
+</p>
+<p>Fun fact: Sums of squares come up here too! And can also be used to calculate <span class="math inline">\(R^2\)</span>! <span class="math display">\[
+SST = \sum_{i=1}^n (y_i - \bar y)^2
+\]</span> and <span class="math display">\[
+SSE = \sum_{i=1}^n (y_i - \hat y_i)^2 = \sum_{i=1}^n \hat e_i^2
+\]</span> Then <span class="math display">\[
+R^2 = \frac{SST - SSE}{SST} = 1 - \frac{SSE}{SST}
+\]</span></p>
+<p>We’ll return to these in a bit.</p>
+<p><strong>Example</strong>: Some studies have suggested that aerobic activity can benefit brain development and cognition in growing children (Chaddock-Heyman, 2015). It is conjectured that the higher your aerobic activity as measured by VO<span class="math inline">\(_2\)</span> max (mL/kg/min), the thinner the cortical grey matter in the superior and anterior frontal lobes (measured with an MRI). A sample of children was recruited to participate in the study, and the data are in the file <code>vo2max.csv</code>.</p>
+<ul>
+<li>Plot the data. What can we say about direction, form, and strength?</li>
+</ul>
+<p><br>
+<br>
+</p>
+<ul>
+<li><p><span class="math inline">\(R\)</span><br>
+</p></li>
+<li><p>Fitted line<br>
+</p></li>
+<li><p>Residual plot. Anything concerning?<br>
+</p></li>
+<li><p><span class="math inline">\(R^2\)</span></p></li>
+</ul>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: In a survey of statistics students at Hope College, two of the questions asked were their current GPA and how many classes they failed to attend during the past three weeks. The data are in the file <code>missclass.csv</code>.</p>
+<ul>
+<li>Plot the data. What can we say about direction, form, and strength?</li>
+</ul>
+<p><br>
+<br>
+</p>
+<ul>
+<li><p><span class="math inline">\(R\)</span><br>
+</p></li>
+<li><p>Fitted line<br>
+</p></li>
+<li><p>Residual plot. Anything concerning?<br>
+</p></li>
+<li><p><span class="math inline">\(R^2\)</span><br>
+</p></li>
+</ul>
+<p><strong>Example</strong>: We expect the number of doctors in a city to be related to the number of hospitals, reflecting both the size of the city and the general level of medical care. The US Census Bureau regularly collects such data for many metropolitan areas in the US. The file <code>MetroHealth83.csv</code> proves a sample of 83 metropolitan areas that have at least two community hospitals. Let’s focus on trying to predict the number of MDs (<span class="math inline">\(y\)</span>) from the number of hospitals (<span class="math inline">\(x\)</span>).</p>
+<ul>
+<li>Plot the data. What can we say about direction, form, and strength?</li>
+</ul>
+<p><br>
+<br>
+</p>
+<ul>
+<li><p><span class="math inline">\(R\)</span><br>
+</p></li>
+<li><p>Fitted line<br>
+</p></li>
+<li><p>Residual plot. Anything concerning?<br>
+</p></li>
+<li><p><span class="math inline">\(R^2\)</span><br>
+</p></li>
+</ul>
+</section>
+<section id="inference-for-regression-chapter-24" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="inference-for-regression-chapter-24"><span class="header-section-number">4.3</span> Inference for Regression (Chapter 24)</h2>
+<p>We reviewed the least squares regression line, now we’ll move on to using the LS line to test whether or not there is a relationship between two continuous variables. We’ll also construct confidence intervals for the slope.</p>
+<p><strong>Example</strong>: The R package <code>palmerpenguins</code> contains data collected by Dr.&nbsp;Kristen Gorman and the Palmer Station, Antarctica LTER (Long Term Ecological Research Network). The data set <code>penguins</code> contains data on 344 penguins from 3 different species, and includes variables like bill length, bill depth, body length, and body mass. For more information, see Allison Horst’s GitHub page (she also has great penguin artwork!). Let’s start with the relationship between bill length (<span class="math inline">\(y\)</span>) and flipper length (<span class="math inline">\(x\)</span>).</p>
+<ul>
+<li>Plot the data. What can we say about direction, form, and strength?</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'palmerpenguins' was built under R version 4.4.3</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+  &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+1 Adelie  Torgersen           39.1          18.7               181        3750
+2 Adelie  Torgersen           39.5          17.4               186        3800
+3 Adelie  Torgersen           40.3          18                 195        3250
+4 Adelie  Torgersen           NA            NA                  NA          NA
+5 Adelie  Torgersen           36.7          19.3               193        3450
+6 Adelie  Torgersen           39.3          20.6               190        3650
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data.plot<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>penguins, <span class="fu">aes</span>(<span class="at">x=</span>flipper_length_mm, <span class="at">y=</span>bill_length_mm))<span class="sc">+</span><span class="fu">geom_point</span>() </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>data.plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br>
+<br>
+</p>
+<ul>
+<li><span class="math inline">\(R\)</span></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(penguins<span class="sc">$</span>flipper_length_mm, penguins<span class="sc">$</span>bill_length_mm, <span class="at">use=</span><span class="st">"complete.obs"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6561813</code></pre>
+</div>
+</div>
+<ul>
+<li>Fitted line</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data.plotline<span class="ot">&lt;-</span>data.plot <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">color=</span><span class="st">"red"</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>data.plotline</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing non-finite outside the scale range
+(`stat_smooth()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>penguins.lm<span class="ot">&lt;-</span><span class="fu">lm</span>(bill_length_mm<span class="sc">~</span>flipper_length_mm,<span class="at">data=</span>penguins)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins.lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = bill_length_mm ~ flipper_length_mm, data = penguins)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-8.5792 -2.6715 -0.5721  2.0148 19.1518 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       -7.26487    3.20016   -2.27   0.0238 *  
+flipper_length_mm  0.25477    0.01589   16.03   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 4.126 on 340 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.4306,    Adjusted R-squared:  0.4289 
+F-statistic: 257.1 on 1 and 340 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<ul>
+<li>Residual plot. Anything concerning?</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>resid<span class="ot">&lt;-</span><span class="fu">resid</span>(penguins.lm)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>pred<span class="ot">&lt;-</span><span class="fu">predict</span>(penguins.lm)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pred,resid,<span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\(R^2\)</span><br>
+</li>
+</ul>
+<p>There is some true relationship between bill length and flipper length, but we can’t ever know it. If we picked a different random sample of penguins, we’d likely get at least a slightly different relationship due to sample-to-sample variability. This will lead to variability in the regression line. We’re going to focus on variability in the slope of the line (just as in previous situations we focused on variability in the sample mean, sample proportion, difference in sample means, difference in sample proportions, etc.).</p>
+<p>Let’s go to the applet to get a visual of what happens if we do this over and over. We’ll create a population with 20000 observations with a true slope of 2.</p>
+<ul>
+<li>draw a sample of size 20, and fit a line. What’s the estimated slope?</li>
+<li>another sample of size 20</li>
+<li>build up slowly until we have 100 samples</li>
+</ul>
+<div style="page-break-after: always;"></div>
+<ul>
+<li>notice the shape in the estimated lines</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>Go up to 1000. What do you notice about the distribution of the estimated slopes?</li>
+</ul>
+<p><br>
+<br>
+</p>
+<section id="randomization-test-for-the-slope" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="randomization-test-for-the-slope"><span class="header-section-number">4.3.1</span> Randomization test for the slope</h3>
+<p>We want to see if there is a linear relationship between bill length and flipper length. The relevant hypotheses can be written in terms of the population slope parameter. Here, the population is all penguins that will ever live near Palmer Station, Antarctica.</p>
+<p>H<span class="math inline">\(_0:\)</span><br>
+</p>
+<p>H<span class="math inline">\(_a:\)</span><br>
+</p>
+<p>In the randomization test, we permute one variable to eliminate any existing relationship. That is, we set the null hypothesis to be true, and measure the natural variability in the data due to sampling but not due to the variables being related. In the two sample problem, we did this by randomly assigning a group label to one of the outcomes (by shuffling cards and dealing into stacks). In the matched pairs problem we did this by randomly determining whether to swap the first/second observation. Here, we will do this by randomly rematching bill length and flipper length observations. By doing this, any pattern in the linear model that is observed is due only to random chance and not an underlying relationship. The randomization test compares the slopes calculated from the repeated randomizations with what was observed in the data.</p>
+<div style="page-break-after: always;"></div>
+<p>Back to the penguins:</p>
+<p><br>
+</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mosaic)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>bill_null<span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">1000</span>)<span class="sc">*</span><span class="fu">lm</span>(bill_length_mm<span class="sc">~</span><span class="fu">shuffle</span>(flipper_length_mm),<span class="at">data=</span>penguins)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bill_null)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Intercept flipper_length_mm    sigma    r.squared           F numdf dendf
+1  49.83455      -0.029354156 5.457111 5.715805e-03 1.943048201     1   338
+2  43.39717       0.002619561 5.467263 4.542859e-05 0.015355560     1   338
+3  52.34606      -0.041911080 5.450783 1.164514e-02 3.982431945     1   338
+4  44.26539      -0.001747296 5.480659 2.014679e-05 0.006809753     1   338
+5  44.51653      -0.002874539 5.477225 5.450524e-05 0.018423774     1   338
+6  46.41738      -0.012171968 5.442816 9.939793e-04 0.336299288     1   338
+  .row .index
+1    1      1
+2    1      2
+3    1      3
+4    1      4
+5    1      5
+6    1      6</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bill_null, <span class="fu">aes</span>(flipper_length_mm)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.01</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>p_val <span class="ot">&lt;-</span> <span class="fu">prop</span>(<span class="sc">~</span>(<span class="fu">abs</span>(flipper_length_mm) <span class="sc">&gt;</span> <span class="fl">0.255</span>),<span class="at">data=</span>bill_null)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>p_val</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>prop_TRUE 
+        0 </code></pre>
+</div>
+</div>
+</section>
+<section id="bootstrap-confidence-interval-for-the-slope" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="bootstrap-confidence-interval-for-the-slope"><span class="header-section-number">4.3.2</span> Bootstrap confidence interval for the slope</h3>
+<p>Now, we are not assuming a null hypothesis is true. Instead, we sample with replacement from the data and we keep linked the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> responses. For each bootstrap sample, we draw a sample with replacement of matched <span class="math inline">\((x,y)\)</span> pairs, drawing as many pairs as there were observed in the original data set. We then fit the least squares model, and note the fitted <span class="math inline">\(\hat\beta_{1,boot}\)</span>. We repeated this process many times and build up a distribution of bootstrap values of the slope. We can then obtain a bootstrap confidence interval by either pulling the appropriate percentiles from the distribution of bootstrapped slopes or finding the SE of the bootstrap values and calculating a bootstrap SE confidence interval.</p>
+<p>Back to the penguins:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>boot.samples<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">sim=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,<span class="at">slope_BS=</span><span class="cn">NA</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#For each row in the data set, draw a bootstrap sample from the original data and find#</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># the slope#</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  sample_BS <span class="ot">&lt;-</span> penguins[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(penguins),<span class="fu">nrow</span>(penguins), <span class="at">replace=</span><span class="cn">TRUE</span>),]</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  model_BS <span class="ot">&lt;-</span> <span class="fu">lm</span>(bill_length_mm<span class="sc">~</span>flipper_length_mm,<span class="at">data=</span>sample_BS)</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  boot.samples<span class="sc">$</span>slope_BS[i]<span class="ot">&lt;-</span>model_BS<span class="sc">$</span>coefficients[<span class="dv">2</span>]</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sim  slope_BS
+1   1 0.2723927
+2   2 0.2491228
+3   3 0.2448650
+4   4 0.2527797
+5   5 0.2639656
+6   6 0.2533559</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram#</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.samples, <span class="fu">aes</span>(slope_BS)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.005</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co">#See the plot#</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>boot.hist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#To get the bootstrap percentile confidence interval, #</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co">#start by ranking the bootstrap means from smallest to largest #</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>rankmean<span class="ot">&lt;-</span><span class="fu">sort</span>(boot.samples<span class="sc">$</span>slope_BS)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Lower endpoint is the 2.5th percentile (95% confidence)#</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankmean[<span class="dv">25</span>]</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2275035</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpont is the 97.5th percentile (95% confidence)#</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankmean[<span class="dv">975</span>]</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2784711</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bootstrap standard error of the mean#</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(rankmean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01280514</code></pre>
+</div>
+</div>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="mathematical-model-for-inference-about-the-slope" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="mathematical-model-for-inference-about-the-slope"><span class="header-section-number">4.3.3</span> Mathematical model for inference about the slope</h3>
+<p>Let’s now consider the relationship between body mass and flipper length.</p>
+<ul>
+<li>Plot the data. What can we say about direction, form, and strength?</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>data.plot2<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>penguins, <span class="fu">aes</span>(<span class="at">x=</span>flipper_length_mm, <span class="at">y=</span>body_mass_g))<span class="sc">+</span><span class="fu">geom_point</span>() </span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>data.plot2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br>
+<br>
+</p>
+<ul>
+<li><span class="math inline">\(R\)</span></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(penguins<span class="sc">$</span>flipper_length_mm, penguins<span class="sc">$</span>body_mass_g, <span class="at">use=</span><span class="st">"complete.obs"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8712018</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<ul>
+<li>Fitted line</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>data.plotline2<span class="ot">&lt;-</span>data.plot2 <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">color=</span><span class="st">"red"</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>data.plotline2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing non-finite outside the scale range
+(`stat_smooth()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>penguins2.lm<span class="ot">&lt;-</span><span class="fu">lm</span>(body_mass_g<span class="sc">~</span>flipper_length_mm,<span class="at">data=</span>penguins)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins2.lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = body_mass_g ~ flipper_length_mm, data = penguins)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1058.80  -259.27   -26.88   247.33  1288.69 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       -5780.831    305.815  -18.90   &lt;2e-16 ***
+flipper_length_mm    49.686      1.518   32.72   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 394.3 on 340 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.759, Adjusted R-squared:  0.7583 
+F-statistic:  1071 on 1 and 340 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li>Residual plot. Anything concerning?</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>resid2<span class="ot">&lt;-</span><span class="fu">resid</span>(penguins2.lm)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>pred2<span class="ot">&lt;-</span><span class="fu">predict</span>(penguins2.lm)</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pred2,resid2,<span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\(R^2\)</span><br>
+</li>
+</ul>
+<p>Like we did with the randomization test, we can use the mathematical model approach to see if there’s convincing evidence of a relationship between body mass and flipper length. We’re testing the same hypotheses we did before:</p>
+<p>H<span class="math inline">\(_0:\)</span><br>
+</p>
+<p>H<span class="math inline">\(_a:\)</span><br>
+</p>
+<p>To do this, we’ll use the test statistic</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>We have an estimate, and we have a null value. We need an SE.</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>Confidence intervals will also have the same form we’ve seen before.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We can also get confidence intervals from R.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(penguins2.lm,<span class="st">"flipper_length_mm"</span>, <span class="at">level=</span><span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     2.5 %   97.5 %
+flipper_length_mm 46.69892 52.67221</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<p>Just as we’ve seen before, the mathematical model requires that some conditions be met:</p>
+<ul>
+<li>Linearity: data should follow a linear trend. If we have a nonlinear trend we need to use a different approach.</li>
+<li>Independent observations: The most frequent violation of this one with regression comes from data taken sequentially in time.</li>
+<li>Nearly normal residuals: violations can be due to outliers or influential points</li>
+<li>Constant or equal variance: Can be diagnosed with a residual plot. We’ve seen this violated with the doctors data set</li>
+</ul>
+<p>We can check these using residual plots. How will violations manifest in the residual plot?</p>
+<ul>
+<li>Linearity: residuals that look themselves like a model could be fit</li>
+<li>Independent observations: cyclical patterns</li>
+<li>Nearly normal: residuals that stand out from the rest</li>
+<li>Constant variance: wedge shape</li>
+</ul>
+<p>Let’s look at some examples where assumptions may be violated. In the first example, we are modeling <span class="math inline">\(y=\)</span>work hours required to complete a job as a function of <span class="math inline">\(x=\)</span>lot size. The data are in the <code>api2lm</code> package.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(api2lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(toluca)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  lot_size work_hours
+1       80        399
+2       30        121
+3       50        221
+4       90        376
+5       70        361
+6       60        224</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>tol.plot<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>toluca, <span class="fu">aes</span>(<span class="at">x=</span>lot_size, <span class="at">y=</span>work_hours))<span class="sc">+</span><span class="fu">geom_point</span>() </span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>tol.plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(toluca<span class="sc">$</span>lot_size, toluca<span class="sc">$</span>work_hours)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9063848</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>toluca.lm<span class="ot">&lt;-</span><span class="fu">lm</span>(work_hours<span class="sc">~</span>lot_size,<span class="at">data=</span>toluca)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(toluca.lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = work_hours ~ lot_size, data = toluca)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-83.876 -34.088  -5.982  38.826 103.528 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   62.366     26.177   2.382   0.0259 *  
+lot_size       3.570      0.347  10.290 4.45e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 48.82 on 23 degrees of freedom
+Multiple R-squared:  0.8215,    Adjusted R-squared:  0.8138 
+F-statistic: 105.9 on 1 and 23 DF,  p-value: 4.449e-10</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>tol.plotline<span class="ot">&lt;-</span>tol.plot <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">color=</span><span class="st">"red"</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>tol.plotline</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>resid<span class="ot">&lt;-</span><span class="fu">resid</span>(toluca.lm)</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>pred<span class="ot">&lt;-</span><span class="fu">predict</span>(toluca.lm)</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pred,resid,<span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-24-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In the second example we are considering how the number of maps distributed on a city bus (<span class="math inline">\(y\)</span>) depends on the increase in bus ridership (<span class="math inline">\(x\)</span>).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>rider<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">6.7</span>, <span class="fl">5.3</span>, <span class="dv">4</span>, <span class="fl">6.55</span>, <span class="fl">2.15</span>, <span class="fl">6.6</span>, <span class="fl">5.75</span>)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>maps<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">220</span>, <span class="dv">140</span>, <span class="dv">120</span>, <span class="dv">180</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">160</span>)</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>transit<span class="ot">&lt;-</span><span class="fu">data.frame</span>(rider,maps)</span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(transit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  rider maps
+1  0.60   80
+2  6.70  220
+3  5.30  140
+4  4.00  120
+5  6.55  180
+6  2.15  100</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>transit.plot<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>transit, <span class="fu">aes</span>(<span class="at">x=</span>rider, <span class="at">y=</span>maps))<span class="sc">+</span><span class="fu">geom_point</span>() </span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>transit.plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(transit<span class="sc">$</span>rider, transit<span class="sc">$</span>maps)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9354683</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>transit.lm<span class="ot">&lt;-</span><span class="fu">lm</span>(maps<span class="sc">~</span>rider,<span class="at">data=</span>transit)</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(transit.lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = maps ~ rider, data = transit)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-21.95 -12.20  -2.83  12.08  29.87 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   55.284     16.035   3.448  0.01367 *  
+rider         20.126      3.104   6.484  0.00064 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 18.7 on 6 degrees of freedom
+Multiple R-squared:  0.8751,    Adjusted R-squared:  0.8543 
+F-statistic: 42.04 on 1 and 6 DF,  p-value: 0.0006397</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>tra.plotline<span class="ot">&lt;-</span>transit.plot <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">color=</span><span class="st">"red"</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>tra.plotline</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>resid<span class="ot">&lt;-</span><span class="fu">resid</span>(transit.lm)</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>pred<span class="ot">&lt;-</span><span class="fu">predict</span>(transit.lm)</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pred,resid,<span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-25-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In the next example, we are considering whether the number of days of training for a new sales employee (<span class="math inline">\(x\)</span>) affects their performance score (<span class="math inline">\(y\)</span>)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>train<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">1</span>,  <span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">2.5</span>, <span class="fl">2.5</span>)</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>perf<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">42.5</span>, <span class="fl">50.6</span>, <span class="fl">68.5</span>, <span class="fl">80.7</span>, <span class="dv">89</span>, <span class="fl">99.6</span>, <span class="fl">105.3</span>, <span class="fl">111.8</span>, <span class="fl">112.3</span>, <span class="fl">125.7</span>)</span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>sales<span class="ot">&lt;-</span><span class="fu">data.frame</span>(train, perf)</span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sales)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  train perf
+1   0.5 42.5
+2   0.5 50.6
+3   1.0 68.5
+4   1.0 80.7
+5   1.5 89.0
+6   1.5 99.6</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>sales.plot<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>sales, <span class="fu">aes</span>(<span class="at">x=</span>train, <span class="at">y=</span>perf))<span class="sc">+</span><span class="fu">geom_point</span>() </span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>sales.plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(sales<span class="sc">$</span>train, sales<span class="sc">$</span>perf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9620584</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>sales.lm<span class="ot">&lt;-</span><span class="fu">lm</span>(perf<span class="sc">~</span>train,<span class="at">data=</span>sales)</span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sales.lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = perf ~ train, data = sales)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-12.0700  -2.2262  -0.3925   4.3187  11.0000 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   34.945      5.948   5.875 0.000372 ***
+train         35.770      3.587   9.973 8.66e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 8.02 on 8 degrees of freedom
+Multiple R-squared:  0.9256,    Adjusted R-squared:  0.9163 
+F-statistic: 99.46 on 1 and 8 DF,  p-value: 8.66e-06</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>sales.plotline<span class="ot">&lt;-</span>sales.plot <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">color=</span><span class="st">"red"</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>sales.plotline</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-26-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>resid<span class="ot">&lt;-</span><span class="fu">resid</span>(sales.lm)</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>pred<span class="ot">&lt;-</span><span class="fu">predict</span>(sales.lm)</span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pred,resid,<span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-26-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In our final example, we consider data taken over 16 months. In this data set, we have the number of orders a company received (<span class="math inline">\(x\)</span>) and the number of manhours required to process those orders (<span class="math inline">\(y\)</span>).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="do">##x=orders, y=manhours##</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>month<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>)</span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">3000</span>, <span class="dv">3400</span>, <span class="dv">4000</span>, <span class="dv">2800</span>, <span class="dv">2000</span>, <span class="dv">1700</span>, <span class="dv">1400</span>, <span class="dv">1300</span>, <span class="dv">1000</span>, <span class="dv">600</span>, <span class="dv">1500</span>, <span class="dv">2200</span>, <span class="dv">3300</span>, <span class="dv">3600</span>, <span class="dv">4100</span>, <span class="dv">3200</span>)</span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>y<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">8000</span>, <span class="dv">9200</span>, <span class="dv">10000</span>, <span class="dv">7500</span>, <span class="dv">5800</span>, <span class="dv">5000</span>, <span class="dv">4400</span>, <span class="dv">3700</span>, <span class="dv">3100</span>, <span class="dv">2220</span>, <span class="dv">4100</span>, <span class="dv">5500</span>, <span class="dv">8100</span>, <span class="dv">9400</span>, <span class="dv">10600</span>, <span class="dv">7900</span>)</span>
+<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a>labor<span class="ot">&lt;-</span><span class="fu">data.frame</span>(month, x, y)</span>
+<span id="cb94-8"><a href="#cb94-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-9"><a href="#cb94-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(labor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  month    x     y
+1     1 3000  8000
+2     2 3400  9200
+3     3 4000 10000
+4     4 2800  7500
+5     5 2000  5800
+6     6 1700  5000</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>labor.plot<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>labor, <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y))<span class="sc">+</span><span class="fu">geom_point</span>() </span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>labor.plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(labor<span class="sc">$</span>x, labor<span class="sc">$</span>y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9942263</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>labor.lm<span class="ot">&lt;-</span><span class="fu">lm</span>(y<span class="sc">~</span>x,<span class="at">data=</span>labor)</span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(labor.lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x, data = labor)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-461.2 -190.2   70.7  191.9  426.2 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 804.85142  180.68854   4.454 0.000545 ***
+x             2.34379    0.06761  34.668 5.65e-15 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 292.7 on 14 degrees of freedom
+Multiple R-squared:  0.9885,    Adjusted R-squared:  0.9877 
+F-statistic:  1202 on 1 and 14 DF,  p-value: 5.649e-15</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>labor.plotline<span class="ot">&lt;-</span>labor.plot <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">color=</span><span class="st">"red"</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>labor.plotline</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-27-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>resid<span class="ot">&lt;-</span><span class="fu">resid</span>(labor.lm)</span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>pred<span class="ot">&lt;-</span><span class="fu">predict</span>(labor.lm)</span>
+<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pred,resid,<span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-27-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(month,resid,<span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-27-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<p>Why do the conditions matter?</p>
+<ul>
+<li>Without the assumed conditions, the test statistic does not have the assumed <span class="math inline">\(t\)</span> distribution. However, we’re looking for large deviations.</li>
+<li>Linearity: most important if we’re trying to understand the relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. The model itself is not an accurate portrayal of the relationship. Fitting different models is the fix–in future classes!</li>
+<li>Independence: very important, but hardest to diagnose.</li>
+<li>Normality: Less important than linearity and independence. The line is still okay, it’s the SEs that will be off if this one is not met. Neither randomization test nor the bootstrap interval require this condition.</li>
+<li>Constant variance: Like normality, the line is still okay. But, p-values will be wrong if this one is severely violated. Randomization test and bootstrap interval don’t need this one either.</li>
+</ul>
+<p>Let’s go back to the doctors data set, and consider the relationship between number of beds and number of hospitals.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>health<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"MetroHealth83.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(health)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           City NumMDs RateMDs NumHospitals NumBeds RateBeds
+1       Holland-Grand Haven, MI    349     140            3     316      127
+2             Louisville, KY-IN   4042     340           18    3909      328
+3              Battle Creek, MI    256     184            3     517      372
+4                   Madison, WI   2679     510            7    1467      279
+5             Fort Smith, AR-OK    502     179            8     975      348
+6 Sarasota-Bradenton-Venice, FL   2352     371            7    1899      299
+  NumMedicare PctChangeMedicare MedicareRate SSBNum SSBRate SSBChange
+1       29533               8.3        11835  34135   13679       8.1
+2      173845               3.0        14606 202485   17013       3.0
+3       22972               2.4        16539  27245   19615       3.3
+4       60530               5.2        11528  68705   13085       4.9
+5       45185               4.6        16146  55370   19785       5.8
+6      161625               2.5        25474 175580   27674       2.7
+  NumRetired SSINum SSIRate SqrtMDs
+1      23165   2070     820 18.6815
+2     118920  29017    2416 63.5767
+3      16645   4095    2945 16.0000
+4      47085   6492    1221 51.7591
+5      29415   9313    3301 22.4054
+6     129855   7559    1160 48.4974</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>bed.plot<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>health, <span class="fu">aes</span>(<span class="at">x=</span>NumHospitals, <span class="at">y=</span>NumBeds))<span class="sc">+</span><span class="fu">geom_point</span>() </span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>bed.plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>bed.plotline<span class="ot">&lt;-</span>bed.plot <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">color=</span><span class="st">"red"</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a>bed.plotline</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-28-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>beds.lm<span class="ot">&lt;-</span><span class="fu">lm</span>(NumBeds<span class="sc">~</span>NumHospitals,<span class="at">data=</span>health)</span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(beds.lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = NumBeds ~ NumHospitals, data = health)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-881.05 -194.15  -13.05  153.28 2160.95 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    -72.06      83.54  -0.863    0.391    
+NumHospitals   220.94       8.71  25.365   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 503.5 on 81 degrees of freedom
+Multiple R-squared:  0.8882,    Adjusted R-squared:  0.8868 
+F-statistic: 643.4 on 1 and 81 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>bresid<span class="ot">&lt;-</span><span class="fu">resid</span>(beds.lm)</span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>bpred<span class="ot">&lt;-</span><span class="fu">predict</span>(beds.lm)</span>
+<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bpred,bresid,<span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-28-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="anova-and-regression" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="anova-and-regression"><span class="header-section-number">4.4</span> ANOVA and Regression</h2>
+<p>The ANOVA model and the regression model are really the same thing. To see this, let’s look a the regression model more closely</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><span class="math inline">\(SSE\)</span> is the sum of squared residuals that is minimized when we estimate the least squares regression line. It’s the errors that still occur when predicting with the fitted model. <span class="math inline">\(SSTotal\)</span> is the sum of squared deviations from the mean of the responses. <span class="math inline">\(\bar y\)</span> is a crude method for estimating the model–just estimate everything with the average rather than taking the <span class="math inline">\(x\)</span> value into account. This is the same as the <span class="math inline">\(SSTotal\)</span> in the ANOVA model. The difference between these two, <span class="math inline">\(SSModel = SSTotal - SSError\)</span> is the amount of original variability in the responses that is successfully explained by the model.</p>
+<p>If <span class="math inline">\(SSModel\)</span> is large relative to <span class="math inline">\(SSError\)</span>, then the model has done a good job of explaining the variability in the response. Here’s why: if the data follow the line perfectly then all the <span class="math inline">\((y - \hat y)^2\)</span> will be 0, and <span class="math inline">\(SSE\)</span> would be 0–all of the variability is explained by the model. On the other hand, if <span class="math inline">\(SSModel=0\)</span>, then every prediction is the same as the mean and we get no useful information from the predictor variable. In practice, obviously, we don’t see either of these two extremes. But, we can consider the question of whether the amount of variability explained by the model is more than we would expect to see by random chance, compared to the variability in the error term.</p>
+<p>The ANOVA table carries over as well:</p>
+<div style="page-break-after: always;"></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th><span class="math inline">\(df\)</span></th>
+<th>SS</th>
+<th>MS</th>
+<th>F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model/Reg</td>
+<td>1</td>
+<td>SSModel</td>
+<td>MSModel</td>
+<td>MSModel/MSError</td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td><span class="math inline">\(n-2\)</span></td>
+<td>SSError</td>
+<td>MSError</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><span class="math inline">\(n-1\)</span></td>
+<td>SSTotal</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Everything works the same way! We still divide the <span class="math inline">\(SSModel\)</span> and <span class="math inline">\(SSError\)</span> by their <span class="math inline">\(df\)</span> to get the <span class="math inline">\(MSModel\)</span> and <span class="math inline">\(MSError\)</span>, respectively. The <span class="math inline">\(df\)</span> for Total is still (# observations - 1). The <span class="math inline">\(df\)</span> for Model is 1 because there is one predictor, which leaves <span class="math inline">\(n-2\)</span> <span class="math inline">\(df\)</span> for Error.</p>
+<p>Like before, when the predictor is ineffective, <span class="math inline">\(MSModel\)</span> and <span class="math inline">\(MSError\)</span> should be about the same. When the predictor is useful, <span class="math inline">\(MSModel\)</span> will be large relative to <span class="math inline">\(MSError\)</span>. We can use the same ratio we used before:</p>
+<p><span class="math display">\[
+F = \frac{MSModel}{MSError}
+\]</span></p>
+<p>We are testing</p>
+<p>H<span class="math inline">\(_0:\)</span> The model is ineffective (or, equivalently, <span class="math inline">\(\beta_1 = 0\)</span>)</p>
+<p>H<span class="math inline">\(_a:\)</span> The model is effective (or, equivalently, <span class="math inline">\(\beta_1 \neq 0\)</span>)</p>
+<p>How do we know if <span class="math inline">\(F\)</span> is big enough to convince us that the null is not true? Again, we’ll compare it to what we would expect to see either through repeated randomizations assuming the null hypothesis (randomization test) or by comparing it to the <span class="math inline">\(F\)</span> distribution with <span class="math inline">\(df_1=1\)</span> and <span class="math inline">\(df_2=n-2\)</span>.</p>
+<p>Let’s go back to the penguin data, looking at the relationship between body mass and flipper length.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="at">formula =</span> body_mass_g <span class="sc">~</span> flipper_length_mm, <span class="at">data =</span> penguins))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = body_mass_g ~ flipper_length_mm, data = penguins)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1058.80  -259.27   -26.88   247.33  1288.69 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       -5780.831    305.815  -18.90   &lt;2e-16 ***
+flipper_length_mm    49.686      1.518   32.72   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 394.3 on 340 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.759, Adjusted R-squared:  0.7583 
+F-statistic:  1071 on 1 and 340 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Recall <span class="math inline">\(R^2\)</span>, the coefficient of determination. When we were doing the review of linear regression we mentioned that <span class="math inline">\(R^2\)</span> can be interpreted as the amount of variability in the response that is explained by the model. Here’s another way to calculate <span class="math inline">\(R^2\)</span>: <span class="math display">\[
+R^2 = \frac{SSModel}{SSTotal}
+\]</span></p>
+<p>For modeling body mass as a function of flipper length</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>We can use <span class="math inline">\(R^2\)</span> to compare models. Suppose we are trying to decide if bill length or flipper length is a better predictor of body mass in penguins.</p>
+<p>Using flipper length:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(penguins2.lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: body_mass_g
+                   Df    Sum Sq   Mean Sq F value    Pr(&gt;F)    
+flipper_length_mm   1 166452902 166452902  1070.7 &lt; 2.2e-16 ***
+Residuals         340  52854796    155455                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>So Total Sum of Squares here is <span class="math inline">\(166452902 + 52854796 = 219307698\)</span></p>
+<p>Using bill length:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>penguins3.lm<span class="ot">&lt;-</span><span class="fu">lm</span>(<span class="at">formula =</span> body_mass_g <span class="sc">~</span> bill_length_mm, <span class="at">data =</span> penguins)</span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins3.lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = body_mass_g ~ bill_length_mm, data = penguins)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1762.08  -446.98    32.59   462.31  1636.86 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     362.307    283.345   1.279    0.202    
+bill_length_mm   87.415      6.402  13.654   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 645.4 on 340 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.3542,    Adjusted R-squared:  0.3523 
+F-statistic: 186.4 on 1 and 340 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(penguins3.lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: body_mass_g
+                Df    Sum Sq  Mean Sq F value    Pr(&gt;F)    
+bill_length_mm   1  77669072 77669072  186.44 &lt; 2.2e-16 ***
+Residuals      340 141638626   416584                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>So Total Sum of Squares here is <span class="math inline">\(77669072 + 141638626 = 219307698\)</span>. The same! This is because <span class="math inline">\(SSTotal\)</span> is calculated based only the response–the body mass–which is the same for both models. What’s changing is how that variability is apportioned–to predictor or to error.</p>
+<p>So, <span class="math inline">\(R^2\)</span> for flipper length is:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>while <span class="math inline">\(R^2\)</span> for bill length is:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The models themselves are really doing the same thing, too. Recall the model for the ANOVA is</p>
+<p><span class="math display">\[
+y_i = \mu_i + e_i
+\]</span> and the model for regression is <span class="math display">\[
+y_i = \beta_0 + \beta_1 x_i + e_i
+\]</span> I was careful (I think!) to always say that predictions based on the model give us the <strong>average</strong> response we would expect to see for a given <span class="math inline">\(x\)</span> value. <span class="math inline">\(\beta_0 + \beta_1\)</span> really is the mean response we expect for a given value of <span class="math inline">\(x_i\)</span>, and <span class="math inline">\(\mu_i\)</span> is the mean response we expect for a given group <span class="math inline">\(i\)</span>. The only difference is whether our predictor is a particular numeric value or the level of a category.</p>
+</section>
+<section id="inference-for-prediction" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="inference-for-prediction"><span class="header-section-number">4.5</span> Inference for Prediction</h2>
+<p>We’ve already seen that we can use a linear regression model to predict the mean response for a given value of the explanatory variable. Going back to the Lego data set, we can use the model to predict the mean price for a Lego set with <span class="math inline">\(x\)</span> number of pieces. For example, if we want to predict the price for a Lego set with 500 pieces:</p>
+<p><span class="math display">\[
+\hat y = 4.86 + 0.105(500) = 57.36
+\]</span></p>
+<p>Beyond prediction of the mean response, we sometimes want a margin of error around this mean response which will describe how accurate we expect this prediction to be. We can get a confidence interval for the prediction, but there are two different types. To figure out which type to use, we must first decide our goal for the interval–do we want to predict the <strong>mean response</strong> for a particular value of <span class="math inline">\(x=x^*\)</span> or do we want to predict the response for an <strong>individual observation</strong> (i.e., the next response) corresponding to a particular value of <span class="math inline">\(x=x^*\)</span>. The value of the prediction is the same in both cases, but they will have different standard errors.</p>
+<p>In the Lego example, if we want to know the average price for all Lego sets with 500 pieces we would use an interval for the mean response. However, if we want the interval to predict the price of a particular Lego set with 500 pieces, we need the interval for a single prediction. These are often distinguished by using different terms for the two intervals.</p>
+<p>To estimate the <strong>mean</strong> response, we use a <strong>confidence interval</strong> for <span class="math inline">\(\mu_Y\)</span>. It estimates the mean response for <span class="math inline">\(y\)</span> when <span class="math inline">\(x=x^*\)</span>. This mean response <span class="math display">\[
+\mu_Y = \beta_0 + \beta_1 x^*
+\]</span> is a parameter, a fixed (unknown) number.</p>
+<p>To estimate an <strong>individual</strong> response, we use a <strong>prediction interval</strong>. A prediction interval estimates a single random response <span class="math inline">\(y\)</span> rather than a parameter like <span class="math inline">\(\mu_Y\)</span>. It’s harder to predict a single response than it is to predict a mean response, and this will manifest in the size of the respective standard errors.</p>
+<p>Both intervals have the usual form</p>
+<p><br>
+<br>
+</p>
+<p>but the prediction interval will have a larger SE than the confidence interval. We’ll let R calculate these for us, but just to see the difference:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Notice the components of the SE</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Let’s do this with Lego data set. We’ll start with a confidence interval for the mean response with 500 pieces.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>new.dat<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">pieces=</span><span class="dv">500</span>)</span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lego.lm, <span class="at">newdata=</span>new.dat, <span class="at">interval=</span><span class="st">'confidence'</span>, <span class="at">level=</span><span class="fl">0.90</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       fit      lwr      upr
+1 57.38449 55.61317 59.15581</code></pre>
+</div>
+</div>
+<p>Let’s try a set with number of pieces further away from the overall mean number of pieces.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>new.dat2<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">pieces=</span><span class="dv">2000</span>)</span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lego.lm, <span class="at">newdata=</span>new.dat2, <span class="at">interval=</span><span class="st">'confidence'</span>, <span class="at">level=</span><span class="fl">0.90</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      fit      lwr      upr
+1 214.952 209.5567 220.3473</code></pre>
+</div>
+</div>
+<p>Now let’s see how these compare to the prediction intervals for 500 and 2000 pieces.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lego.lm, <span class="at">newdata=</span>new.dat, <span class="at">interval=</span><span class="st">'prediction'</span>, <span class="at">level=</span><span class="fl">0.90</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       fit      lwr      upr
+1 57.38449 35.29241 79.47657</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lego.lm, <span class="at">newdata=</span>new.dat2, <span class="at">interval=</span><span class="st">'prediction'</span>, <span class="at">level=</span><span class="fl">0.90</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      fit      lwr      upr
+1 214.952 192.2797 237.6243</code></pre>
+</div>
+</div>
+<p>We can also put confidence and prediction bands around the fitted line.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lego, <span class="fu">aes</span>(<span class="at">x=</span>pieces, <span class="at">y=</span>price)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">'lm'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>X<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="fu">min</span>(lego<span class="sc">$</span>pieces, <span class="at">na.rm=</span>T),<span class="fu">max</span>(lego<span class="sc">$</span>pieces,<span class="at">na.rm=</span>T), <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a>conf.band <span class="ot">&lt;-</span><span class="fu">predict</span>(lego.lm, <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">pieces=</span>X), <span class="at">interval=</span><span class="st">'confidence'</span>)</span>
+<span id="cb131-4"><a href="#cb131-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-5"><a href="#cb131-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(conf.band)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       fit      lwr      upr
+1 8.433522 5.827517 11.03953
+2 8.538567 5.934864 11.14227
+3 8.643612 6.042207 11.24502
+4 8.748657 6.149546 11.34777
+5 8.853702 6.256882 11.45052
+6 8.958747 6.364214 11.55328</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a>pred.band <span class="ot">&lt;-</span><span class="fu">predict</span>(lego.lm, <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">pieces=</span>X), <span class="at">interval=</span><span class="st">'prediction'</span>)</span>
+<span id="cb133-2"><a href="#cb133-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb133-3"><a href="#cb133-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pred.band)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       fit       lwr      upr
+1 8.433522 -17.98334 34.85038
+2 8.538567 -17.87806 34.95520
+3 8.643612 -17.77279 35.06002
+4 8.748657 -17.66752 35.16484
+5 8.853702 -17.56225 35.26965
+6 8.958747 -17.45698 35.37448</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lego<span class="sc">$</span>pieces, lego<span class="sc">$</span>price,    <span class="at">col=</span><span class="st">"gray"</span>,</span>
+<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Number of Pieces"</span>, <span class="at">ylab =</span> <span class="st">"Price"</span>,</span>
+<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>, <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">font.lab =</span> <span class="dv">2</span>, <span class="at">font.axis =</span> <span class="dv">2</span>, <span class="at">cex.axis =</span> <span class="fl">0.75</span>)</span>
+<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(X, conf.band[, <span class="st">"fit"</span>], <span class="at">col =</span> <span class="st">"red"</span>,  <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb135-5"><a href="#cb135-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(X, conf.band[, <span class="st">"upr"</span>], <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lty =</span> <span class="dv">5</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb135-6"><a href="#cb135-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(X, conf.band[, <span class="st">"lwr"</span>], <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lty =</span> <span class="dv">5</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb135-7"><a href="#cb135-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(X, pred.band[, <span class="st">"upr"</span>], <span class="at">col =</span> <span class="st">"green"</span>, <span class="at">lty=</span><span class="dv">3</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb135-8"><a href="#cb135-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(X, pred.band[,<span class="st">"lwr"</span>], <span class="at">col=</span><span class="st">"green"</span>, <span class="at">lty=</span><span class="dv">3</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-4-Regression_files/figure-html/unnamed-chunk-35-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Section-3-Means.html" class="pagination-link" aria-label="Inference for Means (Chapters 19-22)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Inference for Means (Chapters 19-22)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
