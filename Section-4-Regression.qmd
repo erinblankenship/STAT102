@@ -45,7 +45,7 @@ For other recent examples:
 
 In these cases, the predictor was categorical as was the response.
 
-Now, we turn to quantitative predictor(s) and quantitative response. We'll focus on a single predictor, though it is possible to multiple predictors. Linear regression is the statistical method for fitting a line to data where the relationship between two quantitative variables ($x$ and $y$ can be modeled by a straight line with some error.
+Now, we turn to quantitative predictor(s) and quantitative response. We'll focus on a single predictor, though it is possible to use multiple predictors. Linear regression is the statistical method for fitting a line to data where the relationship between two quantitative variables ($x$ and $y$) can be modeled by a straight line with some error.
 
 We typically start with a **scatterplot**, and we explore the plot looking for 4 things:
 

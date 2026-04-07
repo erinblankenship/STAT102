@@ -280,7 +280,7 @@ window.Quarto = {
 <li><p>Attempting to see a relationship between survey mode (predictor) and whether or not the respondent indicated they did not exercise.</p></li>
 </ul>
 <p>In these cases, the predictor was categorical as was the response.</p>
-<p>Now, we turn to quantitative predictor(s) and quantitative response. We’ll focus on a single predictor, though it is possible to multiple predictors. Linear regression is the statistical method for fitting a line to data where the relationship between two quantitative variables (<span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> can be modeled by a straight line with some error.</p>
+<p>Now, we turn to quantitative predictor(s) and quantitative response. We’ll focus on a single predictor, though it is possible to use multiple predictors. Linear regression is the statistical method for fitting a line to data where the relationship between two quantitative variables (<span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>) can be modeled by a straight line with some error.</p>
 <p>We typically start with a <strong>scatterplot</strong>, and we explore the plot looking for 4 things:</p>
 <ul>
 <li><p>Direction:<br>
@@ -790,12 +790,12 @@ F-statistic: 257.1 on 1 and 340 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bill_null)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Intercept flipper_length_mm    sigma    r.squared           F numdf dendf
-1  49.83455      -0.029354156 5.457111 5.715805e-03 1.943048201     1   338
-2  43.39717       0.002619561 5.467263 4.542859e-05 0.015355560     1   338
-3  52.34606      -0.041911080 5.450783 1.164514e-02 3.982431945     1   338
-4  44.26539      -0.001747296 5.480659 2.014679e-05 0.006809753     1   338
-5  44.51653      -0.002874539 5.477225 5.450524e-05 0.018423774     1   338
-6  46.41738      -0.012171968 5.442816 9.939793e-04 0.336299288     1   338
+1  39.77689       0.020662820 5.458139 2.831712e-03 0.959836629     1   338
+2  42.56576       0.006672816 5.469063 2.964388e-04 0.100226021     1   338
+3  43.50757       0.002058119 5.467625 2.817969e-05 0.009525004     1   338
+4  39.04402       0.024333384 5.461762 3.920858e-03 1.334402947     1   339
+5  47.00130      -0.015259378 5.459731 1.544049e-03 0.522695535     1   338
+6  44.45847      -0.002648990 5.476117 4.609033e-05 0.015579250     1   338
   .row .index
 1    1      1
 2    1      2
@@ -839,12 +839,12 @@ F-statistic: 257.1 on 1 and 340 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sim  slope_BS
-1   1 0.2723927
-2   2 0.2491228
-3   3 0.2448650
-4   4 0.2527797
-5   5 0.2639656
-6   6 0.2533559</code></pre>
+1   1 0.2553743
+2   2 0.2662470
+3   3 0.2293446
+4   4 0.2616133
+5   5 0.2549184
+6   6 0.2530336</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram#</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.samples, <span class="fu">aes</span>(slope_BS)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.005</span>)</span>
@@ -866,18 +866,18 @@ F-statistic: 257.1 on 1 and 340 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankmean[<span class="dv">25</span>]</span>
 <span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2275035</code></pre>
+<pre><code>[1] 0.2290925</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpont is the 97.5th percentile (95% confidence)#</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankmean[<span class="dv">975</span>]</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2784711</code></pre>
+<pre><code>[1] 0.2800721</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bootstrap standard error of the mean#</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(rankmean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.01280514</code></pre>
+<pre><code>[1] 0.01310855</code></pre>
 </div>
 </div>
 <p><br>
