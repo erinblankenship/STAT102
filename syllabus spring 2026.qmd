@@ -110,7 +110,7 @@ Students may not make or distribute screen captures, audio/video recordings of, 
 
 **Homework:** Approximately 8-10 homework assignments will be made over the course of the semester. The only way to learn statistics is to practice working problems, and homework is therefore an essential part of the course. Homework will be graded partially on completeness and partially on accuracy. Bear in mind that homework is for your benefit, not the instructor's.
 
-**Final Demonstration:** One of the goals of the course is to develop your skills in communicating with and about data. To this end, as well as to provide other students with valuable resources, you will demonstrate how to do something in R and/or with data. All materials and resources (e.g., R code, links to webpages, slides, instructions, etc.) will be provided the rest of the class, and other students should be able to use the tools you demonstrate on their own after the presentation. This assignment will be completed in pairs. More details will be provided later in the semester.
+**Final Demonstration:** One of the goals of the course is to develop your skills in communicating with and about data. To this end, as well as to provide other students with valuable resources, you will demonstrate how to do something in R and/or with data. All materials and resources (e.g., R code, links to webpages, slides, instructions, etc.) will be provided the rest of the class, and other students should be able to use the tools you demonstrate on their own after the presentation. More details will be provided later in the semester.
 
 **Instructional Continuity:** If in-person classes are canceled, you will be notified of the instructional continuity plan for this class through Canvas.
 
@@ -145,7 +145,7 @@ It may be useful to leverage AI tools to ensure that your work conforms to gramm
 [***TENTATIVE***]{.underline} **Course Outline**
 
 | Week | Dates | Notes | Topics |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | 1 | 13-15 January |  | Introduction; Inference methods in broad strokes; Randomization tests |
 | 2 | 20-22 January | HW 1 due | Randomization tests; bootstrap confidence intervals |
 | 3 | 27-29 January | HW 2 due | Mathematical model methods |

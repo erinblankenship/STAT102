@@ -789,20 +789,20 @@ F-statistic: 257.1 on 1 and 340 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bill_null)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Intercept flipper_length_mm    sigma    r.squared           F numdf dendf
-1  39.77689       0.020662820 5.458139 2.831712e-03 0.959836629     1   338
-2  42.56576       0.006672816 5.469063 2.964388e-04 0.100226021     1   338
-3  43.50757       0.002058119 5.467625 2.817969e-05 0.009525004     1   338
-4  39.04402       0.024333384 5.461762 3.920858e-03 1.334402947     1   339
-5  47.00130      -0.015259378 5.459731 1.544049e-03 0.522695535     1   338
-6  44.45847      -0.002648990 5.476117 4.609033e-05 0.015579250     1   338
-  .row .index
-1    1      1
-2    1      2
-3    1      3
-4    1      4
-5    1      5
-6    1      6</code></pre>
+<pre><code>  Intercept flipper_length_mm    sigma    r.squared          F numdf dendf .row
+1  39.66818       0.021175606 5.445078 0.0029874131 1.01277119     1   338    1
+2  49.61297      -0.028412187 5.465308 0.0053343564 1.81268195     1   338    1
+3  45.48530      -0.007553955 5.450124 0.0003827371 0.12941466     1   338    1
+4  47.16339      -0.016283939 5.462641 0.0017531792 0.59361528     1   338    1
+5  46.31797      -0.011892833 5.474633 0.0009358053 0.31659848     1   338    1
+6  42.59469       0.006603597 5.472508 0.0002897628 0.09796822     1   338    1
+  .index
+1      1
+2      2
+3      3
+4      4
+5      5
+6      6</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bill_null, <span class="fu">aes</span>(flipper_length_mm)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.01</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -839,12 +839,12 @@ F-statistic: 257.1 on 1 and 340 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boot.samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sim  slope_BS
-1   1 0.2553743
-2   2 0.2662470
-3   3 0.2293446
-4   4 0.2616133
-5   5 0.2549184
-6   6 0.2530336</code></pre>
+1   1 0.2659617
+2   2 0.2361822
+3   3 0.2666263
+4   4 0.2571144
+5   5 0.2589395
+6   6 0.2881274</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram#</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>boot.hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(boot.samples, <span class="fu">aes</span>(slope_BS)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.005</span>)</span>
@@ -866,18 +866,18 @@ F-statistic: 257.1 on 1 and 340 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>lower<span class="ot">&lt;-</span>rankmean[<span class="dv">25</span>]</span>
 <span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>lower</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2290925</code></pre>
+<pre><code>[1] 0.229855</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Upper endpont is the 97.5th percentile (95% confidence)#</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>upper<span class="ot">&lt;-</span>rankmean[<span class="dv">975</span>]</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>upper</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2800721</code></pre>
+<pre><code>[1] 0.2793219</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bootstrap standard error of the mean#</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(rankmean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.01310855</code></pre>
+<pre><code>[1] 0.01308117</code></pre>
 </div>
 </div>
 <p><br>
